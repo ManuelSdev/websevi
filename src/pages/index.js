@@ -1,21 +1,23 @@
 
 import styles from '../styles/Home.module.css'
 import IconCorpName from '../components/IconCorpName';
+import GridCard from '../components/GridCard';
+import ProductsGrid from "../components/ProductsGrid"
+import { Container } from '@mui/material';
+import MainMosaic from '../components/MainMosaic';
 export default function Home() {
   return (
-    <div className={styles.container}>
+
+    // <div className={styles.container}>
+    <div>
+      <MainMosaic />
+      <Container>
+        <ProductsGrid></ProductsGrid>
+      </Container>
 
 
-      <main className={styles.main}>
 
-        <IconCorpName viewBox="0 0 381.17 68.88"
-          sx={{ fill: "blue", fontSize: 200 }}
-        ></IconCorpName>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
 
-      </main>
 
 
     </div>

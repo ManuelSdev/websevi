@@ -43,6 +43,14 @@ export default createTheme({
                 underline: "none"
             }
         },
+        MuiGrid: {
+            styleOverrides: {
+                root: {
+                    // apply theme's border-radius instead of component's default
+                    alignItems: 'center'
+                },
+            },
+        }
 
     },
 
