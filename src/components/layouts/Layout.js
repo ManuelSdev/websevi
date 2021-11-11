@@ -11,13 +11,13 @@ import Header from "../elements/Header";
 
 
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isLogged }) => {
     const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
     return (
 
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header />
+            <Header isLogged={isLogged} />
 
             <main>
                 {children}

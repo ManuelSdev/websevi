@@ -11,7 +11,7 @@ const steps = [
     'Create an ad group',
     'Create an ad',
 ];
-const cart = () => {
+const Cart = () => {
 
     return (
         <Container>
@@ -88,4 +88,4 @@ const cart = () => {
     )
 }
 
-export default cart
+export default Cart

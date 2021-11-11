@@ -10,8 +10,15 @@ import DropdownMenu from './DropdownMenu'
 
 import { categs } from "../../items/headerItems"
 
+//supertoken
+import { Button } from "@mui/material"
+import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 
-const Header = () => {
+async function logoutClicked() {
+    await ThirdPartyEmailPassword.signOut()
+    ThirdPartyEmailPassword.redirectToAuth()
+}
+const Header = ({ isLogged }) => {
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
@@ -58,11 +65,19 @@ const Header = () => {
                         }}
                     />
                     <Box sx={{ color: "black" }}>
-                        <Link href="/user/profile">Mi cuenta </Link>
+                        <Link href="/newUser">
+                            {isLogged ? 'Mi cuenta' : 'Iniciar sesion'}
+                        </Link>
                     </Box>
                     <Box sx={{ color: "black" }}>
                         <Link href="/cart">Carrito</Link>
                     </Box>
+
+                    <Button
+                        onClick={logoutClicked}
+                    >
+                        Salir
+                    </Button>
                 </Toolbar>
 
                 <Toolbar
@@ -74,7 +89,7 @@ const Header = () => {
                     }}
                 >
                     {categs.map(categ =>
-                        <Box sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
+                        <Box key={categ.name} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
                             <DropdownMenu {...categ}></DropdownMenu>
                         </Box>
                     )}

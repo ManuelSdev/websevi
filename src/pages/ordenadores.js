@@ -1,7 +1,7 @@
 
-const store = () => {
+const Pcs = () => {
 
     return <div>SOLUCIONES INTEGRALES</div>
 }
 
-export default store
+export default Pcs

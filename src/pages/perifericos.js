@@ -1,7 +1,7 @@
 
-const store = () => {
+const Peripherals = () => {
 
     return <div>SOLUCIONES INTEGRALES</div>
 }
 
-export default store
+export default Peripherals

@@ -114,6 +114,21 @@ export const categs = [
                 get href() { return `/${this.name}` },
             }
         ]
+    },
+    {
+        href: '/privado',
+        title: 'PRIVADO',
+        name: 'Privado'
+    },
+    {
+        href: '/checkSesion',
+        title: 'CHECK SESSION',
+        name: 'Check'
+    },
+    {
+        href: '/legalInfo',
+        title: 'INFO LEGAL',
+        name: 'Info'
     }
 
 ]

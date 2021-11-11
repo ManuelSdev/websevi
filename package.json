@@ -13,9 +13,14 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
+    "axios": "^0.24.0",
+    "mongoose": "^6.0.12",
     "next": "12.0.1",
+    "nextjs-cors": "^2.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "supertokens-auth-react": "^0.17.2",
+    "supertokens-node": "^8.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",

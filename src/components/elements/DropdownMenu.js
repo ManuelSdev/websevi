@@ -10,7 +10,7 @@ export default function BasicMenu({ href, title, subCategs }) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        subCategs && setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
@@ -66,8 +66,9 @@ export default function BasicMenu({ href, title, subCategs }) {
 
                 }}
             >
-                {subCategs.map(subCateg =>
+                {subCategs?.map(subCateg =>
                     <MenuItem
+                        key={subCateg.name}
                         component={Link}
                         href={subCateg.href}
                         onPointerEnter={handleAnchorEl}

@@ -35,7 +35,7 @@ export default createTheme({
                 // The props to change the default for.
 
                 variant: 'contained',
-                disableRipple: true,
+
             },
         },
         MuiButton: {

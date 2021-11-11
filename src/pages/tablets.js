@@ -1,6 +1,6 @@
-const store = () => {
+const Tablets = () => {
 
     return <div>SOLUCIONES INTEGRALES</div>
 }
 
-export default store
+export default Tablets

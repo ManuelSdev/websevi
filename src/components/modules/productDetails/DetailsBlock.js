@@ -35,7 +35,8 @@ const DetailsBlock = () => {
                 <Typography>EVGA </Typography>
             </Box>
 
-            <ButtonGroup disableElevation variant="contained">
+
+            <ButtonGroup variant="contained">
                 <Button sx={{ borderRadius: 8 }}>
 
                     <SvgIcon>
