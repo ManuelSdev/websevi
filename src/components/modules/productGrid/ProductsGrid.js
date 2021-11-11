@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 import { Box } from "@mui/system"
-import GridCard from "./GridCard"
+import GridCard from "./modules/productGrid/GridCard"
 
 const ProductsGrid = () => {
 

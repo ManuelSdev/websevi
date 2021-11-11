@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material"
 import { Box } from "@mui/system"
 import { Container } from "@mui/material"
-import DetailsBlock from "../../components/DetailsBlock"
+import DetailsBlock from "../../components/modules/productDetails/DetailsBlock"
 import { Button } from "@mui/material"
 
 

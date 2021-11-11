@@ -1,5 +1,5 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Rating, Typography } from "@mui/material"
-import Link from '../components/Link'
+import Link from '../../elements/Link'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box } from "@mui/system";
 const GridCard = () => {

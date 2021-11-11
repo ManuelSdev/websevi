@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material"
+import { Grid, Paper, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 
 
@@ -16,12 +16,11 @@ const MainMosaic = () => {
                         <div>HOla</div>
                         <Box> Hola</Box>
                         <Box> Hola</Box>
-                        <Box> Hola</Box>
-                        <Box> Hola</Box>
+
                         <p style={{ marginBlockStart: '0px' }} >HOLAA</p>
                         <p >HOLAA</p>
                         <p>HOLAA</p>
-
+                        <Typography variant='h1'>Adios</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} >

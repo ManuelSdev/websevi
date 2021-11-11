@@ -1,9 +1,9 @@
 
 import Head from 'next/head'
-import Layout from '../components/Layout'
-
+import Layout from '../components/layouts/Layout'
 
 function App({ Component, pageProps }) {
+
   return (
     <>
       <Head>
@@ -23,3 +23,4 @@ function App({ Component, pageProps }) {
 }
 
 export default App
+

@@ -47,7 +47,7 @@ export default createTheme({
             styleOverrides: {
                 root: {
                     // apply theme's border-radius instead of component's default
-                    alignItems: 'center'
+                    //  alignItems: 'center'
                 },
             },
         }

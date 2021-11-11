@@ -3,17 +3,20 @@ import { Toolbar } from "@mui/material"
 import IconCorpName from "./IconCorpName"
 import { TextField } from "@mui/material"
 import { Box, styled } from '@mui/system'
-import Link from '../components/Link'
+import Link from './Link'
 import { InputAdornment } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
+import DropdownMenu from './DropdownMenu'
 
+import { categs } from "../../items/headerItems"
 
 
 const Header = () => {
-
+    //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
             <AppBar position="sticky">
+
                 <Toolbar
                     sx={{
                         bgcolor: 'corpBlack.main',
@@ -23,7 +26,6 @@ const Header = () => {
                         '@media (min-width: 600px)': {
                             minHeight: "1em"
                         }
-
                     }}
                 >
                     <p>Lunes a jueves ........635 41 55 73 </p>
@@ -48,7 +50,6 @@ const Header = () => {
                         id="standard-basic"
                         label="Buscar en el catálogo"
                         variant="standard"
-
                         InputProps={{
                             endAdornment:
                                 <InputAdornment position="start">
@@ -56,7 +57,6 @@ const Header = () => {
                                 </InputAdornment>,
                         }}
                     />
-
                     <Box sx={{ color: "black" }}>
                         <Link href="/user/profile">Mi cuenta </Link>
                     </Box>
@@ -72,28 +72,13 @@ const Header = () => {
                         justifyContent: 'center',
                         color: "corpWhite.main",
                     }}
-
                 >
-                    <Box sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
-                        <Link href="/">INICIO</Link>
-                    </Box>
-                    <Box sx={{ p: 1, m: 1, }}>
-                        <Link href="/store">TIENDA </Link>
-                    </Box>
-                    <Box sx={{ p: 1, m: 1, }}>
-                        <Link href="/techServ">OCASIÓN </Link>
-                    </Box>
-                    <Box sx={{ p: 1, m: 1, }}>
-                        <Link href="/techServ">SERVICIO TÉCNICO </Link>
-                    </Box>
-                    <Box sx={{ p: 1, m: 1, }}>
-                        <Link href="/solutions">SOLUCIONES INTEGRALES </Link>
-                    </Box>
-                    <Box sx={{ p: 1, m: 1, }}>
-                        <Link href="/contact">CONTACTO </Link>
-                    </Box>
+                    {categs.map(categ =>
+                        <Box sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
+                            <DropdownMenu {...categ}></DropdownMenu>
+                        </Box>
+                    )}
                 </Toolbar>
-
             </AppBar>
 
 
@@ -102,3 +87,17 @@ const Header = () => {
 }
 
 export default Header
+
+/**
+
+     <Box sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
+
+                            <DropdownMenu
+                                category={item}
+                                href={headerItems[normalizeStr(item)].href}
+                            ></DropdownMenu>
+                        </Box>
+
+
+
+ */

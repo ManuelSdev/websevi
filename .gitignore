@@ -35,3 +35,7 @@ yarn-error.log*
 
 #Dev files
 ejemploINFO.xml
+
+#Provider files
+trozo.xml
+trozoINFO.xml
