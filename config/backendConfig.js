@@ -11,8 +11,11 @@ export const backendConfig = () => {
             //(sign up on supertokens.io), or self host a core.
             //connectionURI: "https://try.supertokens.io",
             // apiKey: "IF YOU HAVE AN API KEY FOR THE CORE, ADD IT HERE",
-            connectionURI: process.env.SUPERTOKENSCORE_CONNECT_URI,
-            apiKey: process.env.SUPERTOKENS_CORE_API_KEY,
+            // connectionURI: 'https://f9c77d5143a811ecba169b72c9819ce6-eu-west-1.aws.supertokens.io:3570',
+            //apiKey: 'rsISVaFVPhxvHCTBcdq7wdcvUPrvti',
+            connectionURI: process.env.NEXT_PUBLIC_SUPERTOKENSCORE_CONNECT_URI,
+            apiKey: process.env.NEXT_PUBLIC_SUPERTOKENSCORE_API_KEY
+
         },
         appInfo,
         recipeList: [
@@ -21,8 +24,10 @@ export const backendConfig = () => {
                     // We have provided you with development keys which you can use for testsing.
                     // IMPORTANT: Please replace them with your own OAuth keys for production use.
                     ThirdPartyEmailPasswordNode.Google({
-                        clientId: "1060725074195-kmeum4crr01uirfl2op9kd5acmi9jutn.apps.googleusercontent.com",
-                        clientSecret: "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"
+                        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+                        clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET
+                        //clientId: "1060725074195-kmeum4crr01uirfl2op9kd5acmi9jutn.apps.googleusercontent.com",
+                        // clientSecret: "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"
                     }),
                     ThirdPartyEmailPasswordNode.Github({
                         clientId: "467101b197249757c71f",

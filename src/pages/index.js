@@ -12,7 +12,8 @@ import { test } from '../../xmlToObject';
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
-
+console.log(process.env.API_DOMAIN)
+console.log(process.env.WEBSITE_DOMAIN)
 
 export default function Home({ pp }) {
 

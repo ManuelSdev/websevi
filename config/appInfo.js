@@ -2,7 +2,7 @@
 export const appInfo = {
     // learn more about this on https://supertokens.io/docs/thirdpartyemailpassword/appinfo
     appName: "Sevimatic",
-    apiDomain: "http://localhost:3000",
-    websiteDomain: "http://localhost:3000",
+    apiDomain: process.env.NEXT_PUBLIC_API_DOMAIN,
+    websiteDomain: process.env.NEXT_PUBLIC_WEBSITE_DOMAIN,
     apiBasePath: "/api/auth/",
 }
