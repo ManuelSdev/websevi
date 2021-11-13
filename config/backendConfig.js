@@ -17,6 +17,7 @@ export const backendConfig = () => {
             apiKey: process.env.NEXT_PUBLIC_SUPERTOKENSCORE_API_KEY
 
         },
+
         appInfo,
         recipeList: [
             ThirdPartyEmailPasswordNode.init({
