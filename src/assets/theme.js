@@ -50,6 +50,15 @@ export default createTheme({
                     //  alignItems: 'center'
                 },
             },
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+
+                    // apply theme's border-radius instead of component's default
+                    //  alignItems: 'center'
+                },
+            },
         }
 
     },

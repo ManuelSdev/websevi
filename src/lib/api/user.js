@@ -4,7 +4,7 @@ import client, { configureClient, resetClient } from './client';
 
 
 export const createUser = userData => {
-    return client.post('/users', userData)
+    return client.post('/users/create', userData)
 }
 
 export const checkSession = () => {

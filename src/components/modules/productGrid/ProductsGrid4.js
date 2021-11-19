@@ -7,16 +7,18 @@ const ProductsGrid = () => {
     return (
         <Box sx={{ flexGrow: 1, background: "green" }}>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={4} lg={4} >
+                <Grid item xs={6} sm={4} md={3} lg={3} >
                     <GridCard>xs=8</GridCard>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4} >
+                <Grid item xs={6} sm={4} md={3} lg={3} >
                     <GridCard>xs=8</GridCard>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4} >
+                <Grid item xs={6} sm={4} md={3} lg={3} >
                     <GridCard>xs=8</GridCard>
                 </Grid>
-
+                <Grid item xs={6} sm={4} md={3} lg={3} >
+                    <GridCard>xs=8</GridCard>
+                </Grid>
             </Grid>
         </Box>
     )

@@ -3,262 +3,138 @@
 export const categs = [
     {
         title: 'COMPONENTES',
-        name: 'Componentes',
-        get href() { return `/${this.name}` },
+        page: 'componentes',
+        get href() { return `/${this.page}` },
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
-        get href() { return `/${this.name}` },
+        get href() { return `/${this.page}` },
         title: 'PERIFÉRICOS',
-        name: 'Periféricos',
+        page: 'perifericos',
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
-        get href() { return `/${this.name}` },
+        get href() { return `/${this.page}` },
         title: 'ORDENADORES',
-        name: 'Ordenadores',
+        page: 'ordenadores',
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
-        get href() { return `/${this.name}` },
+        get href() { return `/${this.page}` },
         title: 'PORTÁTILES',
-        name: 'Portátiles',
+        page: 'portatiles',
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
-        get href() { return `/${this.name}` },
+        get href() { return `/${this.page}` },
         title: 'TABLETS',
-        name: 'Tablets',
+        page: 'tablets',
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
-        get href() { return `/${this.name}` },
+        get href() { return `/${this.page}` },
         title: 'MÓVILES',
-        name: 'Móviles',
+        page: 'moviles',
         subCategs: [
             {
-                name: 'subcat1',
-                get href() { return `/${this.name}` },
+                page: 'subcat1',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat2',
-                get href() { return `/${this.name}` },
+                page: 'subcat2',
+                get href() { return `/${this.page}` },
             },
             {
-                name: 'subcat3',
-                get href() { return `/${this.name}` },
+                page: 'subcat3',
+                get href() { return `/${this.page}` },
             }
         ]
     },
     {
         href: '/privado',
         title: 'PRIVADO',
-        name: 'Privado'
+        page: 'Privado'
     },
     {
-        href: '/checkSesion',
+        href: '/checkSession',
         title: 'CHECK SESSION',
-        name: 'Check'
+        page: 'Check'
     },
     {
         href: '/legalInfo',
         title: 'INFO LEGAL',
-        name: 'Info'
+        page: 'Info'
     }
 
 ]
 
 
 
-export const categss = {
-    0: {
 
-        title: 'COMPONENTES',
-        name: 'Componentes',
-        href: () => `/${this.name}`,
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    1: {
-        href: () => `/${this.name}`,
-        title: 'PERIFÉRICOS',
-        name: 'Periféricos',
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    2: {
-        href: () => `/${this.name}`,
-        title: 'ORDENADORES',
-        name: 'Ordenadores',
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    3: {
-        href: () => `/${this.name}`,
-        title: 'PORTÁTILES',
-        name: 'Portátiles',
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    4: {
-        href: () => `/${this.name}`,
-        title: 'TABLETS',
-        name: 'Tablets',
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    5: {
-        href: () => `/${this.name}`,
-        title: 'MÓVILES',
-        name: 'Móviles',
-        subCategs: {
-            0: {
-                name: 'subcat1',
-                href: () => `/${this.name}`,
-            },
-            1: {
-                name: 'subcat2',
-                href: () => `/${this.name}`,
-            },
-            2: {
-                name: 'subcat3',
-                href: () => `/${this.name}`,
-            }
-        }
-    },
-
-    itemsOrder: ['COMPONENTES', 'PERIFÉRICOS', 'ORDENADORES', 'PORTÁTILES', 'TABLETS', 'MÓVILES']
-
-}
 
 export const normalizeStr = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()

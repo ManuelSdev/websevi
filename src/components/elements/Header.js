@@ -70,6 +70,11 @@ const Header = ({ isLogged }) => {
                         </Link>
                     </Box>
                     <Box sx={{ color: "black" }}>
+                        <Link href="/admin">
+                            Admin
+                        </Link>
+                    </Box>
+                    <Box sx={{ color: "black" }}>
                         <Link href="/cart">Carrito</Link>
                     </Box>
 
@@ -89,7 +94,7 @@ const Header = ({ isLogged }) => {
                     }}
                 >
                     {categs.map(categ =>
-                        <Box key={categ.name} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
+                        <Box key={categ.page} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
                             <DropdownMenu {...categ}></DropdownMenu>
                         </Box>
                     )}

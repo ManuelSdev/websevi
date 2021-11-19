@@ -68,7 +68,7 @@ export default function BasicMenu({ href, title, subCategs }) {
             >
                 {subCategs?.map(subCateg =>
                     <MenuItem
-                        key={subCateg.name}
+                        key={subCateg.page}
                         component={Link}
                         href={subCateg.href}
                         onPointerEnter={handleAnchorEl}
@@ -77,7 +77,7 @@ export default function BasicMenu({ href, title, subCategs }) {
                             pointerEvents: 'auto',
                         }}
                     >
-                        {subCateg.name}
+                        {subCateg.page}
                     </MenuItem>
                 )}
 

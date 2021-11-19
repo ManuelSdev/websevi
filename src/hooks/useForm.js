@@ -36,6 +36,7 @@ function useForm(initialFormValue) {
 
   //const [formValue, setFormValue] = React.useState(initialFormValue);
   const [formValue, setFormValue] = useStateWithCb(initialFormValue)
+
   const updateFormValue = (name, value) => {
     setFormValue(currentFormValue => ({
 

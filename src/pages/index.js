@@ -2,21 +2,21 @@
 import styles from '../styles/Home.module.css'
 import IconCorpName from '../components/elements/IconCorpName';
 import GridCard from '../components/modules/productGrid/GridCard';
-import ProductsGrid from "../components/modules/productGrid/ProductsGrid"
+import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
 import { Container } from '@mui/material';
 import MainMosaic from '../components/elements/MainMosaic';
 import fs from 'fs'
 import deco from '../../decode'
-import { test } from '../../xmlToObject';
+import { test, csv } from '../../xmlToObject';
 
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
-console.log(process.env.API_DOMAIN)
-console.log(process.env.WEBSITE_DOMAIN)
 
-export default function Home({ pp }) {
 
+export default function Home({ pp, o }) {
+  //o(console.log)
+  //console.log(o)
   return (
 
     // <div className={styles.container}>
@@ -24,7 +24,7 @@ export default function Home({ pp }) {
 
       <MainMosaic />
       <Container>
-        <ProductsGrid></ProductsGrid>
+        <ProductsGrid4></ProductsGrid4>
       </Container>
       {pp}
     </div>
@@ -36,12 +36,13 @@ export default function Home({ pp }) {
 
 //console.log(a)
 export async function getStaticProps() {
-  //const b = test()
-  //console.dir(test())
-  //test(console.log)
+  // const b = () => csv()
+  // console.dir(csv())
+  test(console.log)
   return {
     props: {
-      pp: 'holiii'
+      pp: 'holiii',
+
     }
   }
 }

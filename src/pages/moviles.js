@@ -3,7 +3,7 @@
 
 const Moviles = () => {
 
-    return <div>SOLUCIONES INTEGRALES</div>
+    return <div>MOVILES</div>
 }
 
 export default Moviles

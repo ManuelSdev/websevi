@@ -1,7 +1,7 @@
 
-const Peripherals = () => {
+const Perifericos = () => {
 
-    return <div>SOLUCIONES INTEGRALES</div>
+    return <div>PERIFERICOS</div>
 }
 
-export default Peripherals
+export default Perifericos

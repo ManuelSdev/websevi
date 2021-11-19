@@ -35,10 +35,15 @@ const tagNames = ['id', 'categories', 'name', 'description', 'manufacturer', 'pv
 
 
 
+export const csv = (cb) => fs.readFile('./catalog.csv', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err)
+    }
+    cb(data)
+})
 
 
-
-export const test = (cb) => fs.readFile('./trozo.xml', 'utf8', (err, data) => {
+export const test = (cb) => fs.readFile('./trozoINFO.xml', 'utf8', (err, data) => {
     if (err) {
         console.error(err)
     }

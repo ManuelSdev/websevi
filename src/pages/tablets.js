@@ -1,6 +1,8 @@
+
+
 const Tablets = () => {
 
-    return <div>SOLUCIONES INTEGRALES</div>
+    return <div>TABLETS</div>
 }
 
 export default Tablets

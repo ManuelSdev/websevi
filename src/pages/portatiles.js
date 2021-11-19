@@ -1,7 +1,7 @@
 
-const Laptops = () => {
+const Portatiles = () => {
 
-    return <div>SOLUCIONES INTEGRALES</div>
+    return <div>PORTATILES</div>
 }
 
-export default Laptops
+export default Portatiles

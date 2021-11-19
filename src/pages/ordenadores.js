@@ -1,7 +1,7 @@
 
-const Pcs = () => {
+const Ordenadores = () => {
 
-    return <div>SOLUCIONES INTEGRALES</div>
+    return <div>ORDENADORES</div>
 }
 
-export default Pcs
+export default Ordenadores

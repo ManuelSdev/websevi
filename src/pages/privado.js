@@ -11,7 +11,7 @@ const ThirdPartyEmailPasswordAuthNoSSR = dynamic(
     ),
     { ssr: false }
 )
-
+console.log({ ...ThirdPartyEmailPassword })
 function Protegida() {
     return (
         <div>PÁGINA PRIVADA</div>

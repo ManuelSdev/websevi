@@ -49,7 +49,29 @@ export const backendConfig = () => {
                     // }),
                 ],
             }),
-            SessionNode.init(),
+            SessionNode.init(
+                {
+                    override: {
+                        functions: (originalImplementation) => {
+                            return {
+                                ...originalImplementation,
+                                createNewSession: async function (input) {
+                                    let userId = input.userId;
+
+                                    let role = "admin"; // TODO: fetch role based on userId
+
+                                    input.accessTokenPayload = {
+                                        ...input.accessTokenPayload,
+                                        role
+                                    };
+
+                                    return originalImplementation.createNewSession(input);
+                                },
+                            };
+                        },
+                    },
+                }
+            ),
         ],
         isInServerlessEnv: true,
     }

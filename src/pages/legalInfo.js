@@ -1,6 +1,6 @@
-const MONGODB_URI = process.env.MONGODB_URI
+
+
 const LegalInfo = () => {
-    console.log(MONGODB_URI)
     return (
         <>
 

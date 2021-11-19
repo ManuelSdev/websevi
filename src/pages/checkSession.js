@@ -2,9 +2,15 @@
 import { checkSession } from "../lib/api/user"
 import usePromise from "../hooks/usePromise"
 import React from "react"
+import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
+
+
+import Test from "./checkSessionL";
+
 const Store = ({ isLogged, hola }) => {
 
-    console.log(isLogged)
+    console.log('LOGGED ', isLogged)
+
     const { loading, error, throwPromise, data } = usePromise({})
 
     // const history = useHistory()
@@ -25,12 +31,24 @@ const Store = ({ isLogged, hola }) => {
     }
     fetchUserData()
 
+
     return (
         <div>
             HOLA
-            {isLogged && <div>ADIOS</div>}
+
         </div>
     )
 }
 
+
+
 export default Store
+
+/*
+  return (
+        <ThirdPartyEmailPasswordAuth requireAuth={false}>
+            <Test />
+        </ThirdPartyEmailPasswordAuth>
+    )
+
+    */
