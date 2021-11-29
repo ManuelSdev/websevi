@@ -129,7 +129,13 @@ export const categs = [
         href: '/legalInfo',
         title: 'INFO LEGAL',
         page: 'Info'
+    },
+    {
+        href: '/upload',
+        title: 'SUBIR IMAGENES',
+        page: 'Upload'
     }
+
 
 ]
 

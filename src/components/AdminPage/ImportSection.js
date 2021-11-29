@@ -2,7 +2,9 @@
 import { Input, InputLabel, Paper } from "@mui/material"
 import { Box } from "@mui/system"
 import useForm from "../../hooks/useForm"
-const ImportBlock = () => {
+
+
+const ImportSection = () => {
     const { formValue: searchKeys, handleChange, handleSubmit, validate, setFormValue } = useForm({})
 
     return (
@@ -19,7 +21,7 @@ const ImportBlock = () => {
     )
 }
 
-export default ImportBlock
+export default ImportSection
 
 /*
 <form>

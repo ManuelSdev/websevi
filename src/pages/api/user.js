@@ -41,6 +41,7 @@ export default async function user(req, res) {
     let userId = req.session.getUserId();
     let userInfo = await ThirdPartyEmailPassword.getUserById(userId);
     console.log('JKJKSKSJS', userInfo)
+
     return res.json({
         note: 'Fetch any data from your application for authenticated user after using verifySession middleware',
 

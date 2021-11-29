@@ -11,7 +11,7 @@ const GridCard = () => {
 
                 <CardMedia
                     component="img"
-                    image="https://livedemo00.template-help.com/opencart_58281/image/cache/catalog/products/product-22-800x800.png"
+                    image="https://bucketmoon.s3.eu-west-3.amazonaws.com/1633618930002-vaca.jpg"
                     alt="Paella dish"
                 />
                 <CardContent

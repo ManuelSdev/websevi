@@ -1,16 +1,27 @@
 import usePromise from "../../hooks/usePromise";
-import { createProduct } from "../../lib/api/product";
+import { createProduct, getPresignedS3POST, uploadImageS3 } from "../../lib/api/product";
 import NewProductForm from "./NewProductForm"
 
 
-const NewProductSection = () => {
+
+const NewProductSection = ({ props }) => {
     const { error, throwPromise, } = usePromise()
+    const { bucket, region } = props
+    console.log(region)
     const handleSubmit = async newProduct => {
+        /*
+                try {
+                    await createProduct(newProduct)
+                } catch (error) {
+                    console.log('ERROR', error.message)
+                    throw error
+                }
+        */
         await throwPromise(createProduct(newProduct));
         //history.push("/user");
     };
     return (
-        <NewProductForm onSubmit={handleSubmit}></NewProductForm>
+        <NewProductForm error={error?.data} onSubmit={handleSubmit}></NewProductForm>
     )
 }
 

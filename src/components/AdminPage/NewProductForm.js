@@ -1,9 +1,11 @@
 import { Button, Container, Grid, Input, InputLabel, MenuItem, Select, TextField, FormControl } from "@mui/material"
+import { Box } from "@mui/system";
 
 import useForm from "../../hooks/useForm";
+import InputFile from "../elements/InputFile";
 
 
-const NewProductForm = ({ onSubmit }) => {
+const NewProductForm = ({ onSubmit, error }) => {
 
     const { formValue: product, handleChange, handleSubmit, validate, setFormValue } = useForm({
         name: '',
@@ -36,7 +38,7 @@ const NewProductForm = ({ onSubmit }) => {
     };
 */
 
-
+    error && console.log('HAY ERROR ', error)
     return (
 
 
@@ -90,6 +92,7 @@ const NewProductForm = ({ onSubmit }) => {
                         <FormControl size="small" fullWidth>
                             <InputLabel id="cat1-label">Categoría 1</InputLabel>
                             <Select
+                                //required
                                 labelId="cat1-label"
                                 id="cat1"
                                 name='categorie_1'
@@ -151,17 +154,23 @@ const NewProductForm = ({ onSubmit }) => {
 
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12} >
-                    <label htmlFor="contained-button-file">
-                        <Input accept="image/*" id="contained-button-file" style={{ display: 'none' }} type="file" />
-                        <Button variant="contained" component="span">
-                            Cargar imagen
-                        </Button>
-                    </label>
+
+
+
+                    <InputFile
+                        //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
+                        //y que salga el aviso de mui
+                        name="images"
+                        accept="image/*" id="contained-button-file"
+                        // editableSrc={product?.images ?? null}
+                        onChange={handleChange}
+                    />
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12}>
                     <Button type="submit" >Subir anuncio</Button>
                 </Grid>
-
+                {/**TODO: refina el tema de errores */}
+                {error && <Box>{error}</Box>}
             </Grid>
 
         </Container>
@@ -170,3 +179,15 @@ const NewProductForm = ({ onSubmit }) => {
 }
 
 export default NewProductForm
+
+
+/*
+ <label htmlFor="contained-button-file">
+  <Input
+                            name="images"
+                            accept="image/*" id="contained-button-file" style={{ display: 'none' }} type="file" />
+                        <Button variant="contained" component="span">
+                            Cargar imagen
+                        </Button>
+                    </label>
+                    */

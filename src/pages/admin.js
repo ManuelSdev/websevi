@@ -12,11 +12,15 @@ import ContentCopy from '@mui/icons-material/ContentCopy';
 import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import ProductsGrid from "../components/modules/productGrid/ProductsGrid"
-import { Container, Box, Grid } from '@mui/material';
-import ImportBlock from '../components/AdminPage/ImportBlock';
+import { Container, Box, Grid, ListItemButton } from '@mui/material';
+import ImportBlock from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
-import OrdersBlock from '../components/AdminPage/OrdersBlock';
-const Admin = () => {
+import OrdersBlock from '../components/AdminPage/OrdersSection';
+import allCategsOnArray from '../../src/assets/categories'
+//import initCategs from './api/categories/init'
+import { createCateg } from '../lib/api/categorie';
+
+const Admin = (props) => {
 
     const [block, setBlock] = React.useState('new');
 
@@ -32,8 +36,15 @@ const Admin = () => {
 
     const components = {
         import: <ImportBlock />,
-        new: <NewProductSection />,
+        new: <NewProductSection props={props} />,
         orders: <OrdersBlock />
+    }
+
+    const restartCategs = async () => {
+        const categs = allCategsOnArray()
+        console.log(categs)
+        await createCateg(categs)
+
     }
 
     return (
@@ -66,6 +77,14 @@ const Admin = () => {
                                     <ListItemText>Paste</ListItemText>
 
                                 </MenuItem>
+                                <MenuItem onClick={restartCategs}>
+                                    <ListItemIcon>
+                                        <ContentPaste fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText>Creat categs</ListItemText>
+
+                                </MenuItem>
+
 
                             </MenuList>
                         </Paper>
@@ -88,3 +107,17 @@ const Admin = () => {
 }
 
 export default Admin
+
+
+export async function getStaticProps() {
+    const bucket = process.env.BUCKET_NAME
+    const region = process.env.REGION
+    //test(console.log)
+    return {
+        props: {
+            bucket,
+            region
+
+        }
+    }
+}

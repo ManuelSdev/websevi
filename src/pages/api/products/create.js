@@ -1,9 +1,22 @@
 
 import Product from '../../../models/Products'
 import dbConnect from '../../../lib/dbConnect'
-export default async function handler(req, res) {
+import upload from '../../../lib/utils/multerUploadS3'
+import nc from 'next-connect'
+
+import initMiddleware from '../../../lib/api/initMiddleware'
+import runMiddleware from '../../../lib/api/runMiddleware'
+
+//const mul = initMiddleware(multerUploadS3)
+async function handler_(req, res) {
+    console.log("BODY", req.body)
+    console.log("BODY", req.body)
+    console.log("IMG", req.file)
+    // upload.single("images")
     // res.status(200).json({ name: 'John Doe' })
     console.log("BODY", req.body)
+    console.log("IMG", req.file)
+    // console.log("req", req)
     await dbConnect()
     try {
         const { username, email, password } = req.body
@@ -20,3 +33,50 @@ export default async function handler(req, res) {
         res.status(500)
     }
 }
+
+const handler = nc()
+    .use(upload.single("images"))
+    .post(async (req, res, next) => {
+        console.log("IMG", req.file)
+        console.log("BODY", req.body)
+
+
+        try {
+
+            const { name } = req.body
+            if (!name) {
+                //Estos errores si deben salir en el front
+                const error = new Error('Debe indicar que producto quiere vender para subir un anuncio');
+                error.status = 401;
+                next(error);
+                return
+            }
+            await dbConnect()
+            const productData = { ...req.body }
+            const newProduct = await new Product(productData)
+            const saved = await newProduct.save()
+            res.status(201).json({ result: saved })
+            console.log('EN ERROR')
+            // res.json({ hello: "world" });
+        } catch (err) {
+            //TODO: meter algo en el objeto error para filtrar este tipo de errores y que no salgan en el front
+            console.log("error*************", err)
+            next(err)
+        }
+    })
+/*
+.put(async (req, res) => {
+    res.end("async/await is also supported!");
+})
+.patch(async (req, res) => {
+    throw new Error("Throws me around! Error can be caught and handled.");
+});
+*/
+export const config = {
+    api: {
+        bodyParser: false
+    }
+}
+
+
+export default handler;

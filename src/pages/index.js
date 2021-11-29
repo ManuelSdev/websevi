@@ -16,7 +16,7 @@ console.log(unescape('sPerif&#xE9;ricos'))
 
 export default function Home({ pp, o }) {
   //o(console.log)
-  //console.log(o)
+  console.log(pp)
   return (
 
     // <div className={styles.container}>
