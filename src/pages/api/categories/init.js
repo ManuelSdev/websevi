@@ -1,5 +1,5 @@
 
-import Categories from '../../../models/Categories'
+import Categories from '../../../models/Categorie'
 import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 

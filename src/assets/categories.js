@@ -1,7 +1,13 @@
 
 const initialCategories = [
+
     {
-        path: 'null',
+        path: null,
+        ids: ['Root'],
+        level: 0
+    },
+    {
+        path: ',Root,',
         ids: ['Componentes', 'Períféricos', 'Ordenadores'],
         level: 1
     },

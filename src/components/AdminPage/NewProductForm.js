@@ -3,7 +3,8 @@ import { Box } from "@mui/system";
 
 import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
-
+import { getCategs } from "../../lib/api/categorie";
+import React from "react";
 
 const NewProductForm = ({ onSubmit, error }) => {
 
@@ -19,7 +20,54 @@ const NewProductForm = ({ onSubmit, error }) => {
         images: null,
     });
 
+    const [cat, setCat] = React.useState({
+        categories_1: [],
+        categories_2: [],
+        categories_3: []
+    })
+
     const { name, brand, price, categorie_1, categorie_2, categorie_3, ean, description } = product;
+    const { categories_1, categories_2, categories_3 } = cat
+
+    const firstRenderForCateg_2 = React.useRef(true);
+    const firstRenderForCateg_3 = React.useRef(true);
+
+    React.useEffect(() => {
+        getCat({ level: 1 }, 'categories_1')
+        // console.log('USE EFFECT DEL INPUT', editableSrc)
+    }, [])
+
+    React.useEffect(() => {
+        if (firstRenderForCateg_2.current) {
+            firstRenderForCateg_2.current = false;
+            return;
+        }
+
+        getCat({ path: categorie_1 }, 'categories_2')
+        // console.log('USE EFFECT DEL INPUT', editableSrc)
+    }, [categorie_1])
+
+    React.useEffect(() => {
+        if (firstRenderForCateg_3.current) {
+            firstRenderForCateg_3.current = false;
+            return;
+        }
+
+        getCat({ path: categorie_2 }, 'categories_3')
+        // console.log('USE EFFECT DEL INPUT', editableSrc)
+    }, [categorie_2, categories_2])
+
+    const getCat = async (filter, categories) => {
+        const query = await getCategs(filter)
+        const newArray = query.map(categorie => categorie._id)
+        console.log('query  1', query)
+        await setCat({
+            ...cat,
+            [categories]: newArray
+        })
+        console.log('cattt', cat)
+    }
+
     /*
     const handleChange = ev => {
         console.log("EVENT ", ev.target)
@@ -100,9 +148,10 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 label="Categoría 1"
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {categories_1.map(categ =>
+                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                )}
+
                             </Select>
                         </FormControl>
 
@@ -118,9 +167,10 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 label="Categoría 2"
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {categories_2.map(categ =>
+                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                )}
+
                             </Select>
                         </FormControl>
 
@@ -136,9 +186,9 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 label="Categoría 3"
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {categories_3.map(categ =>
+                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                )}
                             </Select>
                         </FormControl>
 
@@ -150,7 +200,14 @@ const NewProductForm = ({ onSubmit, error }) => {
                     <TextField fullWidth multiline size="small" label="Descripción" variant="outlined" />
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12}>
-                    <TextField size="small" label="Precio" variant="outlined" type='number' />
+                    <TextField
+                        size="small"
+                        label="Precio"
+                        variant="outlined"
+                        type='number'
+                        name='price'
+                        value={price}
+                    />
 
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12} >

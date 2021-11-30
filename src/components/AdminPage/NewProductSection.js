@@ -7,7 +7,7 @@ import NewProductForm from "./NewProductForm"
 const NewProductSection = ({ props }) => {
     const { error, throwPromise, } = usePromise()
     const { bucket, region } = props
-    console.log(region)
+    //console.log(region)
     const handleSubmit = async newProduct => {
         /*
                 try {

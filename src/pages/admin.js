@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 
 import * as React from 'react';
 import Divider from '@mui/material/Divider';
@@ -46,6 +47,9 @@ const Admin = (props) => {
         await createCateg(categs)
 
     }
+
+
+
 
     return (
         <Container>

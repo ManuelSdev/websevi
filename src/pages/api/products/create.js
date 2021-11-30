@@ -4,8 +4,8 @@ import dbConnect from '../../../lib/dbConnect'
 import upload from '../../../lib/utils/multerUploadS3'
 import nc from 'next-connect'
 
-import initMiddleware from '../../../lib/api/initMiddleware'
-import runMiddleware from '../../../lib/api/runMiddleware'
+//import initMiddleware from '../../../lib/api/initMiddleware'
+//import runMiddleware from '../../../ lib / api / runMiddleware'
 
 //const mul = initMiddleware(multerUploadS3)
 async function handler_(req, res) {
