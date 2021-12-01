@@ -20,76 +20,77 @@ const NewProductForm = ({ onSubmit, error }) => {
         images: null,
     });
 
-    const [cat, setCat] = React.useState({
+    const [categories, setCategories] = React.useState({
         categories_1: [],
         categories_2: [],
         categories_3: []
     })
 
     const { name, brand, price, categorie_1, categorie_2, categorie_3, ean, description } = product;
-    const { categories_1, categories_2, categories_3 } = cat
+    const { categories_1, categories_2, categories_3 } = categories
 
     const firstRenderForCateg_2 = React.useRef(true);
     const firstRenderForCateg_3 = React.useRef(true);
 
+    //Tras el primer render, setea las categorías de nivel 1
     React.useEffect(() => {
-        getCat({ level: 1 }, 'categories_1')
-        // console.log('USE EFFECT DEL INPUT', editableSrc)
+        setCategs({ level: 1 }, 'categories_1')
     }, [])
 
+    /**
+     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_1
+     * Mantiene el valor del formulario product salvo el valor de categorie_2, que vuelve a ser ''
+     */
     React.useEffect(() => {
         if (firstRenderForCateg_2.current) {
             firstRenderForCateg_2.current = false;
             return;
         }
-
-        getCat({ path: categorie_1 }, 'categories_2')
-        // console.log('USE EFFECT DEL INPUT', editableSrc)
+        setFormValue({
+            ...product,
+            categorie_2: ''
+        })
+        setCategs({ path: categorie_1 }, 'categories_2')
     }, [categorie_1])
 
+    /**
+     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2
+     * Mantiene el valor del formulario product salvo el valor de categorie_3, que vuelve a ser ''
+     */
     React.useEffect(() => {
         if (firstRenderForCateg_3.current) {
             firstRenderForCateg_3.current = false;
             return;
         }
+        setFormValue({
+            ...product,
+            categorie_3: ''
+        })
+        setCategs({ path: categorie_2 }, 'categories_3')
+    }, [categorie_2])
 
-        getCat({ path: categorie_2 }, 'categories_3')
-        // console.log('USE EFFECT DEL INPUT', editableSrc)
-    }, [categorie_2, categories_2])
-
-    const getCat = async (filter, categories) => {
+    /**
+     * Recibe un objeto filter para filtrar categorías en bdd
+     * Recibe un array categories_x que será el único 
+     * seteado en el estado "categories" con la respuesta del back
+     */
+    const setCategs = async (filter, categoriesToChange) => {
         const query = await getCategs(filter)
         const newArray = query.map(categorie => categorie._id)
         console.log('query  1', query)
-        await setCat({
-            ...cat,
-            [categories]: newArray
+        await setCategories({
+            ...categories,
+            [categoriesToChange]: newArray
         })
-        console.log('cattt', cat)
+        console.log('cattt', categories)
     }
 
-    /*
-    const handleChange = ev => {
-        console.log("EVENT ", ev.target)
-        // console.log("EVENT TARGET TYPE", ev.target.value)
-        //console.log("EVENT TARGET NAME", ev.target.name)
-        // console.log("EVENT TARGET TYPE", ev.target.type)
-        // console.log("llamada a handleChange de useForm")
 
-        //const valueGetter = getValueByType[ev.target.type] || defaultGetValue;
-        //updateFormValue(ev.target.name, valueGetter(ev.target));
 
-        //console.log("EVENT TARGET NAME", ev.target.name)
-        //console.log("VALOR VALUE GETTER", valueGetter(ev.target))
-        //console.log("FORM VALUE", formValue)
-
-    };
-*/
 
     error && console.log('HAY ERROR ', error)
+
     return (
-
-
         <Container component='form' onSubmit={handleSubmit(onSubmit)}>
 
             <Grid container spacing={2} columns={2}>
@@ -130,9 +131,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                             onChange={handleChange}
                             value={ean}
                         />
-
                     </Grid>
-
                 </Grid>
 
                 <Grid item container spacing={2} xs={6} sm={4} md={3} lg={1} >
@@ -151,7 +150,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 {categories_1.map(categ =>
                                     <MenuItem value={categ}>{categ}</MenuItem>
                                 )}
-
                             </Select>
                         </FormControl>
 
@@ -170,7 +168,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 {categories_2.map(categ =>
                                     <MenuItem value={categ}>{categ}</MenuItem>
                                 )}
-
                             </Select>
                         </FormControl>
 
@@ -191,9 +188,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 )}
                             </Select>
                         </FormControl>
-
                     </Grid>
-
                 </Grid>
 
                 <Grid item xs={6} sm={4} md={3} lg={12} >
@@ -211,9 +206,6 @@ const NewProductForm = ({ onSubmit, error }) => {
 
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12} >
-
-
-
                     <InputFile
                         //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
                         //y que salga el aviso de mui
@@ -248,3 +240,22 @@ export default NewProductForm
                         </Button>
                     </label>
                     */
+
+
+/*
+const handleChange = ev => {
+console.log("EVENT ", ev.target)
+// console.log("EVENT TARGET TYPE", ev.target.value)
+//console.log("EVENT TARGET NAME", ev.target.name)
+// console.log("EVENT TARGET TYPE", ev.target.type)
+// console.log("llamada a handleChange de useForm")
+
+//const valueGetter = getValueByType[ev.target.type] || defaultGetValue;
+//updateFormValue(ev.target.name, valueGetter(ev.target));
+
+//console.log("EVENT TARGET NAME", ev.target.name)
+//console.log("VALOR VALUE GETTER", valueGetter(ev.target))
+//console.log("FORM VALUE", formValue)
+
+};
+*/
