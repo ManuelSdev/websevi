@@ -14,37 +14,45 @@ import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import ProductsGrid from "../components/modules/productGrid/ProductsGrid"
 import { Container, Box, Grid, ListItemButton } from '@mui/material';
-import ImportBlock from '../components/AdminPage/ImportSection';
+import ImportSection from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
-import OrdersBlock from '../components/AdminPage/OrdersSection';
+import OrdersSection from '../components/AdminPage/OrdersSection';
 import allCategsOnArray from '../../src/assets/categories'
 //import initCategs from './api/categories/init'
-import { createCateg } from '../lib/api/categorie';
+import { resetCategs } from '../lib/api/categorie';
+import NewCategsSection from '../components/AdminPage/NewCategsSection';
+import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
 
 const Admin = (props) => {
 
-    const [block, setBlock] = React.useState('new');
+    const [section, setSection] = React.useState('newProduct');
 
     const IMPORT = 'import'
-    const NEW = 'new'
+    const NEW_PRODUCT = 'newProduct'
+    const NEW_CATEGS = 'newCategs'
+    const DEL_CATEGS = 'delCategs'
     const ORDERS = 'orders'
 
-    const handleBlock = {
-        import: () => setBlock(IMPORT),
-        new: () => setBlock(NEW),
-        orders: () => setBlock(ORDERS),
+    const handleSection = {
+        import: () => setSection(IMPORT),
+        newProduct: () => setSection(NEW_PRODUCT),
+        newCategs: () => setSection(NEW_CATEGS),
+        delCategs: () => setSection(DEL_CATEGS),
+        orders: () => setSection(ORDERS),
     }
-
+    //sin uso
     const components = {
-        import: <ImportBlock />,
-        new: <NewProductSection props={props} />,
-        orders: <OrdersBlock />
+        import: <ImportSection />,
+        newProduct: <NewProductSection props={props} />,
+        newCategs: <NewCategsSection props={props} />,
+
+        orders: <OrdersSection />
     }
 
     const restartCategs = async () => {
         const categs = allCategsOnArray()
         console.log(categs)
-        await createCateg(categs)
+        await resetCategs(categs)
 
     }
 
@@ -55,39 +63,58 @@ const Admin = (props) => {
         <Container>
             <Box sx={{ flexGrow: 1, background: "green" }}>
                 <Grid container spacing={2}>
-
-
                     <Grid item xs={6} sm={4} md={3} lg={3} >
                         <Paper>
                             <MenuList>
-                                <MenuItem onClick={handleBlock.import}>
+                                <MenuItem onClick={handleSection.import}>
                                     <ListItemIcon>
                                         <ContentCut fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText>Importar catálogo</ListItemText>
 
                                 </MenuItem>
-                                <MenuItem onClick={handleBlock.new}>
+                                <MenuItem onClick={handleSection.newProduct}>
                                     <ListItemIcon>
                                         <ContentCopy fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText>Añadir producto</ListItemText>
 
                                 </MenuItem>
-                                <MenuItem onClick={handleBlock.orders}>
+                                <MenuItem onClick={handleSection.newCategs}>
                                     <ListItemIcon>
                                         <ContentPaste fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText>Paste</ListItemText>
+                                    <ListItemText>Crear categorías</ListItemText>
 
                                 </MenuItem>
-                                <MenuItem onClick={restartCategs}>
+                                <MenuItem onClick={handleSection.orders}>
                                     <ListItemIcon>
                                         <ContentPaste fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText>Creat categs</ListItemText>
+                                    <ListItemText>Pedidos</ListItemText>
 
                                 </MenuItem>
+
+                                <MenuItem
+                                    onClick={handleSection.delCategs}
+                                >
+                                    <ListItemIcon>
+                                        <ContentPaste fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText>Eliminar categorías</ListItemText>
+
+                                </MenuItem>
+
+                                <MenuItem
+                                    onClick={restartCategs}
+                                >
+                                    <ListItemIcon>
+                                        <ContentPaste fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText>Reiniciar categorías</ListItemText>
+
+                                </MenuItem>
+
 
 
                             </MenuList>
@@ -99,7 +126,12 @@ const Admin = (props) => {
 
 
                         <Paper>
-                            {components[block]}
+
+                            {section === IMPORT && <ImportSection />}
+                            {section === NEW_PRODUCT && <NewProductSection props={props} />}
+                            {section === NEW_CATEGS && <NewCategsSection props={props} />}
+                            {section === DEL_CATEGS && <DeleteCategsSection props={props} />}
+                            {section === ORDERS && <OrdersSection />}
                         </Paper>
 
                     </Grid>

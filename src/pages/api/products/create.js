@@ -1,5 +1,5 @@
 
-import Product from '../../../models/Products'
+import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 import upload from '../../../lib/utils/multerUploadS3'
 import nc from 'next-connect'
@@ -40,10 +40,11 @@ const handler = nc()
         console.log("IMG", req.file)
         console.log("BODY", req.body)
 
-
+        const { name } = req.body
         try {
 
-            const { name } = req.body
+
+
             if (!name) {
                 //Estos errores si deben salir en el front
                 const error = new Error('Debe indicar que producto quiere vender para subir un anuncio');
@@ -52,15 +53,14 @@ const handler = nc()
                 return
             }
             await dbConnect()
-            const productData = { ...req.body }
+            const productData = { images: req.file.location, ...req.body }
             const newProduct = await new Product(productData)
             const saved = await newProduct.save()
-            res.status(201).json({ result: saved })
-            console.log('EN ERROR')
+            res.status(201).json({ message: 'El producto ha sido añadido correctamente' })
             // res.json({ hello: "world" });
         } catch (err) {
             //TODO: meter algo en el objeto error para filtrar este tipo de errores y que no salgan en el front
-            console.log("error*************", err)
+            console.log("ERROR AL CREAR PRODUCTO", err)
             next(err)
         }
     })

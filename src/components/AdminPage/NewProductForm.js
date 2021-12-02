@@ -5,6 +5,7 @@ import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
 import { getCategs } from "../../lib/api/categorie";
 import React from "react";
+import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 
 const NewProductForm = ({ onSubmit, error }) => {
 
@@ -34,39 +35,50 @@ const NewProductForm = ({ onSubmit, error }) => {
 
     //Tras el primer render, setea las categorías de nivel 1
     React.useEffect(() => {
-        setCategs({ level: 1 }, 'categories_1')
+        console.log('USE 1')
+        setCategs({ level: 1 }, 'categories_1', 'cat 1')
     }, [])
 
     /**
      * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_1
-     * Mantiene el valor del formulario product salvo el valor de categorie_2, que vuelve a ser ''
+     * Mantiene el valor del formulario product salvo el valor de categorie_2
+     * y categorie_3, que vuelven a ser ''
      */
     React.useEffect(() => {
+        console.log('USE 2')
         if (firstRenderForCateg_2.current) {
             firstRenderForCateg_2.current = false;
             return;
         }
+
+        setCategs({ path: categorie_1 }, 'categories_2', 'cat 2')
+
         setFormValue({
             ...product,
-            categorie_2: ''
+            categorie_2: '',
+            categorie_3: ''
         })
-        setCategs({ path: categorie_1 }, 'categories_2')
     }, [categorie_1])
 
     /**
-     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2
-     * Mantiene el valor del formulario product salvo el valor de categorie_3, que vuelve a ser ''
+     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2, siempre que 
+     * este cambio sea del string vacío "" a cualquier otro string no vacío. Esta condición
+     * evita lanzar este useEffect cuando, el useEffect de arriba, setea categorie_2 a ""
+     * Mantiene el valor del formulario product salvo el valor de categorie_3, que vuelve a ser ""
      */
     React.useEffect(() => {
+        console.log('USE 3')
         if (firstRenderForCateg_3.current) {
             firstRenderForCateg_3.current = false;
             return;
         }
+        if (categorie_2 === '') return
+
+        setCategs({ path: categorie_2 }, 'categories_3', 'cat 3')
         setFormValue({
             ...product,
             categorie_3: ''
         })
-        setCategs({ path: categorie_2 }, 'categories_3')
     }, [categorie_2])
 
     /**
@@ -74,11 +86,13 @@ const NewProductForm = ({ onSubmit, error }) => {
      * Recibe un array categories_x que será el único 
      * seteado en el estado "categories" con la respuesta del back
      */
-    const setCategs = async (filter, categoriesToChange) => {
+    const setCategs = async (filter, categoriesToChange, renderBy) => {
+        console.log('RENDER DE ', renderBy)
         const query = await getCategs(filter)
         const newArray = query.map(categorie => categorie._id)
-        console.log('query  1', query)
-        await setCategories({
+
+        console.log(`QUERY DE ${renderBy}`, query)
+        setCategories({
             ...categories,
             [categoriesToChange]: newArray
         })
@@ -148,7 +162,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 onChange={handleChange}
                             >
                                 {categories_1.map(categ =>
-                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                    <MenuItem key={categ} value={categ}>{categ}</MenuItem>
                                 )}
                             </Select>
                         </FormControl>
@@ -166,7 +180,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 onChange={handleChange}
                             >
                                 {categories_2.map(categ =>
-                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                    <MenuItem key={categ} value={categ}>{categ}</MenuItem>
                                 )}
                             </Select>
                         </FormControl>
@@ -184,7 +198,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 onChange={handleChange}
                             >
                                 {categories_3.map(categ =>
-                                    <MenuItem value={categ}>{categ}</MenuItem>
+                                    <MenuItem key={categ} value={categ}>{categ}</MenuItem>
                                 )}
                             </Select>
                         </FormControl>
@@ -192,7 +206,16 @@ const NewProductForm = ({ onSubmit, error }) => {
                 </Grid>
 
                 <Grid item xs={6} sm={4} md={3} lg={12} >
-                    <TextField fullWidth multiline size="small" label="Descripción" variant="outlined" />
+                    <TextField
+                        fullWidth
+                        multiline
+                        size="small"
+                        label="Descripción"
+                        variant="outlined"
+                        name='description'
+                        value={description}
+                        onChange={handleChange}
+                    />
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12}>
                     <TextField
@@ -202,6 +225,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                         type='number'
                         name='price'
                         value={price}
+                        onChange={handleChange}
                     />
 
                 </Grid>
@@ -217,6 +241,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12}>
                     <Button type="submit" >Subir anuncio</Button>
+                    <SaveAndLoadButton></SaveAndLoadButton>
                 </Grid>
                 {/**TODO: refina el tema de errores */}
                 {error && <Box>{error}</Box>}

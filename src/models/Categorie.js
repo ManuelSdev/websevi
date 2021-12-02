@@ -11,17 +11,26 @@ const categorieSchema = new mongoose.Schema({
 
 })
 
-//const Categorie = mongoose.model('Categorie', categorieSchema)
+categorieSchema.statics.ex = async function (_id) {
+    console.log("_ID QUE LLEGA A EXIST: ", _id)
+    /*
+        const querys = Categorie.findById(_id)
+         console.log('QUERYlllllllllllllllllllllllllllllllllllllllll')
+        console.log('QUERY', querys)
+        return await querys.exec();
+        */
+    const doesUserExit = await Categorie.exists({ _id });
+    console.log('QUERY', doesUserExit)
 
-//export default mongoose.models('Categorie') || Categorie
 
-export default mongoose.models.Categorie || mongoose.model('Categorie', categorieSchema);
-/*
-const getCategorie = () => {
-    if (mongoose.models && mongoose.models.Categorie)
-
-        return mongoose.model('Categorie', categorieSchema)
 }
 
-export const Categor = getCategorie()
-*/
+const Categorie = mongoose.models.Categorie || mongoose.model('Categorie', categorieSchema);
+
+
+export default Categorie
+
+
+
+
+

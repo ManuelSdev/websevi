@@ -28,7 +28,11 @@ const initialCategories = [
         ids: ['Portátiles', 'Sobremesa'],
         level: 2
     },
-
+    {
+        path: ',Componentes,Procesadores,',
+        ids: ['Procesadores INTEL', 'Procesadores AMD'],
+        level: 3
+    },
 
     {
         path: ',Componentes,Placas base,',

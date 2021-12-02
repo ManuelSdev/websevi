@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             //await Categorie.find({ path: /,Placas base,$/ })
             await Categorie.find({ path: new RegExp(`,${filters.path},$`) })
             :
-            await Categorie.find(filters, '_id').exec()
+            await Categorie.find(filters).exec()
 
 
         res.status(201).json(result)
