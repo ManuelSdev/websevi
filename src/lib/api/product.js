@@ -6,6 +6,9 @@ import { withFormData } from '../utils/converters';
 
 export const createProduct_ = newProduct => client.post('/products/create', newProduct)
 
+export const resetProducts = newProducts => client.post('/products/reset', newProducts)
+
+
 export const getPresignedS3POST = filename => client.post('/uploadS3', filename)
 
 export const uploadImageS3 = (url, filename) => client.post(`${url}`, filename)

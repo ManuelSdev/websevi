@@ -7,11 +7,12 @@ const GridCard = () => {
     return (
         <Card
         >
-            <CardActionArea component={Link} href='/products/details'>
+            <CardActionArea component={Link} href='/products/productDetailsSection'>
 
                 <CardMedia
                     component="img"
-                    image="https://bucketmoon.s3.eu-west-3.amazonaws.com/1633618930002-vaca.jpg"
+                    //image="https://bucketmoon.s3.eu-west-3.amazonaws.com/1633618930002-vaca.jpg"
+                    image='https://img.pccomponentes.com/articles/63/637023/1824-gigabyte-amd-radeon-rx-6600-eagle-8gb-gddr6.jpg'
                     alt="Paella dish"
                 />
                 <CardContent

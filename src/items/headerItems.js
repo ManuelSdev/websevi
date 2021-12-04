@@ -3,7 +3,7 @@
 export const categs = [
     {
         title: 'COMPONENTES',
-        page: 'componentes',
+        page: 'categories/componentes',
         get href() { return `/${this.page}` },
         subCategs: [
             {

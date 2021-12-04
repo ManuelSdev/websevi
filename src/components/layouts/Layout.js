@@ -7,12 +7,13 @@ import Image from 'next/image'
 
 import Header from "../elements/Header";
 
-
+import { getCategs } from "../../lib/api/categorie";
 
 
 
 const Layout = ({ children, isLogged }) => {
     const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
+    //const { error, throwPromise, loading, data: categs } = usePromise({})
     return (
 
         <ThemeProvider theme={theme}>

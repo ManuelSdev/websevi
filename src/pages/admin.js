@@ -18,10 +18,12 @@ import ImportSection from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
 import OrdersSection from '../components/AdminPage/OrdersSection';
 import allCategsOnArray from '../../src/assets/categories'
+import initialProducts from '../assets/products';
 //import initCategs from './api/categories/init'
 import { resetCategs } from '../lib/api/categorie';
 import NewCategsSection from '../components/AdminPage/NewCategsSection';
 import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
+import { resetProducts } from '../lib/api/product';
 
 const Admin = (props) => {
 
@@ -53,6 +55,7 @@ const Admin = (props) => {
         const categs = allCategsOnArray()
         console.log(categs)
         await resetCategs(categs)
+        await resetProducts(initialProducts)
 
     }
 
@@ -60,7 +63,7 @@ const Admin = (props) => {
 
 
     return (
-        <Container>
+        <Container sx={{ mt: '2em' }}>
             <Box sx={{ flexGrow: 1, background: "green" }}>
                 <Grid container spacing={2}>
                     <Grid item xs={6} sm={4} md={3} lg={3} >
@@ -111,7 +114,7 @@ const Admin = (props) => {
                                     <ListItemIcon>
                                         <ContentPaste fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText>Reiniciar categorías</ListItemText>
+                                    <ListItemText>Reiniciar estado</ListItemText>
 
                                 </MenuItem>
 

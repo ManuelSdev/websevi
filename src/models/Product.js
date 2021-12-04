@@ -5,8 +5,10 @@ const productSchema = mongoose.Schema({
     brand: { type: String },
     price: { type: Number, index: true },
     active: false,
-    categorie_1: { type: String, index: true },
+
     userFavorites: { type: [String], index: true },
+    categories: { type: [String], index: true },
+
     images: String,
     description: String,
 

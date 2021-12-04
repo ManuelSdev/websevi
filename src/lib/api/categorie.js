@@ -5,7 +5,7 @@ import client, { configureClient, resetClient } from './client';
 
 export const createCategs = newCateg => client.post('/categories/create', newCateg)
 
-export const resetCategs = newCateg => client.post('/categories/init', newCateg)
+export const resetCategs = newCategs => client.post('/categories/reset', newCategs)
 
 //export const getCategs = level => client.get('/categories/get', level)
 

@@ -1,40 +1,40 @@
 import { Grid } from "@mui/material"
 import { Box } from "@mui/system"
 import { Container } from "@mui/material"
-import DetailsBlock from "../../components/modules/productDetails/DetailsBlock"
+import ProductDetails from "../../components/modules/productDetails/ProductDetails"
 import { Button } from "@mui/material"
+import Image from "next/image"
+import giga from '../../assets/images/giga.jpg'
+import usePromise from "../../hooks/usePromise"
+import React from "react"
 
 
-const details = () => {
+const ProductDetailsSection = () => {
+    //const { errorm, throwPromise, loading, data } = usePromise()
+
 
     return (
-        <Container>
+        //TODO: UNIFICA con admin.js
+        <Container sx={{ mt: '2em' }}>
             <Box sx={{ flexGrow: 1, background: "green" }}>
-                <Grid container spacing={2}>
+                <Grid container spacing={12}>
                     <Grid item xs={6} sm={4} md={3} lg={6} >
                         <Box
                             sx={{
+                                // pr: 15,
                                 background: "blue",
                                 display: 'flex',
                                 justifyContent: 'center'
                             }}
                         >
-                            fotos
-                            <Button>hola</Button>
+                            <Image
+                                src={giga}
+                            />
                         </Box>
                     </Grid>
                     <Grid item xs={6} sm={4} md={3} lg={6} >
-                        <Box
-                            sx={{
-                                background: "red",
-                                display: 'flex',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            detalles
-                        </Box>
 
-                        <DetailsBlock></DetailsBlock>
+                        <ProductDetails></ProductDetails>
                     </Grid>
 
                 </Grid>
@@ -44,4 +44,4 @@ const details = () => {
     )
 }
 
-export default details
+export default ProductDetailsSection

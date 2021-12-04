@@ -40,7 +40,8 @@ const handler = nc()
         console.log("IMG", req.file)
         console.log("BODY", req.body)
 
-        const { name } = req.body
+        const { name, categorie_1, categorie_2, categorie_3 } = req.body
+        const categories = [categorie_1, categorie_2, categorie_3]
         try {
 
 
@@ -53,7 +54,7 @@ const handler = nc()
                 return
             }
             await dbConnect()
-            const productData = { images: req.file.location, ...req.body }
+            const productData = { images: req.file.location, categories, ...req.body }
             const newProduct = await new Product(productData)
             const saved = await newProduct.save()
             res.status(201).json({ message: 'El producto ha sido añadido correctamente' })

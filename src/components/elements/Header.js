@@ -22,7 +22,7 @@ const Header = ({ isLogged }) => {
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
-            <AppBar position="sticky">
+            <AppBar position="sticky" >
 
                 <Toolbar
                     sx={{
@@ -39,6 +39,7 @@ const Header = ({ isLogged }) => {
                 </Toolbar>
 
                 <Toolbar
+
                     sx={{
                         //borderRadius: "80px",
 
@@ -49,6 +50,7 @@ const Header = ({ isLogged }) => {
                     }}
                 >
                     <IconCorpName viewBox="0 0 381.17 68.88"
+
                         sx={{ fill: "blue", height: "100%", fontSize: 250 }}
                     ></IconCorpName>
 

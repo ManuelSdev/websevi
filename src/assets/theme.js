@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 
 
-export default createTheme({
+const theme = createTheme({
     //Paleta de colores
     palette: {
         /*
@@ -35,7 +35,15 @@ export default createTheme({
                 // The default props to change
 
                 variant: 'contained',
-            }
+            },
+            styleOverrides: {
+                root: {
+                    // apply theme's border-radius instead of component's default
+                    alignItems: 'center',
+                    marginBottom: '1em'
+
+                },
+            },
         },
         MuiLink: {
             defaultProps: {
@@ -64,3 +72,7 @@ export default createTheme({
     },
 
 });
+
+theme.spacing(9)
+
+export default theme
