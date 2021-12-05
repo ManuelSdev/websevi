@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+console.log('jhsdljkhjksdhsjh')
 const productSchema = mongoose.Schema({
     name: { type: String, unique: true },
     brand: { type: String },
@@ -16,4 +16,5 @@ const productSchema = mongoose.Schema({
 
 
 
-export default mongoose.models.Product || mongoose.model('Product', productSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
+export default Product

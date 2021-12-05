@@ -39,3 +39,6 @@ ejemploINFO.xml
 #Provider files
 trozo.xml
 trozoINFO.xml
+
+#Experimental files
+xmlToObject.js

@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
 import { getCategs } from "../../lib/api/categorie";
-import React from "react";
+import React, { useCallback } from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 
 const NewProductForm = ({ onSubmit, error }) => {
@@ -35,18 +35,18 @@ const NewProductForm = ({ onSubmit, error }) => {
 
     //Tras el primer render, setea las categorías de nivel 1
 
-    const useEffect_1 = () => {
+    const useEffect_1 = useCallback(() => {
         console.log('USE 1')
         setCategs({ level: 1 }, 'categories_1', 'cat 1')
-    }
-    React.useEffect(useEffect_1, [])
+    }, [setCategs])
+    React.useEffect(useEffect_1, [useEffect_1])
     /**
      * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_1
      * Mantiene el valor del formulario product salvo el valor de categorie_2
      * y categorie_3, que vuelven a ser ''
      */
 
-    const useEffect_2 = () => {
+    const useEffect_2 = useCallback(() => {
         console.log('USE 2')
         if (firstRenderForCateg_2.current) {
             firstRenderForCateg_2.current = false;
@@ -60,8 +60,8 @@ const NewProductForm = ({ onSubmit, error }) => {
             categorie_2: '',
             categorie_3: ''
         })
-    }
-    React.useEffect(useEffect_2, [categorie_1])
+    }, [setCategs, setFormValue, product])
+    React.useEffect(useEffect_2, [categorie_1, useEffect_2])
     /**
      * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2, siempre que 
      * este cambio sea del string vacío "" a cualquier otro string no vacío. Esta condición
@@ -69,7 +69,7 @@ const NewProductForm = ({ onSubmit, error }) => {
      * Mantiene el valor del formulario product salvo el valor de categorie_3, que vuelve a ser ""
      */
 
-    const useEffect_3 = () => {
+    const useEffect_3 = useCallback(() => {
         console.log('USE 3')
         if (firstRenderForCateg_3.current) {
             firstRenderForCateg_3.current = false;
@@ -82,8 +82,8 @@ const NewProductForm = ({ onSubmit, error }) => {
             ...product,
             categorie_3: ''
         })
-    }
-    React.useEffect(useEffect_3, [categorie_2])
+    }, [setCategs, setFormValue, product])
+    React.useEffect(useEffect_3, [categorie_2, useEffect_3])
     /**
      * Recibe un objeto filter para filtrar categorías en bdd
      * Recibe un array categories_x que será el único 
@@ -238,8 +238,8 @@ const NewProductForm = ({ onSubmit, error }) => {
                         //y que salga el aviso de mui
                         name="images"
                         accept="image/*" id="contained-button-file"
-                        // editableSrc={product?.images ?? null}
-                        onChange={handleChange}
+                    // editableSrc={product?.images ?? null}
+                    // onChange={handleChange}
                     />
                 </Grid>
                 <Grid item xs={6} sm={4} md={3} lg={12}>

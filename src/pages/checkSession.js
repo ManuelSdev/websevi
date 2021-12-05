@@ -5,7 +5,7 @@ import React from "react"
 import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
 
-import Test from "./checkSessionL";
+//import Test from "./checkSessionL";
 
 const Store = ({ isLogged, hola }) => {
 

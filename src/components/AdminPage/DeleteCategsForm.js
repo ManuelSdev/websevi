@@ -138,25 +138,8 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
                     />
                 </Box>
             </>
-            {categories_1.map(categ =>
-                <Box>
-                    hola
 
-                </Box>
-            )
-            }
-            {categories_1 && console.log(categories_1[0])}
 
-            {categories_1 && categories_1.map(ca => {
-                console.log('CA', ca.level)
-                return <Box>{ca.level}</Box>
-            })}
-            {categories_1.map(function () {
-                return <Box>ohslkhlkhslkhl</Box>;
-            })}
-            {categories_1.map(categ =>
-                <MenuItem key={categ} value={categ}>{categ.level}</MenuItem>
-            )}
             <FormControl component='fieldset' variant="standard" margin='normal'>
                 <Button type="submit" >Eliminar cat</Button>
                 <SaveAndLoadButton></SaveAndLoadButton>
@@ -176,3 +159,28 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
 }
 
 export default DeleteCategsForm
+
+/*
+
+    {categories_1.map(categ =>
+                <Box>
+                    hola
+
+                </Box>
+            )
+            }
+            {categories_1 && console.log(categories_1[0])}
+
+            {categories_1 && categories_1.map(ca => {
+                console.log('CA', ca.level)
+                return <Box>{ca.level}</Box>
+            })}
+            {categories_1.map(function () {
+                return <Box>ohslkhlkhslkhl</Box>;
+            })}
+            {categories_1.map(categ =>
+                <MenuItem key={categ} value={categ}>{categ.level}</MenuItem>
+            )}
+
+
+            */

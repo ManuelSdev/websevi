@@ -29,6 +29,7 @@ const ProductDetailsSection = () => {
                         >
                             <Image
                                 src={giga}
+                                alt="Imagen de producto"
                             />
                         </Box>
                     </Grid>

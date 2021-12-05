@@ -147,7 +147,7 @@ const Admin = (props) => {
 
 export default Admin
 
-
+/*
 export async function getStaticProps() {
     const bucket = process.env.BUCKET_NAME
     const region = process.env.REGION
@@ -160,3 +160,5 @@ export async function getStaticProps() {
         }
     }
 }
+
+*/

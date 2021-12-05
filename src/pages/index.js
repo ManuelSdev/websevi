@@ -6,8 +6,6 @@ import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
 import { Container } from '@mui/material';
 import MainMosaic from '../components/elements/MainMosaic';
 import fs from 'fs'
-import deco from '../../decode'
-import { test, csv } from '../../xmlToObject';
 
 
 
@@ -38,7 +36,7 @@ export default function Home({ pp, o }) {
 export async function getStaticProps() {
   // const b = () => csv()
   // console.dir(csv())
-  test(console.log)
+  //test(console.log)
   return {
     props: {
       pp: 'holiii',

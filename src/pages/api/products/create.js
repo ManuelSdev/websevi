@@ -54,7 +54,11 @@ const handler = nc()
                 return
             }
             await dbConnect()
-            const productData = { images: req.file.location, categories, ...req.body }
+            const productData = req.file ?
+                { images: req.file.location, categories, ...req.body }
+                :
+                { categories, ...req.body }
+
             const newProduct = await new Product(productData)
             const saved = await newProduct.save()
             res.status(201).json({ message: 'El producto ha sido añadido correctamente' })

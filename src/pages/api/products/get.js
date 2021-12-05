@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         res.status(201).json(result)
 
     } catch (err) {
-        console.log("ERROR CATEGORIES GET", err.message)
+        console.log("ERROR PRODUCT GET", err.message)
         res.status(500)
     }
 }

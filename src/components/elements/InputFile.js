@@ -50,7 +50,7 @@ function InputFile({ onChange, editableSrc, ...props }) {
 
   return (
     <div >
-      <input type="file" name="resume"
+      <input
         //required
         ref={inputRef}
         type="file"
