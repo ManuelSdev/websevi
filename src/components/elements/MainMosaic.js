@@ -11,16 +11,16 @@ const MainMosaic = () => {
             <Grid container rowSpacing={0}>
                 <Grid item xs={12}  >
                     <Paper square
-                        sx={{ color: "white", backgroundColor: 'grey.800', height: '700px' }}
+                        sx={{ color: "white", backgroundColor: 'grey.800', height: '600px' }}
                     >
-                        <div>HOla</div>
+                        {/*<div>HOla</div>
                         <Box> Hola</Box>
                         <Box> Hola</Box>
 
                         <p style={{ marginBlockStart: '0px' }} >HOLAA</p>
                         <p >HOLAA</p>
                         <p>HOLAA</p>
-                        <Typography variant='h1'>Adios</Typography>
+                        <Typography variant='h1'>Adios</Typography>*/}
                     </Paper>
                 </Grid>
                 <Grid item xs={6} >

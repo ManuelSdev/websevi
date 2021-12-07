@@ -5,7 +5,7 @@ import GridCard from '../components/modules/productGrid/GridCard';
 import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
 import { Container } from '@mui/material';
 import MainMosaic from '../components/elements/MainMosaic';
-import fs from 'fs'
+import toPlainString from '../lib/utils/plainString'
 
 
 
@@ -25,6 +25,7 @@ export default function Home({ pp, o }) {
         <ProductsGrid4></ProductsGrid4>
       </Container>
       {pp}
+      {toPlainString('CómpoNNNNás ásssNN')}
     </div>
   )
 }
@@ -39,7 +40,7 @@ export async function getStaticProps() {
   //test(console.log)
   return {
     props: {
-      pp: 'holiii',
+      pp: 'prueba getStaticProps',
 
     }
   }

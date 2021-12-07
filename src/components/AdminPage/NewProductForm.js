@@ -90,16 +90,16 @@ const NewProductForm = ({ onSubmit, error }) => {
      * seteado en el estado "categories" con la respuesta del back
      */
     const setCategs = async (filter, categoriesToChange, renderBy) => {
-        console.log('RENDER DE ', renderBy)
+        // console.log('RENDER DE ', renderBy)
         const query = await getCategs(filter)
         const newArray = query.map(categorie => categorie._id)
 
-        console.log(`QUERY DE ${renderBy}`, query)
+        //  console.log(`QUERY DE ${renderBy}`, query)
         setCategories({
             ...categories,
             [categoriesToChange]: newArray
         })
-        console.log('cattt', categories)
+        //console.log('cattt', categories)
     }
 
 

@@ -17,7 +17,7 @@ import { Container, Box, Grid, ListItemButton } from '@mui/material';
 import ImportSection from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
 import OrdersSection from '../components/AdminPage/OrdersSection';
-import allCategsOnArray from '../../src/assets/categories'
+import allCategsOnArray from '../../src/assets/initialCategories'
 import initialProducts from '../assets/products';
 //import initCategs from './api/categories/init'
 import { resetCategs } from '../lib/api/categorie';

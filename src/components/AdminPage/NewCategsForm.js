@@ -4,6 +4,7 @@ import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import { getCategs } from "../../lib/api/categorie";
+import toPlainString from "../../lib/utils/plainString";
 
 const NewCategsForm = ({ onSubmit, error }) => {
 
@@ -60,7 +61,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
             categorie_2: '',
             categorie_3: ''
         })
-        setCategs({ path: categorie_1 }, 'categories_2')
+        setCategs({ path: toPlainString(categorie_1) }, 'categories_2')
     }, [categorie_1])
 
     /**
@@ -77,7 +78,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
             ...formValue,
             categorie_3: ''
         })
-        setCategs({ path: categorie_2 }, 'categories_3')
+        setCategs({ path: toPlainString(categorie_2) }, 'categories_3')
     }, [categorie_2])
 
 
@@ -88,8 +89,10 @@ const NewCategsForm = ({ onSubmit, error }) => {
         }
         setFormValue({
             ...formValue,
+            categorie_1: '',
             categ_1_isNew: !categ_1_isNew
         })
+        !toggled_1 && setToggled_2(false)
     }, [toggled_1])
 
     React.useEffect(() => {
@@ -99,6 +102,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         }
         setFormValue({
             ...formValue,
+            categorie_2: '',
             categ_2_isNew: !categ_2_isNew
         })
     }, [toggled_2])
@@ -106,11 +110,11 @@ const NewCategsForm = ({ onSubmit, error }) => {
     /**
      * Recibe un objeto filter para filtrar categorías en bdd
      * Recibe un array categories_x que será el único 
-     * seteado en el estado "categories" con la respuesta del back
+     * seteado en el estado "categories" con la respuesta del backend
      */
     const setCategs = async (filter, categoriesToChange) => {
         const query = await getCategs(filter)
-        const newArray = query.map(categorie => categorie._id)
+        const newArray = query.map(categorie => categorie.name)
         console.log('query  1', query)
         await setCategories({
             ...categories,
@@ -172,7 +176,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             required
                             fullWidth
                             size="small"
-                            label="Nombre de la categoría 1"
+                            label='Nombre de la categoría 1'
                             variant="outlined"
                             name='categorie_1'
                             onChange={handleChange}
@@ -191,7 +195,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             <Switch
                                 // classes={lovelyStyles}
                                 checked={toggled_2}
-                                onChange={e => setToggled_2(e.target.checked)}
+                                onChange={e => toggled_1 && setToggled_2(e.target.checked)}
                             />
                         }
                         label='Usar categoría de nivel 2 existente'
@@ -202,7 +206,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             <Switch
                                 // classes={lovelyStyles}
                                 checked={!toggled_2}
-                                onChange={e => setToggled_2(!e.target.checked)}
+                                onChange={e => toggled_1 && setToggled_2(!e.target.checked)}
                             />
                         }
                         label='Crear nueva categoría de nivel 2'
@@ -264,7 +268,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
 
 
             <FormControl component='fieldset' variant="standard" margin='normal'>
-                <Button type="submit" >Subir anuncio</Button>
+                <Button type="submit" >Crear Categoría</Button>
                 <SaveAndLoadButton></SaveAndLoadButton>
             </FormControl>
 

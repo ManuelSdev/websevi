@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     await dbConnect()
     const filters = req.query
     //console.log("req body init", req.body)
-    console.log("req body init", filters)
+    //console.log("req body init", req.params)
     try {
         const result = filters.path ?
             //const result = await Categorie.find({ path: /,Componentes,/ })
@@ -17,9 +17,9 @@ export default async function handler(req, res) {
             //await Categorie.find({ path: /,Placas base,$/ })
             await Categorie.find({ path: new RegExp(`,${filters.path},$`) })
             :
-            await Categorie.find(filters).exec()
+            await Categorie.find(filters)
 
-
+        // console.log('**********************************', result)
         res.status(201).json(result)
 
     } catch (err) {

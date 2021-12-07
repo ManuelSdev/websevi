@@ -17,7 +17,7 @@ function usePromise(initialValue) {
     if (error) {
       return setError(error);
     }
-    console.log('PUTA DATAAA', data)
+
     setData(data);
   };
 

@@ -2,7 +2,7 @@ import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Rati
 import Link from '../../elements/Link'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box } from "@mui/system";
-const GridCard = () => {
+const GridCard = ({ product }) => {
 
     return (
         <Card
@@ -12,7 +12,8 @@ const GridCard = () => {
                 <CardMedia
                     component="img"
                     //image="https://bucketmoon.s3.eu-west-3.amazonaws.com/1633618930002-vaca.jpg"
-                    image='https://img.pccomponentes.com/articles/63/637023/1824-gigabyte-amd-radeon-rx-6600-eagle-8gb-gddr6.jpg'
+                    //image='https://img.pccomponentes.com/articles/63/637023/1824-gigabyte-amd-radeon-rx-6600-eagle-8gb-gddr6.jpg'
+                    image={product.images}
                     alt="Paella dish"
                 />
                 <CardContent
@@ -28,8 +29,8 @@ const GridCard = () => {
 
                     </Box>
 
-                    <Typography align='center'> Tarjeta gráfica</Typography>
-                    <Typography align='center'> 700 €</Typography>
+                    <Typography align='center'> {product.name}</Typography>
+                    <Typography align='center'> {product.price} €</Typography>
                 </CardContent>
 
             </CardActionArea>

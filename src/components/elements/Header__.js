@@ -7,32 +7,18 @@ import Link from './Link'
 import { InputAdornment } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import DropdownMenu from './DropdownMenu'
-import { getCategs } from "../../lib/api/categorie"
 
-//import { categs } from "../../items/headerItems"
+import { categs } from "../../items/headerItems"
 
 //supertoken
 import { Button } from "@mui/material"
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
-import React from "react"
-import usePromise from "../../hooks/usePromise"
-
 
 async function logoutClicked() {
     await ThirdPartyEmailPassword.signOut()
     ThirdPartyEmailPassword.redirectToAuth()
 }
-
 const Header = ({ isLogged }) => {
-
-    const { error, throwPromise, loading, data: categs } = usePromise([])
-    // const [categs, setCategs] = React.useState([]);
-
-    React.useEffect(async () => {
-        const a = await throwPromise(getCategs(''));
-        //const a = await getCategs()
-        //await setCategs(a)
-    }, [])
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
@@ -109,14 +95,11 @@ const Header = ({ isLogged }) => {
                         color: "corpWhite.main",
                     }}
                 >
-                    {categs.length > 0 && categs.map(categ =>
-                        categ.level === 1 &&
-                        <Box key={categ._id} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
-                            <DropdownMenu categ_1={categ} categs={categs}></DropdownMenu>
+                    {categs.map(categ =>
+                        <Box key={categ.page} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
+                            <DropdownMenu {...categ}></DropdownMenu>
                         </Box>
-                    )
-
-                    }
+                    )}
                 </Toolbar>
             </AppBar>
 

@@ -4,17 +4,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Popover, Typography } from '@mui/material';
 import Link from './Link'
-//import SubDropdownMenu from './SubDropdownMenu'
-//import { NestedMenuItems } from 'mui-nested-menu'
-import toPlainString from '../../lib/utils/plainString';
 
-export default function DropdownMenu({ categ_1, categs }) {
+export default function DropdownMenu({ href, title, subCategs }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const categs_2 = categs.filter(categ_2 => categ_2.level === 2 && categ_2.path === `,${categ_1._id},`)
     const handleClick = (event) => {
-        categs_2 && setAnchorEl(event.currentTarget);
+        subCategs && setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
@@ -23,12 +19,11 @@ export default function DropdownMenu({ categ_1, categs }) {
     const handleAnchorEl = () => {
         setAnchorEl(anchorEl)
     }
-    //const categNavbarName = categ_1.name.toUpperCase()
-    //console.log('uuuuuuuuuuuuuiiiiiiiiiiiiiiiiii,', categ_1)
+
     return (
         <div>
             <Link
-                href={`/categories/${toPlainString(categ_1._id)}`}
+                href={href}
                 id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"
@@ -37,7 +32,7 @@ export default function DropdownMenu({ categ_1, categs }) {
                 onPointerLeave={handleClose}
                 onClick={handleClose}
             >
-                {categ_1.name.toUpperCase()}
+                {title}
             </Link>
             <Menu
                 id="basic-menu"
@@ -72,34 +67,20 @@ export default function DropdownMenu({ categ_1, categs }) {
 
                 }}
             >
-                {categs_2.length > 0 && categs_2.map(categ_2 =>
-                    //console.log('------------------------', `/${toPlainString(categ_2._id)}`) ||
-                    //console.log('------------------------', categ_2) ||
+                {subCategs?.map(subCateg =>
+                    <MenuItem
+                        key={subCateg.page}
+                        component={Link}
+                        href={subCateg.href}
+                        onPointerEnter={handleAnchorEl}
+                        onClick={handleClose}
+                        sx={{
+                            pointerEvents: 'auto',
+                        }}
+                    >
+                        {subCateg.page}
+                    </MenuItem>
 
-                    categ_2.childs > 0 ?
-                        <NestedMenuItems
-                            label={categ_2.name}
-                        >
-                            {categ_2.childNames.map(categ_3_name =>
-                                <MenuItem>
-                                    {categ_3_name}
-                                </MenuItem>
-                            )}
-                        </NestedMenuItems>
-                        :
-                        <MenuItem
-                            key={categ_2._id}
-
-                            component={Link}
-                            href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
-                            onPointerEnter={handleAnchorEl}
-                            onClick={handleClose}
-                            sx={{
-                                pointerEvents: 'auto',
-                            }}
-                        >
-                            {categ_2.name}
-                        </MenuItem>
 
                 )}
 
