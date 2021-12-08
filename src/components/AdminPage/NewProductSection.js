@@ -10,7 +10,7 @@ import React from "react";
 const NewProductSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation, setData } = usePromise({})
     const [uploaded, setUploaded] = React.useState(false)
-    const { bucket, region } = props
+    //const { bucket, region } = props
     //console.log(region)
     const handleSubmit = async newProduct => {
         /*

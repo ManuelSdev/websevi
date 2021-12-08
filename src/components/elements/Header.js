@@ -23,17 +23,8 @@ async function logoutClicked() {
     ThirdPartyEmailPassword.redirectToAuth()
 }
 
-const Header = ({ isLogged }) => {
+const Header = ({ isLogged, categs }) => {
 
-    const { error, throwPromise, loading, data: categs } = usePromise([])
-    // const [categs, setCategs] = React.useState([]);
-
-    React.useEffect(async () => {
-        const a = await throwPromise(getCategs(''));
-        //const a = await getCategs()
-        //await setCategs(a)
-    }, [])
-    //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
             <AppBar position="sticky" >

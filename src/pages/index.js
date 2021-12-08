@@ -6,42 +6,57 @@ import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
 import { Container } from '@mui/material';
 import MainMosaic from '../components/elements/MainMosaic';
 import toPlainString from '../lib/utils/plainString'
-
+import Layout from '../components/layouts/Layout';
+import { getCategsPath } from '../lib/utils/categsStaticsPaths';
+import { getCats } from './api/categories/g';
+import { getProducts } from './api/products/get';
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
 
 
-export default function Home({ pp, o }) {
+export default function Home({ isLogged, categories }) {
   //o(console.log)
-  console.log(pp)
+  //console.log('sssssssssssssssspp', categs)
   return (
 
     // <div className={styles.container}>
-    <div>
+    <Layout isLogged={isLogged} categs={categories}>
 
       <MainMosaic />
       <Container>
         <ProductsGrid4></ProductsGrid4>
       </Container>
-      {pp}
+
       {toPlainString('CómpoNNNNás ásssNN')}
-    </div>
+    </Layout>
+
   )
 }
 
 
 
+/*
+export async function getStaticPaths() {
 
-//console.log(a)
-export async function getStaticProps() {
-  // const b = () => csv()
-  // console.dir(csv())
-  //test(console.log)
+  //Obtiene categorias cuyo campo level vale 1 o 2
+  const query = await getCats({ level: { $in: [1, 2] } })
+  const categories = JSON.parse(JSON.stringify(query))
+  const paths = getCategsPath(categories)
+
+  // console.log('EL PATHH', paths)
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false }
+}
+*/
+export async function getStaticProps(context) {
+  //  console.log('CONTEXTT', context.params)
+  const categories_query = await getCats()
+  const categories = JSON.parse(JSON.stringify(categories_query))
+  const products_query = await getProducts()
+  const products = JSON.parse(JSON.stringify(products_query))
   return {
-    props: {
-      pp: 'prueba getStaticProps',
-
-    }
+    props: { categories, products }, // will be passed to the page component as props
   }
 }

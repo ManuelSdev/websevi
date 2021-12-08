@@ -7,6 +7,7 @@ const categorieSchema = new mongoose.Schema({
     _id: String,
     level: { type: Number, index: true },
     childs: { type: [String], index: true },
+    parent: String,
     name: { type: String, unique: true },
     path: String,
 

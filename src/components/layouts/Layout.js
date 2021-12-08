@@ -11,14 +11,16 @@ import { getCategs } from "../../lib/api/categorie";
 
 
 
-const Layout = ({ children, isLogged }) => {
+const Layout = ({ children, categs, isLogged }) => {
     const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
     //const { error, throwPromise, loading, data: categs } = usePromise({})
+
+    //console.log('*****************', categs)
     return (
 
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header isLogged={isLogged} />
+            <Header isLogged={isLogged} categs={categs} />
 
             <main>
                 {children}

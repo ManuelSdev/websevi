@@ -1,5 +1,6 @@
-import { AppBar } from "@mui/material"
-import { Toolbar } from "@mui/material"
+import { AppBar, IconButton } from "@mui/material"
+import Toolbar from '@mui/material/Toolbar';
+
 import IconCorpName from "./IconCorpName"
 import { TextField } from "@mui/material"
 import { Box, styled } from '@mui/system'
@@ -7,18 +8,37 @@ import Link from './Link'
 import { InputAdornment } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import DropdownMenu from './DropdownMenu'
+import { getCategs } from "../../lib/api/categorie"
 
-import { categs } from "../../items/headerItems"
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+//import { categs } from "../../items/headerItems"
 
 //supertoken
 import { Button } from "@mui/material"
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
+import React from "react"
+import usePromise from "../../hooks/usePromise"
+import CategoriesButton from "../header/CategoriesButton"
+
 
 async function logoutClicked() {
     await ThirdPartyEmailPassword.signOut()
     ThirdPartyEmailPassword.redirectToAuth()
 }
+
 const Header = ({ isLogged }) => {
+
+    const { error, throwPromise, loading, data: categs } = usePromise([])
+    // const [categs, setCategs] = React.useState([]);
+
+    React.useEffect(async () => {
+        const a = await throwPromise(getCategs(''));
+        //const a = await getCategs()
+        //await setCategs(a)
+    }, [])
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
     return (
         <>
@@ -87,19 +107,31 @@ const Header = ({ isLogged }) => {
                     </Button>
                 </Toolbar>
 
-                <Toolbar
-                    sx={{
-                        // bgcolor: 'corpGreen.main',
-                        bgcolor: 'grey.300',
-                        justifyContent: 'center',
-                        color: "corpWhite.main",
-                    }}
-                >
-                    {categs.map(categ =>
-                        <Box key={categ.page} sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
-                            <DropdownMenu {...categ}></DropdownMenu>
-                        </Box>
-                    )}
+                <Toolbar>
+                    <CategoriesButton />
+
+                    <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        // aria-controls={menuId}
+                        aria-haspopup="true"
+                        // onClick={handleProfileMenuOpen}
+                        color="inherit"
+                    >
+                        <AccountCircle fontSize="large" />
+                    </IconButton>
+                    <IconButton
+                        size="large"
+                        edge="end"
+                        aria-label="account of current user"
+                        // aria-controls={menuId}
+                        aria-haspopup="true"
+                        // onClick={handleProfileMenuOpen}
+                        color="inherit"
+                    >
+                        <ShoppingCartIcon fontSize="large" />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
 

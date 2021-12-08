@@ -71,10 +71,10 @@ function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout isLogged={isLogged}>
-        <Component {...pageProps} />
 
-      </Layout>
+      <Component {...pageProps} />
+
+
 
     </>
   )

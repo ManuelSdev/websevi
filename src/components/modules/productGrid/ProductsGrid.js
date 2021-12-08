@@ -5,7 +5,7 @@ import GridCard from './GridCard'
 const ProductsGrid = ({ products }) => {
     //Hay tres elementos por filas, calculamos el número de filas necesarias
     const rows = () => products.length % 3 === 0 ? products.lengt / 3 : products.lengt / 3 + 1
-    console.log('*****************', products)
+    //console.log('*****************', products)
     return (
         <>
 

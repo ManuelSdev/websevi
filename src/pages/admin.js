@@ -24,8 +24,10 @@ import { resetCategs } from '../lib/api/categorie';
 import NewCategsSection from '../components/AdminPage/NewCategsSection';
 import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
 import { resetProducts } from '../lib/api/product';
+import Layout from '../components/layouts/Layout';
+import { getCats } from './api/categories/g';
 
-const Admin = (props) => {
+const Admin = ({ isLogged, categories, props }) => {
 
     const [section, setSection] = React.useState('newProduct');
 
@@ -63,85 +65,87 @@ const Admin = (props) => {
 
 
     return (
-        <Container sx={{ mt: '2em' }}>
-            <Box sx={{ flexGrow: 1, background: "green" }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={6} sm={4} md={3} lg={3} >
-                        <Paper>
-                            <MenuList>
-                                <MenuItem onClick={handleSection.import}>
-                                    <ListItemIcon>
-                                        <ContentCut fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Importar catálogo</ListItemText>
+        <Layout isLogged={isLogged} categs={categories}>
+            <Container sx={{ mt: '2em' }}>
+                <Box sx={{ flexGrow: 1, background: "green" }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6} sm={4} md={3} lg={3} >
+                            <Paper>
+                                <MenuList>
+                                    <MenuItem onClick={handleSection.import}>
+                                        <ListItemIcon>
+                                            <ContentCut fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Importar catálogo</ListItemText>
 
-                                </MenuItem>
-                                <MenuItem onClick={handleSection.newProduct}>
-                                    <ListItemIcon>
-                                        <ContentCopy fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Añadir producto</ListItemText>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleSection.newProduct}>
+                                        <ListItemIcon>
+                                            <ContentCopy fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Añadir producto</ListItemText>
 
-                                </MenuItem>
-                                <MenuItem onClick={handleSection.newCategs}>
-                                    <ListItemIcon>
-                                        <ContentPaste fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Crear categorías</ListItemText>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleSection.newCategs}>
+                                        <ListItemIcon>
+                                            <ContentPaste fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Crear categorías</ListItemText>
 
-                                </MenuItem>
-                                <MenuItem onClick={handleSection.orders}>
-                                    <ListItemIcon>
-                                        <ContentPaste fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Pedidos</ListItemText>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleSection.orders}>
+                                        <ListItemIcon>
+                                            <ContentPaste fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Pedidos</ListItemText>
 
-                                </MenuItem>
+                                    </MenuItem>
 
-                                <MenuItem
-                                    onClick={handleSection.delCategs}
-                                >
-                                    <ListItemIcon>
-                                        <ContentPaste fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Eliminar categorías</ListItemText>
+                                    <MenuItem
+                                        onClick={handleSection.delCategs}
+                                    >
+                                        <ListItemIcon>
+                                            <ContentPaste fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Eliminar categorías</ListItemText>
 
-                                </MenuItem>
+                                    </MenuItem>
 
-                                <MenuItem
-                                    onClick={restartCategs}
-                                >
-                                    <ListItemIcon>
-                                        <ContentPaste fontSize="small" />
-                                    </ListItemIcon>
-                                    <ListItemText>Reiniciar estado</ListItemText>
+                                    <MenuItem
+                                        onClick={restartCategs}
+                                    >
+                                        <ListItemIcon>
+                                            <ContentPaste fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText>Reiniciar estado</ListItemText>
 
-                                </MenuItem>
+                                    </MenuItem>
 
 
 
-                            </MenuList>
-                        </Paper>
+                                </MenuList>
+                            </Paper>
+                        </Grid>
+
+                        <Grid item xs={6} sm={4} md={3} lg={9} >
+
+
+
+                            <Paper>
+
+                                {section === IMPORT && <ImportSection />}
+                                {section === NEW_PRODUCT && <NewProductSection props={props} />}
+                                {section === NEW_CATEGS && <NewCategsSection props={props} />}
+                                {section === DEL_CATEGS && <DeleteCategsSection props={props} />}
+                                {section === ORDERS && <OrdersSection />}
+                            </Paper>
+
+                        </Grid>
+
                     </Grid>
-
-                    <Grid item xs={6} sm={4} md={3} lg={9} >
-
-
-
-                        <Paper>
-
-                            {section === IMPORT && <ImportSection />}
-                            {section === NEW_PRODUCT && <NewProductSection props={props} />}
-                            {section === NEW_CATEGS && <NewCategsSection props={props} />}
-                            {section === DEL_CATEGS && <DeleteCategsSection props={props} />}
-                            {section === ORDERS && <OrdersSection />}
-                        </Paper>
-
-                    </Grid>
-
-                </Grid>
-            </Box>
-        </Container >
+                </Box>
+            </Container >
+        </Layout>
     )
 }
 
@@ -162,3 +166,16 @@ export async function getStaticProps() {
 }
 
 */
+
+export async function getStaticProps(context) {
+    //  console.log('CONTEXTT', context.params)
+    const categories_query = await getCats()
+    const categories = JSON.parse(JSON.stringify(categories_query))
+    /*
+    const products_query = await getProducts()
+    const products = JSON.parse(JSON.stringify(products_query))
+    */
+    return {
+        props: { categories }, // will be passed to the page component as props
+    }
+}

@@ -3,11 +3,12 @@ import Categorie from '../../../models/Categorie'
 import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
-export async function getCats(f) {
+export async function getCats(filters) {
     console.log('HOLA')
     await dbConnect()
-    const cat = await Categorie.find(f)
-    // console.log('PRODS DE LA QUERY GET', products)
+
+    const cat = await Categorie.find(filters)
+    // console.log('PRODS DE LA QUERY GET', cat)
     return cat
 }
 

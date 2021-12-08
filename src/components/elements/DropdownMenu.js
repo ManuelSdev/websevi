@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Popover, Typography } from '@mui/material';
+import { MenuList, Popover, Typography } from '@mui/material';
 import Link from './Link'
 //import SubDropdownMenu from './SubDropdownMenu'
 //import { NestedMenuItems } from 'mui-nested-menu'
@@ -72,26 +72,18 @@ export default function DropdownMenu({ categ_1, categs }) {
 
                 }}
             >
-                {categs_2.length > 0 && categs_2.map(categ_2 =>
-                    //console.log('------------------------', `/${toPlainString(categ_2._id)}`) ||
-                    //console.log('------------------------', categ_2) ||
+                <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                >
+                    {categs_2.map(categ_2 =>
 
-                    categ_2.childs > 0 ?
-                        <NestedMenuItems
-                            label={categ_2.name}
-                        >
-                            {categ_2.childNames.map(categ_3_name =>
-                                <MenuItem>
-                                    {categ_3_name}
-                                </MenuItem>
-                            )}
-                        </NestedMenuItems>
-                        :
                         <MenuItem
                             key={categ_2._id}
 
                             component={Link}
-                            href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
+                            href={`/categories/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
                             onPointerEnter={handleAnchorEl}
                             onClick={handleClose}
                             sx={{
@@ -101,11 +93,38 @@ export default function DropdownMenu({ categ_1, categs }) {
                             {categ_2.name}
                         </MenuItem>
 
-                )}
 
+
+                    )}
+                </MenuList>
 
             </Menu>
         </div >
     );
 }
 
+/*
+        <NestedMenuItems
+                            label={categ_2.name}
+                        >
+                            {categ_2.childNames.map(categ_3_name =>
+                                <MenuItem>
+                                    {categ_3_name}
+                                </MenuItem>
+                            )}
+                        </NestedMenuItems>
+
+
+                                  <Popover
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                The content of the Popover.
+                            </Popover>
+                        */
