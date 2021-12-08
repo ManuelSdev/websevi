@@ -17,8 +17,8 @@ import { Container, Box, Grid, ListItemButton } from '@mui/material';
 import ImportSection from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
 import OrdersSection from '../components/AdminPage/OrdersSection';
-import allCategsOnArray from '../../src/assets/initialCategories'
-import initialProducts from '../assets/products';
+import allCategsOnArray from '../assets/initialsCategories'
+import initialsProducts from '../assets/initialsProducts';
 //import initCategs from './api/categories/init'
 import { resetCategs } from '../lib/api/categorie';
 import NewCategsSection from '../components/AdminPage/NewCategsSection';
@@ -57,7 +57,7 @@ const Admin = ({ isLogged, categories, props }) => {
         const categs = allCategsOnArray()
         console.log(categs)
         await resetCategs(categs)
-        await resetProducts(initialProducts)
+        await resetProducts(initialsProducts)
 
     }
 

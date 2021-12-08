@@ -1,4 +1,4 @@
-import toPlainString from "../lib/utils/plainString"
+import { toPlainString } from "../lib/utils/stringTools"
 const initialCategories = [
     {
         path: ',Root,',

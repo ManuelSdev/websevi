@@ -4,6 +4,7 @@ import { getProducts } from "../api/products/get"
 import { getCats } from '../api/categories/g'
 import { getCategsPath } from '../../lib/utils/categsStaticsPaths'
 import Layout from '../../components/layouts/Layout'
+import { nameToUrl } from '../../lib/utils/stringTools'
 
 
 const Categorie = ({ isLogged, products, categories }) => {
@@ -56,6 +57,7 @@ export async function getStaticPaths() {
 
     //Obtiene categorias cuyo campo level vale 1 o 2
     const query = await getCats({ level: { $in: [1, 2] } })
+    console.log('----------------------------', query)
     const categories = JSON.parse(JSON.stringify(query))
     const paths = getCategsPath(categories)
 

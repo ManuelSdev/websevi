@@ -2,12 +2,13 @@
 import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 
-export async function getProducts() {
-    console.log('HOLA')
+export async function getProducts(filters) {
+    console.log('HOLAaaaaa', filters)
     await dbConnect()
-    const products = await Product.find()
-    // console.log('PRODS DE LA QUERY GET', products)
-    return JSON.parse(JSON.stringify(products))
+    const products = await Product.find(filters)
+    console.log('PRODS DE LA QUERY GET', products)
+    //return JSON.parse(JSON.stringify(products))
+    return products
 }
 export default async function handler(req, res) {
 

@@ -3,6 +3,7 @@ import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 import upload from '../../../lib/utils/multerUploadS3'
 import nc from 'next-connect'
+import { nameToUrl } from '../../../lib/utils/stringTools'
 
 //import initMiddleware from '../../../lib/api/initMiddleware'
 //import runMiddleware from '../../../ lib / api / runMiddleware'
@@ -53,9 +54,10 @@ const handler = nc()
                 next(error);
                 return
             }
+            req.body.url = nameToUrl(name)
             await dbConnect()
             const productData = req.file ?
-                { images: req.file.location, categories, ...req.body }
+                { images: req.file.location, categories, ...req.body, name }
                 :
                 { categories, ...req.body }
 

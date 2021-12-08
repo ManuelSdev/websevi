@@ -1,6 +1,7 @@
+import { nameToUrl } from "../lib/utils/stringTools"
 
 
-const initialProducts = [
+const products = [
     {
         name: 'AMD Ryzen 5 1600 3.2GHZ BOX',
         brand: 'AMD',
@@ -148,5 +149,6 @@ const initialProducts = [
 
 
 ]
-
+const initialProducts = products.map(product => ({ ...product, url: nameToUrl(product.name) }))
 export default initialProducts
+

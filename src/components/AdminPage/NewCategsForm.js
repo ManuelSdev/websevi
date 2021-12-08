@@ -4,7 +4,7 @@ import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import { getCategs } from "../../lib/api/categorie";
-import toPlainString from "../../lib/utils/plainString";
+import { toPlainString } from "../../lib/utils/stringTools";
 
 const NewCategsForm = ({ onSubmit, error }) => {
 

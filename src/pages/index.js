@@ -5,7 +5,7 @@ import GridCard from '../components/modules/productGrid/GridCard';
 import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
 import { Container } from '@mui/material';
 import MainMosaic from '../components/elements/MainMosaic';
-import toPlainString from '../lib/utils/plainString'
+import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
 import { getCategsPath } from '../lib/utils/categsStaticsPaths';
 import { getCats } from './api/categories/g';

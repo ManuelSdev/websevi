@@ -1,6 +1,7 @@
 import Categorie from '../../../models/Categorie'
 import dbConnect from '../../../lib/dbConnect'
-import toPlainString from '../../../lib/utils/plainString'
+import { toPlainString } from '../../../lib/utils/plainString'
+import { nameToUrl } from '../../../lib/utils/stringTools'
 //import titleCase from '../../../lib/utils/titleCase'
 export default async function handler(req, res) {
     console.log("REQ EN CREATE", req.body)
@@ -17,9 +18,9 @@ export default async function handler(req, res) {
         const nameCateg_2 = categorie_2.trim()
         const nameCateg_3 = categorie_3.trim()
 
-        const idCateg_1 = toPlainString(nameCateg_1)
-        const idCateg_2 = categorie_2 && toPlainString(nameCateg_2)
-        const idCateg_3 = categorie_3 && toPlainString(nameCateg_3)
+        const idCateg_1 = toPlainString(nameCateg_1).replace('', '-')
+        const idCateg_2 = categorie_2 && toPlainString(nameCateg_2).replace('', '-')
+        const idCateg_3 = categorie_3 && toPlainString(nameCateg_3).replace('', '-')
         // const check = await Categorie.ex(categorie_1)
         // console.log('cehck cat', check)
         //throw new Error('El ')

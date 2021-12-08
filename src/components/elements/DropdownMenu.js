@@ -4,9 +4,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { MenuList, Popover, Typography } from '@mui/material';
 import Link from './Link'
-//import SubDropdownMenu from './SubDropdownMenu'
-//import { NestedMenuItems } from 'mui-nested-menu'
-import toPlainString from '../../lib/utils/plainString';
+
+import { toPlainString } from '../../lib/utils/stringTools';
 
 export default function DropdownMenu({ categ_1, categs }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,6 +24,8 @@ export default function DropdownMenu({ categ_1, categs }) {
     }
     //const categNavbarName = categ_1.name.toUpperCase()
     //console.log('uuuuuuuuuuuuuiiiiiiiiiiiiiiiiii,', categ_1)
+
+
     return (
         <div>
             <Link

@@ -1,4 +1,5 @@
 module.exports = {
+
   reactStrictMode: true,
 
   //supertokens
@@ -8,7 +9,9 @@ module.exports = {
     webpack5: true, // by default, if you customize webpack config, they switch back to version 4. 
     // Looks like backward compatibility approach.
   },
-
+  images: {
+    domains: ['bucketmoon.s3.eu-west-3.amazonaws.com'],
+  },
   webpack: (config, options) => {
     //https://dev.to/marcinwosinek/how-to-add-resolve-fallback-to-webpack-5-in-nextjs-10-i6j
     config.resolve.fallback = {

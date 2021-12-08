@@ -2,12 +2,14 @@ import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Rati
 import Link from '../../elements/Link'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box } from "@mui/system";
+import { nameToUrl } from "../../../lib/utils/stringTools";
 const GridCard = ({ product }) => {
+
 
     return (
         <Card
         >
-            <CardActionArea component={Link} href='/products/productDetailsSection'>
+            <CardActionArea component={Link} href={`/products/${product.url}`}>
 
                 <CardMedia
                     component="img"

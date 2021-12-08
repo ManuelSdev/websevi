@@ -5,7 +5,7 @@ import Icon from '@mui/material/Icon';
 import { Box } from "@mui/system";
 
 
-const ProductDetails = () => {
+const ProductDetails = ({ product }) => {
 
     return (
         <Box sx={{ flexGrow: 1, background: "white" }}>
@@ -17,7 +17,7 @@ const ProductDetails = () => {
                 component="div"
 
             >
-                Gigabyte AMD Radeon RX 6600 EAGLE 8GB GDDR6
+                {product.name}
             </Typography>
             <Typography
                 sx={{ fontWeight: 'bold' }}
@@ -27,7 +27,7 @@ const ProductDetails = () => {
                 component="div"
 
             >
-                700€
+                {product.price}
             </Typography>
             <Box sx={{
                 display: 'flex',
@@ -46,7 +46,7 @@ const ProductDetails = () => {
             }}>
                 <Typography
                     sx={{ fontWeight: 'bold', mr: 5 }}>Marca :</Typography>
-                <Typography gutterBottom>EVGA </Typography>
+                <Typography gutterBottom>{product.brand} </Typography>
             </Box>
             <Box sx={{
                 display: 'flex',
