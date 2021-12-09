@@ -10,7 +10,7 @@ module.exports = {
     // Looks like backward compatibility approach.
   },
   images: {
-    domains: ['bucketmoon.s3.eu-west-3.amazonaws.com'],
+    domains: ['bucketmoon.s3.eu-west-3.amazonaws.com', 'bucketmoon.s3.amazonaws.com'],
   },
   webpack: (config, options) => {
     //https://dev.to/marcinwosinek/how-to-add-resolve-fallback-to-webpack-5-in-nextjs-10-i6j

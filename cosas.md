@@ -7,3 +7,7 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });
+
+
+**RUTA DEL SignInHeader
+/home/laki/tfg/websevi/node_modules/supertokens-auth-react/lib/build/recipe/emailpassword/components/themes/signInAndUp/signInHeader.js

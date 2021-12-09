@@ -6,6 +6,7 @@ const productSchema = mongoose.Schema({
     price: { type: Number, index: true },
     featured: false,
     url: String,
+    ean: { type: String, unique: true },
     categories: { type: [String], index: true },
 
     images: String,
