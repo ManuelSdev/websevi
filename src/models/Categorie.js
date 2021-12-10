@@ -23,7 +23,7 @@ categorieSchema.statics.ex = async function (_id) {
         return await querys.exec();
         */
     const doesUserExit = await Categorie.exists({ _id });
-    console.log('QUERY', doesUserExit)
+    //  console.log('QUERY', doesUserExit)
 
 
 }

@@ -1,8 +1,8 @@
-import { Grid } from "@mui/material"
-import { Box } from "@mui/system"
-import { Container } from "@mui/material"
+import Grid from "@mui/material/Grid"
+import Box from "@mui/system/Box"
+import Container from "@mui/material/Container"
 import ProductDetails from "../../components/modules/productDetails/ProductDetails"
-import { Button } from "@mui/material"
+import Button from "@mui/material/Button"
 import Image from "next/image"
 import giga from '../../assets/images/giga.jpg'
 import usePromise from "../../hooks/usePromise"
@@ -16,7 +16,7 @@ import { urlToName } from "../../lib/utils/stringTools"
 const ProductDetailsSection = ({ categories, product, isLogged }) => {
     //const { errorm, throwPromise, loading, data } = usePromise()
 
-    console.log('@@@@@@@@@@@@@@@@@@@@', product)
+    // console.log('@@@@@@@@@@@@@@@@@@@@', product)
     return (
         //TODO: UNIFICA con admin.js
         <Layout isLogged={isLogged} categs={categories}>
@@ -72,7 +72,7 @@ export async function getStaticPaths() {
     //Obtiene categorias cuyo campo level vale 1 o 2
 
     const query = await getProducts({}, 'url')
-    console.log('+++++++++++++++++++++++++', query)
+    // console.log('+++++++++++++++++++++++++', query)
     const products = JSON.parse(JSON.stringify(query))
     const paths = products.map(product => ({ params: { prodUrl: product.url } })
     )
@@ -91,7 +91,7 @@ export async function getStaticProps({ params }) {
 
 
     const product_query = await getProducts({ url: params.prodUrl })
-    console.log('############################', product_query)
+    //  console.log('############################', product_query)
     //Esta consulta devuelve un array con un único producto/elemento
     const [product] = JSON.parse(JSON.stringify(product_query))
     return {

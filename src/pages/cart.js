@@ -1,6 +1,17 @@
 
-import { Button, CardMedia, Container, Grid, Paper, Step, StepLabel, Stepper, Typography } from "@mui/material"
-import { Box } from "@mui/system"
+import Button from "@mui/material/Button"
+import CardMedia from "@mui/material/CardMedia"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import Step from "@mui/material/Step"
+import StepLabel from "@mui/material/StepLabel"
+import Stepper from "@mui/material/Stepper"
+import Stepper from "@mui/material/Stepper"
+import Typography from "@mui/material/Typography"
+
+
+import Box from "@mui/system/Box"
 import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
 import s from '@mui/icons-material/DeleteForeverOutlined';
 import ss from '@mui/icons-material/CloseOutlined';

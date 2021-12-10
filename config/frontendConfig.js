@@ -46,13 +46,19 @@ export const frontendConfig = () => {
                             }
                         ]
                     },
+                    style: {
+                        button: {
+                            backgroundColor: '#009CAC',
+                            borderColor: '#009CAC'
+                        }
+                    }
 
 
                 },
                 //Personaliza tomando la key de un componente y pasándola a tu custom como prop
                 override: {
                     components: {
-                        EmailPasswordSignInHeader: ({ DefaultComponent, ...props }) => {
+                        ThirdPartySignInAndUpProvidersForm: ({ DefaultComponent, ...props }) => {
                             /**
                             * In this case, the <EmailPasswordSignInHeader> will render the default component
                             * wrapped in div with octocat picture above it.
@@ -60,21 +66,62 @@ export const frontendConfig = () => {
 
 
                             console.log('+++', { DefaultComponent })
-                            /*
-                                                   <Box
-                                >
+
+
+
+                            return (
+
+                                <DefaultComponent {...props} />
+
+
+
+                            );
+                        },
+                        EmailPasswordSignInHeader: ({ DefaultComponent, ...props }) => {
+                            /**
+                            * In this case, the <EmailPasswordSignInHeader> will render the default component
+                            * wrapped in div with octocat picture above it.
+                            */
+
+
+                            // console.log('+++', { DefaultComponent })
+
+
+
+                            return (
+                                <Box>
                                     <IconCorpName
                                         viewBox="0 0 381.17 68.88"
 
                                         sx={{ mb: 4, fill: "blue", height: "100%", fontSize: 250 }}
-                                    ></IconCorpName>                                
+                                    ></IconCorpName>
+                                    <DefaultComponent {...props} />
                                 </Box>
-                                */
+
+
+                            );
+                        },
+                        EmailPasswordSignUpHeader: ({ DefaultComponent, ...props }) => {
+                            /**
+                            * In this case, the <EmailPasswordSignInHeader> will render the default component
+                            * wrapped in div with octocat picture above it.
+                            */
+
+
+                            // console.log('+++', { DefaultComponent })
+
+
+
                             return (
+                                <Box>
+                                    <IconCorpName
+                                        viewBox="0 0 381.17 68.88"
 
-                                <DefaultComponent {...props} >
+                                        sx={{ mb: 4, fill: "blue", height: "100%", fontSize: 250 }}
+                                    ></IconCorpName>
+                                    <DefaultComponent {...props} />
+                                </Box>
 
-                                </DefaultComponent>
 
                             );
                         },

@@ -1,7 +1,17 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Rating, Typography } from "@mui/material"
+import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardActionArea from "@mui/material/CardActionArea"
+import CardActions from "@mui/material/CardActions"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Rating from "@mui/material/Rating"
+import Typography from "@mui/material/Typography"
+
+
+
 import Link from '../../elements/Link'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Box } from "@mui/system";
+import Box from "@mui/system/Box";
 import { nameToUrl } from "../../../lib/utils/stringTools";
 const GridCard = ({ product }) => {
 

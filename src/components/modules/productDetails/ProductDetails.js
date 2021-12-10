@@ -1,8 +1,11 @@
-import { Button, ButtonGroup, Rating, Stack, SvgIcon, Typography } from "@mui/material"
 import TextField from '@mui/material/TextField';
-import Icon from '@mui/material/Icon';
+import Button from '@mui/material/Button';
+import Rating from '@mui/material/Rating';
+import SvgIcon from '@mui/material/SvgIcon';
+import Typography from '@mui/material/Typography';
 
-import { Box } from "@mui/system";
+
+import Box from "@mui/system/Box";
 
 
 const ProductDetails = ({ product }) => {
@@ -27,7 +30,7 @@ const ProductDetails = ({ product }) => {
                 component="div"
 
             >
-                {product.price}
+                {product.price} €
             </Typography>
             <Box sx={{
                 display: 'flex',

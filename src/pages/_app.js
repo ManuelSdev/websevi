@@ -7,6 +7,7 @@ import SuperTokensReact from 'supertokens-auth-react'
 import * as SuperTokensConfig from '../../config/frontendConfig'
 import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
+//import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
 async function initNode() {
 
@@ -26,7 +27,7 @@ if (typeof window !== 'undefined') {
 
 function App({ Component, pageProps }) {
 
-  const [isLogged, setIsLogged] = React.useState(null)
+  const [isLogged, setIsLogged] = React.useState({ state: false, admin: false })
 
   useEffect(() => {
     async function doRefresh() {
@@ -43,17 +44,36 @@ function App({ Component, pageProps }) {
 
   }, [pageProps.fromSupertokens])
 
-
   useEffect(() => {
     const checkSession = async () => {
 
       //Si existe una sesión activa, la promesa devuelve true
-      setIsLogged(await Session.doesSessionExist())
+      // setIsLogged(await Session.doesSessionExist())
+      const state = await Session.doesSessionExist()
+      console.log('SESIOONNNN ++++++++++++++', state)
+
+      const { admin } = state && await Session.getAccessTokenPayloadSecurely()
+      const info = state && await Session.getAccessTokenPayloadSecurely()
+      console.log('INFO EN FRONT @@@@@@@@@@@@@@', info)
+      //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
+      setIsLogged({ state, admin: !!admin })
+
     }
     checkSession()
 
-  }, [])
 
+  }, [])
+  /*
+    useEffect(() => {
+      const checkSession = async () => {
+  
+        //Si existe una sesión activa, la promesa devuelve true
+        setIsLogged(await Session.doesSessionExist())
+      }
+      checkSession()
+  
+    }, [])
+  */
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
@@ -61,6 +81,7 @@ function App({ Component, pageProps }) {
   pageProps.isLogged = isLogged
 
   pageProps.hola = "hola"
+  console.log('LOGIN', isLogged)
   return (
     <>
 
@@ -72,7 +93,9 @@ function App({ Component, pageProps }) {
       </Head>
 
 
+
       <Component {...pageProps} />
+
 
 
 

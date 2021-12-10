@@ -34,13 +34,13 @@ const theme = createTheme({
             defaultProps: {
                 // The default props to change
 
-                variant: 'contained',
+                //   variant: 'contained',
             },
             styleOverrides: {
                 root: {
                     // apply theme's border-radius instead of component's default
                     alignItems: 'center',
-                    marginBottom: '1em'
+                    //marginBottom: '1em'
 
                 },
             },

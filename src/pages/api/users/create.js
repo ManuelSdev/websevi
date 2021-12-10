@@ -3,7 +3,7 @@ import User from '../../../models/Users'
 import dbConnect from '../../../lib/dbConnect'
 export default async function handler(req, res) {
     // res.status(200).json({ name: 'John Doe' })
-    console.log("BODY", req.body)
+    //console.log("BODY", req.body)
     await dbConnect()
     try {
         const { username, email, password } = req.body

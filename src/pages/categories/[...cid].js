@@ -10,8 +10,8 @@ import { nameToUrl } from '../../lib/utils/stringTools'
 const Categorie = ({ isLogged, products, categories }) => {
     const router = useRouter()
     const { cid } = router.query
-    console.log('url', cid)
-    console.log('products', products)
+    //console.log('url', cid)
+    // console.log('products', products)
     //  console.log('PRODUCT SSR', products)
     return (
         <Layout isLogged={isLogged} categs={categories}>
@@ -57,7 +57,7 @@ export async function getStaticPaths() {
 
     //Obtiene categorias cuyo campo level vale 1 o 2
     const query = await getCats({ level: { $in: [1, 2] } })
-    console.log('----------------------------', query)
+    //console.log('----------------------------', query)
     const categories = JSON.parse(JSON.stringify(query))
     const paths = getCategsPath(categories)
 

@@ -1,12 +1,10 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { MenuList, Popover, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import MenuList from '@mui/material/MenuList';
 import Link from './Link'
-
 import { toPlainString } from '../../lib/utils/stringTools';
-
 export default function DropdownMenu({ categ_1, categs }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -29,16 +27,33 @@ export default function DropdownMenu({ categ_1, categs }) {
     return (
         <div>
             <Link
+                //disableElevation='true'
                 href={`/categories/${toPlainString(categ_1._id)}`}
-                id="basic-button"
+                // id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onPointerEnter={handleClick}
                 onPointerLeave={handleClose}
                 onClick={handleClose}
+                sx={{
+                    color: 'black',
+                    '& :hover': {
+                        color: "white",
+                    },
+                }}
+
             >
-                {categ_1.name.toUpperCase()}
+                <Typography
+                    textAlign="center"
+                    variant='h6'
+
+
+                >
+                    {categ_1.name.toUpperCase()}
+                </Typography>
+
+
             </Link>
             <Menu
                 id="basic-menu"

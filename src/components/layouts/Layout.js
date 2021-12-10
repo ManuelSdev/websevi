@@ -1,5 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { AppBar, Toolbar, Container, CssBaseline, Button, TextField, Paper, Grid } from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
 import useMediaQuery from "@mui/material/useMediaQuery";
 import theme from '../../assets/theme'
 import styles from '../../styles/Home.module.css'
@@ -7,7 +7,6 @@ import Image from 'next/image'
 
 import Header from "../elements/Header";
 
-import { getCategs } from "../../lib/api/categorie";
 
 
 

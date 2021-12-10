@@ -29,7 +29,7 @@ const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numb
 //console.log('*********************************', categories)
 //TODO: refactoriza y crea modulo en lib con esto
 export const getCategsPath = categories => categories.map(categ => {
-    console.log('****************************,categories')
+    //console.log('****************************,categories')
     const deepPath = Array.from(
         [
             ...pathToArray(categ.path)(1)
@@ -38,7 +38,9 @@ export const getCategsPath = categories => categories.map(categ => {
     )
 
     return categ.level === 1 ?
-        console.log('-------------------------', categ._id) || { params: { cid: [categ._id] } }
+        // console.log('-------------------------', categ._id) ||
+        { params: { cid: [categ._id] } }
         :
-        console.log('+++++++++++++++++', deepPath) || { params: { cid: deepPath } }
+        // console.log('+++++++++++++++++', deepPath) || 
+        { params: { cid: deepPath } }
 })

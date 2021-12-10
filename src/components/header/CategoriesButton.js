@@ -6,7 +6,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Box from '@mui/system/Box';
 import React from 'react';
 import NestedMenuItem from 'mui-nested-menu/build/NestedMenuItem';
-import { Button, Menu, MenuItem } from '@mui/material';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const CategoriesButton = () => {

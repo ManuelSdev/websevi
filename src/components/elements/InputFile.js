@@ -1,4 +1,4 @@
-import { Input } from '@mui/material';
+import Input from '@mui/material/Input';
 import React from 'react';
 import Image from 'next/image'
 import placeholder from '../../assets/images/placeholder.png';

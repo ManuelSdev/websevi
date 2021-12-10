@@ -57,14 +57,16 @@ export const backendConfig = () => {
                                 ...originalImplementation,
                                 createNewSession: async function (input) {
                                     let userId = input.userId;
-
-                                    let role = "admin"; // TODO: fetch role based on userId
+                                    console.log('USER ID**************************', userId)
+                                    //gestion del rol admin 
+                                    let admin = userId === 'c05864ca-8e53-4100-8f01-d0070f6e4a7e'
 
                                     input.accessTokenPayload = {
                                         ...input.accessTokenPayload,
-                                        role
+                                        admin
                                     };
-
+                                    console.log('el rol admin////////////////', admin)
+                                    console.log('hostia')
                                     return originalImplementation.createNewSession(input);
                                 },
                             };

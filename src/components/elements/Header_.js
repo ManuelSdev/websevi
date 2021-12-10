@@ -40,6 +40,7 @@ const Header = ({ isLogged }) => {
         //await setCategs(a)
     }, [])
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
+    console.log('estado login', isLogged)
     return (
         <>
             <AppBar position="sticky" >
@@ -88,7 +89,13 @@ const Header = ({ isLogged }) => {
                     />
                     <Box sx={{ color: "black" }}>
                         <Link href="/newUser">
-                            {isLogged ? 'Mi cuenta' : 'Iniciar sesion'}
+                            {isLogged.state ?
+                                isLogged.admin ?
+                                    'Dashboard'
+                                    :
+                                    'Mi cuenta'
+                                :
+                                'Iniciar sesion'}
                         </Link>
                     </Box>
                     <Box sx={{ color: "black" }}>

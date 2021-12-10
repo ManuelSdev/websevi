@@ -10,14 +10,11 @@ import { nameToUrl } from '../../../lib/utils/stringTools'
 
 //const mul = initMiddleware(multerUploadS3)
 async function handler_(req, res) {
-    console.log("BODY", req.body)
-    console.log("BODY", req.body)
-    console.log("IMG", req.file)
+    // console.log("BODY", req.body)
+    //    console.log("IMG", req.file)
     // upload.single("images")
     // res.status(200).json({ name: 'John Doe' })
-    console.log("BODY", req.body)
-    console.log("IMG", req.file)
-    // console.log("req", req)
+
     await dbConnect()
     try {
         const { username, email, password } = req.body
@@ -38,8 +35,8 @@ async function handler_(req, res) {
 const handler = nc()
     .use(upload.single("images"))
     .post(async (req, res, next) => {
-        console.log("IMG", req.file)
-        console.log("BODY", req.body)
+        //console.log("IMG", req.file)
+        // console.log("BODY", req.body)
 
         const { name, categorie_1, categorie_2, categorie_3 } = req.body
         const categories = [categorie_1, categorie_2, categorie_3]

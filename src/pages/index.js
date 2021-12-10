@@ -2,14 +2,14 @@
 import styles from '../styles/Home.module.css'
 import IconCorpName from '../components/elements/IconCorpName';
 import GridCard from '../components/modules/productGrid/GridCard';
-import ProductsGrid4 from "../components/modules/productGrid/ProductsGrid"
-import { Container } from '@mui/material';
+import Container from '@mui/material/Container';
 import MainMosaic from '../components/elements/MainMosaic';
 import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
 import { getCategsPath } from '../lib/utils/categsStaticsPaths';
 import { getCats } from './api/categories/g';
 import { getProducts } from './api/products/get';
+import ProductsGrid from '../components/modules/productGrid/ProductsGrid'
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
@@ -25,7 +25,7 @@ export default function Home({ isLogged, categories }) {
 
       <MainMosaic />
       <Container>
-        <ProductsGrid4></ProductsGrid4>
+        <ProductsGrid></ProductsGrid>
       </Container>
 
       {toPlainString('CómpoNNNNás ásssNN')}

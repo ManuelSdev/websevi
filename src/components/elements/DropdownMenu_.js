@@ -1,8 +1,6 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Popover, Typography } from '@mui/material';
 import Link from './Link'
 
 export default function DropdownMenu({ href, title, subCategs }) {

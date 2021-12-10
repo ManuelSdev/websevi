@@ -1,12 +1,11 @@
 import usePromise from "../../hooks/usePromise";
 import { createCategs } from "../../lib/api/categorie";
-import NewProductForm from "./NewProductForm"
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Box } from "@mui/system";
 import ConfirmAndReturn from "../elements/ConfirmAndReturn";
 import React from "react";
 import NewCategsForm from './NewCategsForm'
+
 
 const NewCategsSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation } = usePromise({})
