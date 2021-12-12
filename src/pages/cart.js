@@ -22,7 +22,7 @@ import IconCorpName from "../components/elements/IconCorpName"
 import { ThemeProvider } from "@emotion/react"
 import theme from "../assets/theme"
 
-const Cart = () => {
+const CartPage = () => {
     const { cart, setCart } = useAppContext()
 
     //const cartTotalPrice = React.useRef(0);
@@ -33,10 +33,15 @@ const Cart = () => {
         'Resumen'
     ];
 
-    const handleDelete = (productToDelete) => {
+    const handleDeletes = productToDelete => ev => {
+        ev.preventDefault()
         const newCart = cart.filter(product => product._id !== productToDelete._id)
+        console.log('newcart jskjskjslksjlñ', newCart)
         setCart(newCart)
     }
+    const handleDelete = (productToDelete) => { handleDeletes(productToDelete) }
+    const h = (prod) => ev => console.log('eventt', prod)
+    const f = () => { console.log('eventt') }
     const rowsTotalPrice = cart.map(product => product.amount * product.price)
     const cartTotalPrice = cart.length > 0 ?
         sumArray(rowsTotalPrice)
@@ -60,6 +65,10 @@ const Cart = () => {
                         }
                     }}
                 >
+                    <Button
+                        onCLick={f}
+                    >hoo
+                    </Button >
 
                     <p>Lunes a jueves ........635 41 55 73 </p>
                 </Toolbar>
@@ -111,38 +120,44 @@ const Cart = () => {
                             </Grid>
                             {cart.map(product => {
 
-                                return <Paper ax={{ display: "flex", flexDirection: 'row' }}>
-                                    <Grid container >
-                                        <Grid container spacing={2} item xs={12} sm={12} md={8} lg={6} >
-                                            <Grid item xs={12} sm={12} md={8} lg={3} >
-                                                <CardMedia
-                                                    component="img"
-                                                    // image="https://livedemo00.template-help.com/opencart_58281/image/cache/catalog/products/product-22-800x800.png"
-                                                    image={product.images}
-                                                    alt="Paella dish"
-                                                />
+                                return (
+                                    <Paper key={product._id} ax={{ display: "flex", flexDirection: 'row' }}>
+                                        <Grid container >
+                                            <Grid container spacing={2} item xs={12} sm={12} md={8} lg={6} >
+                                                <Grid item xs={12} sm={12} md={8} lg={3} >
+                                                    <CardMedia
+                                                        component="img"
+                                                        // image="https://livedemo00.template-help.com/opencart_58281/image/cache/catalog/products/product-22-800x800.png"
+                                                        image={product.images}
+                                                        alt="Paella dish"
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} sm={12} md={8} lg={9} >
+                                                    {product.name}
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={12} sm={12} md={8} lg={9} >
-                                                {product.name}
+                                            <Grid item xs={12} sm={12} md={8} lg={2} >
+                                                {product.price}
                                             </Grid>
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={8} lg={2} >
-                                            {product.price}
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={8} lg={2} >
-                                            {product.amount}
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={8} lg={1.5} >
-                                            {product.amount * product.price} €
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={8} lg={0.5} >
-                                            <IconButton onCLick={handleDelete(product)} color="primary" aria-label="upload picture" component="span">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
+                                            <Grid item xs={12} sm={12} md={8} lg={2} >
+                                                {product.amount}
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={8} lg={1.5} >
+                                                {product.amount * product.price} €
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={8} lg={0.5} >
+                                                <IconButton
+                                                    onClick={handleDeletes(product)}
+                                                    color="primary" aria-label="upload picture" component="span">
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Grid>
 
-                                </Paper>
+                                        </Grid>
+
+                                    </Paper>
+                                )
+
                             }
                             )}
                         </Grid>
@@ -155,8 +170,8 @@ const Cart = () => {
                     </Grid>
                 </Box>
             </Container >
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 
-export default Cart
+export default CartPage

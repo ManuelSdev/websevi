@@ -10,7 +10,7 @@ import NewCategsForm from './NewCategsForm'
 const NewCategsSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation } = usePromise({})
     const [uploaded, setUploaded] = React.useState(false)
-    const { bucket, region } = props
+    //const { bucket, region } = props
     //console.log(region)
     const handleSubmit = async newCategories => {
         /*

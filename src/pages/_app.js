@@ -82,21 +82,22 @@ function App({ Component, pageProps }) {
   }, [])
 
   useEffect(() => {
-    if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart))
 
   }, [cart])
+
 
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
   //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
 
-  const appProps = { isLogged, cart, setCart }
+  const appProps = { isLogged, setIsLogged, cart, setCart }
   //pageProps.isLogged = isLogged
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
   pageProps.hola = "hola"
-  //console.log('LOGIN', isLogged)
+  console.log('LOGIN', isLogged)
   return (
     <>
 

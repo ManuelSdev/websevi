@@ -1,6 +1,6 @@
 import Categorie from '../../../models/Categorie'
 import dbConnect from '../../../lib/dbConnect'
-import { toPlainString } from '../../../lib/utils/plainString'
+import { toPlainString } from '../../../lib/utils/stringTools'
 import { nameToUrl } from '../../../lib/utils/stringTools'
 //import titleCase from '../../../lib/utils/titleCase'
 export default async function handler(req, res) {
@@ -13,14 +13,16 @@ export default async function handler(req, res) {
     try {
         await dbConnect()
         const { categorie_1, categorie_2, categorie_3, categ_1_isNew: c1New, categ_2_isNew: c2New } = req.body
-
+        console.log('categorie_2 -------------------', categorie_2)
         const nameCateg_1 = categorie_1.trim()
         const nameCateg_2 = categorie_2.trim()
         const nameCateg_3 = categorie_3.trim()
-
-        const idCateg_1 = toPlainString(nameCateg_1).replace('', '-')
-        const idCateg_2 = categorie_2 && toPlainString(nameCateg_2).replace('', '-')
-        const idCateg_3 = categorie_3 && toPlainString(nameCateg_3).replace('', '-')
+        console.log('nameCateg_2 -------------------', nameCateg_2)
+        const idCateg_1 = toPlainString(nameCateg_1).replace('', '-').slice(1)
+        //slice(1) suprime le guion inicial que añade el replace
+        const idCateg_2 = categorie_2 && toPlainString(nameCateg_2).replace('', '-').slice(1)
+        console.log('idCateg_2 -------------------', idCateg_2)
+        const idCateg_3 = categorie_3 && toPlainString(nameCateg_3).replace('', '-').slice(1)
         // const check = await Categorie.ex(categorie_1)
         // console.log('cehck cat', check)
         //throw new Error('El ')

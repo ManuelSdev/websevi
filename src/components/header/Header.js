@@ -16,23 +16,24 @@ import Button from "@mui/material/Button"
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import React from "react"
 import FirstToolBar from './FirstToolBar'
+import { useAppContext } from "../context"
 
 
 
 
-async function logoutClicked() {
-    await ThirdPartyEmailPassword.signOut()
-    ThirdPartyEmailPassword.redirectToAuth()
-}
+
 
 const Header = ({ categs }) => {
-
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
-
-
+    const { setIsLogged } = useAppContext()
+    async function logoutClicked() {
+        await ThirdPartyEmailPassword.signOut()
+        setIsLogged({ state: false, admin: false })
+        // ThirdPartyEmailPassword.redirectToAuth()
+    }
     return (
 
-        <AppBar position="sticky" sx={{ mb: '2em' }} >
+        <AppBar position="sticky" sx={{ mb: '2em', background: "red" }} >
 
             <Toolbar
                 sx={{
