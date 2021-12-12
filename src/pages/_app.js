@@ -7,12 +7,11 @@ import SuperTokensReact from 'supertokens-auth-react'
 import * as SuperTokensConfig from '../../config/frontendConfig'
 import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
+import { AppProvider } from '../components/context'
 //import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
+//Supertokens logic
 async function initNode() {
-
-
-
   const supertokensNode = await import('supertokens-node')
   const { backendConfig } = await import('../../config/backendConfig')
   supertokensNode.init(backendConfig())
@@ -28,7 +27,23 @@ if (typeof window !== 'undefined') {
 function App({ Component, pageProps }) {
 
   const [isLogged, setIsLogged] = React.useState({ state: false, admin: false })
+  //cart =[{}]
+  //Guarda productos que se van añádiendo o quitando del carrito
+  const [cart, setCart] = React.useState([])
+  /*
+    const firstRender = React.useRef(true);
+  
+    useEffect(() => {
+      if (firstRender.current) {
+        firstRender.current = false;
+        return;
+    }
+  
+  
+    }, [cart])
+  */
 
+  //Supertokens logic
   useEffect(() => {
     async function doRefresh() {
       if (pageProps.fromSupertokens === 'needs-refresh') {
@@ -45,6 +60,10 @@ function App({ Component, pageProps }) {
   }, [pageProps.fromSupertokens])
 
   useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    storedCart && setCart(storedCart)
+    console.log('STOREDDDD', storedCart)
+    //
     const checkSession = async () => {
 
       //Si existe una sesión activa, la promesa devuelve true
@@ -54,34 +73,30 @@ function App({ Component, pageProps }) {
 
       const { admin } = state && await Session.getAccessTokenPayloadSecurely()
       const info = state && await Session.getAccessTokenPayloadSecurely()
-      console.log('INFO EN FRONT @@@@@@@@@@@@@@', info)
+      // console.log('INFO EN FRONT @@@@@@@@@@@@@@', info)
       //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
       setIsLogged({ state, admin: !!admin })
 
     }
     checkSession()
-
-
   }, [])
-  /*
-    useEffect(() => {
-      const checkSession = async () => {
-  
-        //Si existe una sesión activa, la promesa devuelve true
-        setIsLogged(await Session.doesSessionExist())
-      }
-      checkSession()
-  
-    }, [])
-  */
+
+  useEffect(() => {
+    if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart));
+
+  }, [cart])
+
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
+  //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
 
-  pageProps.isLogged = isLogged
-
+  const appProps = { isLogged, cart, setCart }
+  //pageProps.isLogged = isLogged
+  // pageProps.cart = [...cart]
+  //pageProps.setCart = setCart
   pageProps.hola = "hola"
-  console.log('LOGIN', isLogged)
+  //console.log('LOGIN', isLogged)
   return (
     <>
 
@@ -93,8 +108,10 @@ function App({ Component, pageProps }) {
       </Head>
 
 
+      <AppProvider {...appProps}>
+        <Component {...pageProps} />
+      </AppProvider>
 
-      <Component {...pageProps} />
 
 
 

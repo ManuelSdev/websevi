@@ -15,13 +15,15 @@ import ProductsGrid from '../components/modules/productGrid/ProductsGrid'
 console.log(unescape('sPerif&#xE9;ricos'))
 
 
-export default function Home({ isLogged, categories }) {
+export default function Home({ categories }) {
+
+
   //o(console.log)
   //console.log('sssssssssssssssspp', categs)
   return (
 
     // <div className={styles.container}>
-    <Layout isLogged={isLogged} categs={categories}>
+    <Layout categs={categories} >
 
       <MainMosaic />
       <Container>

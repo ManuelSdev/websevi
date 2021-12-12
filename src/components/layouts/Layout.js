@@ -5,13 +5,14 @@ import theme from '../../assets/theme'
 import styles from '../../styles/Home.module.css'
 import Image from 'next/image'
 
-import Header from "../elements/Header";
+import Header from "../header/Header";
 
 
 
 
-const Layout = ({ children, categs, isLogged }) => {
+const Layout = ({ children, categs }) => {
     const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
+
     //const { error, throwPromise, loading, data: categs } = usePromise({})
 
     //console.log('*****************', categs)
@@ -19,7 +20,7 @@ const Layout = ({ children, categs, isLogged }) => {
 
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header isLogged={isLogged} categs={categs} />
+            <Header categs={categs} />
 
             <main>
                 {children}
