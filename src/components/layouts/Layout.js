@@ -6,6 +6,7 @@ import styles from '../../styles/Home.module.css'
 import Image from 'next/image'
 
 import Header from "../header/Header";
+import Footer from "./Footer";
 
 
 
@@ -26,8 +27,23 @@ const Layout = ({ children, categs }) => {
                 {children}
 
             </main>
+            <footer>
+                <Footer></Footer>
+            </footer>
 
-            <footer className={styles.footer}>
+
+        </ThemeProvider >
+
+
+
+    )
+}
+
+export default Layout
+
+/**
+
+  <footer className={styles.footer}>
                 <a
                     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                     target="_blank"
@@ -40,11 +56,4 @@ const Layout = ({ children, categs }) => {
                 </a>
             </footer>
 
-        </ThemeProvider >
-
-
-
-    )
-}
-
-export default Layout
+ */

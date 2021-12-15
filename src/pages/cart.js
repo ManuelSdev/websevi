@@ -66,7 +66,7 @@ const CartPage = () => {
                     }}
                 >
                     <Button
-                        onCLick={f}
+                        onClick={f}
                     >hoo
                     </Button >
 
@@ -119,7 +119,7 @@ const CartPage = () => {
                                 </Grid>
                             </Grid>
                             {cart.map(product => {
-
+                                const [mainImage] = product.images
                                 return (
                                     <Paper key={product._id} ax={{ display: "flex", flexDirection: 'row' }}>
                                         <Grid container >
@@ -128,7 +128,7 @@ const CartPage = () => {
                                                     <CardMedia
                                                         component="img"
                                                         // image="https://livedemo00.template-help.com/opencart_58281/image/cache/catalog/products/product-22-800x800.png"
-                                                        image={product.images}
+                                                        image={mainImage}
                                                         alt="Paella dish"
                                                     />
                                                 </Grid>

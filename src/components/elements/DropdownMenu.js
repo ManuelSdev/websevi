@@ -28,7 +28,7 @@ export default function DropdownMenu({ categ_1, categs }) {
         <div>
             <Link
                 //disableElevation='true'
-                href={`/categories/${toPlainString(categ_1._id)}`}
+                href={`/${toPlainString(categ_1._id)}`}
                 // id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"
@@ -99,7 +99,7 @@ export default function DropdownMenu({ categ_1, categs }) {
                             key={categ_2._id}
 
                             component={Link}
-                            href={`/categories/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
+                            href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
                             onPointerEnter={handleAnchorEl}
                             onClick={handleClose}
                             sx={{

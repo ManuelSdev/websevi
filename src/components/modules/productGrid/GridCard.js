@@ -15,7 +15,7 @@ import Box from "@mui/system/Box";
 import { nameToUrl } from "../../../lib/utils/stringTools";
 const GridCard = ({ product }) => {
 
-
+    const [mainImage] = product.images
     return (
         <Card
         >
@@ -25,7 +25,8 @@ const GridCard = ({ product }) => {
                     component="img"
                     //image="https://bucketmoon.s3.eu-west-3.amazonaws.com/1633618930002-vaca.jpg"
                     //image='https://img.pccomponentes.com/articles/63/637023/1824-gigabyte-amd-radeon-rx-6600-eagle-8gb-gddr6.jpg'
-                    image={product.images}
+                    //  image={product.images}
+                    image={mainImage}
                     alt="Paella dish"
                 />
                 <CardContent

@@ -18,6 +18,7 @@ async function handler_(req, res) {
     await dbConnect()
     try {
         const { username, email, password } = req.body
+
         req.body.date = new Date()
         const productData = { ...req.body }
         //const savedUser = await createUser(userData)

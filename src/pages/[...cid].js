@@ -1,20 +1,20 @@
 import { useRouter } from 'next/router'
-import ProductsLayout from "../../components/modules/productsLayout/ProductsLayout"
-import { getProducts } from "../api/products/get"
-import { getCats } from '../api/categories/g'
-import { getCategsPath } from '../../lib/utils/categsStaticsPaths'
-import Layout from '../../components/layouts/Layout'
-import { nameToUrl } from '../../lib/utils/stringTools'
+import ProductsLayout from "../components/modules/productsLayout/ProductsLayout"
+import { getProducts } from "./api/products/get"
+import { getCats } from './api/categories/g'
+import { getCategsPath } from '../lib/utils/categsStaticsPaths'
+import Layout from '../components/layouts/Layout'
+import { nameToUrl } from '../lib/utils/stringTools'
 
 
-const Categorie = ({ isLogged, products, categories }) => {
+const Categorie = ({ isLogged, products, categs }) => {
     const router = useRouter()
     const { cid } = router.query
     //console.log('url', cid)
     // console.log('products', products)
     //  console.log('PRODUCT SSR', products)
     return (
-        <Layout isLogged={isLogged} categs={categories}>
+        <Layout isLogged={isLogged} categs={categs}>
             <ProductsLayout products={products}></ProductsLayout>
         </Layout>
 
@@ -68,12 +68,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-    //  console.log('CONTEXTT', context.params)
+    console.log('CONTEXTT', context.params)
     const categories_query = await getCats()
-    const categories = JSON.parse(JSON.stringify(categories_query))
-    const products_query = await getProducts()
+    const categs = JSON.parse(JSON.stringify(categories_query))
+    /**
+     * conext.params contiene el path de la url en este formato { cid: [ 'categoria1', 'categoria2',... ] }
+     * lo extraigo y renombro el objeto al operador $all de mongodb para hacer la consulta y obtener 
+     * solo los productos correspondientes a las categorías que aparecen en la url
+     */
+    const { cid: $all } = context.params
+    //https://docs.mongodb.com/manual/tutorial/query-arrays/
+
+    const filters = { categories: { $all } }
+    const products_query = await getProducts(filters)
     const products = JSON.parse(JSON.stringify(products_query))
     return {
-        props: { categories, products }, // will be passed to the page component as props
+        props: { categs, products }, // will be passed to the page component as props
     }
 }

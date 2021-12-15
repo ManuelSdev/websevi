@@ -12,26 +12,20 @@ import Layout from "../../components/layouts/Layout"
 import { getCategsPath } from "../../lib/utils/categsStaticsPaths"
 import { getCats } from "../api/categories/g"
 import { urlToName } from "../../lib/utils/stringTools"
-import { ButtonBase, ImageList, ImageListItem, Link } from "@mui/material"
+import { ImageList, ImageListItem } from "@mui/material"
 
 const ProductPage = ({ categories, product }) => {
     //const { errorm, throwPromise, loading, data } = usePromise()
     const [firstImage] = product.images
-    // console.log('////////////////////', product.images)
-    const images = [...product.images]
-    const [mainImage, setMainImage] = React.useState(firstImage)
+    const [mainImage, setMainImage] = React.useState()
 
-    const handleMainImage = (image) => ev => {
-        ev.preventDefault()
-        setMainImage(image)
-    }
     return (
         //TODO: UNIFICA con admin.js
         <Layout categs={categories} >
 
 
             <Container sx={{ background: "red" }}>
-                <Box sx={{ flexGrow: 1, background: "AliceBlue" }}>
+                <Box sx={{ flexGrow: 1, background: "green" }}>
                     <Grid container spacing={0}>
                         <Grid item xs={6} sm={4} md={3} lg={6} >
                             <Box
@@ -51,45 +45,25 @@ const ProductPage = ({ categories, product }) => {
                                     height='100%'
                                     objectFit='contain'
                                     layout='fill'
-                                    //src={product.images}
-                                    src={mainImage}
-
+                                    src={product.images}
                                     alt="Imagen de producto"
                                 />
                             </Box>
-
-
-                            <ImageList sx={{ width: 527, height: 450 }} cols={4} rowHeight={128.75}>
-                                {images.map((image) => (
-                                    <ImageListItem key={image} component={Button}
-                                        sx={{
-
-                                            border: 1,
-                                            borderColor: 'DarkGrey',
-                                            borderRadius: 0,
-                                            '&:hover': {
-                                                border: 2,
-                                                borderColor: 'corpGreen.main',
-                                                //  borderRadius: 0,
-
-                                            }
-                                        }}
-                                    >
-
-                                        <Image
-
-                                            objectFit='contain'
-                                            layout='fill'
-                                            //src={product.images}
-                                            src={image}
-                                            alt="Imagen de producto"
-                                            onClick={handleMainImage(image)}
+                            <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+                                {itemData.map((item) => (
+                                    <ImageListItem key={item.img}>
+                                        <img
+                                            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                                            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={item.title}
+                                            loading="lazy"
                                         />
-
                                     </ImageListItem>
                                 ))}
                             </ImageList>
+                            <Box>
 
+                            </Box>
                         </Grid>
                         <Grid item xs={6} sm={4} md={3} lg={6} >
                             <ProductDetails product={product} ></ProductDetails>

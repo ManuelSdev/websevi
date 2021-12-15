@@ -30,7 +30,6 @@ export default function Home({ categories }) {
         <ProductsGrid></ProductsGrid>
       </Container>
 
-      {toPlainString('CómpoNNNNás ásssNN')}
     </Layout>
 
   )
