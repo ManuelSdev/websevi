@@ -207,5 +207,8 @@ const mobos = [
 
 
 ]
-
-export default mobos
+const mobosWithFilters = mobos.map(mobo => {
+    mobo.filters = ['brand', 'chipset', 'size', 'price']
+    return mobo
+})
+export default mobosWithFilters

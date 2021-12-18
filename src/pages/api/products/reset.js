@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     //console.log("req body init", req.body)
 
     try {
-        console.log("req body init", req.body)
+        //  console.log("req body init", req.body)
 
         const { deletedCount } = await Product.deleteMany();
         console.log(`Eliminados ${deletedCount} productos.`);

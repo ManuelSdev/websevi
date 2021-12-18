@@ -8,13 +8,13 @@ export default async function handler(req, res) {
     //console.log("req body init", req.body)
 
     try {
-        console.log("req body init", req.body)
+        // console.log("req body FILTERS", req.body.map(obj => obj.filters[1]))
 
         const { deletedCount } = await Categories.deleteMany();
         console.log(`Eliminadas ${deletedCount} categorias.`);
 
         const result = await Categories.insertMany(req.body)
-
+        // console.log('RESULT**********', result.map(obj => obj.filters[1]))
         res.status(201).json({ result: result })
 
     } catch (err) {

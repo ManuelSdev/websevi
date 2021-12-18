@@ -1,27 +1,14 @@
 
-
 import mongoose from 'mongoose'
-//TODO: REVISAR schemaTypes
-
-
-//const Filter = mongoose.models.Filter || mongoose.model('Filter', filterSchema);
 
 const categorieSchema = new mongoose.Schema({
     //_id: { type: String, unique: true },
-    _id: String,
+    categorieName: { type: String, unique: true, index: true },
     level: { type: Number, index: true },
     childs: { type: [String], index: true },
     parent: String,
     name: { type: String, unique: true },
     path: String,
-
-    // filters: [{ f: [String] }]
-    // filters: { type: [filterSchema] },
-    filters: [{
-        type: Map,
-        of: [String]
-    }]
-
 
 
 })
@@ -44,8 +31,3 @@ const Categorie = mongoose.models.Categorie || mongoose.model('Categorie', categ
 
 
 export default Categorie
-
-
-
-
-

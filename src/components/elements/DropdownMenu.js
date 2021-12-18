@@ -99,7 +99,8 @@ export default function DropdownMenu({ categ_1, categs }) {
                             key={categ_2._id}
 
                             component={Link}
-                            href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
+                            // href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
+                            href={`/${toPlainString(categ_2._id)}`}
                             onPointerEnter={handleAnchorEl}
                             onClick={handleClose}
                             sx={{

@@ -145,4 +145,8 @@ const cpus = [
     }
 ]
 
-export default cpus
+const cpusWithFilters = cpus.map(cpu => {
+    cpu.filters = ['brand', 'price']
+    return cpu
+})
+export default cpusWithFilters

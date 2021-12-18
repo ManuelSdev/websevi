@@ -8,12 +8,12 @@
 const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numberOfParents)
 
 /**
-    * como estamos en la ruta /pages/categories/[...cid].js,
+    * como estamos en la ruta /pages/categories/[...categoriesId].js,
     * getStaticPaths define las rutas dinámicas a partir de un objeto de este tipo
     * paths: [
-    * { params: { cid: ["id1"] } },
-    * { params: { cid: ["id2"] } },
-    * { params: { cid: ["padre1", "id3"] } }
+    * { params: { categoriesId: ["id1"] } },
+    * { params: { categoriesId: ["id2"] } },
+    * { params: { categoriesId: ["padre1", "id3"] } }
     * ],
     * creaando las siguientes rutas
     *     caegories/id1
@@ -28,7 +28,7 @@ const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numb
     */
 //console.log('*********************************', categories)
 //TODO: refactoriza y crea modulo en lib con esto
-export const getCategsPath = categories => categories.map(categ => {
+export const getCategsPath_sin_uso = categories => categories.map(categ => {
     //console.log('****************************,categories')
     const deepPath = Array.from(
         [
@@ -39,8 +39,12 @@ export const getCategsPath = categories => categories.map(categ => {
 
     return categ.level === 1 ?
         // console.log('-------------------------', categ._id) ||
-        { params: { cid: [categ._id] } }
+        { params: { categoriesId: [categ._id] } }
         :
         // console.log('+++++++++++++++++', deepPath) || 
-        { params: { cid: deepPath } }
+        { params: { categoriesId: deepPath } }
+})
+
+export const getCategsPath = categories => categories.map(categ => {
+    return { params: { categoriePath: categ.path } }
 })

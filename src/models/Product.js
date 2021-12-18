@@ -10,6 +10,7 @@ const productSchema = mongoose.Schema({
     url: String,
     ean: { type: String, unique: true },
     categories: { type: [String], index: true },
+    filters: { type: [String], index: true },
 
     images: { type: [String] },
     description: String,

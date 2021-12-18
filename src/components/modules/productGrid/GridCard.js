@@ -19,7 +19,7 @@ const GridCard = ({ product }) => {
     return (
         <Card
         >
-            <CardActionArea component={Link} href={`/products/${product.url}`}>
+            <CardActionArea component={Link} href={`/product/${product.url}`}>
 
                 <CardMedia
                     component="img"

@@ -15,8 +15,8 @@ export async function getCats(filters) {
 export default async function handler(req, res) {
     await dbConnect()
     const filters = req.query
-        //console.log("req body init", req.body)
-        ** console.log("req body init", filters)
+    //console.log("req body init", req.body)
+    // console.log("req body init", filters)
     try {
         const result = filters.path ?
             //const result = await Categorie.find({ path: /,Componentes,/ })

@@ -9,7 +9,7 @@ import usePromise from "../../hooks/usePromise"
 import React from "react"
 import { getProducts } from "../api/products/get"
 import Layout from "../../components/layouts/Layout"
-import { getCategsPath } from "../../lib/utils/categsStaticsPaths"
+import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
 import { getCats } from "../api/categories/g"
 import { urlToName } from "../../lib/utils/stringTools"
 import { ButtonBase, ImageList, ImageListItem, Link } from "@mui/material"
@@ -112,7 +112,7 @@ export async function getStaticPaths() {
     const query = await getProducts({}, 'url')
     // console.log('+++++++++++++++++++++++++', query)
     const products = JSON.parse(JSON.stringify(query))
-    const paths = products.map(product => ({ params: { prodUrl: product.url } })
+    const paths = products.map(product => ({ params: { productUrl: product.url } })
     )
 
     // console.log('EL PATHH', paths)
@@ -128,7 +128,7 @@ export async function getStaticProps({ params }) {
     const categories = JSON.parse(JSON.stringify(categories_query))
 
 
-    const product_query = await getProducts({ url: params.prodUrl })
+    const product_query = await getProducts({ url: params.productUrl })
     //  console.log('############################', product_query)
     //Esta consulta devuelve un array con un único producto/elemento
     const [product] = JSON.parse(JSON.stringify(product_query))
