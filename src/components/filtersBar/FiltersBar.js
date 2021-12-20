@@ -14,19 +14,23 @@ import Checkbox from '@mui/material/Checkbox';
 import { toPlainString } from '../../lib/utils/stringTools';
 import useForm from '../../hooks/useForm';
 import { useRouter } from 'next/router';
-const FiltersBar = ({ filtersProps }) => {
-    const { hasLink, filters } = filtersProps
+import { Box } from '@mui/system';
+import { Slider } from '@mui/material';
+import usePriceSlider from '../../hooks/usePriceSlider';
+const FiltersBar = ({ filtersProps, priceSliderProps }) => {
+    const { hasLink, filters, maxPrice } = filtersProps
     const router = useRouter()
     const { categoryPath, slug } = router.query
-
     const firstRender = React.useRef(true);
-    //const [checkedFilters, setCheckedFilters] = React.useState([])
-    console.log('#########', router.query)
+
     const { formValue, handleChange: onChange, setFormValue } = useForm({
         checkedFilters: slug ? slug : [],
     });
 
     const { checkedFilters } = formValue
+    /**Slider */
+    const { priceRange, handlePrice, valuetext, marks, initialMaxPrice } = priceSliderProps
+
 
     const handleChange = ev => {
 
@@ -54,33 +58,14 @@ const FiltersBar = ({ filtersProps }) => {
             firstRender.current = false;
             return;
         }
-        const a = { b: `/${categoryPath}` }
+        const newPath = { path: `/${categoryPath}` }
         checkedFilters.map(filter => {
-            a.b = a.b.concat('/', filter)
-        }
-            /*
-              const newPath = { basePath: `/${categoryPath}` }
-                    checkedFilters.map(filter => {
-                        newPath.basePath = newPath.basePath.concat('/', filter)
-                    }
-            
-                    )
-                    */
-
-        )
-        console.log('+++++++++++', a.b)
-        router.push(a.b)
+            newPath.path = newPath.path.concat('/', filter)
+        })
+        router.push(newPath.path)
     }, [checkedFilters])
 
-    //const filtersKeys
-    // console.log('filters en FiltersBar.js', filters)
-    /*
-    const handleChange = a => event => {
-        //setChecked(event.target.checked);
-        console.log(a, event.target.name);
 
-    };
-    */
     //Genera un array con los índices del array filters como strings
     //Lo recibe la propiedad , que recibe valores en este formato defaultExpanded={['1', '2'...]}
     //para desplegar por defecto los componentes TreeItem cuyo nodeId coincida con un número del array de strings
@@ -89,7 +74,7 @@ const FiltersBar = ({ filtersProps }) => {
         <Paper>
             <TreeView
                 //defaultExpanded={['1']}
-                defaultExpanded={[...arrayOfIndexString]}
+                defaultExpanded={hasLink ? [] : [...arrayOfIndexString, 'price']}
                 aria-label="file system navigator"
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
@@ -98,19 +83,21 @@ const FiltersBar = ({ filtersProps }) => {
                 {
                     filters.map((filter, index) => {
                         const filterKey = Object.keys(filter)
+                        console.log('*****', filter)
                         const filtersBlock = hasLink ?
-                            <Link color='black' href={`/${toPlainString(filter)}`}>
-                                <TreeItem sx={{ pt: 2 }} nodeId={index} label={filter}>
-                                    <TreeItem />
+                            <Link color='black' key={filter} href={`/${toPlainString(filter)}`}>
+                                <TreeItem sx={{ pt: 2 }} nodeId={`${index}`} label={filter}>
+                                    <TreeItem nodeId={`${filter}`} />
                                 </TreeItem>
                             </Link>
                             :
-                            <TreeItem sx={{ pt: 2 }} nodeId={`${index}`} label={filterKey}>
+                            <TreeItem key={filterKey} sx={{ pt: 2 }} nodeId={`${index}`} label={filterKey}>
                                 <FormGroup>
 
                                     {filter[`${filterKey}`].map(filterValue =>
 
                                         <FormControlLabel
+                                            key={filterValue}
                                             control={
                                                 <Checkbox
                                                     onChange={handleChange}
@@ -121,18 +108,35 @@ const FiltersBar = ({ filtersProps }) => {
                                             }
                                             label={filterValue}
                                         />
-
                                     )}
-
-
-
                                 </FormGroup>
                             </TreeItem>
                         return filtersBlock
                     })
+                }
+                {hasLink ||
+                    <TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
+                        <Box sx={{ width: '90%', pl: 1 }}>
+                            <Slider
+                                getAriaLabel={() => 'Rango de precios'}
+                                value={priceRange}
+                                onChange={handlePrice}
+                                valueLabelDisplay="off"
+                                getAriaValueText={valuetext}
+                                marks={marks}
+                                disableSwap
+                                max={initialMaxPrice}
+
+                            />
+                        </Box>
+                    </TreeItem>
 
                 }
-
+                <TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
+                    <Box sx={{ width: 200 }}>
+                        DDDDDDDDDDDDDD
+                    </Box>
+                </TreeItem>
             </TreeView>
         </Paper >
 
@@ -141,20 +145,3 @@ const FiltersBar = ({ filtersProps }) => {
 
 export default FiltersBar
 
-/*
-         {filter[`${filterKey}`].map(filterValue =>
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    onClick={handleChange('hhhhhhhhhh')}
-                                                    name={filterValue}
-                                                    value={'hola'}
-                                                />
-                                            }
-
-                                            label={filterValue}
-
-                                        />
-                                    )
-                                    }
-*/

@@ -49,7 +49,7 @@ const allCategsOnArray = () => {
         )
         const [op] = categsOk.length > 0 ? categsOk : [{ childName: '' }]
         const { childsNames } = op
-        console.log('#################', childsNames)
+        // console.log('#################', childsNames)
         return childsNames
     }
 

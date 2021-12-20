@@ -13,6 +13,8 @@ const Filters = ({ isLogged, products, categories, filtersProps }) => {
     const { query } = useRouter()
     const { categoriesId } = router.query
 
+
+
     console.log('queryyyyyyyyyy', query)
     // console.log('products', products)
     //  console.log('PRODUCT SSR', products)
@@ -70,7 +72,8 @@ export async function getServerSideProps(context) {
         const newKey = Object.keys(obj)
         productsFilter[newKey] = obj[`${newKey}`]
     })
-    //TODO: refactoriza y externaliza esto que se repite en [categoryPath].js
+
+    //TODO: refactoriza y externaliza TODO esto que viene ahora y que se repite en [categoryPath].js
     const thisCategoryInArray = categories.filter(categ => categ.path === categoryPath)
     //console.log('*******************', categs)
     const [thisCategory] = thisCategoryInArray
@@ -78,6 +81,27 @@ export async function getServerSideProps(context) {
     const { level } = thisCategory
 
 
+
+    //Obtiene los productos
+    const products_res = await getProducts(productsFilter)
+    const products = JSON.parse(JSON.stringify(products_res))
+    /**
+     * Obtiene el precio máximo de todos los productos y lo pasa como propiedad al filtro usado
+     * cuando la category tiene level===2
+     * Este precio máximo se usa como tope en el slider de la FiltersBar que permite filtrar por precio
+     */
+    const prices = products.map(product => product.price)
+    const maxPrice = Math.max(...prices)
+
+    /**
+     * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
+     * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
+     * al objeto una variable de control hasLink=true para indicar al componente que use estos filtros
+     * que deben contener un enlace
+     * Si es el campo level es dos, los filtros serán  los elementoslos elementos del campo childs  de la categoría.
+     * . Ahora, hasLink=false porque estos filtros contendrán un desplegable en lugar de un enlace
+     * 
+     */
     const getFiltersProps = () => {
         if (level === 1) {
             const filter = {
@@ -88,18 +112,14 @@ export async function getServerSideProps(context) {
         } else if (level === 2) {
             const filter = {
                 hasLink: false,
-                filters: thisCategory.filters
+                filters: thisCategory.filters,
+                maxPrice
             }
             return filter
         }
     }
 
     const filtersProps = getFiltersProps()
-
-    //Obtiene los productos
-    const products_res = await getProducts(productsFilter)
-    const products = JSON.parse(JSON.stringify(products_res))
-    //console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬', products)
     return {
         props: { products, categories, filtersProps }, // will be passed to the page component as props
     }

@@ -71,6 +71,14 @@ export async function getStaticProps(context) {
     //   console.log('*******************', objectCategorie)
     const { level } = thisCategory
 
+
+    /**
+    * Obtiene el precio máximo de todos los productos y lo pasa como propiedad al filtro usado
+    * cuando la category tiene level===2
+    * Este precio máximo se usa como tope en el slider de la FiltersBar que permite filtrar por precio
+    */
+    const prices = products.map(product => product.price)
+    const maxPrice = Math.max(...prices)
     /**
      * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
@@ -91,7 +99,8 @@ export async function getStaticProps(context) {
         } else if (level === 2) {
             const filter = {
                 hasLink: false,
-                filters: thisCategory.filters
+                filters: thisCategory.filters,
+                maxPrice
             }
             return filter
         }
