@@ -39,8 +39,8 @@ const handler = nc()
         //console.log("IMG", req.file)
         // console.log("BODY", req.body)
 
-        const { name, categorie_1, categorie_2, categorie_3 } = req.body
-        const categories = [categorie_1, categorie_2, categorie_3]
+        const { name, category_1, category_2, category_3 } = req.body
+        const categories = [category_1, category_2, category_3]
         try {
 
 

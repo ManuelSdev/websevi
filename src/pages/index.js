@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 import MainMosaic from '../components/elements/MainMosaic';
 import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
-import { getCategsPath } from '../lib/staticsPathFilters/categsStaticsPaths';
 import { getCats } from './api/categories/g';
 import { getProducts } from './api/products/get';
 import ProductsGrid from '../components/modules/productGrid/ProductsGrid'
@@ -23,7 +22,7 @@ export default function Home({ categories }) {
   return (
 
     // <div className={styles.container}>
-    <Layout categs={categories} >
+    <Layout categories={categories} >
 
       <MainMosaic />
       <Container>

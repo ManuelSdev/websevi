@@ -54,13 +54,13 @@ const mobos = [
 
     },
     {
-        name: 'AsRock X570M Pro4',
-        brand: 'AsRock',
+        name: 'Asrock X570M Pro4',
+        brand: 'Asrock',
         chipset: 'AMD X570',
         size: 'mATX',
         price: 198,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
-        description: 'La placa base X570M Pro4 de AsRock contiene la próxima generación de PCI Express 4.0, capaz de realizar el doble de velocidad en comparación con la tercera generación anterior. La exclusiva ranura de acero de ASRock con puntos de anclaje adicionales se ha agregado de manera revolucionaria para garantizar la estabilidad de la señal y también para garantizar que las tarjetas gráficas pesadas estén bien instaladas en la ranura PCI-E de forma segura.',
+        description: 'La placa base X570M Pro4 de Asrock contiene la próxima generación de PCI Express 4.0, capaz de realizar el doble de velocidad en comparación con la tercera generación anterior. La exclusiva ranura de acero de ASRock con puntos de anclaje adicionales se ha agregado de manera revolucionaria para garantizar la estabilidad de la señal y también para garantizar que las tarjetas gráficas pesadas estén bien instaladas en la ranura PCI-E de forma segura.',
         images:
             [
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/1-asrock-x570m.jpg',
@@ -70,8 +70,8 @@ const mobos = [
             ]
     },
     {
-        name: 'AsRock X570 Phantom Gaming-ITX/TB3',
-        brand: 'AsRock',
+        name: 'Asrock X570 Phantom Gaming-ITX/TB3',
+        brand: 'Asrock',
         chipset: 'AMD x570',
         size: 'ITX',
         price: 305,
@@ -106,7 +106,7 @@ const mobos = [
     {
         name: 'Asus PRIME Z690-P D4',
         brand: 'ASUS',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'ATX',
         price: 224,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
@@ -123,7 +123,7 @@ const mobos = [
     {
         name: 'Asus ROG STRIX Z690-F GAMING WIFI',
         brand: 'ASUS',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'ATX',
         price: 419,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
@@ -140,7 +140,7 @@ const mobos = [
     {
         name: 'Gigabyte Z690 AORUS ELITE DDR4',
         brand: 'Gigabyte',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'ATX',
         price: 273,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
@@ -157,7 +157,7 @@ const mobos = [
     {
         name: 'Asus PRIME Z690M-PLUS D4',
         brand: 'ASUS',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'mATX',
         price: 234,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
@@ -174,7 +174,7 @@ const mobos = [
     {
         name: 'Asus ROG STRIX Z690-I GAMING WIFI',
         brand: 'ASUS',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'ITX',
         price: 470,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],
@@ -190,7 +190,7 @@ const mobos = [
     {
         name: 'MSI MPG Z690 CARBON WIFI',
         brand: 'MSI',
-        chipset: 'Intel z690',
+        chipset: 'Intel Z690',
         size: 'ATX',
         price: 208,
         categories: ['Componentes', 'Placas base', 'Placas base AMD'],

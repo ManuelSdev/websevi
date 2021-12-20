@@ -27,7 +27,7 @@ const FirstToolBar = () => {
     const [cartProductsAmount, setCartProductsAmount] = React.useState(0)
 
     React.useEffect(() => {
-        console.log('USE TOOLBAR cart ', cart)
+        //console.log('USE TOOLBAR cart ', cart)
         //  console.log('PRODUCTOS EN EL CARRO USE', cart)
         if (cart.length > 0) {
             //localStorage.setItem("cart", JSON.stringify(cart));

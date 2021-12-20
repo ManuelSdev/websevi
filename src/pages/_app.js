@@ -62,14 +62,14 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
     storedCart && setCart(storedCart)
-    console.log('STOREDDDD', storedCart)
+    //console.log('STOREDDDD', storedCart)
     //
     const checkSession = async () => {
 
       //Si existe una sesión activa, la promesa devuelve true
       // setIsLogged(await Session.doesSessionExist())
       const state = await Session.doesSessionExist()
-      console.log('SESIOONNNN ++++++++++++++', state)
+      // console.log('SESIOONNNN ++++++++++++++', state)
 
       const { admin } = state && await Session.getAccessTokenPayloadSecurely()
       const info = state && await Session.getAccessTokenPayloadSecurely()
@@ -97,7 +97,7 @@ function App({ Component, pageProps }) {
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
   pageProps.hola = "hola"
-  console.log('LOGIN', isLogged)
+  //console.log('LOGIN', isLogged)
   return (
     <>
 

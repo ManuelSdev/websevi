@@ -11,7 +11,7 @@ import Footer from "./Footer";
 
 
 
-const Layout = ({ children, categs }) => {
+const Layout = ({ children, categories }) => {
     const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
 
     //const { error, throwPromise, loading, data: categs } = usePromise({})
@@ -21,7 +21,7 @@ const Layout = ({ children, categs }) => {
 
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header categs={categs} />
+            <Header categories={categories} />
 
             <main>
                 {children}

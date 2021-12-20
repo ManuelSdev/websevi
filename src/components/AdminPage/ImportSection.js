@@ -1,6 +1,6 @@
 
 import { Input, InputLabel, Paper } from "@mui/material"
-import { Box } from "@mui/system"
+import Box from '@mui/system/Box'
 import useForm from "../../hooks/useForm"
 
 

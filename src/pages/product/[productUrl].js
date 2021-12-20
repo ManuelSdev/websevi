@@ -5,14 +5,15 @@ import ProductDetails from "../../components/modules/productDetails/ProductDetai
 import Button from "@mui/material/Button"
 import Image from "next/image"
 import giga from '../../assets/images/giga.jpg'
-import usePromise from "../../hooks/usePromise"
 import React from "react"
 import { getProducts } from "../api/products/get"
 import Layout from "../../components/layouts/Layout"
-import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
+//import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
+//import { getCategoryPath } from "../../lib/pathsGetters/getCategoryPath"
 import { getCats } from "../api/categories/g"
-import { urlToName } from "../../lib/utils/stringTools"
-import { ButtonBase, ImageList, ImageListItem, Link } from "@mui/material"
+import ImageList from "@mui/material/ImageList"
+import ImageListItem from "@mui/material/ImageListItem"
+import Link from "@mui/material/Link"
 
 const ProductPage = ({ categories, product }) => {
     //const { errorm, throwPromise, loading, data } = usePromise()
@@ -27,7 +28,7 @@ const ProductPage = ({ categories, product }) => {
     }
     return (
         //TODO: UNIFICA con admin.js
-        <Layout categs={categories} >
+        <Layout categories={categories} >
 
 
             <Container sx={{ background: "red" }}>
@@ -124,8 +125,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     //  console.log('CONTEXTT', context.params)
 
-    const categories_query = await getCats()
-    const categories = JSON.parse(JSON.stringify(categories_query))
+    const categories_res = await getCats()
+    const categories = JSON.parse(JSON.stringify(categories_res))
 
 
     const product_query = await getProducts({ url: params.productUrl })

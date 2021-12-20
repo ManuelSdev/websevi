@@ -13,7 +13,9 @@ import ContentCopy from '@mui/icons-material/ContentCopy';
 import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import ProductsGrid from "../components/modules/productGrid/ProductsGrid"
-import { Container, Box, Grid, ListItemButton } from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import ImportSection from '../components/AdminPage/ImportSection';
 import NewProductSection from '../components/AdminPage/NewProductSection';
 import OrdersSection from '../components/AdminPage/OrdersSection';
@@ -22,7 +24,7 @@ import initialsCategories from '../assets/initialsCategories'
 
 import initialsProducts from '../assets/initialsProducts';
 //import initCategs from './api/categories/init'
-import { resetCategs } from '../lib/api/categorie';
+import { resetCategs } from '../lib/api/category';
 import NewCategsSection from '../components/AdminPage/NewCategsSection';
 import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
 import { resetProducts } from '../lib/api/product';
@@ -67,7 +69,7 @@ const Admin = ({ isLogged, categories, props }) => {
 
 
     return (
-        <Layout isLogged={isLogged} categs={categories}>
+        <Layout isLogged={isLogged} categories={categories}>
             <Container sx={{ mt: '2em' }}>
                 <Box sx={{ flexGrow: 1, background: "green" }}>
                     <Grid container spacing={2}>

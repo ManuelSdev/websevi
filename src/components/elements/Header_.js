@@ -1,14 +1,16 @@
-import { AppBar, IconButton } from "@mui/material"
+import IconButton from "@mui/material/IconButton"
+import AppBar from "@mui/material/AppBar"
+
 import Toolbar from '@mui/material/Toolbar';
 
 import IconCorpName from "./IconCorpName"
-import { TextField } from "@mui/material"
-import { Box, styled } from '@mui/system'
+import TextField from "@mui/material/TextField"
+import Box from '@mui/system/Box'
 import Link from './Link'
-import { InputAdornment } from "@mui/material"
+import InputAdornment from "@mui/material/InputAdornment"
 import SearchIcon from '@mui/icons-material/Search';
 import DropdownMenu from './DropdownMenu'
-import { getCategs } from "../../lib/api/categorie"
+import { getCategs } from "../../lib/api/category"
 
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
@@ -40,7 +42,7 @@ const Header = ({ isLogged }) => {
         //await setCategs(a)
     }, [])
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
-    console.log('estado login', isLogged)
+    //  console.log('estado login', isLogged)
     return (
         <>
             <AppBar position="sticky" >

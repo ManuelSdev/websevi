@@ -1,5 +1,5 @@
 
-import Categorie from '../../../models/Categorie'
+import Category from '../../../models/Category'
 import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
@@ -15,9 +15,9 @@ export default async function handler(req, res) {
             //const result = await Categorie.find({ path: /,Componentes,/ })
             //await Categorie.find({ path: /,Componentes,[^,]+,$/ })
             //await Categorie.find({ path: /,Placas base,$/ })
-            await Categorie.find({ path: new RegExp(`,${filters.path},$`) })
+            await Category.find({ path: new RegExp(`,${filters.path},$`) })
             :
-            await Categorie.find(filters)
+            await Category.find(filters)
 
         // console.log('**********************************', result)
         res.status(201).json(result)

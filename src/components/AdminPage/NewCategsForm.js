@@ -16,7 +16,7 @@ import Box from "@mui/system/Box";
 import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
-import { getCategs } from "../../lib/api/categorie";
+import { getCategs } from "../../lib/api/Category";
 import { toPlainString } from "../../lib/utils/stringTools";
 
 const NewCategsForm = ({ onSubmit, error }) => {
@@ -24,14 +24,14 @@ const NewCategsForm = ({ onSubmit, error }) => {
     const { formValue, handleChange, handleSubmit, setFormValue } = useForm({
         categ_1_isNew: false,
         categ_2_isNew: false,
-        categorie_1: '',
-        categorie_2: '',
-        categorie_3: '',
+        category_1: '',
+        category_2: '',
+        category_3: '',
 
 
     });
 
-    const { categorie_1, categorie_2, categorie_3, categ_1_isNew, categ_2_isNew } = formValue;
+    const { category_1, category_2, category_3, categ_1_isNew, categ_2_isNew } = formValue;
 
     const [categories, setCategories] = React.useState({
         categories_1: [],
@@ -71,11 +71,11 @@ const NewCategsForm = ({ onSubmit, error }) => {
         if (!toggled_1) return
         setFormValue({
             ...formValue,
-            categorie_2: '',
-            categorie_3: ''
+            category_2: '',
+            category_3: ''
         })
-        setCategs({ path: toPlainString(categorie_1) }, 'categories_2')
-    }, [categorie_1])
+        setCategs({ path: toPlainString(category_1) }, 'categories_2')
+    }, [category_1])
 
     /**
      * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2
@@ -86,13 +86,13 @@ const NewCategsForm = ({ onSubmit, error }) => {
             firstRenderFor.current.categ_3 = false;
             return;
         }
-        if (!toggled_2 || categorie_2 === '') return
+        if (!toggled_2 || category_2 === '') return
         setFormValue({
             ...formValue,
-            categorie_3: ''
+            category_3: ''
         })
-        setCategs({ path: toPlainString(categorie_2) }, 'categories_3')
-    }, [categorie_2])
+        setCategs({ path: toPlainString(category_2) }, 'categories_3')
+    }, [categorye_2])
 
 
     React.useEffect(() => {
@@ -102,7 +102,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         }
         setFormValue({
             ...formValue,
-            categorie_1: '',
+            category_1: '',
             categ_1_isNew: !categ_1_isNew
         })
         !toggled_1 && setToggled_2(false)
@@ -115,7 +115,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         }
         setFormValue({
             ...formValue,
-            categorie_2: '',
+            category_2: '',
             categ_2_isNew: !categ_2_isNew
         })
     }, [toggled_2])
@@ -127,7 +127,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
      */
     const setCategs = async (filter, categoriesToChange) => {
         const query = await getCategs(filter)
-        const newArray = query.map(categorie => categorie.name)
+        const newArray = query.map(category => category.name)
         console.log('query  1', query)
         await setCategories({
             ...categories,
@@ -173,8 +173,8 @@ const NewCategsForm = ({ onSubmit, error }) => {
                                 required
                                 labelId="cat1-label"
                                 id="cat1"
-                                name='categorie_1'
-                                value={categorie_1}
+                                name='category_1'
+                                value={category_1}
                                 label="Seleccione la categoría 1"
                                 onChange={handleChange}
                             >
@@ -191,9 +191,9 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             size="small"
                             label='Nombre de la categoría 1'
                             variant="outlined"
-                            name='categorie_1'
+                            name='category_1'
                             onChange={handleChange}
-                            value={categorie_1}
+                            value={category_1}
                         />
                     }
 
@@ -232,8 +232,8 @@ const NewCategsForm = ({ onSubmit, error }) => {
                                 //required
                                 labelId="cat2-label"
                                 id="cat2"
-                                name='categorie_2'
-                                value={categorie_2}
+                                name='category_2'
+                                value={category_2}
                                 label="Seleccione la categoría 2"
                                 onChange={handleChange}
                             >
@@ -250,9 +250,9 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             size="small"
                             label="Nombre de la categoría 2"
                             variant="outlined"
-                            name='categorie_2'
+                            name='category_2'
                             onChange={handleChange}
-                            value={categorie_2}
+                            value={category_2}
                             margin='dense'
                         />
                     }
@@ -269,9 +269,9 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             size="small"
                             label="Nombre de la categoría 3"
                             variant="outlined"
-                            name='categorie_3'
+                            name='category_3'
                             onChange={handleChange}
-                            value={categorie_3}
+                            value={category_3}
                         />
 
                     </FormGroup>

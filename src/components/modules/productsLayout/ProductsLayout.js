@@ -5,14 +5,14 @@ import GridCard from "../productGrid/GridCard"
 import ProductsGrid from "../productGrid/ProductsGrid"
 import FiltersBar from "../../filtersBar/FiltersBar"
 
-const ProductsLayout = ({ products, filter }) => {
+const ProductsLayout = ({ products, filtersProps }) => {
     //console.log('*****************', products)
     return (
         <Container>
             <Box sx={{ mt: 5, flexGrow: 1, background: "green" }}>
                 <Grid container spacing={2}>
                     <Grid item xs={6} sm={4} md={3} lg={3} >
-                        <FiltersBar filter={filter}></FiltersBar>
+                        <FiltersBar filtersProps={filtersProps}></FiltersBar>
                     </Grid>
 
 

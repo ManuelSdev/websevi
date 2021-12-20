@@ -1,5 +1,5 @@
 
-import Categorie from '../../../models/Categorie'
+import Category from '../../../models/Category'
 import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     //console.log("req body init", req.body)
     //console.log("req body init", filters)
     try {
-        const result = await Categorie.find().sort({ path: 1 })
+        const result = await Category.find().sort({ path: 1 })
 
 
 

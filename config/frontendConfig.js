@@ -3,7 +3,7 @@ import ThirdPartyEmailPasswordReact from 'supertokens-auth-react/recipe/thirdpar
 import SessionReact from 'supertokens-auth-react/recipe/session'
 import { appInfo } from './appInfo'
 import IconCorpName from "../src/components/elements/IconCorpName"
-import { Box } from '@mui/system'
+import Box from '@mui/system/Box'
 
 export const frontendConfig = () => {
     return {

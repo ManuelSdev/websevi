@@ -5,13 +5,15 @@ import Typography from '@mui/material/Typography';
 import MenuList from '@mui/material/MenuList';
 import Link from './Link'
 import { toPlainString } from '../../lib/utils/stringTools';
-export default function DropdownMenu({ categ_1, categs }) {
+export default function DropdownMenu({ categ_1, categories }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const categs_2 = categs.filter(categ_2 => categ_2.level === 2 && categ_2.path === `,${categ_1._id},`)
+    const subCategs = categories.filter(category => category.parent === categ_1.path)
+
+    //console.log('***************', subCategs)
     const handleClick = (event) => {
-        categs_2 && setAnchorEl(event.currentTarget);
+        subCategs && setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
@@ -28,7 +30,7 @@ export default function DropdownMenu({ categ_1, categs }) {
         <div>
             <Link
                 //disableElevation='true'
-                href={`/${toPlainString(categ_1._id)}`}
+                href={`/${toPlainString(categ_1.path)}`}
                 // id="basic-button"
                 aria-controls="basic-menu"
                 aria-haspopup="true"
@@ -93,21 +95,21 @@ export default function DropdownMenu({ categ_1, categs }) {
                     id="composition-menu"
                     aria-labelledby="composition-button"
                 >
-                    {categs_2.map(categ_2 =>
+                    {subCategs.map(subCateg =>
 
                         <MenuItem
-                            key={categ_2._id}
+                            key={subCateg._id}
 
                             component={Link}
-                            // href={`/${toPlainString(categ_1._id)}/${toPlainString(categ_2._id)}`}
-                            href={`/${toPlainString(categ_2._id)}`}
+                            // href={`/${toPlainString(categ_1._id)}/${toPlainString(subCateg._id)}`}
+                            href={`/${toPlainString(subCateg.path)}`}
                             onPointerEnter={handleAnchorEl}
                             onClick={handleClose}
                             sx={{
                                 pointerEvents: 'auto',
                             }}
                         >
-                            {categ_2.name}
+                            {subCateg.name}
                         </MenuItem>
 
 
@@ -122,9 +124,9 @@ export default function DropdownMenu({ categ_1, categs }) {
 
 /*
         <NestedMenuItems
-                            label={categ_2.name}
+                            label={subCateg.name}
                         >
-                            {categ_2.childNames.map(categ_3_name =>
+                            {subCateg.childNames.map(categ_3_name =>
                                 <MenuItem>
                                     {categ_3_name}
                                 </MenuItem>

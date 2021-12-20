@@ -9,7 +9,7 @@ const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numb
 
 /**
     * como estamos en la ruta /pages/categories/[...categoriesId].js,
-    * getStaticPaths define las rutas dinámicas a partir de un objeto de este tipo
+    * getStaticPaths define las rutas dinámicas a partir de un ARRAY de este tipo
     * paths: [
     * { params: { categoriesId: ["id1"] } },
     * { params: { categoriesId: ["id2"] } },
@@ -45,6 +45,6 @@ export const getCategsPath_sin_uso = categories => categories.map(categ => {
         { params: { categoriesId: deepPath } }
 })
 
-export const getCategsPath = categories => categories.map(categ => {
-    return { params: { categoriePath: categ.path } }
+export const getCategoryPath = categories => categories.map(categ => {
+    return { params: { categoryPath: categ.path } }
 })

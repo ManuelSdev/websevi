@@ -1,29 +1,16 @@
 import AppBar from "@mui/material/AppBar"
-
 import Toolbar from "@mui/material/Toolbar"
-
 import Box from '@mui/system/Box'
 import Link from '../elements/Link'
-
-
 import DropdownMenu from '../elements/DropdownMenu'
 
-
-//import { categs } from "../../items/headerItems"
-
-//supertoken
 import Button from "@mui/material/Button"
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import React from "react"
 import FirstToolBar from './FirstToolBar'
 import { useAppContext } from "../context"
 
-
-
-
-
-
-const Header = ({ categs }) => {
+const Header = ({ categories }) => {
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
     const { setIsLogged } = useAppContext()
     async function logoutClicked() {
@@ -69,9 +56,9 @@ const Header = ({ categs }) => {
             >
 
 
-                {categs.length > 0 && categs.map(categ =>
-                    categ.level === 1 &&
-                    <Box key={categ._id}
+                {categories.length > 0 && categories.map(category =>
+                    category.level === 1 &&
+                    <Box key={category._id}
                         sx={{
                             p: 1, m: 1,
                             /*
@@ -81,7 +68,7 @@ const Header = ({ categs }) => {
                             */
                         }}>
 
-                        <DropdownMenu categ_1={categ} categs={categs}></DropdownMenu>
+                        <DropdownMenu categ_1={category} categories={categories}></DropdownMenu>
                     </Box>
                 )}
 

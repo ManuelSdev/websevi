@@ -1,9 +1,16 @@
-import { Button, Container, Grid, Input, InputLabel, MenuItem, Select, TextField, FormControl } from "@mui/material"
-import { Box } from "@mui/system";
+import Button from "@mui/material/Button"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import Select from "@mui/material/Select"
+import TextField from "@mui/material/TextField"
+import FormControl from "@mui/material/FormControl"
+import Box from "@mui/system/Box";
 
 import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
-import { getCategs } from "../../lib/api/categorie";
+import { getCategs } from "../../lib/api/category";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 
@@ -14,9 +21,9 @@ const NewProductForm = ({ onSubmit, error }) => {
         brand: '',
         price: "",
         ean: "",
-        categorie_1: '',
-        categorie_2: '',
-        categorie_3: '',
+        category_1: '',
+        category_2: '',
+        category_3: '',
         description: '',
         images: null,
     });
@@ -27,7 +34,7 @@ const NewProductForm = ({ onSubmit, error }) => {
         categories_3: []
     })
 
-    const { name, brand, price, categorie_1, categorie_2, categorie_3, ean, description } = product;
+    const { name, brand, price, category_1, category_2, category_3, ean, description } = product;
     const { categories_1, categories_2, categories_3 } = categories
 
     const firstRenderForCateg_2 = React.useRef(true);
@@ -36,7 +43,7 @@ const NewProductForm = ({ onSubmit, error }) => {
     //Tras el primer render, setea las categorías de nivel 1
 
     const useEffect_1 = () => {
-        console.log('USE 1')
+        //console.log('USE 1')
         setCategs({ level: 1 }, 'categories_1', 'cat 1')
     }
     React.useEffect(useEffect_1, [])
@@ -47,21 +54,21 @@ const NewProductForm = ({ onSubmit, error }) => {
      */
 
     const useEffect_2 = () => {
-        console.log('USE 2')
+        // console.log('USE 2')
         if (firstRenderForCateg_2.current) {
             firstRenderForCateg_2.current = false;
             return;
         }
 
-        setCategs({ path: categorie_1 }, 'categories_2', 'cat 2')
+        setCategs({ path: category_1 }, 'categories_2', 'cat 2')
 
         setFormValue({
             ...product,
-            categorie_2: '',
-            categorie_3: ''
+            category_2: '',
+            category_3: ''
         })
     }
-    React.useEffect(useEffect_2, [categorie_1])
+    React.useEffect(useEffect_2, [category_1])
     /**
      * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_2, siempre que 
      * este cambio sea del string vacío "" a cualquier otro string no vacío. Esta condición
@@ -75,15 +82,15 @@ const NewProductForm = ({ onSubmit, error }) => {
             firstRenderForCateg_3.current = false;
             return;
         }
-        if (categorie_2 === '') return
+        if (category_2 === '') return
 
-        setCategs({ path: categorie_2 }, 'categories_3', 'cat 3')
+        setCategs({ path: category_2 }, 'categories_3', 'cat 3')
         setFormValue({
             ...product,
-            categorie_3: ''
+            category_3: ''
         })
     }
-    React.useEffect(useEffect_3, [categorie_2])
+    React.useEffect(useEffect_3, [category_2])
     /**
      * Recibe un objeto filter para filtrar categorías en bdd
      * Recibe un array categories_x que será el único 
@@ -92,7 +99,7 @@ const NewProductForm = ({ onSubmit, error }) => {
     const setCategs = async (filter, categoriesToChange, renderBy) => {
         // console.log('RENDER DE ', renderBy)
         const query = await getCategs(filter)
-        const newArray = query.map(categorie => categorie._id)
+        const newArray = query.map(category => category._id)
 
         //  console.log(`QUERY DE ${renderBy}`, query)
         setCategories({
@@ -159,8 +166,8 @@ const NewProductForm = ({ onSubmit, error }) => {
                                 //required
                                 labelId="cat1-label"
                                 id="cat1"
-                                name='categorie_1'
-                                value={categorie_1}
+                                name='category_1'
+                                value={category_1}
                                 label="Categoría 1"
                                 onChange={handleChange}
                             >
@@ -177,8 +184,8 @@ const NewProductForm = ({ onSubmit, error }) => {
                             <Select
                                 labelId="cat2-label"
                                 id="cat2"
-                                name='categorie_2'
-                                value={categorie_2}
+                                name='category_2'
+                                value={category_2}
                                 label="Categoría 2"
                                 onChange={handleChange}
                             >
@@ -195,8 +202,8 @@ const NewProductForm = ({ onSubmit, error }) => {
                             <Select
                                 labelId="cat3-label"
                                 id="cat3"
-                                name='categorie_3'
-                                value={categorie_3}
+                                name='category_3'
+                                value={category_3}
                                 label="Categoría 3"
                                 onChange={handleChange}
                             >

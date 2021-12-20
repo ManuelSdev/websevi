@@ -1,5 +1,5 @@
 
-import Categorie from '../../../models/Categorie'
+import Category from '../../../models/Category'
 import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
@@ -7,7 +7,7 @@ export async function getCats(filters) {
     // console.log('HOLA')
     await dbConnect()
 
-    const cat = await Categorie.find(filters)
+    const cat = await Category.find(filters)
     // console.log('PRODS DE LA QUERY GET', cat)
     return cat
 }
@@ -22,9 +22,9 @@ export default async function handler(req, res) {
             //const result = await Categorie.find({ path: /,Componentes,/ })
             //await Categorie.find({ path: /,Componentes,[^,]+,$/ })
             //await Categorie.find({ path: /,Placas base,$/ })
-            await Categorie.find({ path: new RegExp(`,${filters.path},$`) })
+            await Category.find({ path: new RegExp(`,${filters.path},$`) })
             :
-            await Categorie.find(filters).exec()
+            await Category.find(filters).exec()
 
 
         res.status(201).json(result)

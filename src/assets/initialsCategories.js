@@ -30,7 +30,10 @@ const initialsCategories = [
         level: 2,
         name: 'Procesadores',
         parent: 'componentes',
-
+        filters:
+            [
+                { brand: ['AMD', 'Intel'] }
+            ]
 
     },
     {
@@ -39,8 +42,8 @@ const initialsCategories = [
         parent: 'componentes',
         filters:
             [
-                { brand: ['ASUS', 'Gigabyte', 'AsRock', 'MSI'] },
-                { chipset: ['AMD B550', 'AMD X570', 'Intel z690'] },
+                { brand: ['ASUS', 'Gigabyte', 'Asrock', 'MSI'] },
+                { chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },
                 { size: ['ATX', 'mATX', 'ITX'] }
             ]
 
@@ -163,6 +166,8 @@ const initialsCategories = [
 
 const addElements = (categories) => categories.map(categ => {
     categ.path = toPlainString(categ.name)
+
+    categ.parent = toPlainString(categ.parent)
     return categ
 })
 
@@ -175,7 +180,7 @@ export default modCategories
 
 /*
 { brand: ['ASUS', 'Gigabyte', 'AsRock', 'MSI'] },
-                { chipset: ['AMD B550', 'AMD X570', 'Intel z690'] },
+                { chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },
                 { size: ['ATX', 'mATX', 'ITX'] }
 
                 */
