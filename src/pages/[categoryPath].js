@@ -12,7 +12,7 @@ const Category = ({ isLogged, products, categories, filtersProps }) => {
     const { query } = useRouter()
     const { categoriesId } = router.query
 
-    console.log('use Router query en [categoryPath].js', query)
+    // console.log('use Router query en [categoryPath].js', query)
     // console.log('products', products)
     //  console.log('PRODUCT SSR', products)
     return (
@@ -79,6 +79,8 @@ export async function getStaticProps(context) {
     */
     const prices = products.map(product => product.price)
     const maxPrice = Math.max(...prices)
+    const minPrice = Math.min(...prices)
+    //const priceRange=[0,maxPrice]
     /**
      * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
@@ -100,7 +102,8 @@ export async function getStaticProps(context) {
             const filter = {
                 hasLink: false,
                 filters: thisCategory.filters,
-                maxPrice
+                pricesRange: [minPrice, maxPrice]
+
             }
             return filter
         }

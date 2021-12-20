@@ -9,13 +9,13 @@ import { mapFilters } from '../../lib/mapFilters'
 import getFiltersPath from '../../lib/pathsGetters/getFiltersPaht copy'
 
 const Filters = ({ isLogged, products, categories, filtersProps }) => {
-    const router = useRouter()
-    const { query } = useRouter()
-    const { categoriesId } = router.query
+    /*
+        const router = useRouter()
+        const { priceRange: currentPriceRange } = router.query
+        console.log('currentPriceRange en [...slug].js', currentPriceRange)
+        console.log('maxPrice en [...slug].js', filtersProps.maxPrice)
+    */
 
-
-
-    console.log('queryyyyyyyyyy', query)
     // console.log('products', products)
     //  console.log('PRODUCT SSR', products)
     return (
@@ -92,7 +92,7 @@ export async function getServerSideProps(context) {
      */
     const prices = products.map(product => product.price)
     const maxPrice = Math.max(...prices)
-
+    const minPrice = Math.min(...prices)
     /**
      * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
@@ -113,7 +113,7 @@ export async function getServerSideProps(context) {
             const filter = {
                 hasLink: false,
                 filters: thisCategory.filters,
-                maxPrice
+                pricesRange: [minPrice, maxPrice]
             }
             return filter
         }

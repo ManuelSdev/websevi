@@ -5,11 +5,12 @@
 
 import { useState } from 'react';
 
-function usePriceSlider(initialMaxPrice) {
-    const [priceRange, setPriceRange] = useState([0, initialMaxPrice]);
-    const [minPrice, maxPrice] = priceRange
+function usePriceSlider(initialSelectedPricesRange) {
+
+    const [selectedPricesRange, setSelectedPricesRange] = useState(initialSelectedPricesRange);
+
     const handlePrice = (event, newValue) => {
-        setPriceRange(newValue);
+        setSelectedPricesRange(newValue);
         // console.log('=========', newValue)
     }
 
@@ -19,24 +20,12 @@ function usePriceSlider(initialMaxPrice) {
     /**
      *  marks pasa como prop al slider. La clave value representa en que punto del slider, de 0 100, se pinta el label. 
      */
-    const marks = [
-        {
-            value: 0,
-            label: `${minPrice}`,
-        },
 
-        {
-            value: initialMaxPrice,
-            label: `${maxPrice}`,
-        },
-    ];
 
     return {
-        priceRange,
+        selectedPricesRange,
         handlePrice,
         valuetext,
-        marks,
-        initialMaxPrice
     };
 }
 

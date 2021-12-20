@@ -17,11 +17,29 @@ import { useRouter } from 'next/router';
 import { Box } from '@mui/system';
 import { Slider } from '@mui/material';
 import usePriceSlider from '../../hooks/usePriceSlider';
-const FiltersBar = ({ filtersProps, priceSliderProps }) => {
-    const { hasLink, filters, maxPrice } = filtersProps
+const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
+    const firstRender = React.useRef(true);
+
     const router = useRouter()
     const { categoryPath, slug } = router.query
-    const firstRender = React.useRef(true);
+
+    const { hasLink, filters, pricesRange } = filtersProps
+    const [minPrice, maxPrice] = pricesRange
+
+    const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange
+
+
+    const marks = [
+        {
+            value: minPrice,
+            label: `${minSelectedPrice}`,
+        },
+
+        {
+            value: maxPrice,
+            label: `${maxSelectedPrice}`,
+        },
+    ];
 
     const { formValue, handleChange: onChange, setFormValue } = useForm({
         checkedFilters: slug ? slug : [],
@@ -29,13 +47,12 @@ const FiltersBar = ({ filtersProps, priceSliderProps }) => {
 
     const { checkedFilters } = formValue
     /**Slider */
-    const { priceRange, handlePrice, valuetext, marks, initialMaxPrice } = priceSliderProps
 
+
+    console.log('VALUE', selectedPricesRange)
 
     const handleChange = ev => {
-
         const { name, checked, value: filterValue } = ev.target;
-        console.log('ev.target', name)
         //onChange recibe un objeto similar al objeto event
         onChange({
             target: {
@@ -63,6 +80,10 @@ const FiltersBar = ({ filtersProps, priceSliderProps }) => {
             newPath.path = newPath.path.concat('/', filter)
         })
         router.push(newPath.path)
+        router.push({
+            pathname: newPath.path,
+            query: { selectedPricesRange },
+        })
     }, [checkedFilters])
 
 
@@ -73,6 +94,8 @@ const FiltersBar = ({ filtersProps, priceSliderProps }) => {
     return (
         <Paper>
             <TreeView
+                //Key : https://stackoverflow.com/questions/54364872/a-component-is-changing-an-uncontrolled-input-of-type-checkbox-to-be-controlled
+                key={`treeview-${categoryPath}`}
                 //defaultExpanded={['1']}
                 defaultExpanded={hasLink ? [] : [...arrayOfIndexString, 'price']}
                 aria-label="file system navigator"
@@ -83,7 +106,7 @@ const FiltersBar = ({ filtersProps, priceSliderProps }) => {
                 {
                     filters.map((filter, index) => {
                         const filterKey = Object.keys(filter)
-                        console.log('*****', filter)
+                        // console.log('*****', filter)
                         const filtersBlock = hasLink ?
                             <Link color='black' key={filter} href={`/${toPlainString(filter)}`}>
                                 <TreeItem sx={{ pt: 2 }} nodeId={`${index}`} label={filter}>
@@ -114,29 +137,26 @@ const FiltersBar = ({ filtersProps, priceSliderProps }) => {
                         return filtersBlock
                     })
                 }
-                {hasLink ||
-                    <TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
+                {!hasLink &&
+                    < TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
                         <Box sx={{ width: '90%', pl: 1 }}>
                             <Slider
                                 getAriaLabel={() => 'Rango de precios'}
-                                value={priceRange}
+                                value={selectedPricesRange}
                                 onChange={handlePrice}
                                 valueLabelDisplay="off"
                                 getAriaValueText={valuetext}
                                 marks={marks}
                                 disableSwap
-                                max={initialMaxPrice}
+                                step={10}
+                                max={maxPrice}
+                                min={minPrice}
 
                             />
                         </Box>
                     </TreeItem>
-
                 }
-                <TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
-                    <Box sx={{ width: 200 }}>
-                        DDDDDDDDDDDDDD
-                    </Box>
-                </TreeItem>
+
             </TreeView>
         </Paper >
 
