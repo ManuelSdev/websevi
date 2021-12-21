@@ -10,6 +10,24 @@ export const frontendConfig = () => {
         appInfo,
         recipeList: [
             ThirdPartyEmailPasswordReact.init({
+                //TODO: QUITA onHandleEvent SI usas el callback del backend
+                onHandleEvent: async (context) => {
+                    if (context.action === "SESSION_ALREADY_EXISTS") {
+                        // TODO:
+                        console.log("SESSION_ALREADY_EXISTS")
+                    } else {
+                        let { id, email } = context.user;
+                        if (context.action === "SUCCESS") {
+                            if (context.isNewUser) {
+                                // TODO: Sign up
+                                console.log("SUCCESS context.isNewUser", context)
+                            } else {
+                                // TODO: Sign in
+                                console.log("SUCCESS")
+                            }
+                        }
+                    }
+                },
                 signInAndUpFeature: {
                     providers: [
                         ThirdPartyEmailPasswordReact.Google.init(),

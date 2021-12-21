@@ -30,18 +30,6 @@ function App({ Component, pageProps }) {
   //cart =[{}]
   //Guarda productos que se van añádiendo o quitando del carrito
   const [cart, setCart] = React.useState([])
-  /*
-    const firstRender = React.useRef(true);
-  
-    useEffect(() => {
-      if (firstRender.current) {
-        firstRender.current = false;
-        return;
-    }
-  
-  
-    }, [cart])
-  */
 
   //Supertokens logic
   useEffect(() => {

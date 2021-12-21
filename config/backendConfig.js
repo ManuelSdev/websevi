@@ -2,7 +2,7 @@
 import ThirdPartyEmailPasswordNode from 'supertokens-node/recipe/thirdpartyemailpassword'
 import SessionNode from 'supertokens-node/recipe/session'
 import { appInfo } from './appInfo'
-
+import { createUserSP } from '../src/pages/api/createUser'
 export const backendConfig = () => {
     return {
         framework: "express",
@@ -48,7 +48,82 @@ export const backendConfig = () => {
                     //   clientId: "FACEBOOK_CLIENT_ID",
                     // }),
                 ],
+                //Sobreescribe callback para lanzar evento tras login o registro
+                override: {
+                    apis: (originalImplementation) => {
+                        return {
+                            ...originalImplementation,
+
+                            // override the email password sign up API
+                            emailPasswordSignUpPOST: async function (input) {
+                                if (originalImplementation.emailPasswordSignUpPOST === undefined) {
+                                    throw Error("Should never come here");
+                                }
+
+                                // TODO: some pre sign up logic
+
+                                let response = await originalImplementation.emailPasswordSignUpPOST(input);
+
+                                if (response.status === "OK") {
+                                    // TODO: some post sign up logic
+                                    console.log('NUEVO USUARIO EN SUPERTOKENS', response.user.email)
+                                    createUserSP(response)
+                                }
+
+                                return response;
+                            },
+
+                            // override the email password sign in API
+                            emailPasswordSignInPOST: async function (input) {
+                                if (originalImplementation.emailPasswordSignInPOST === undefined) {
+                                    throw Error("Should never come here");
+                                }
+
+                                // TODO: some pre sign in logic
+
+                                let response = await originalImplementation.emailPasswordSignInPOST(input);
+
+                                if (response.status === "OK") {
+                                    // TODO: some post sign in logic
+                                }
+
+                                return response;
+                            },
+                            //TODO: BORRA USUARIOS DADOS DE ALTA EN SUPERTOKENS Y CREA SOLO EN MONGO CUANDO HAGAN SIGN UP EN SUPERTOKENS
+                            // override the thirdparty sign in / up API
+                            thirdPartySignInUpPOST: async function (input) {
+                                if (originalImplementation.thirdPartySignInUpPOST === undefined) {
+                                    throw Error("Should never come here");
+                                }
+
+                                // TODO: Some pre sign in / up logic
+
+                                let response = await originalImplementation.thirdPartySignInUpPOST(input);
+
+                                if (response.status === "OK") {
+                                    if (response.createdNewUser) {
+                                        //Cuando el usuario se crea en la bdd de supertokens
+                                        // TODO: some post sign up logic
+                                        console.log('NUEVO USUARIO EN SUPERTOKENS', response.user.email)
+                                        createUserSP(response)
+                                    } else {
+                                        //Cuando el usuario ya existe en la bdd de supertokens
+                                        // TODO: some post sign in logic
+                                        console.log('USUARIO EXISTENTE EN SUPERTOKENS ', response.user.email)
+                                        createUserSP(response)
+                                        // console.log('response', response)
+                                        // console.log('input', input)
+                                    }
+                                }
+
+                                return response;
+                            }
+                        }
+                    }
+                }
             }),
+            //SessionNode.init(),
+
             SessionNode.init(
                 {
                     override: {
@@ -57,7 +132,7 @@ export const backendConfig = () => {
                                 ...originalImplementation,
                                 createNewSession: async function (input) {
                                     let userId = input.userId;
-                                    console.log('USER ID**************************', userId)
+                                    //console.log('USER ID**************************', input)
                                     //gestion del rol admin 
                                     let admin = userId === 'c05864ca-8e53-4100-8f01-d0070f6e4a7e'
 
@@ -66,7 +141,6 @@ export const backendConfig = () => {
                                         admin
                                     };
                                     console.log('el rol admin////////////////', admin)
-                                    console.log('hostia')
                                     return originalImplementation.createNewSession(input);
                                 },
                             };
@@ -74,6 +148,7 @@ export const backendConfig = () => {
                     },
                 }
             ),
+
         ],
         isInServerlessEnv: true,
     }
