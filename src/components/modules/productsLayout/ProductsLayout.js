@@ -8,18 +8,28 @@ import usePriceSlider from "../../../hooks/usePriceSlider"
 import { useRouter } from "next/router"
 
 const ProductsLayout = ({ products, filtersProps }) => {
-    //console.log('*****************', products)
+
 
     //PriceSlider es el único filtro (el de precio) que funciona del lado del cliente
-    const router = useRouter()
 
+    console.log('*****************', filtersProps)
+
+    const router = useRouter()
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
+    console.log('pricesRange en ProductsLayout', pricesRange)
 
-    const { selectedPricesRange, handlePrice, valuetext } = currentSelectedPricesRange ?
-        { ...usePriceSlider([...currentSelectedPricesRange]) }
-        :
-        { ...usePriceSlider([...pricesRange]) }
+
+    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
+        currentSelectedPricesRange ?
+            [...currentSelectedPricesRange]
+            :
+            [...pricesRange]
+    )
+
+    console.log('selectedPricesRange en ProductsLayout', selectedPricesRange)
+
+
 
 
 
@@ -33,13 +43,13 @@ const ProductsLayout = ({ products, filtersProps }) => {
                             selectedPricesRange={selectedPricesRange}
                             handlePrice={handlePrice}
                             valuetext={valuetext}
-
-                        ></FiltersBar>
+                        />
                     </Grid>
-
-
                     <Grid item xs={6} sm={4} md={3} lg={9} >
-                        <ProductsGrid products={products} selectedPricesRange={selectedPricesRange} ></ProductsGrid>
+                        <ProductsGrid
+                            products={products}
+                            selectedPricesRange={selectedPricesRange}
+                        />
                     </Grid>
 
                 </Grid>

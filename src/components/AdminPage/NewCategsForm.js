@@ -16,7 +16,7 @@ import Box from "@mui/system/Box";
 import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
-import { getCategs } from "../../lib/api/Category";
+import { getCategs } from "../../lib/api/category";
 import { toPlainString } from "../../lib/utils/stringTools";
 
 const NewCategsForm = ({ onSubmit, error }) => {

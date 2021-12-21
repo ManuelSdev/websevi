@@ -96,6 +96,7 @@ export async function getStaticProps(context) {
             const filter = {
                 hasLink: true,
                 filters: thisCategory.childs,
+                pricesRange: [minPrice, maxPrice]
             }
             return filter
         } else if (level === 2) {

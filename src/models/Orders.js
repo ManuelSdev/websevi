@@ -2,16 +2,15 @@ import mongoose from 'mongoose'
 
 const orderSchema = mongoose.Schema({
     username: { type: String, unique: true },
-    email: { type: String, unique: true },
-    password: String,
-    active: false,
+    products: { type: [String], unique: true },
+    amount: { type: Number, index: true },
+    status: { type: String, unique: true },
     favorites: { type: [String], index: true },
-    image: String,
-    publishedAds: Number,
+
     date: Date
 
 })
 
-const Order = mongoose.model('User', userSchema)
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
 
 export default User

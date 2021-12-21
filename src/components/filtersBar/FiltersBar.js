@@ -18,6 +18,7 @@ import { Box } from '@mui/system';
 import { Slider } from '@mui/material';
 import usePriceSlider from '../../hooks/usePriceSlider';
 const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
+
     const firstRender = React.useRef(true);
 
     const router = useRouter()
@@ -75,6 +76,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
             firstRender.current = false;
             return;
         }
+        console.log('USEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
         const newPath = { path: `/${categoryPath}` }
         checkedFilters.map(filter => {
             newPath.path = newPath.path.concat('/', filter)

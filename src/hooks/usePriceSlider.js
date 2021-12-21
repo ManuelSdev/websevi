@@ -6,9 +6,9 @@
 import { useState } from 'react';
 
 function usePriceSlider(initialSelectedPricesRange) {
-
+    console.log('=========', initialSelectedPricesRange)
     const [selectedPricesRange, setSelectedPricesRange] = useState(initialSelectedPricesRange);
-
+    console.log('+++++++', selectedPricesRange)
     const handlePrice = (event, newValue) => {
         setSelectedPricesRange(newValue);
         // console.log('=========', newValue)
