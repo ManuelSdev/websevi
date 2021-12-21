@@ -41,7 +41,7 @@ const Header = ({ categories }) => {
                 <Link href="/admin">
                     Admin
                 </Link>
-                <Link href="/user">
+                <Link href="/user/test">
                     Profile
                 </Link>
                 <p>Lunes a jueves ........635 41 55 73 </p>

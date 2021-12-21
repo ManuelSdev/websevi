@@ -15,20 +15,20 @@ import Cloud from '@mui/icons-material/Cloud';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import ImportSection from '../components/AdminPage/ImportSection';
-import NewProductSection from '../components/AdminPage/NewProductSection';
-import OrdersSection from '../components/AdminPage/OrdersSection';
+import ImportSection from '../../components/AdminPage/ImportSection';
+import NewProductSection from '../../components/AdminPage/NewProductSection';
+import OrdersSection from '../../components/AdminPage/OrdersSection';
 //import allCategsOnArray from '../assets/initialsCategories'
-import initialsCategories from '../assets/initialsCategories'
+import initialsCategories from '../../assets/initialsCategories'
 
-import initialsProducts from '../assets/initialsProducts';
+import initialsProducts from '../../assets/initialsProducts';
 //import initCategs from './api/categories/init'
-import { resetCategs } from '../lib/api/category';
-import NewCategsSection from '../components/AdminPage/NewCategsSection';
-import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
-import { resetProducts } from '../lib/api/product';
-import Layout from '../components/layouts/Layout';
-import { getCats } from './api/categories/g';
+import { resetCategs } from '../../lib/api/category';
+import NewCategsSection from '../../components/AdminPage/NewCategsSection';
+import DeleteCategsSection from '../../components/AdminPage/DeleteCategsSection';
+import { resetProducts } from '../../lib/api/product';
+import Layout from '../../components/layouts/Layout';
+import { getCats } from '../api/categories/g';
 
 const Admin = ({ isLogged, categories, props }) => {
 

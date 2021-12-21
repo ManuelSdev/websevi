@@ -96,7 +96,7 @@ function App({ Component, pageProps }) {
   //pageProps.isLogged = isLogged
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
-  pageProps.hola = "hola"
+
   //console.log('LOGIN', isLogged)
   return (
     <>
