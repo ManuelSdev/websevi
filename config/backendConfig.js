@@ -138,9 +138,10 @@ export const backendConfig = () => {
 
                                     input.accessTokenPayload = {
                                         ...input.accessTokenPayload,
-                                        admin
+                                        admin,
+                                        userId
                                     };
-                                    console.log('el rol admin////////////////', admin)
+                                    console.log('el rol admin////////////////', input)
                                     return originalImplementation.createNewSession(input);
                                 },
                             };

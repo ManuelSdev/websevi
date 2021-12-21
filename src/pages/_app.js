@@ -26,7 +26,7 @@ if (typeof window !== 'undefined') {
 
 function App({ Component, pageProps }) {
 
-  const [isLogged, setIsLogged] = React.useState({ state: false, admin: false })
+  const [isLogged, setIsLogged] = React.useState({ state: false, admin: false, authId: '' })
   //cart =[{}]
   //Guarda productos que se van añádiendo o quitando del carrito
   const [cart, setCart] = React.useState([])
@@ -58,12 +58,18 @@ function App({ Component, pageProps }) {
       // setIsLogged(await Session.doesSessionExist())
       const state = await Session.doesSessionExist()
       // console.log('SESIOONNNN ++++++++++++++', state)
-
-      const { admin } = state && await Session.getAccessTokenPayloadSecurely()
+      /**
+       * Si el userId del usuario logado tiene asignado el rol de administrador, admin=true
+       * userdId es el identificador de usuario en la bdd de supertokens. Se obtiene y se renombra a authID
+       * authId es un identificador de usuario en la bdd de la app. Permite relacionar el usuario logado
+       * con supertokens con su perfil de usuario en la bdd de la app.
+       */
+      const { admin, userId: authId } = state && await Session.getAccessTokenPayloadSecurely()
       const info = state && await Session.getAccessTokenPayloadSecurely()
-      // console.log('INFO EN FRONT @@@@@@@@@@@@@@', info)
+
+      console.log('INFO EN FRONT @@@@@@@@@@@@@@', authId)
       //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
-      setIsLogged({ state, admin: !!admin })
+      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '' })
 
     }
     checkSession()
@@ -78,14 +84,14 @@ function App({ Component, pageProps }) {
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
-  //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
+  // console.log('@@@@@@@@@@@@@@@@@@@@', Session)
 
   const appProps = { isLogged, setIsLogged, cart, setCart }
   //pageProps.isLogged = isLogged
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
 
-  //console.log('LOGIN', isLogged)
+  console.log('LOGIN', isLogged)
   return (
     <>
 

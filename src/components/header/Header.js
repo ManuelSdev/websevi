@@ -15,7 +15,7 @@ const Header = ({ categories }) => {
     const { setIsLogged } = useAppContext()
     async function logoutClicked() {
         await ThirdPartyEmailPassword.signOut()
-        setIsLogged({ state: false, admin: false })
+        setIsLogged({ state: false, admin: false, authId: '' })
         // ThirdPartyEmailPassword.redirectToAuth()
     }
     return (

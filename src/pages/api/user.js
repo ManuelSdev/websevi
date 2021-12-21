@@ -1,4 +1,6 @@
-
+/**
+ * Esta ruta API permite obtener datos de la sesión actual del usuario autenticado con supertokens
+ */
 //https://supertokens.io/docs/thirdpartyemailpassword/nextjs/session-verification/in-api
 
 import { superTokensNextWrapper } from 'supertokens-node/nextjs'

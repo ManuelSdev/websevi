@@ -25,7 +25,7 @@ import CartStepper from "../components/cart/CartStepper"
 import CartStep from "../components/cart/CartStep"
 
 const CartPage = () => {
-    const { cart, setCart } = useAppContext()
+    const { cart, setCart, isLogged } = useAppContext()
 
     //const cartTotalPrice = React.useRef(0);
 
@@ -33,7 +33,7 @@ const CartPage = () => {
     const handleDeletes = productToDelete => ev => {
         ev.preventDefault()
         const newCart = cart.filter(product => product._id !== productToDelete._id)
-        console.log('newcart jskjskjslksjlñ', newCart)
+        //console.log('newcart jskjskjslksjlñ', newCart)
         setCart(newCart)
     }
     const handleDelete = (productToDelete) => { handleDeletes(productToDelete) }
@@ -44,7 +44,7 @@ const CartPage = () => {
         sum(...rowsTotalPrice)
         :
         0
-    console.log('+++++++++++++++', rowsTotalPrice.map(e => typeof e))
+    //console.log('+++++++++++++++', rowsTotalPrice.map(e => typeof e))
 
     return (
         <ThemeProvider theme={theme}>
@@ -89,7 +89,7 @@ const CartPage = () => {
 
 
 
-            <CartStepper cartTotalPrice={cartTotalPrice} />
+            <CartStepper cartTotalPrice={cartTotalPrice} isLogged={isLogged} />
 
         </ThemeProvider >
     )

@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper"
 import CartStep from "./CartStep";
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
-
+import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 const steps = [
     'Carrito',
@@ -20,7 +20,9 @@ const steps = [
     'Resumen'
 ];
 
-export default function CartStepper({ cartTotalPrice }) {
+export default function CartStepper({ cartTotalPrice, isLogged }) {
+    const waitingForChangeIsLogged = React.useRef(false);
+
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
@@ -70,6 +72,37 @@ export default function CartStepper({ cartTotalPrice }) {
         setActiveStep(0);
         setCompleted({});
     };
+
+
+    //console.log('----------------------', window.sessionStorage.getItem('activeStep'))
+    /**
+     * Si, en el paso 2 (activeStep=1) el usuario no está logado, se le redirige a la página de login
+     * Una vez logado, la propiedad redirectBack: true lo volverá a traer a este punto
+     * Guarda la clave 'step1Anchor' en el sessionStorage para avanzar al paso 2 (activeStep=1)  al volver 
+     * tras la redirección
+     * Cuando vuelve y el stepper se situa en el paso 2 (activeStep=1) , la clave es borrada
+     * Como useState no cambia el estado de isLogged de forma síncrona, usa waitingForChangeIsLogged
+     * como ancla para asegurar que la autenticación se ha realizado y loggin.state=true
+     *  no entrar en bucle en el tercer if
+     */
+    React.useEffect(() => {
+        if (waitingForChangeIsLogged.current && isLogged.state) {
+            waitingForChangeIsLogged.current = false;
+            return;
+        }
+
+        if (sessionStorage.getItem('step1Anchor')) {
+            waitingForChangeIsLogged.current = true
+            sessionStorage.removeItem('step1Anchor')
+            setActiveStep(1)
+        }
+
+
+        if (activeStep === 1 && !isLogged.state && !waitingForChangeIsLogged.current) {
+            sessionStorage.setItem('step1Anchor', true)
+            redirectToAuth({ redirectBack: true })
+        }
+    }, [activeStep])
 
     return (
         <Container>

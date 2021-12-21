@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const orderSchema = mongoose.Schema({
-    username: { type: String, unique: true },
+    userId: { type: String, unique: true },
     products: { type: [String], unique: true },
     amount: { type: Number, index: true },
     status: { type: String, unique: true },
