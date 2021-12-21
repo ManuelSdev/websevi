@@ -16,22 +16,19 @@ import s from '@mui/icons-material/DeleteForeverOutlined';
 import ss from '@mui/icons-material/CloseOutlined';
 import { useAppContext } from "../components/context"
 import React from "react"
-import { sumArray } from "../lib/utils/sumArray"
+import { sum } from "../lib/utils/sum"
 import { AppBar, CssBaseline, IconButton, Toolbar } from "@mui/material"
 import IconCorpName from "../components/elements/IconCorpName"
 import { ThemeProvider } from "@emotion/react"
 import theme from "../assets/theme"
+import CartStepper from "../components/cart/CartStepper"
+import CartStep from "../components/cart/CartStep"
 
 const CartPage = () => {
     const { cart, setCart } = useAppContext()
 
     //const cartTotalPrice = React.useRef(0);
-    const steps = [
-        'Carrito',
-        'Envío',
-        'Pago',
-        'Resumen'
-    ];
+
 
     const handleDeletes = productToDelete => ev => {
         ev.preventDefault()
@@ -44,15 +41,14 @@ const CartPage = () => {
     const f = () => { console.log('eventt') }
     const rowsTotalPrice = cart.map(product => product.amount * product.price)
     const cartTotalPrice = cart.length > 0 ?
-        sumArray(rowsTotalPrice)
+        sum(...rowsTotalPrice)
         :
         0
-    console.log('+++++++++++++++', cart)
+    console.log('+++++++++++++++', rowsTotalPrice.map(e => typeof e))
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar
                     sx={{
@@ -90,88 +86,17 @@ const CartPage = () => {
                 </Toolbar>
 
             </AppBar>
-            <Container>
-                <Box sx={{ width: '100%', background: "red" }}>
-                    <Stepper activeStep={1} alternativeLabel>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </Box>
-                <Box sx={{ flexGrow: 1, background: "orange", marginTop: '30px' }}>
 
-                    <Grid container spacing={2}>
-                        <Grid container item xs={12} sm={12} md={8} lg={8} >
-                            <Grid container  >
-                                <Grid item xs={12} sm={12} md={8} lg={6} >
-                                    Articulo
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={8} lg={2} >
-                                    Precio
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={8} lg={2} >
-                                    Unidades
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={8} lg={2} >
-                                    Total
-                                </Grid>
-                            </Grid>
-                            {cart.map(product => {
-                                const [mainImage] = product.images
-                                return (
-                                    <Paper key={product._id} ax={{ display: "flex", flexDirection: 'row' }}>
-                                        <Grid container >
-                                            <Grid container spacing={2} item xs={12} sm={12} md={8} lg={6} >
-                                                <Grid item xs={12} sm={12} md={8} lg={3} >
-                                                    <CardMedia
-                                                        component="img"
-                                                        // image="https://livedemo00.template-help.com/opencart_58281/image/cache/catalog/products/product-22-800x800.png"
-                                                        image={mainImage}
-                                                        alt="Paella dish"
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12} sm={12} md={8} lg={9} >
-                                                    {product.name}
-                                                </Grid>
-                                            </Grid>
-                                            <Grid item xs={12} sm={12} md={8} lg={2} >
-                                                {product.price}
-                                            </Grid>
-                                            <Grid item xs={12} sm={12} md={8} lg={2} >
-                                                {product.amount}
-                                            </Grid>
-                                            <Grid item xs={12} sm={12} md={8} lg={1.5} >
-                                                {product.amount * product.price} €
-                                            </Grid>
-                                            <Grid item xs={12} sm={12} md={8} lg={0.5} >
-                                                <IconButton
-                                                    onClick={handleDeletes(product)}
-                                                    color="primary" aria-label="upload picture" component="span">
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Grid>
 
-                                        </Grid>
 
-                                    </Paper>
-                                )
+            <CartStepper cartTotalPrice={cartTotalPrice} />
 
-                            }
-                            )}
-                        </Grid>
-                        <Grid item sx={{ background: "grey" }} xs={12} sm={12} md={4} lg={4} >
-                            <Paper>
-                                <Typography>TOTAL :{cartTotalPrice}</Typography>
-                                <Button>CONTINUAR</Button>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Container >
         </ThemeProvider >
     )
 }
 
 export default CartPage
+
+/*
+
+            */

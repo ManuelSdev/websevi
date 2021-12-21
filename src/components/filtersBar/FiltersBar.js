@@ -50,7 +50,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     /**Slider */
 
 
-    console.log('VALUE', selectedPricesRange)
+    //console.log('VALUE', selectedPricesRange)
 
     const handleChange = ev => {
         const { name, checked, value: filterValue } = ev.target;

@@ -15,8 +15,6 @@ const ProductDetails = ({ product }) => {
 
     const { setCart, cart } = useAppContext()
 
-
-
     const [productToCart, setProductToCart] = React.useState({
         ...product,
         amount: 0,
@@ -51,7 +49,7 @@ const ProductDetails = ({ product }) => {
                 cartCurrentAmountOfThisProduct = productInCart.amount
             }
         })
-        console.log('CUANTOS', amount + amountField + cartCurrentAmountOfThisProduct)
+        //console.log('CUANTOS', amount + amountField + cartCurrentAmountOfThisProduct)
         return setProductToCart({ ...product, amount: amount + amountField + cartCurrentAmountOfThisProduct })
     }
     React.useEffect(() => {
@@ -59,126 +57,24 @@ const ProductDetails = ({ product }) => {
             firstRender.current = false;
             return;
         }
-        console.log('USE DETAIL')
-        console.log('allowUseEffect.current', allowUseEffect.current)
+        // console.log('USE DETAIL')
+        // console.log('allowUseEffect.current', allowUseEffect.current)
         if (!allowUseEffect.current) {
-            console.log('falso++++++++++++++++++++++++++')
+            //console.log('falso++++++++++++++++++++++++++')
             return
         }
-        console.log('hola')
 
-
-
-        console.log('hola')
-
-        //console.log('PUTO CART', cart)
-        //  console.log('IN CART ID ', productInCart.id)
-        // console.log('PROD ID  ', product.id)
         const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
 
-        console.log('cartWithoutThisProduct', cartWithoutThisProduct)
-        console.log('productToCart', productToCart)
+        //console.log('cartWithoutThisProduct', cartWithoutThisProduct)
+        //  console.log('productToCart', productToCart)
         const newCart = Array.from([...cartWithoutThisProduct, productToCart])
-        console.log('newCart', newCart)
+        // console.log('newCart', newCart)
         setCart([...newCart])
         setProductToCart({ ...product, amount: 0 })
         allowUseEffect.current = false
     }, [productToCart])
-    /*
-     const addToCart = () => {
-         console.log('CARTASA', cart)
-         //productToCart.amount === 0 && increaSeAmount()
-         cart.map(productInCart => {
-             // productInCart && console.log('IN CART ID ', productInCart._id)
-             //  console.log('PROD ID  ', product)
-             //Si el producto actual ya se encuentra en el carrito, actualiza el valor
-             //amount sumando el amount del producto del carrito con el amount del producto actual
-             if (productInCart._id === product._id) {
-                 console.log('productInCart.amount ', productInCart.amount)
-                 console.log(' product.amount ', productToCart.amount)
-                 const updatedAmount = productInCart.amount + productToCart.amount
-                 console.log('UPDATED', updatedAmount)
-                 setProductToCart({ ...product, amount: updatedAmount })
-             }
-         })
-         //console.log('PUTO CART', cart)
-         //  console.log('IN CART ID ', productInCart.id)
-         // console.log('PROD ID  ', product.id)
-         const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
- 
-         console.log('VIEJOOOO', cartWithoutThisProduct)
-         const newCart = Array.from([...cartWithoutThisProduct, productToCart])
-         setCart([...newCart])
-     }
-     */
 
-    /*
-        React.useEffect(() => {
-            if (firstRender.current) {
-                firstRender.current = false;
-                return;
-            }
-            if (!onlyUpdateAmount.current) {
-    
-                cart.map(productInCart => {
-                    // productInCart && console.log('IN CART ID ', productInCart._id)
-                    //  console.log('PROD ID  ', product)
-                    //Si el producto actual ya se encuentra en el carrito, actualiza el valor
-                    //amount sumando el amount del producto del carrito con el amount del producto actual
-                    if (productInCart._id === product._id) {
-                        console.log('productInCart.amount ', productInCart.amount)
-                        console.log(' product.amount ', productToCart.amount)
-                        const updatedAmount = productInCart.amount + productToCart.amount
-                        console.log('UPDATED', updatedAmount)
-                        setProductToCart({ ...product, amount: updatedAmount })
-                    }
-                })
-                //console.log('PUTO CART', cart)
-                //  console.log('IN CART ID ', productInCart.id)
-                // console.log('PROD ID  ', product.id)
-                const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
-    
-                console.log('VIEJOOOO', cartWithoutThisProduct)
-                const newCart = Array.from([...cartWithoutThisProduct, productToCart])
-                setCart([...newCart])
-                firstRender.current = false;
-            }
-    
-    
-        }, [amount])
-    */
-
-    /*
-        const addToCart = () => {
-            console.log('CARTASA', cart)
-            productToCart.amount === 0 && increaSeAmount()
-            cart.map(productInCart => {
-                // productInCart && console.log('IN CART ID ', productInCart._id)
-                //  console.log('PROD ID  ', product)
-                //Si el producto actual ya se encuentra en el carrito, actualiza el valor
-                //amount sumando el amount del producto del carrito con el amount del producto actual
-                if (productInCart._id === product._id) {
-                    console.log('productInCart.amount ', productInCart.amount)
-                    console.log(' product.amount ', productToCart.amount)
-                    const updatedAmount = productInCart.amount + productToCart.amount
-                    console.log('UPDATED', updatedAmount)
-                    setProductToCart({ ...product, amount: updatedAmount })
-                }
-            })
-            //console.log('PUTO CART', cart)
-            //  console.log('IN CART ID ', productInCart.id)
-            // console.log('PROD ID  ', product.id)
-            const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
-    
-            console.log('VIEJOOOO', cartWithoutThisProduct)
-            const newCart = Array.from([...cartWithoutThisProduct, productToCart])
-            setCart([...newCart])
-        }
-    
-    */
-
-    const { error, throwPromise, loading, data: productId } = usePromise({})
-    // console.log('productToCart', productToCart)
 
     return (
         <Box sx={{ flexGrow: 1, background: "white" }}>

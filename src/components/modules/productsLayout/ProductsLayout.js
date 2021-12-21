@@ -7,27 +7,28 @@ import FiltersBar from "../../filtersBar/FiltersBar"
 import usePriceSlider from "../../../hooks/usePriceSlider"
 import { useRouter } from "next/router"
 
-const ProductsLayout = ({ products, filtersProps }) => {
+const ProductsLayout = ({ products, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
 
 
     //PriceSlider es el único filtro (el de precio) que funciona del lado del cliente
 
-    console.log('*****************', filtersProps)
-
-    const router = useRouter()
-    const { selectedPricesRange: currentSelectedPricesRange } = router.query
-    const { pricesRange } = filtersProps
-    console.log('pricesRange en ProductsLayout', pricesRange)
-
-
-    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
-        currentSelectedPricesRange ?
-            [...currentSelectedPricesRange]
-            :
-            [...pricesRange]
-    )
-
-    console.log('selectedPricesRange en ProductsLayout', selectedPricesRange)
+    //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
+    /*
+        const router = useRouter()
+        const { categoryPath, selectedPricesRange: currentSelectedPricesRange } = router.query
+        console.log('*****RENDER ProductsLayout CON path', categoryPath)
+        const { pricesRange } = filtersProps
+        console.log('pricesRange en ProductsLayout', pricesRange)
+    
+    
+        const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
+            currentSelectedPricesRange ?
+                [...currentSelectedPricesRange]
+                :
+                [...pricesRange]
+        )
+    */
+    //console.log('selectedPricesRange en ProductsLayout', pop)
 
 
 

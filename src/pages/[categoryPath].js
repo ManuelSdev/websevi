@@ -6,18 +6,24 @@ import { getCategoryPath } from '../lib/pathsGetters/getCategoryPath'
 import Layout from '../components/layouts/Layout'
 import { nameToUrl } from '../lib/utils/stringTools'
 import { mapFilters } from '../lib/mapFilters'
+import usePriceSlider from '../hooks/usePriceSlider'
 
 const Category = ({ isLogged, products, categories, filtersProps }) => {
     const router = useRouter()
-    const { query } = useRouter()
-    const { categoriesId } = router.query
+    //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
-    // console.log('use Router query en [categoryPath].js', query)
-    // console.log('products', products)
-    //  console.log('PRODUCT SSR', products)
+    const { selectedPricesRange: currentSelectedPricesRange } = router.query
+    const { pricesRange } = filtersProps
+    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
+        currentSelectedPricesRange ?
+            [...currentSelectedPricesRange]
+            :
+            [...pricesRange]
+    )
+    const props = { selectedPricesRange, handlePrice, valuetext }
     return (
         <Layout isLogged={isLogged} categories={categories}>
-            <ProductsLayout products={products} filtersProps={filtersProps}></ProductsLayout>
+            <ProductsLayout products={products} filtersProps={filtersProps} {...props}></ProductsLayout>
         </Layout>
 
     )

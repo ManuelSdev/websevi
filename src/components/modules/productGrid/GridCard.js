@@ -53,7 +53,9 @@ const GridCard = ({ product }) => {
                     justifyContent: 'center'
                 }}
             >
-                <Button sx={{ borderRadius: 8 }}>Añadir al carrito</Button>
+                <Button sx={{ borderRadius: 8 }}
+                // onClick={addToCart}
+                >Añadir al carrito</Button>
                 <FavoriteBorderIcon />
                 <Link href='/' />
             </CardActions>

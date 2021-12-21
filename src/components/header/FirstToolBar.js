@@ -15,7 +15,7 @@ import { useAppContext } from "../context";
 import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import Typography from "@mui/material/Typography";
-import { sumArray } from "../../lib/utils/sumArray";
+import { sum } from "../../lib/utils/sum";
 const StyledButton = styled(Button)(`
   text-transform: none;
 `);
@@ -38,7 +38,7 @@ const FirstToolBar = () => {
 
 
             //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-            const totalProductsAmount = sumArray(...amountOfEachProduct)
+            const totalProductsAmount = sum(...amountOfEachProduct)
             setCartProductsAmount(totalProductsAmount)
         }
     }, [cart])
