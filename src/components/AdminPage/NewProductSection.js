@@ -20,6 +20,7 @@ const NewProductSection = ({ props }) => {
                     throw error
                 }
         */
+        console.log('NEW PROD', newProduct)
         await throwPromise(createProduct(newProduct));
         setUploaded(true)
         //history.push("/user");

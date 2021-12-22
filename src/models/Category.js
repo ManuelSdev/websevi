@@ -7,16 +7,14 @@ import mongoose from 'mongoose'
 //const Filter = mongoose.models.Filter || mongoose.model('Filter', filterSchema);
 
 const categorySchema = new mongoose.Schema({
-    //_id: { type: String, unique: true },
-    _id: String,
     level: { type: Number, index: true },
     childs: { type: [String], index: true },
     parent: String,
-    name: { type: String, unique: true },
-    path: String,
+    name: { type: String, unique: true, index: true },
+    path: { type: String, unique: true, index: true },
 
-    // filters: [{ f: [String] }]
-    // filters: { type: [filterSchema] },
+    //filters es un array de objetos/maps
+    //cada valor de una propiedad del objeto será un array de string
     filters: [{
         type: Map,
         of: [String]

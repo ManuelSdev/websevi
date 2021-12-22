@@ -5,46 +5,16 @@ import upload from '../../../lib/utils/multerUploadS3'
 import nc from 'next-connect'
 import { nameToUrl } from '../../../lib/utils/stringTools'
 
-//import initMiddleware from '../../../lib/api/initMiddleware'
-//import runMiddleware from '../../../ lib / api / runMiddleware'
-
-//const mul = initMiddleware(multerUploadS3)
-async function handler_(req, res) {
-    // console.log("BODY", req.body)
-    //    console.log("IMG", req.file)
-    // upload.single("images")
-    // res.status(200).json({ name: 'John Doe' })
-
-    await dbConnect()
-    try {
-        const { username, email, password } = req.body
-
-        req.body.date = new Date()
-        const productData = { ...req.body }
-        //const savedUser = await createUser(userData)
-        const newProduct = await new Product(productData)
-        //newUser.password = await User.hashPassword(userData.password)
-        //return newUser.save()
-        const saved = await newProduct.save()
-        res.status(201).json({ result: saved })
-    } catch (err) {
-        console.log("ERROR EN TRY DE API RUTA", err.message)
-        res.status(500)
-    }
-}
-
+//TODO: pulir validaciones aquí y en front
 const handler = nc()
     .use(upload.single("images"))
     .post(async (req, res, next) => {
-        //console.log("IMG", req.file)
-        // console.log("BODY", req.body)
+        // console.log("IMG", req.file)
+        //console.log("BODY", req.body)
 
-        const { name, category_1, category_2, category_3 } = req.body
-        const categories = [category_1, category_2, category_3]
+        const { name, category_1, category_2 } = req.body
+        const categories = [category_1, category_2]
         try {
-
-
-
             if (!name) {
                 //Estos errores si deben salir en el front
                 const error = new Error('Debe indicar que producto quiere vender para subir un anuncio');

@@ -11,7 +11,6 @@ import Stepper from "@mui/material/Stepper"
 import Typography from "@mui/material/Typography"
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
-import { Box } from "@mui/system"
 const CartStep = () => {
     const { cart, setCart } = useAppContext()
 
@@ -24,8 +23,6 @@ const CartStep = () => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Articulos en tu carrito</Typography></Box>
-
             <Grid container  >
                 <Grid item xs={12} sm={12} md={8} lg={6} >
                     Articulo

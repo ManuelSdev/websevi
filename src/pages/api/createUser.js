@@ -2,6 +2,23 @@
 import dbConnect from '../../lib/dbConnect'
 import User from '../../models/Users';
 
+/**
+ Modelo ejemplo de addresses
+     addresses: [
+        {
+          address1: {
+            address: 'Mi calle',
+            postCode: 14045,
+            city: 'Sevilla',
+            region: 'Sevilla',
+            country: 'España',
+            default: true
+          }
+        }
+
+      ]
+
+ */
 //Crea un usuario con la API de supertokens
 //Recibe como parámetro la respuesta del API de supertokens
 export async function createUserSP(supertokensResponse) {
@@ -21,7 +38,6 @@ export async function createUserSP(supertokensResponse) {
       email,
       favorites: [],
       orders: [],
-      address: ''
 
 
     })

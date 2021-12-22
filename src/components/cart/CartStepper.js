@@ -9,6 +9,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
 import CartStep from "./CartStep";
+import ShipmentStep from './ShipmentStep'
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
@@ -97,7 +98,6 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
             setActiveStep(1)
         }
 
-
         if (activeStep === 1 && !isLogged.state && !waitingForChangeIsLogged.current) {
             sessionStorage.setItem('step1Anchor', true)
             redirectToAuth({ redirectBack: true })
@@ -124,7 +124,7 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                             <CartStep />
                             :
                             activeStep === 1 ?
-                                <Box>PASO 2</Box>
+                                <ShipmentStep />
                                 :
                                 activeStep === 2 ?
                                     <Box>PASO 3</Box>
