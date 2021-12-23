@@ -2,10 +2,14 @@ import mongoose from 'mongoose'
 
 const userSchema = mongoose.Schema({
     name: String,
+    lastName: String,
     authId: { type: String, unique: true, index: true },
     email: { type: String, unique: true, index: true },
     favorites: { type: [String], index: true },
     orders: { type: [String], index: true },
+    idCard: { type: String, unique: true },
+    phone: Number,
+    company: String,
 
     //addresses es un array de objetos/maps
     //cada valor de una propiedad del objeto será un nuevo esquema/objeto
@@ -15,10 +19,11 @@ const userSchema = mongoose.Schema({
         of: new mongoose.Schema({
             address: String,
             postCode: Number,
-            city: { type: String, index: true },
-            region: { type: String, index: true },
-            country: { type: String, index: true },
-            default: Boolean
+            city: String,
+            region: String,
+            country: String,
+            moreInfo: String,
+            defaultAddress: Boolean
         })
     }]
 

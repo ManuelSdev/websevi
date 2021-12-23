@@ -10,7 +10,7 @@ import { getProducts } from "../api/products/get"
 import Layout from "../../components/layouts/Layout"
 //import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
 //import { getCategoryPath } from "../../lib/pathsGetters/getCategoryPath"
-import { getCats } from "../api/categories/g"
+import { getCategories } from "../api/categories/getCategories"
 import ImageList from "@mui/material/ImageList"
 import ImageListItem from "@mui/material/ImageListItem"
 import Link from "@mui/material/Link"
@@ -125,14 +125,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     //  console.log('CONTEXTT', context.params)
 
-    const categories_res = await getCats()
-    const categories = JSON.parse(JSON.stringify(categories_res))
+    const categoriesRes = await getCategories()
+    const categories = JSON.parse(JSON.stringify(categoriesRes))
 
 
-    const product_query = await getProducts({ url: params.productUrl })
+    const productRes = await getProducts({ url: params.productUrl })
     //  console.log('############################', product_query)
     //Esta consulta devuelve un array con un único producto/elemento
-    const [product] = JSON.parse(JSON.stringify(product_query))
+    const [product] = JSON.parse(JSON.stringify(productRes))
     return {
         props: { product, categories }, // will be passed to the page component as props
     }

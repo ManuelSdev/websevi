@@ -4,13 +4,15 @@ import Grid from "@mui/material/Grid"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import Select from "@mui/material/Select"
-import TextField from "@mui/material/TextField"
+
 import FormControl from "@mui/material/FormControl"
+
 import Box from "@mui/system/Box";
+import TextField from "@mui/material/TextField"
 
 import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
-import { getCategs } from "../../lib/api/category";
+import { getCategories } from "../../lib/api/category";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import FormTemplate from "../elements/FormTemplate"
@@ -69,7 +71,7 @@ const NewProductForm = ({ onSubmit, error }) => {
      * seteado en el estado "categories" con la respuesta del back
      */
     const setCategs = async (filter, categoriesToChange) => {
-        const res = await getCategs(filter)
+        const res = await getCategories(filter)
         const newArray = res.map(category => category.name)
         setCategories({
             ...categories,
@@ -77,7 +79,7 @@ const NewProductForm = ({ onSubmit, error }) => {
         })
     }
 
-    const onSubmitProp = handleSubmit(onSubmit)
+    //const onSubmitProp = handleSubmit(onSubmit)
 
     const column1Elements = (
         <Box>
@@ -196,7 +198,7 @@ const NewProductForm = ({ onSubmit, error }) => {
 
     return (
         <FormTemplate
-            onSubmit={onSubmitProp}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{
                 backgroundColor: 'dimGray',
                 '& .MuiFormControl-root': { mb: 2, width: '100%' },

@@ -1,6 +1,6 @@
 
-import dbConnect from '../../lib/dbConnect'
-import User from '../../models/Users';
+import dbConnect from '../../../lib/dbConnect'
+import User from '../../../models/User'
 
 /**
  Modelo ejemplo de addresses
@@ -24,6 +24,7 @@ import User from '../../models/Users';
 export async function createUserSP(supertokensResponse) {
   try {
     await dbConnect()
+
     //Obtiene los datos del usuario autenticado con supertokens
     const { id: authId, email } = supertokensResponse.user
     //Si el usuario existe, lanza error

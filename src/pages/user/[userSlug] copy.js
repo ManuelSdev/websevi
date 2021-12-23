@@ -28,7 +28,7 @@ import NewCategsSection from '../../components/AdminPage/NewCategsSection';
 import DeleteCategsSection from '../../components/AdminPage/DeleteCategsSection';
 import { resetProducts } from '../../lib/api/product';
 import Layout from '../../components/layouts/Layout';
-import { getCats } from '../api/categories/g';
+import { getCats } from '../api/categories/getCategories';
 
 const Admin = ({ isLogged, categories, props }) => {
 

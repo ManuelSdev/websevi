@@ -1,14 +1,11 @@
 
-import styles from '../styles/Home.module.css'
-import IconCorpName from '../components/elements/IconCorpName';
-import GridCard from '../components/modules/productGrid/GridCard';
 import Container from '@mui/material/Container';
 import MainMosaic from '../components/elements/MainMosaic';
 import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
-import { getCats } from './api/categories/g';
-import { getProducts } from './api/products/get';
+import { getProducts } from './api/products/getProducts';
 import ProductsGrid from '../components/modules/productGrid/ProductsGrid'
+import { getCategories } from './api/categories/getCategories';
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
@@ -52,10 +49,11 @@ export async function getStaticPaths() {
 */
 export async function getStaticProps(context) {
   //  console.log('CONTEXTT', context.params)
-  const categories_query = await getCats()
-  const categories = JSON.parse(JSON.stringify(categories_query))
-  const products_query = await getProducts()
-  const products = JSON.parse(JSON.stringify(products_query))
+
+  const categoriesRes = await getCategories()
+  const categories = JSON.parse(JSON.stringify(categoriesRes))
+  const productsRes = await getProducts()
+  const products = JSON.parse(JSON.stringify(productsRes))
   return {
     props: { categories, products }, // will be passed to the page component as props
   }

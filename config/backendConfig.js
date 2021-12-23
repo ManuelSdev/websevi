@@ -2,7 +2,7 @@
 import ThirdPartyEmailPasswordNode from 'supertokens-node/recipe/thirdpartyemailpassword'
 import SessionNode from 'supertokens-node/recipe/session'
 import { appInfo } from './appInfo'
-import { createUserSP } from '../src/pages/api/createUser'
+import { createUserSP } from '../src/pages/api/users/createUser'
 export const backendConfig = () => {
     return {
         framework: "express",

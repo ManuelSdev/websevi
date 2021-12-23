@@ -3,16 +3,13 @@ import client, { configureClient, resetClient } from './client';
 
 
 
-export const createCategs = newCateg => client.post('/categories/create', newCateg)
+export const createCategories = newCateg => client.post('/categories/createCategories', newCateg)
 
-export const resetCategs = newCategs => client.post('/categories/reset', newCategs)
+export const resetCategories = newCategs => client.post('/categories/resetCategories', newCategs)
 
-//export const getCategs = level => client.get('/categories/get', level)
-
-export const getCategs = (filters) => {
+export const getCategories = (filters) => {
     const params = new URLSearchParams(filters)
     //console.log("ppppppppppppppp", params.toString())
     return client.get(`/categories/get/?${params.toString()}`);
 };
 
-export const getTree = () => client.get(`/categories/getTree`);

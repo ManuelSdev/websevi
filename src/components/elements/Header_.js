@@ -10,7 +10,7 @@ import Link from './Link'
 import InputAdornment from "@mui/material/InputAdornment"
 import SearchIcon from '@mui/icons-material/Search';
 import DropdownMenu from './DropdownMenu'
-import { getCategs } from "../../lib/api/category"
+import { getCategories } from "../../lib/api/category"
 
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
@@ -37,8 +37,8 @@ const Header = ({ isLogged }) => {
     // const [categs, setCategs] = React.useState([]);
 
     React.useEffect(async () => {
-        const a = await throwPromise(getCategs(''));
-        //const a = await getCategs()
+        const a = await throwPromise(getCategories(''));
+        //const a = await getCategories()
         //await setCategs(a)
     }, [])
     //const items = [COMPONENTES, PERIFÉRICOS, ORDENADORES, PORTÁTILES, TABLETS, MÓVILES]
@@ -106,7 +106,7 @@ const Header = ({ isLogged }) => {
                         </Link>
                     </Box>
                     <Box sx={{ color: "black" }}>
-                        <Link href="/cart">Carrito</Link>
+                        <Link href="/carrito">Carrito</Link>
                     </Box>
 
                     <Button

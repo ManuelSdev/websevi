@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import ProductsLayout from "../components/modules/productsLayout/ProductsLayout"
-import { getProducts } from "./api/products/get"
-import { getCats } from './api/categories/g'
+import { getProducts } from "./api/products/getProducts"
+import { getCategories } from './api/categories/getCategories'
 import { getCategoryPath } from '../lib/pathsGetters/getCategoryPath'
 import Layout from '../components/layouts/Layout'
 import { nameToUrl } from '../lib/utils/stringTools'
@@ -13,6 +13,7 @@ const Category = ({ isLogged, products, categories, filtersProps }) => {
     //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
+    // console.log('----------------------------', router.query)
     const { pricesRange } = filtersProps
     const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
         currentSelectedPricesRange ?
@@ -37,7 +38,7 @@ export default Category
 export async function getStaticPaths() {
 
     //Obtiene categorias cuyo campo level vale 1 o 2
-    const query = await getCats({ level: { $in: [1, 2] } })
+    const query = await getCategories({ level: { $in: [1, 2] } })
     //console.log('----------------------------', query)
     const categories = JSON.parse(JSON.stringify(query))
     //Genera la estructura del array de paths
@@ -52,7 +53,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     console.log('CONTEXTT', context.params)
     //CATEGORIAS
-    const categories_res = await getCats()
+    const categories_res = await getCategories()
     const categories = JSON.parse(JSON.stringify(categories_res))
 
     //PRODUCTOS

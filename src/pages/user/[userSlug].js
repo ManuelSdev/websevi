@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid"
 import ProfileBar from "../../components/elements/ProfileBar"
 import ContentCut from "@mui/icons-material/ContentCut"
 import Box from "@mui/material/Box"
-import { getCats } from "../api/categories/g"
+import { getCategories } from "../api/categories/getCategories"
 import { toPlainString } from "../../lib/utils/stringTools"
 
 const sections = [
@@ -78,8 +78,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     console.log('CONTEXTT', context.params)
     //CATEGORIAS
-    const categories_res = await getCats()
-    const categories = JSON.parse(JSON.stringify(categories_res))
+    const categoriesRes = await getCategories()
+    const categories = JSON.parse(JSON.stringify(categoriesRes))
 
 
     return {

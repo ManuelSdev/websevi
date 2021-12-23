@@ -16,7 +16,7 @@ import Box from "@mui/system/Box";
 import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
-import { getCategs } from "../../lib/api/category";
+import { getCategories } from "../../lib/api/category";
 import { toPlainString } from "../../lib/utils/stringTools";
 
 const NewCategsForm = ({ onSubmit, error }) => {
@@ -126,7 +126,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
      * seteado en el estado "categories" con la respuesta del backend
      */
     const setCategs = async (filter, categoriesToChange) => {
-        const query = await getCategs(filter)
+        const query = await getCategories(filter)
         const newArray = query.map(category => category.name)
         console.log('query  1', query)
         await setCategories({

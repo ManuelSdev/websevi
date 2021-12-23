@@ -3,10 +3,12 @@ import client, { configureClient, resetClient } from './client';
 
 
 
-export const createUser = userData => {
-    return client.post('/users/create', userData)
-}
-
+//Llamada a la API de supertokens
 export const checkSession = () => {
     return client.get('/user')
+}
+
+export const updateUser = (idParams, newUserValue) => {
+    console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
+    return client.post(`/users/updateUser/${idParams}`, newUserValue)
 }

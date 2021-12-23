@@ -10,7 +10,7 @@ import Box from "@mui/system/Box";
 
 import useForm from "../../hooks/useForm";
 import InputFile from "../elements/InputFile";
-import { getCategs } from "../../lib/api/category";
+import { getCategories } from "../../lib/api/category";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import FormTemplate from "../elements/FormTemplate"
@@ -99,7 +99,7 @@ const NewProductForm = ({ onSubmit, error }) => {
      */
     const setCategs = async (filter, categoriesToChange, renderBy) => {
         // console.log('RENDER DE ', renderBy)
-        const query = await getCategs(filter)
+        const query = await getCategories(filter)
         const newArray = query.map(category => category._id)
 
         //  console.log(`QUERY DE ${renderBy}`, query)

@@ -76,7 +76,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
             firstRender.current = false;
             return;
         }
-        console.log('USEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
         const newPath = { path: `/${categoryPath}` }
         checkedFilters.map(filter => {
             newPath.path = newPath.path.concat('/', filter)

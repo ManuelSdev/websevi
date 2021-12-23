@@ -1,26 +1,30 @@
-import { useRouter } from 'next/router'
 import ProductsLayout from "../../components/modules/productsLayout/ProductsLayout"
-import { getProducts } from "../api/products/get"
-import { getCats } from '../api/categories/g'
+import { getCategories } from '../api/categories/getCategories'
+import { getProducts } from "../api/products/getProducts"
+import usePriceSlider from "../../hooks/usePriceSlider"
 //import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
 import Layout from '../../components/layouts/Layout'
-import { nameToUrl, toPlainString } from '../../lib/utils/stringTools'
-import { mapFilters } from '../../lib/mapFilters'
-import getFiltersPath from '../../lib/pathsGetters/getFiltersPaht copy'
+import { useRouter } from "next/router"
+
 
 const Filters = ({ isLogged, products, categories, filtersProps }) => {
-    /*
-        const router = useRouter()
-        const { priceRange: currentPriceRange } = router.query
-        console.log('currentPriceRange en [...slug].js', currentPriceRange)
-        console.log('maxPrice en [...slug].js', filtersProps.maxPrice)
-    */
+    const router = useRouter()
+    //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
-    // console.log('products', products)
-    //  console.log('PRODUCT SSR', products)
+    const { selectedPricesRange: currentSelectedPricesRange } = router.query
+    // console.log('----------------------------', router.query)
+    const { pricesRange } = filtersProps
+    // console.log('++++++++++++++++++++++++++++', pricesRange)
+    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
+        currentSelectedPricesRange ?
+            [...currentSelectedPricesRange]
+            :
+            [...pricesRange]
+    )
+    const props = { selectedPricesRange, handlePrice, valuetext }
     return (
         <Layout isLogged={isLogged} categories={categories}>
-            <ProductsLayout products={products} filtersProps={filtersProps}></ProductsLayout>
+            <ProductsLayout products={products} filtersProps={filtersProps} {...props}></ProductsLayout>
         </Layout>
 
     )
@@ -36,8 +40,8 @@ export async function getServerSideProps(context) {
     const { categoryPath, slug } = query
 
     //Obtiene todas las categorías para montar el header
-    const categories_res = await getCats()
-    const categories = JSON.parse(JSON.stringify(categories_res))
+    const categoriesRes = await getCategories()
+    const categories = JSON.parse(JSON.stringify(categoriesRes))
     //Obtiene la categoría del path/url: es un array compuesto por un único elemento/objeto category
     const [category] = categories.filter(categ => categ.path === categoryPath)
 
@@ -83,8 +87,8 @@ export async function getServerSideProps(context) {
 
 
     //Obtiene los productos
-    const products_res = await getProducts(productsFilter)
-    const products = JSON.parse(JSON.stringify(products_res))
+    const productsRes = await getProducts(productsFilter)
+    const products = JSON.parse(JSON.stringify(productsRes))
     /**
      * Obtiene el precio máximo de todos los productos y lo pasa como propiedad al filtro usado
      * cuando la category tiene level===2

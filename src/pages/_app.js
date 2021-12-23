@@ -86,7 +86,7 @@ function App({ Component, pageProps }) {
   }
   // console.log('@@@@@@@@@@@@@@@@@@@@', Session)
 
-  const appProps = { isLogged, setIsLogged, cart, setCart }
+  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart }
   //pageProps.isLogged = isLogged
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart

@@ -163,7 +163,7 @@ const ProductDetails = ({ product }) => {
                 <Button >Añadir a lista de deseos</Button>
             </Box>
             <Box>
-                <Link href="/cart">
+                <Link href="/carrito">
                     <Button
 
                     >Comprar</Button>

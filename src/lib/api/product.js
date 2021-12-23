@@ -4,7 +4,7 @@ import { withFormData } from '../utils/converters';
 
 
 
-export const createProduct_ = newProduct => client.post('/products/create', newProduct)
+export const createProduct_ = newProduct => client.post('/products/createProduct', newProduct)
 
 export const resetProducts = newProducts => client.post('/products/reset', newProducts)
 
