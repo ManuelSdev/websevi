@@ -4,33 +4,50 @@ import TextField from "@mui/material/TextField"
 import useForm from "../../hooks/useForm"
 import InputFile from "./InputFile"
 import { Button } from "@mui/material"
-import SaveAndLoadButton from '../elements/SaveAndLoadButton'
+import SaveAndLoadButton from './SaveAndLoadButton'
+import React from "react"
 
 
+const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => {
 
-const UserDataForm = ({ user, onSubmit }) => {
 
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
         name: '',
         lastName: '',
         idCard: "",
         phone: '',
-        company: '',
         address: '',
         postCode: '',
         city: '',
         region: '',
         country: '',
         moreInfo: '',
-        defaultAddress: false
+
 
     });
-    const { name, lastName, idCard, phone, company, address, postCode, city, region, country, moreInfo, defaultAddress } = formValue
+    const { name, lastName, idCard, phone, address, postCode, city, region, country, moreInfo } = formValue
 
+    const formValueInArray = [name, lastName, idCard, phone, address, postCode, city, region, country, moreInfo]
+    //Recorre los elementos del estado y filtra los que no han sido completados (son false)
+    //Si el array resultante formIsComplete está vacio, significa que el formulario esta completo
+    /*
+    React.useEffect(() => {
+        const formIsComplete = formValueInArray.filter(element => !element)
+    
+        if (formIsComplete.length === 0) {
+            //handleMutate()
+
+            setButtonIsActive(true)
+        } else { setButtonIsActive(false) }
+        //console.log('renderrrrrrrr', formIsComplete.length)
+        // console.log('ennnn', formIsComplete)
+
+    }, [formValue]);
+    */
     const column1Elements = (
         <Box>
             <TextField
-
+                required
                 fullWidth
                 size="small"
                 label="Nombre"
@@ -40,7 +57,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 value={name}
             />
             <TextField
-
+                required
                 fullWidth
                 size="small"
                 label="DNI/CIF/NIF"
@@ -50,23 +67,13 @@ const UserDataForm = ({ user, onSubmit }) => {
                 value={idCard}
 
             />
-            <TextField
 
-                fullWidth
-                size="small"
-                label="Móvil"
-                variant="outlined"
-                type='number'
-                name='phone'
-                onChange={handleChange}
-                value={phone}
-            />
         </Box>
     )
     const column2Elements = (
         <Box>
             <TextField
-
+                required
                 fullWidth
                 size="small"
                 label="Apellidos"
@@ -76,14 +83,15 @@ const UserDataForm = ({ user, onSubmit }) => {
                 value={lastName}
             />
             <TextField
+                required
                 fullWidth
                 size="small"
-                label="Empresa"
+                label="Móvil"
                 variant="outlined"
-                name='company'
+                type='number'
+                name='phone'
                 onChange={handleChange}
-                value={company}
-
+                value={phone}
             />
 
         </Box>
@@ -92,7 +100,7 @@ const UserDataForm = ({ user, onSubmit }) => {
     const fullWidthElements = (
         <Box>
             <TextField
-
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -112,7 +120,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 onChange={handleChange}
             />
             <TextField
-
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -123,7 +131,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 onChange={handleChange}
             />
             <TextField
-
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -134,7 +142,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 onChange={handleChange}
             />
             <TextField
-
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -145,7 +153,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 onChange={handleChange}
             />
             <TextField
-
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -159,7 +167,10 @@ const UserDataForm = ({ user, onSubmit }) => {
 
 
 
-            <Button type="submit" >Subir anuncio</Button>
+            <Button
+                type="submit" >
+                Guardar datos</Button>
+
             <SaveAndLoadButton></SaveAndLoadButton>
             {/**TODO: refina el tema de errores */}
             {/*error && <Box>{error}</Box>*/}

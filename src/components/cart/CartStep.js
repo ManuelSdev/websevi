@@ -12,13 +12,19 @@ import Typography from "@mui/material/Typography"
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
 import { Box } from "@mui/system"
-const CartStep = () => {
+
+
+const CartStep = ({ setButtonIsActive }) => {
+
     const { cart, setCart } = useAppContext()
+
+    setButtonIsActive(true)
 
     const handleDeletes = productToDelete => ev => {
         ev.preventDefault()
         const newCart = cart.filter(product => product._id !== productToDelete._id)
         console.log('newcart jskjskjslksjlñ', newCart)
+
         setCart(newCart)
     }
 

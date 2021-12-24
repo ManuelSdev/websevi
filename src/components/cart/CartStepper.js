@@ -13,6 +13,8 @@ import ShipmentStep from './ShipmentStep'
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import useUser from "../../hooks/swrHooks/useUser";
+import { useAppContext } from "../context";
 
 const steps = [
     'Carrito',
@@ -22,11 +24,22 @@ const steps = [
 ];
 
 export default function CartStepper({ cartTotalPrice, isLogged }) {
+    const { authId } = useAppContext()
+    const { users, isLoading, isError, mutate } = useUser(authId)
+
+    //users es un array con un unico objeto user que contiene el campo _id: 
+
+    const [user] = isLoading ? [{}] : users
+
+
+    //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
+
+    const [buttonIsActive, setButtonIsActive] = React.useState(true);
 
     const totalSteps = () => {
         return steps.length;
@@ -121,10 +134,16 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
 
                         {activeStep === 0 ?
-                            <CartStep />
+                            <CartStep setButtonIsActive={setButtonIsActive} />
                             :
                             activeStep === 1 ?
-                                <ShipmentStep />
+                                <ShipmentStep
+                                    user={user}
+                                    mutate={mutate}
+                                    isLoading={isLoading}
+                                    buttonIsActive={buttonIsActive}
+                                    setButtonIsActive={setButtonIsActive}
+                                />
                                 :
                                 activeStep === 2 ?
                                     <Box>PASO 3</Box>
@@ -138,13 +157,16 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                         <Paper>
                             <Typography>TOTAL: {cartTotalPrice}</Typography>
                             <Button
+                                disabled={!buttonIsActive}
                                 onClick={handleNext}
-                            >CONTINUAR</Button>
+                            >
+                                CONTINUAR</Button>
                         </Paper>
                     </Grid>
                 </Grid>
             </Box>
             <Button
+
                 onClick={handleBack}
             >ATRÁS</Button>
         </Container >

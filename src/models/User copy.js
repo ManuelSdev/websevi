@@ -1,19 +1,7 @@
 import mongoose from 'mongoose'
 
-//https://mongoosejs.com/docs/subdocs.html
-const addressSchema = new mongoose.Schema({
-    address: String,
-    addresseeFullName: String,
-    addresseePhone: Number,
-    postCode: Number,
-    city: String,
-    region: String,
-    country: String,
-    moreInfo: String,
-    defaultAddress: { type: Boolean, default: false },
-})
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
     name: String,
     lastName: String,
     authId: { type: String, unique: true, index: true },
@@ -23,13 +11,24 @@ const userSchema = new mongoose.Schema({
     idCard: { type: String, unique: true },
     phone: Number,
     company: String,
-    hasProfile: { type: Boolean, default: false },
 
     //addresses es un array de objetos/maps
     //cada valor de una propiedad del objeto será un nuevo esquema/objeto
     //cada esquema debe contener esos campos
-    //  addresses: { type: [addressSchema], default: () => ({}) }
-    addresses: [addressSchema]
+    addresses: [{
+        type: Map,
+        of: new mongoose.Schema({
+            _id: new mongoose.Schema.Types.ObjectId,
+            address: String,
+            postCode: Number,
+            city: String,
+            region: String,
+            country: String,
+            moreInfo: String,
+            defaultAddress: Boolean
+        })
+    }]
+
 
 })
 

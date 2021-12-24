@@ -4,34 +4,72 @@ import Typography from "@mui/material/Typography"
 import useUser from '../../hooks/swrHooks/useUser'
 import { useAppContext } from '../../components/context'
 
-import UserDataForm from "../elements/UserDataForm"
+import ProfileForm from "../elements/ProfileForm"
 import { updateUser } from "../../lib/api/user"
-const fetcher = (url) => console.log('################', url) || fetch(url).then((res) => res.json())
+import SelectAddressForm from "../elements/SelectAddressForm"
+import { useRouter } from "next/dist/client/router"
 
-const ShipmentStep = () => {
-    const { authId } = useAppContext()
-    const { users, isLoading, isError } = useUser(authId)
-    //users es un array con un unico objeto user que contiene el campo _id: doble destructuring
-    const [user] = isLoading ? [{}] : users
+
+const ShipmentStep = ({ setButtonIsActive, user, mutate, isLoading, ...props }) => {
+
+
+
+
+
+
+
+    user.hasProfile ? setButtonIsActive(true) : setButtonIsActive(false)
     const onSubmit = async (newUserValues) => {
         console.log('*------------', user._id)
-        await updateUser(user._id, newUserValues)
+        const { resolved } = await updateUser(user._id, newUserValues)
+        resolved && mutate()
 
+        //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
     }
-    console.log('authId', authId)
-    console.log('*******************user id', user._id)
+    //console.log('authId', authId)
+    //isLoading || console.log('*******************user id', user.addresses)
     //console.log('*******************user id', user._id)
+
+    //Obtiene dirección principal del array de direcciones
+    if (user.hasProfile) {
+        const [mainAddress] = user.addresses
+        const { address, moreInfo, city, postCode, region, country } = mainAddress
+        const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
+    }
 
 
     return (
-        <>
-            <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
-            <UserDataForm
-                onSubmit={onSubmit}
+        isLoading ?
+            <Box>LOADING</Box>
+            :
+            user.hasProfile ?
+                <Box sx={{ pl: 2 }} >
+                    <Typography>{user.name}</Typography>
+                    <Typography>Direccion: {addressLine}</Typography>
+                    <Typography>Móvil: {user.phone}</Typography>
+                </Box>
+                :
+                <>
+                    <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
+                    <ProfileForm
+                        {...props}
 
-            />
-        </>
+                        onSubmit={onSubmit}
+                    />
+                </>
     )
 }
 
 export default ShipmentStep
+
+/*
+ user.addresses.length < 0 ?
+                <SelectAddressForm user={user}></SelectAddressForm>
+                :
+                <>
+                    <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
+                    <ProfileForm
+                        onSubmit={onSubmit}
+                    />
+                </>
+                */

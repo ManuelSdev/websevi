@@ -1,5 +1,5 @@
 
-
+//TODO: fuera
 const CheckBoxGroup = ({ options, value, onChange, checkBoxGroupClassName, checkBoxLabelBefore, ...props }) => {
     const handleChange = ev => {
         const { name, checked, value: optionValue } = ev.target;

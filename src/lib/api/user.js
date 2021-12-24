@@ -1,3 +1,5 @@
+
+
 import client, { configureClient, resetClient } from './client';
 //import storage from '../utils/storage';
 
@@ -9,6 +11,6 @@ export const checkSession = () => {
 }
 
 export const updateUser = (idParams, newUserValue) => {
-    console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
+    // console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
     return client.post(`/users/updateUser/${idParams}`, newUserValue)
 }
