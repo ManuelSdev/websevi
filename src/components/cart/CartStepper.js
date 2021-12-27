@@ -13,8 +13,7 @@ import ShipmentStep from './ShipmentStep'
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import useUser from "../../hooks/swrHooks/useUser";
-import { useAppContext } from "../context";
+
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
 
@@ -26,15 +25,7 @@ const steps = [
 ];
 
 export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
-    /*
-        const { authId } = useAppContext()
-    
-        const { users, isLoading, isError, mutate } = useUser(authId)
-        //users es un array con un unico objeto user que contiene el campo _id: 
-    
-        const [user] = isLoading ? [{}] : users
-    
-    */
+
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 

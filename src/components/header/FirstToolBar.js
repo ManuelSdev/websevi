@@ -101,7 +101,7 @@ const FirstToolBar = () => {
                             </StyledButton>
                         </Link>
                         :
-                        <Link href="/auth">
+                        <Link href="/user/mis-datos">
                             <StyledButton
 
                                 size="large" variant="text"

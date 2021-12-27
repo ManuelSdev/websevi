@@ -12,5 +12,11 @@ export const checkSession = () => {
 
 export const updateUser = (idParams, newUserValue) => {
     // console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
-    return client.post(`/users/updateUser/${idParams}`, newUserValue)
+    return client.put(`/users/updateUser/${idParams}`, newUserValue)
 }
+
+export const updateFavorites = (userIdParam, productIdParam) => {
+    // console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
+    return client.put(`/users/updateFavorites/${userIdParam}/${productIdParam}`)
+}
+

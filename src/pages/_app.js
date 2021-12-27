@@ -31,6 +31,7 @@ function App({ Component, pageProps }) {
   //Guarda productos que se van añádiendo o quitando del carrito
   const [cart, setCart] = React.useState([])
 
+
   //Supertokens logic
   useEffect(() => {
     async function doRefresh() {
@@ -87,11 +88,12 @@ function App({ Component, pageProps }) {
   // console.log('@@@@@@@@@@@@@@@@@@@@', Session)
 
   const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart }
+  pageProps.authId = isLogged.authId
   //pageProps.isLogged = isLogged
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
 
-  console.log('LOGIN', isLogged)
+  //console.log('LOGIN', isLogged)
   return (
     <>
 

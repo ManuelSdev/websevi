@@ -5,14 +5,23 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/router';
+import Link from './Link'
+import { toPlainString } from '../../lib/utils/stringTools';
+const ProfileBar = ({ sections }) => {
+    // const router = useRouter()
+    // const { userSlug } = router.query
 
-const ProfileBar = ({ sections, handlePush }) => {
-
+    // const handlePush = sectionName => router.push(`/user/${toPlainString(sectionName)}`)
     return (
         <Paper>
             <MenuList>
                 {sections.map(section =>
-                    <MenuItem key={section.name} onClick={handlePush}>
+                    <MenuItem key={section.name}
+                        component={Link}
+                        href={`/user/${toPlainString(section.name)}`}
+                    //onClick={handlePush(section.name)}
+                    >
                         <ListItemIcon>
                             {section.icon}
                         </ListItemIcon>
@@ -25,7 +34,7 @@ const ProfileBar = ({ sections, handlePush }) => {
 
 
             </MenuList>
-        </Paper>
+        </Paper >
     )
 }
 

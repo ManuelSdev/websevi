@@ -80,6 +80,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         checkedFilters.map(filter => {
             newPath.path = newPath.path.concat('/', filter)
         })
+        //CLAVE: revisa si sobra esto
         router.push(newPath.path)
         router.push({
             pathname: newPath.path,

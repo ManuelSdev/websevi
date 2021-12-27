@@ -10,10 +10,24 @@ import useForm from '../../../hooks/useForm';
 import usePromise from '../../../hooks/usePromise';
 import { useAppContext } from '../../context';
 import Link from '../../elements/Link'
-
+import useUser from '../../../hooks/swrHooks/useUser';
+import { updateFavorites } from '../../../lib/api/user';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 const ProductDetails = ({ product }) => {
 
-    const { setCart, cart } = useAppContext()
+    const { setCart, cart, authId } = useAppContext()
+    /**GESTIÓN DE FAVORITOS */
+    const { users, isLoading, isError, mutate } = useUser(authId)
+    const [user] = isLoading ? [{}] : users
+
+
+
+    const handleFavorites = async () => {
+        const res = await updateFavorites(user._id, product._id)
+        res.resolved && mutate()
+        console.log('UPDATE FAV: ', res)
+    }
 
     const [productToCart, setProductToCart] = React.useState({
         ...product,
@@ -30,6 +44,8 @@ const ProductDetails = ({ product }) => {
 
     const increaseAmount = () => setAmountField(amountField + 1)
     const decreaseAmount = () => amountField > 1 && setAmountField(amountField - 1)
+
+
 
     const addToCart = () => {
         allowUseEffect.current = true
@@ -159,9 +175,35 @@ const ProductDetails = ({ product }) => {
                     onClick={addToCart}
                 >Añadir al carrito</Button>
             </Box>
-            <Box>
-                <Button >Añadir a lista de deseos</Button>
-            </Box>
+            {user.favorites.includes(product._id) ?
+                <Box>
+                    <Button
+                        onClick={handleFavorites}
+                        endIcon={
+                            <FavoriteBorderIcon
+                                color='corpGreen'
+                                fontSize='large'
+                            />}
+                    >
+                        Añadir a la lista de deseos
+                    </Button>
+                </Box>
+                :
+                <Box>
+                    <Button
+                        onClick={handleFavorites}
+                        endIcon={
+                            <FavoriteIcon
+                                color='corpGreen'
+
+
+                            />}
+                    >
+                        Eliminar de la lista de deseos
+                    </Button>
+                </Box>
+            }
+
             <Box>
                 <Link href="/carrito">
                     <Button

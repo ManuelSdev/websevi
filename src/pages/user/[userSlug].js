@@ -7,10 +7,13 @@ import ContentCut from "@mui/icons-material/ContentCut"
 import Box from "@mui/material/Box"
 import { getCategories } from "../api/categories/getCategories"
 import { toPlainString } from "../../lib/utils/stringTools"
-
+import useUser from "../../hooks/swrHooks/useUser"
+import DataSection from "../../components/userPage/DataSection"
+import WishListSection from "../../components/userPage/WishListSection"
 const sections = [
     {
         name: 'Mis datos',
+        path: 'mis-datos',
         icon: <ContentCut fontSize="small" />
     },
     {
@@ -31,12 +34,13 @@ const sections = [
     }
 ]
 
-const UserPage = ({ isLogged, categories }) => {
+const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
+    const { userSlug } = router.query
 
-    const handlePush = () => { }
-
-
+    const { users, isLoading, isError, mutate } = useUser(authId)
+    //users es un array con un unico objeto user que contiene el campo _id: 
+    const [user] = isLoading ? [{}] : users
 
     return (
         <Layout isLogged={isLogged} categories={categories}>
@@ -45,13 +49,22 @@ const UserPage = ({ isLogged, categories }) => {
                 <Box sx={{ flexGrow: 1, background: "green" }}>
                     <Grid container spacing={2}>
                         <Grid item xs={6} sm={4} md={3} lg={3} >
-                            <ProfileBar sections={sections} handlePush={handlePush}></ProfileBar>
+                            <ProfileBar sections={sections}></ProfileBar>
                         </Grid>
 
                         <Grid item xs={6} sm={4} md={3} lg={9} >
+                            {
+                                userSlug === 'mis-datos' ?
+                                    <DataSection user={user} />
+                                    :
+                                    userSlug === 'lista-de-deseos' ?
+                                        <WishListSection />
+                                        :
+                                        <Box />
+
+                            }
 
 
-                            {/**Aqui la section */}
 
                         </Grid>
 
