@@ -6,7 +6,7 @@ import Button from "@mui/material/Button"
 import Image from "next/image"
 import giga from '../../assets/images/giga.jpg'
 import React from "react"
-import { getProducts } from "../api/products/get"
+import { getProducts } from "../api/products/getProducts"
 import Layout from "../../components/layouts/Layout"
 //import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
 //import { getCategoryPath } from "../../lib/pathsGetters/getCategoryPath"

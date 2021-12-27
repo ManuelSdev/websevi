@@ -23,11 +23,46 @@ import { ThemeProvider } from "@emotion/react"
 import theme from "../assets/theme"
 import CartStepper from "../components/cart/CartStepper"
 import CartStep from "../components/cart/CartStep"
+import { createOrder } from "../lib/api/order"
+import useUser from "../hooks/swrHooks/useUser"
 
 const CartPage = () => {
-    const { cart, setCart, isLogged } = useAppContext()
+    const { cart, setCart, isLogged, authId } = useAppContext()
 
-    //const cartTotalPrice = React.useRef(0);
+    const { users, isLoading, isError, mutate } = useUser(authId)
+    //users es un array con un unico objeto user que contiene el campo _id: 
+    const [user] = isLoading ? [{}] : users
+
+    const [order, setOrder] = React.useState({
+        userId: '',
+        orderCart: [],
+        amount: '',
+    })
+    console.log('CARRITO', cart)
+    React.useEffect(() => {
+        const orderCart = cart.map(product => {
+            const [productImage] = product.images
+            return {
+                productName: product.name,
+                productAmount: product.amount,
+                productId: product._id,
+                productImage
+            }
+        })
+        setOrder({
+            userId: user._id,
+            orderCart,
+            amount: cartTotalPrice
+        })
+    }, [user, cart])
+
+    const handleSubmit = async ev => {
+        // console.log("9999999999999999999999999999999999", formValue)
+        ev.preventDefault();
+
+        const createdOrder = await createOrder(order)
+        console.log('PEDIDO CREADO', createdOrder)
+    };
 
 
     const handleDeletes = productToDelete => ev => {
@@ -39,12 +74,13 @@ const CartPage = () => {
     const handleDelete = (productToDelete) => { handleDeletes(productToDelete) }
     const h = (prod) => ev => console.log('eventt', prod)
     const f = () => { console.log('eventt') }
-    const rowsTotalPrice = cart.map(product => product.amount * product.price)
+    const rowsTotalPrice = cart.map(product => product.price * product.amount)
+    console.log('rowsTotalPrice', rowsTotalPrice)
     const cartTotalPrice = cart.length > 0 ?
         sum(...rowsTotalPrice)
         :
         0
-    //console.log('+++++++++++++++', rowsTotalPrice.map(e => typeof e))
+    console.log('+++++++++++++++', order)
 
     return (
         <ThemeProvider theme={theme}>
@@ -89,7 +125,14 @@ const CartPage = () => {
 
 
 
-            <CartStepper cartTotalPrice={cartTotalPrice} isLogged={isLogged} />
+            <CartStepper
+                cartTotalPrice={cartTotalPrice}
+                handleSubmit={handleSubmit}
+                isLogged={isLogged}
+                user={user}
+                isLoading={isLoading}
+                mutate={mutate}
+            />
 
         </ThemeProvider >
     )

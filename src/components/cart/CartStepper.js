@@ -15,6 +15,8 @@ import Button from "@mui/material/Button"
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import useUser from "../../hooks/swrHooks/useUser";
 import { useAppContext } from "../context";
+import PaymentStep from "./PaymentStep";
+import ResumeStep from "./ResumeStep";
 
 const steps = [
     'Carrito',
@@ -23,15 +25,16 @@ const steps = [
     'Resumen'
 ];
 
-export default function CartStepper({ cartTotalPrice, isLogged }) {
-    const { authId } = useAppContext()
-    const { users, isLoading, isError, mutate } = useUser(authId)
-
-    //users es un array con un unico objeto user que contiene el campo _id: 
-
-    const [user] = isLoading ? [{}] : users
-
-
+export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
+    /*
+        const { authId } = useAppContext()
+    
+        const { users, isLoading, isError, mutate } = useUser(authId)
+        //users es un array con un unico objeto user que contiene el campo _id: 
+    
+        const [user] = isLoading ? [{}] : users
+    
+    */
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
@@ -129,7 +132,7 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                 </Stepper>
             </Box>
 
-            <Box sx={{ flexGrow: 1, background: "orange", marginTop: '30px' }}>
+            <Box sx={{ flexGrow: 1, background: "azure", marginTop: '30px' }}>
                 <Grid container spacing={2}>
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
 
@@ -146,9 +149,9 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                                 />
                                 :
                                 activeStep === 2 ?
-                                    <Box>PASO 3</Box>
+                                    <PaymentStep />
                                     :
-                                    <Box>PASO 4</Box>
+                                    <ResumeStep />
                         }
 
 
@@ -156,11 +159,20 @@ export default function CartStepper({ cartTotalPrice, isLogged }) {
                     <Grid item sx={{ background: "grey" }} xs={12} sm={12} md={4} lg={4} >
                         <Paper>
                             <Typography>TOTAL: {cartTotalPrice}</Typography>
-                            <Button
-                                disabled={!buttonIsActive}
-                                onClick={handleNext}
-                            >
-                                CONTINUAR</Button>
+                            {activeStep === 3 ?
+                                <Button
+                                    // disabled={!buttonIsActive}
+                                    onClick={handleSubmit}
+                                >
+                                    PAGAR Y FINALIZAR</Button>
+                                :
+                                <Button
+                                    disabled={!buttonIsActive}
+                                    onClick={handleNext}
+                                >
+                                    CONTINUAR</Button>
+                            }
+
                         </Paper>
                     </Grid>
                 </Grid>

@@ -6,19 +6,15 @@ import { useAppContext } from '../../components/context'
 
 import ProfileForm from "../elements/ProfileForm"
 import { updateUser } from "../../lib/api/user"
-import SelectAddressForm from "../elements/SelectAddressForm"
+import SelectAddressForm from "../elements/SelectPayment"
 import { useRouter } from "next/dist/client/router"
 
 
 const ShipmentStep = ({ setButtonIsActive, user, mutate, isLoading, ...props }) => {
 
 
-
-
-
-
-
     user.hasProfile ? setButtonIsActive(true) : setButtonIsActive(false)
+
     const onSubmit = async (newUserValues) => {
         console.log('*------------', user._id)
         const { resolved } = await updateUser(user._id, newUserValues)

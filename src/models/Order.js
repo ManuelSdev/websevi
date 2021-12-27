@@ -1,16 +1,20 @@
 import mongoose from 'mongoose'
 
-const orderSchema = mongoose.Schema({
-    userId: { type: String, unique: true },
-    products: { type: [String], unique: true },
-    amount: { type: Number, index: true },
-    status: { type: String, unique: true },
-    favorites: { type: [String], index: true },
+const orderCartSchema = new mongoose.Schema({
+    productName: String,
+    productAmount: Number,
+    productId: String,
+    productImage: String
+})
 
-    date: Date
+const orderSchema = new mongoose.Schema({
+    userId: String,
+    amount: { type: Number, index: true },
+    date: Date,
+    orderCart: [orderCartSchema],
 
 })
 
 const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
 
-export default User
+export default Order
