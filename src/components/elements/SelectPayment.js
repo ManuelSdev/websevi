@@ -16,15 +16,11 @@ import IconPaypal from './IconPaypal';
 import { Stack } from '@mui/material';
 const SelectPayment = ({ user }) => {
 
-    const [value, setValue] = React.useState('female');
+    const [value, setValue] = React.useState('Tarjeta');
 
     const handleChange = (event) => {
         setValue(event.target.value);
     };
-
-
-
-
 
 
     return (
@@ -37,7 +33,7 @@ const SelectPayment = ({ user }) => {
                 value={value}
                 onChange={handleChange}
             >
-                <FormControlLabel value={'Tarjeta de crédito'} control={<Radio />} label={
+                <FormControlLabel value={'Tarjeta'} control={<Radio />} label={
                     <Stack direction="row" spacing={2}>
                         <IconVisa viewBox="0 0 1000.046 323.653"
                             sx={{ fontSize: 100 }}

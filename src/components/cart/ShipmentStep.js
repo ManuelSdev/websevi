@@ -10,10 +10,10 @@ import SelectAddressForm from "../elements/SelectPayment"
 import { useRouter } from "next/dist/client/router"
 
 
-const ShipmentStep = ({ setButtonIsActive, user, mutate, isLoading, ...props }) => {
+const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
 
 
-    user.hasProfile ? setButtonIsActive(true) : setButtonIsActive(false)
+    // user.hasProfile ? setButtonIsActive(true) : setButtonIsActive(false)
 
     const onSubmit = async (newUserValues) => {
         console.log('*------------', user._id)
@@ -58,14 +58,3 @@ const ShipmentStep = ({ setButtonIsActive, user, mutate, isLoading, ...props }) 
 
 export default ShipmentStep
 
-/*
- user.addresses.length < 0 ?
-                <SelectAddressForm user={user}></SelectAddressForm>
-                :
-                <>
-                    <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
-                    <ProfileForm
-                        onSubmit={onSubmit}
-                    />
-                </>
-                */

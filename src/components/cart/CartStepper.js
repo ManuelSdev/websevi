@@ -33,7 +33,6 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
 
     const [completed, setCompleted] = React.useState({});
 
-    const [buttonIsActive, setButtonIsActive] = React.useState(true);
 
     const totalSteps = () => {
         return steps.length;
@@ -94,6 +93,7 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
      *  no entrar en bucle en el tercer if
      */
     React.useEffect(() => {
+        //Controla la redirección al paso 2(step=1) tras el login
         if (waitingForChangeIsLogged.current && isLogged.state) {
             waitingForChangeIsLogged.current = false;
             return;
@@ -109,7 +109,11 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
             sessionStorage.setItem('step1Anchor', true)
             redirectToAuth({ redirectBack: true })
         }
+
+
     }, [activeStep])
+
+
 
     return (
         <Container>
@@ -128,15 +132,14 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
 
                         {activeStep === 0 ?
-                            <CartStep setButtonIsActive={setButtonIsActive} />
+                            <CartStep />
                             :
                             activeStep === 1 ?
                                 <ShipmentStep
                                     user={user}
                                     mutate={mutate}
                                     isLoading={isLoading}
-                                    buttonIsActive={buttonIsActive}
-                                    setButtonIsActive={setButtonIsActive}
+
                                 />
                                 :
                                 activeStep === 2 ?
@@ -150,18 +153,13 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
                     <Grid item sx={{ background: "grey" }} xs={12} sm={12} md={4} lg={4} >
                         <Paper>
                             <Typography>TOTAL: {cartTotalPrice}</Typography>
-                            {activeStep === 3 ?
-                                <Button
-                                    // disabled={!buttonIsActive}
-                                    onClick={handleSubmit}
-                                >
-                                    PAGAR Y FINALIZAR</Button>
+                            {activeStep === 1 && !user.hasProfile ?
+                                <Button disabled onClick={handleNext}> CONTINUAR</Button>
                                 :
-                                <Button
-                                    disabled={!buttonIsActive}
-                                    onClick={handleNext}
-                                >
-                                    CONTINUAR</Button>
+                                activeStep === 3 ?
+                                    <Button onClick={handleSubmit}> PAGAR Y FINALIZAR</Button>
+                                    :
+                                    <Button onClick={handleNext}> CONTINUAR</Button>
                             }
 
                         </Paper>

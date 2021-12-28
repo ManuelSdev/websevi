@@ -20,7 +20,7 @@ const StyledButton = styled(Button)(`
   text-transform: none;
 `);
 
-const FirstToolBar = () => {
+const SearchToolBar = () => {
 
     //console.log('@@@@@@@@@@@@@@@@@@@@', useAppContext)
     const { isLogged, cart } = useAppContext()
@@ -60,7 +60,8 @@ const FirstToolBar = () => {
             <IconCorpName viewBox="0 0 381.17 68.88"
 
                 sx={{ fill: "blue", height: "100%", fontSize: 250 }}
-            ></IconCorpName>
+            >
+            </IconCorpName>
             <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
                 <TextField
                     sx={{ width: "75%" }}
@@ -126,18 +127,18 @@ const FirstToolBar = () => {
 
 
             </Box>
+            {!isLogged.admin &&
+                <Box
+                    sx={{
+                        height: '75%',
+                        border: 1,
+                        '&:hover': {
+                            borderColor: 'corpGreen.main',
+                            borderRadius: 1,
+                        }
+                    }}
+                >
 
-            <Box
-                sx={{
-                    height: '75%',
-                    border: 1,
-                    '&:hover': {
-                        borderColor: 'corpGreen.main',
-                        borderRadius: 1,
-                    }
-                }}
-            >
-                {isLogged.admin ||
                     <Link href="/carrito">
                         <StyledButton
 
@@ -160,14 +161,11 @@ const FirstToolBar = () => {
                             Carrito
                         </StyledButton>
                     </Link>
-                }
-
-
-            </Box>
-
+                </Box>
+            }
         </Toolbar >
 
     )
 }
 
-export default FirstToolBar
+export default SearchToolBar

@@ -14,11 +14,10 @@ import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
 import { Box } from "@mui/system"
 
 
-const CartStep = ({ setButtonIsActive }) => {
+const CartStep = () => {
 
     const { cart, setCart } = useAppContext()
 
-    setButtonIsActive(true)
 
     const handleDeletes = productToDelete => ev => {
         ev.preventDefault()

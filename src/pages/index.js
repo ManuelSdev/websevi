@@ -1,6 +1,6 @@
 
 import Container from '@mui/material/Container';
-import MainMosaic from '../components/elements/MainMosaic';
+import MainMosaic from '../components/homePage/MainMosaic';
 import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
 import { getProducts } from './api/products/getProducts';

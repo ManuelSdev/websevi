@@ -7,7 +7,7 @@ import DropdownMenu from '../elements/DropdownMenu'
 import Button from "@mui/material/Button"
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import React from "react"
-import FirstToolBar from './FirstToolBar'
+import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
 
 const Header = ({ categories }) => {
@@ -47,7 +47,7 @@ const Header = ({ categories }) => {
                 <p>Lunes a jueves ........635 41 55 73 </p>
             </Toolbar>
 
-            <FirstToolBar />
+            <SearchToolBar />
 
             <Toolbar
                 sx={{
