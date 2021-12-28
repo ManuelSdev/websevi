@@ -31,3 +31,7 @@ export const createProduct = withFormData(newProduct => {
 export const checkSession = () => {
     return client.get('/user')
 }
+
+export const getProducts = (ids) => {
+    return client.get('/products/getProducts')
+}

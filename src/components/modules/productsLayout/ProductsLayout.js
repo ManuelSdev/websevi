@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid"
 import Box from "@mui/system/Box"
 import GridCard from "../productGrid/GridCard"
 import ProductsGrid from "../productGrid/ProductsGrid"
-import FiltersBar from "../../filtersBar/FiltersBar"
+import FiltersBar from "../../filtersSideBar/FiltersBar"
 import usePriceSlider from "../../../hooks/usePriceSlider"
 import { useRouter } from "next/router"
 

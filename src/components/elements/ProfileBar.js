@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 import Link from './Link'
 import { toPlainString } from '../../lib/utils/stringTools';
-const ProfileBar = ({ sections }) => {
+const ProfileBar = ({ sections, profile }) => {
     // const router = useRouter()
     // const { userSlug } = router.query
 
@@ -19,7 +19,11 @@ const ProfileBar = ({ sections }) => {
                 {sections.map(section =>
                     <MenuItem key={section.name}
                         component={Link}
-                        href={`/user/${toPlainString(section.name)}`}
+                        href={profile === 'admin' ?
+                            `/admin/${toPlainString(section.name)}`
+                            :
+                            `/user/${toPlainString(section.name)}`
+                        }
                     //onClick={handlePush(section.name)}
                     >
                         <ListItemIcon>

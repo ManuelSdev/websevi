@@ -90,7 +90,7 @@ const FirstToolBar = () => {
             >
                 {isLogged.state ?
                     isLogged.admin ?
-                        <Link href="/admin">
+                        <Link href="/admin/pedidos">
                             <StyledButton
 
                                 size="large" variant="text"

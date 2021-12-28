@@ -38,7 +38,7 @@ const Header = ({ categories }) => {
                 >
                     Salir
                 </Button>
-                <Link href="/admin">
+                <Link href="/admin/pedidos">
                     Admin
                 </Link>
                 <Link href="/user/test">

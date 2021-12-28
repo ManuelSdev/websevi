@@ -23,7 +23,7 @@ import initialsCategories from '../assets/initialsCategories'
 
 import initialsProducts from '../assets/initialsProducts';
 //import initCategs from './api/categories/init'
-import { resetCategs } from '../lib/api/category';
+import { resetCategories } from '../lib/api/category';
 import NewCategsSection from '../components/AdminPage/NewCategsSection';
 import DeleteCategsSection from '../components/AdminPage/DeleteCategsSection';
 import { resetProducts } from '../lib/api/product';
@@ -59,7 +59,7 @@ const Admin = ({ isLogged, categories, props }) => {
     const restartCategs = async () => {
         //const categs = allCategsOnArray()
         //console.log(categs)
-        await resetCategs(initialsCategories)
+        await resetCategories(initialsCategories)
         await resetProducts(initialsProducts)
 
     }
@@ -154,25 +154,11 @@ const Admin = ({ isLogged, categories, props }) => {
 
 export default Admin
 
-/*
-export async function getStaticProps() {
-    const bucket = process.env.BUCKET_NAME
-    const region = process.env.REGION
-    //test(console.log)
-    return {
-        props: {
-            bucket,
-            region
 
-        }
-    }
-}
-
-*/
 
 export async function getStaticProps(context) {
     //  console.log('CONTEXTT', context.params)
-    const categories_query = await getCats()
+    const categories_query = await getCategories()
     const categories = JSON.parse(JSON.stringify(categories_query))
     /*
     const products_query = await getProducts()

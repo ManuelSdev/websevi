@@ -175,7 +175,22 @@ const ProductDetails = ({ product }) => {
                     onClick={addToCart}
                 >Añadir al carrito</Button>
             </Box>
-            {user.favorites.includes(product._id) ?
+            {user?.favorites ? console.log('PUTO USER', user) ||
+                user.favorites.includes(product._id) ?
+                <Box>
+                    <Button
+                        onClick={handleFavorites}
+                        endIcon={
+                            <FavoriteIcon
+                                color='corpGreen'
+
+
+                            />}
+                    >
+                        Eliminar de la lista de deseos
+                    </Button>
+                </Box>
+                :
                 <Box>
                     <Button
                         onClick={handleFavorites}
@@ -193,13 +208,12 @@ const ProductDetails = ({ product }) => {
                     <Button
                         onClick={handleFavorites}
                         endIcon={
-                            <FavoriteIcon
+                            <FavoriteBorderIcon
                                 color='corpGreen'
-
-
+                                fontSize='large'
                             />}
                     >
-                        Eliminar de la lista de deseos
+                        Añadir a la lista de deseos
                     </Button>
                 </Box>
             }

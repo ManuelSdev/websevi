@@ -97,49 +97,49 @@ const cpus = [
     },
     {
         name: 'Intel Core i7-12700K 5.0 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 478,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12700k.jpg']
 
     },
     {
         name: 'Intel Core i5-12600K 4.9 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 355,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12600K.jpg']
 
     },
     {
         name: 'Intel Core i9-12900K 5.2 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 649,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12900K.jpg']
 
     },
     {
         name: 'Intel Core i7-12700KF 5.0 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 404,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12700KF.jpg']
 
     },
     {
         name: 'Intel Core i9-12900KF 5.2 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 745,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12900KF.jpg']
 
     },
     {
         name: 'Intel Core i5-12600KF 4.9 GHz',
-        brand: 'INTEL',
+        brand: 'Intel',
         price: 357,
-        categories: ['Componentes', 'Procesadores', 'Procesadores INTEL'],
+        categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
         images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12600KF.jpg']
 
     }

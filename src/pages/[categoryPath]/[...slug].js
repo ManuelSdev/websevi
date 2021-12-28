@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 
 
 const Filters = ({ isLogged, products, categories, filtersProps }) => {
+
     const router = useRouter()
     //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
@@ -36,6 +37,8 @@ export default Filters
 
 
 export async function getServerSideProps(context) {
+    console.log('SERVER: getServerSideProps en /pages/[categoryPath]/[...slug].js')
+    console.log('SERVER context en /pages/[categoryPath]/[...slug].js', context.params)
     const { query } = context
     const { categoryPath, slug } = query
 

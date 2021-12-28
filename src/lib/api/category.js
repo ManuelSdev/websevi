@@ -10,6 +10,6 @@ export const resetCategories = newCategs => client.post('/categories/resetCatego
 export const getCategories = (filters) => {
     const params = new URLSearchParams(filters)
     //console.log("ppppppppppppppp", params.toString())
-    return client.get(`/categories/get/?${params.toString()}`);
+    return client.get(`/categories/getCategories/?${params.toString()}`);
 };
 

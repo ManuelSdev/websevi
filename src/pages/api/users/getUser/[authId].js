@@ -15,7 +15,7 @@ export async function getUser(filters) {
 
 export default async function handler(req, res) {
     const { authId } = req.query
-    console.log('get user req query', req.query)
+    // console.log('get user req query', req.query)
     //const filters = req.query
     //console.log("req body init", req.body)
     // console.log("req body init", filters)

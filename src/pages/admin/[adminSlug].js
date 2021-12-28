@@ -7,67 +7,58 @@ import ContentCut from "@mui/icons-material/ContentCut"
 import Box from "@mui/material/Box"
 import { getCategories } from "../api/categories/getCategories"
 import { toPlainString } from "../../lib/utils/stringTools"
-import useUser from "../../hooks/swrHooks/useUser"
-import DataSection from "../../components/userPage/DataSection"
-import WishListSection from "../../components/userPage/WishListSection"
+import NewProductSection from "../../components/AdminPage/NewProductSection"
+import NewCategsSection from "../../components/AdminPage/NewCategsSection"
+import { Paper } from "@mui/material"
 const sections = [
     {
-        name: 'Mis datos',
-        path: 'mis-datos',
+        name: 'Pedidos',
+        path: 'pedidos',
         icon: <ContentCut fontSize="small" />
     },
     {
-        name: 'Lista de deseos',
+        name: 'Crear producto',
         icon: <ContentCut fontSize="small" />
     },
     {
-        name: 'Valoraciones',
+        name: 'Crear categorías',
         icon: <ContentCut fontSize="small" />
     },
+
     {
-        name: 'Pédidos',
-        icon: <ContentCut fontSize="small" />
-    },
-    {
-        name: 'Opciones de pago',
+        name: 'Reiniciar estado',
         icon: <ContentCut fontSize="small" />
     }
 ]
 
 const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
-    const { userSlug } = router.query
+    const { adminSlug } = router.query
 
-    const { users, isLoading, isError, mutate } = useUser(authId)
-    //users es un array con un unico objeto user que contiene el campo _id: 
-    const [user] = isLoading ? [{}] : users
+
 
     return (
         <Layout isLogged={isLogged} categories={categories}>
-
             <Container sx={{ mt: '2em' }}>
                 <Box sx={{ flexGrow: 1, background: "green" }}>
                     <Grid container spacing={2}>
                         <Grid item xs={6} sm={4} md={3} lg={3} >
-                            <ProfileBar sections={sections}></ProfileBar>
+                            <ProfileBar profile={'admin'} sections={sections}></ProfileBar>
                         </Grid>
-
                         <Grid item xs={6} sm={4} md={3} lg={9} >
                             {
-                                userSlug === 'mis-datos' ?
-                                    <DataSection user={user} />
+                                adminSlug === 'pedidos' ?
+                                    <Paper>Orders</Paper>
                                     :
-                                    userSlug === 'lista-de-deseos' ?
-                                        <WishListSection user={user} />
+                                    adminSlug === 'crear-producto' ?
+                                        <NewProductSection />
                                         :
-                                        <Box />
-
+                                        adminSlug === 'crear-categorias' ?
+                                            <NewCategsSection />
+                                            :
+                                            <Box />
                             }
-
-
-
                         </Grid>
-
                     </Grid>
                 </Box>
             </Container >
@@ -80,7 +71,7 @@ export default UserPage
 export async function getStaticPaths() {
 
 
-    const paths = sections.map(section => ({ params: { userSlug: toPlainString(section.name) } }))
+    const paths = sections.map(section => ({ params: { adminSlug: toPlainString(section.name) } }))
 
     // console.log('EL PATHH', paths)
     // We'll pre-render only these paths at build time.
