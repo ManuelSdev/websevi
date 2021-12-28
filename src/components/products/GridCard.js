@@ -9,10 +9,10 @@ import Typography from "@mui/material/Typography"
 
 
 
-import Link from '../../elements/Link'
+import Link from '../elements/Link'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Box from "@mui/system/Box";
-import { nameToUrl } from "../../../lib/utils/stringTools";
+import { nameToUrl } from "../../lib/utils/stringTools";
 const GridCard = ({ product }) => {
 
     const [mainImage] = product.images

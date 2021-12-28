@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import ProductsLayout from "../../components/modules/productsLayout/ProductsLayout"
+import ProductsSection from "../../components/products/ProductsSection"
 import { getProducts } from "./../api/products/getProducts"
 import { getCategories } from './../api/categories/getCategories'
 import { getCategoryPath } from '../../lib/pathsGetters/getCategoryPath'
@@ -24,7 +24,7 @@ const Category = ({ isLogged, products, categories, filtersProps }) => {
     const props = { selectedPricesRange, handlePrice, valuetext }
     return (
         <Layout isLogged={isLogged} categories={categories}>
-            <ProductsLayout products={products} filtersProps={filtersProps} {...props}></ProductsLayout>
+            <ProductsSection products={products} filtersProps={filtersProps} {...props} />
         </Layout>
 
     )

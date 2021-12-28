@@ -10,6 +10,7 @@ import { toPlainString } from "../../lib/utils/stringTools"
 import useUser from "../../hooks/swrHooks/useUser"
 import DataSection from "../../components/userPage/DataSection"
 import WishListSection from "../../components/userPage/WishListSection"
+import SidebarLayout from "../../components/layouts/SidebarLayout"
 const sections = [
     {
         name: 'Mis datos',
@@ -44,33 +45,19 @@ const UserPage = ({ authId, isLogged, categories }) => {
 
     return (
         <Layout isLogged={isLogged} categories={categories}>
+            <SidebarLayout
+                sidebar={<ProfileBar sections={sections} />}
+                content={
+                    userSlug === 'mis-datos' ?
+                        <DataSection user={user} />
+                        :
+                        userSlug === 'lista-de-deseos' ?
+                            <WishListSection user={user} />
+                            :
+                            <Box />
+                }
+            />
 
-            <Container sx={{ mt: '2em' }}>
-                <Box sx={{ flexGrow: 1, background: "green" }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6} sm={4} md={3} lg={3} >
-                            <ProfileBar sections={sections}></ProfileBar>
-                        </Grid>
-
-                        <Grid item xs={6} sm={4} md={3} lg={9} >
-                            {
-                                userSlug === 'mis-datos' ?
-                                    <DataSection user={user} />
-                                    :
-                                    userSlug === 'lista-de-deseos' ?
-                                        <WishListSection user={user} />
-                                        :
-                                        <Box />
-
-                            }
-
-
-
-                        </Grid>
-
-                    </Grid>
-                </Box>
-            </Container >
         </Layout>
     )
 }
@@ -99,3 +86,32 @@ export async function getStaticProps(context) {
         props: { categories }, // will be passed to the page component as props
     }
 }
+
+/*
+<Container sx={{ mt: '2em' }}>
+<Box sx={{ flexGrow: 1, background: "green" }}>
+    <Grid container spacing={2}>
+        <Grid item xs={6} sm={4} md={3} lg={3} >
+            <ProfileBar sections={sections}></ProfileBar>
+        </Grid>
+
+        <Grid item xs={6} sm={4} md={3} lg={9} >
+            {
+                userSlug === 'mis-datos' ?
+                    <DataSection user={user} />
+                    :
+                    userSlug === 'lista-de-deseos' ?
+                        <WishListSection user={user} />
+                        :
+                        <Box />
+
+            }
+
+
+
+        </Grid>
+
+    </Grid>
+</Box>
+</Container >
+*/

@@ -1,6 +1,6 @@
 
 import { Grid } from '@mui/material';
-import ProductsGrid from '../modules/productGrid/ProductsGrid'
+import ProductsGrid from '../products/ProductsGrid'
 import useFavorites from '../../hooks/swrHooks/useFavorites';
 
 const WishListSection = ({ user }) => {
@@ -14,11 +14,11 @@ const WishListSection = ({ user }) => {
         */
     return (
 
-        <Grid item xs={6} sm={4} md={3} lg={9} >
-            <ProductsGrid
-                products={favorites}
-            />
-        </Grid>
+
+        <ProductsGrid
+            products={favorites}
+        />
+
     )
 }
 

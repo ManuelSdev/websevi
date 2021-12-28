@@ -2,8 +2,6 @@ import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/system/Box"
 
-import ProductsGrid from "../productGrid/ProductsGrid"
-import FiltersBar from "../../filtersSideBar/FiltersBar"
 
 
 const SidebarLayout = ({ content, sidebar }) => {

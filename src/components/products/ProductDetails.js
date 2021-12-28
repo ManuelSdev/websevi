@@ -6,12 +6,12 @@ import Typography from '@mui/material/Typography';
 
 import React from 'react';
 import Box from "@mui/system/Box";
-import useForm from '../../../hooks/useForm';
-import usePromise from '../../../hooks/usePromise';
-import { useAppContext } from '../../context';
-import Link from '../../elements/Link'
-import useUser from '../../../hooks/swrHooks/useUser';
-import { updateFavorites } from '../../../lib/api/user';
+import useForm from '../../hooks/useForm';
+import usePromise from '../../hooks/usePromise';
+import { useAppContext } from '../context';
+import Link from '../elements/Link'
+import useUser from '../../hooks/swrHooks/useUser';
+import { updateFavorites } from '../../lib/api/user';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 const ProductDetails = ({ product }) => {
