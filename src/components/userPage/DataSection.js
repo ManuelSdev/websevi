@@ -2,6 +2,7 @@ import ProfileForm from '../elements/ProfileForm'
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
+import Stack from '@mui/material/Stack';
 
 
 
@@ -24,6 +25,10 @@ const DataSection = ({ user }) => {
     return (
         user.hasProfile ?
             <Box>
+                <Stack mb={2} direction='row'>
+                    <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mis datos</Typography>
+
+                </Stack>
                 <Paper>
                     <Typography>Nombre: {user.name}</Typography>
                     <Typography>Direccion: {addressLine}</Typography>

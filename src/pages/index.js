@@ -4,14 +4,14 @@ import MainMosaic from '../components/homePage/MainMosaic';
 import { toPlainString } from '../lib/utils/stringTools'
 import Layout from '../components/layouts/Layout';
 import { getProducts } from './api/products/getProducts';
-import ProductsGrid from '../components/modules/productGrid/ProductsGrid'
+import ProductsGrid from '../components/products/ProductsGrid'
 import { getCategories } from './api/categories/getCategories';
 
 
 console.log(unescape('sPerif&#xE9;ricos'))
 
 
-export default function Home({ categories }) {
+export default function Home({ categories, products }) {
 
 
   //o(console.log)
@@ -23,7 +23,7 @@ export default function Home({ categories }) {
 
       <MainMosaic />
       <Container>
-        <ProductsGrid></ProductsGrid>
+        <ProductsGrid products={products}></ProductsGrid>
       </Container>
 
     </Layout>

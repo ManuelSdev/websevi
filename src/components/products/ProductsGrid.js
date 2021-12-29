@@ -1,33 +1,52 @@
 import Grid from "@mui/material/Grid"
 import Box from "@mui/system/Box"
 import GridCard from './GridCard'
-
+import React from "react";
+import Button from "@mui/material/Button";
 const ProductsGrid = ({ products, selectedPricesRange }) => {
-    //Hay tres elementos por filas, calculamos el número de filas necesarias
-    const rows = () => products.length % 3 === 0 ? products.lengt / 3 : products.lengt / 3 + 1
+
+    const [displayedProducts, setDisplayedProduct] = React.useState(9)
+
+    const handleDisplayed = () => setDisplayedProduct(displayedProducts + 9)
     //REVIsa: cuando metas este componente en el index.js
 
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange ? selectedPricesRange : []
+    console.log('DISPLAYED', displayedProducts)
+    /**
+     * array.filter: usado para la paginación. Se mostrarán un número de productos igual displayedProducts
+     * array.map: usado para el filtro de precio 
+     */
     return (
         <>
-
             <Box sx={{ mb: 3, flexGrow: 1, background: "green" }}>
                 <Grid container spacing={2}>
+                    {products && products
+                        .filter((product, index) => index <= displayedProducts - 1)
+                        .map(product =>
+                            minSelectedPrice && maxSelectedPrice ?
+                                (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                                :
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                        )
 
-
-                    {products && products.map(product =>
-                        minSelectedPrice && maxSelectedPrice ?
-                            (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
-                            <Grid key={product._id} item xs={12} sm={6} md={4} lg={4} >
-                                <GridCard product={product}>xs=8</GridCard>
-                            </Grid>
-                            :
-                            <Grid key={product._id} item xs={12} sm={6} md={4} lg={4} >
-                                <GridCard product={product}>xs=8</GridCard>
-                            </Grid>
-                    )}
-
+                    }
                 </Grid>
+                {displayedProducts < products.length &&
+                    <Box mt={2} sx={{ display: 'flex', justifyContent: 'center', }} >
+                        <Button
+                            onClick={handleDisplayed}
+                        >
+                            Mostrar más
+                        </Button>
+                    </Box>
+                }
+
+
             </Box>
 
         </>

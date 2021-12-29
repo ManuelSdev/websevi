@@ -9,6 +9,8 @@ import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyema
 import React from "react"
 import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
 
 const Header = ({ categories }) => {
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
@@ -20,7 +22,7 @@ const Header = ({ categories }) => {
     }
     return (
 
-        <AppBar position="sticky" sx={{ mb: '2em', background: "red" }} >
+        <AppBar position="sticky" sx={{ minWidth: 600, mb: '2em', background: "red" }} >
 
             <Toolbar
                 sx={{
@@ -57,7 +59,15 @@ const Header = ({ categories }) => {
                     color: "corpWhite.main",
                 }}
             >
-
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                >
+                    <MenuIcon />
+                </IconButton>
 
                 {categories.length > 0 && categories.map(category =>
                     category.level === 1 &&

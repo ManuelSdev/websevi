@@ -5,7 +5,8 @@ import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmAndReturn from "../elements/ConfirmAndReturn";
 import React from "react";
-
+import Box from '@mui/system/Box';
+import Typography from "@mui/material/Typography"
 const NewProductSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation, setData } = usePromise({})
     const [uploaded, setUploaded] = React.useState(false)
@@ -39,7 +40,14 @@ const NewProductSection = ({ props }) => {
                     action={() => setUploaded(false)}
                 ></ConfirmAndReturn>
                 :
-                <NewProductForm error={error?.data} onSubmit={handleSubmit}></NewProductForm>
+                <Box>
+                    <Stack mb={2} direction='row'>
+                        <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Crear producto</Typography>
+
+                    </Stack>
+                    <NewProductForm error={error?.data} onSubmit={handleSubmit}></NewProductForm>
+                </Box>
+
     )
 }
 

@@ -1,11 +1,12 @@
 import usePromise from "../../hooks/usePromise";
 import { createCategories } from "../../lib/api/category";
-import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmAndReturn from "../elements/ConfirmAndReturn";
 import React from "react";
 import NewCategsForm from './NewCategsForm'
-
+import Box from '@mui/system/Box';
+import Stack from '@mui/material/Stack';
+import Typography from "@mui/material/Typography"
 
 const NewCategsSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation } = usePromise({})
@@ -53,7 +54,14 @@ const NewCategsSection = ({ props }) => {
                     action={() => setUploaded(false)}
                 ></ConfirmAndReturn>
                 :
-                <NewCategsForm error={error?.data} onSubmit={handleSubmit}></NewCategsForm>
+                <Box>
+                    <Stack mb={2} direction='row'>
+                        <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Crear categorías</Typography>
+
+                    </Stack>
+                    <NewCategsForm error={error?.data} onSubmit={handleSubmit}></NewCategsForm>
+                </Box>
+
     )
 }
 

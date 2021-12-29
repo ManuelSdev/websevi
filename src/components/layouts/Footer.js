@@ -9,6 +9,7 @@ const Footer = () => {
         <Box
 
             sx={{
+                minWidth: 600,
                 bgcolor: 'corpGreen.main'
             }}
         >
