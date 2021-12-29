@@ -32,21 +32,6 @@ export default function Home({ categories, products }) {
 }
 
 
-
-/*
-export async function getStaticPaths() {
-
-  //Obtiene categorias cuyo campo level vale 1 o 2
-  const query = await getCats({ level: { $in: [1, 2] } })
-  const categories = JSON.parse(JSON.stringify(query))
-  const paths = getCategsPath(categories)
-
-  // console.log('EL PATHH', paths)
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
-}
-*/
 export async function getStaticProps(context) {
   //  console.log('CONTEXTT', context.params)
 
