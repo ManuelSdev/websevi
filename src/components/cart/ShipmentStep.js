@@ -27,7 +27,7 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
     //console.log('*******************user id', user._id)
 
     //Obtiene dirección principal del array de direcciones
-    if (user.hasProfile) {
+    if (user?.hasProfile) {
         const [mainAddress] = user.addresses
         const { address, moreInfo, city, postCode, region, country } = mainAddress
         const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
@@ -38,7 +38,7 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
         isLoading ?
             <Box>LOADING</Box>
             :
-            user.hasProfile ?
+            user?.hasProfile ?
                 <Box sx={{ pl: 2 }} >
                     <Typography>{user.name}</Typography>
                     <Typography>Direccion: {addressLine}</Typography>

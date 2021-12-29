@@ -29,9 +29,9 @@ import useUser from "../hooks/swrHooks/useUser"
 const CartPage = () => {
     const { cart, setCart, isLogged, authId } = useAppContext()
 
-    const { users, isLoading, isError, mutate } = useUser(authId)
+    const { user, isLoading, isError, mutate } = useUser(authId)
     //users es un array con un unico objeto user que contiene el campo _id: 
-    const [user] = isLoading ? [{}] : users
+
 
     const [order, setOrder] = React.useState({
         userId: '',
@@ -40,6 +40,8 @@ const CartPage = () => {
     })
     console.log('CARRITO', cart)
     React.useEffect(() => {
+        if (isLoading) return
+        console.log('USERRRR', user)
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -60,9 +62,15 @@ const CartPage = () => {
     const handleSubmit = async ev => {
         // console.log("9999999999999999999999999999999999", formValue)
         ev.preventDefault();
+        try {
+            const { result, message } = await createOrder(order)
+            result === true && localStorage.removeItem('cart');
 
-        const createdOrder = await createOrder(order)
-        console.log('PEDIDO CREADO', createdOrder)
+            console.log('PEDIDO CREADO', message)
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
 
@@ -72,9 +80,7 @@ const CartPage = () => {
         //console.log('newcart jskjskjslksjlñ', newCart)
         setCart(newCart)
     }
-    const handleDelete = (productToDelete) => { handleDeletes(productToDelete) }
-    const h = (prod) => ev => console.log('eventt', prod)
-    const f = () => { console.log('eventt') }
+
     const rowsTotalPrice = cart.map(product => product.price * product.amount)
     console.log('rowsTotalPrice', rowsTotalPrice)
     const cartTotalPrice = cart.length > 0 ?
@@ -98,10 +104,6 @@ const CartPage = () => {
                         }
                     }}
                 >
-                    <Button
-                        onClick={f}
-                    >hoo
-                    </Button >
 
                     <p>Lunes a jueves ........635 41 55 73 </p>
                 </Toolbar>

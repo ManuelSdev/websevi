@@ -18,8 +18,8 @@ const ProductDetails = ({ product }) => {
 
     const { setCart, cart, authId } = useAppContext()
     /**GESTIÓN DE FAVORITOS */
-    const { users, isLoading, isError, mutate } = useUser(authId)
-    const [user] = isLoading ? [{}] : users
+    const { user, isLoading, isError, mutate } = useUser(authId)
+
 
 
 

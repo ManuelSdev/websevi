@@ -8,7 +8,7 @@ export async function getUser(filters) {
     //console.log('get user', filters)
     await dbConnect()
 
-    const user = await User.find(filters)
+    const [user] = await User.find(filters)
     // console.log('PRODS DE LA QUERY GET', cat)
     return user
 }

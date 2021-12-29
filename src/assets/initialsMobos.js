@@ -70,7 +70,7 @@ const mobos = [
             ]
     },
     {
-        name: 'Asrock X570 Phantom Gaming-ITX/TB3',
+        name: 'Asrock X570 Phantom Gaming-ITX TB3',
         brand: 'Asrock',
         chipset: 'AMD x570',
         size: 'ITX',

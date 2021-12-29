@@ -40,9 +40,8 @@ const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
 
-    const { users, isLoading, isError, mutate } = useUser(authId)
+    const { user, isLoading, isError, mutate } = useUser(authId)
     //users es un array con un unico objeto user que contiene el campo _id: 
-    const [user] = isLoading ? [{}] : users
 
     return (
         <Layout isLogged={isLogged} categories={categories}>

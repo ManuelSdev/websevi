@@ -18,14 +18,18 @@ const OrdersSection = ({ user }) => {
                 <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mis pedidos</Typography>
 
             </Stack>
-            {isLoadingOrders ?
-                <Box>Loading</Box>
+
+            {orders.length === 0 ?
+                <Box>No hay pedidos</Box>
                 :
-                <CollapsibleTable
-                    mainHeaders={mainHeaders}
-                    detailsHeaders={detailsHeaders}
-                    orders={orders}
-                ></CollapsibleTable>
+                isLoadingOrders ?
+                    <Box>Loading</Box>
+                    :
+                    <CollapsibleTable
+                        mainHeaders={mainHeaders}
+                        detailsHeaders={detailsHeaders}
+                        orders={orders}
+                    ></CollapsibleTable>
             }
 
 

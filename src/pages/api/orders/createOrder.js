@@ -7,6 +7,7 @@ export default async function handler(req, res) {
         await dbConnect()
         //AÑADIR PEDIDO A LA BDD
         //Añade fecha al pedido
+        // req.body.userId = 'lkjshshsh'
         const order = { date: new Date(), ...req.body }
         const newOrder = await new Order(order)
         const savedOrder = await newOrder.save()
@@ -14,8 +15,10 @@ export default async function handler(req, res) {
         //AÑADIR PEDIDO AL USUARIO QUE LO HA REALIZADO
         const { userId } = req.body
         const { _id: orderId } = savedOrder
-        // console.log('####### ORDER ID', orderId)
-        await User.findByIdAndUpdate({ _id: userId }, { '$push': { orders: orderId } }, {
+
+        console.log('####### ORDER ID', orderId)
+        console.log('####### USER ID', userId)
+        await User.findByIdAndUpdate(userId, { '$push': { orders: orderId } }, {
             new: true,
             useFindAndModify: false
         })
@@ -23,6 +26,7 @@ export default async function handler(req, res) {
         console.log('@@@@@@@@@@@@@@@@@@@', savedOrder)
         res.status(201).json({ result: true, message: `El pedido con ID ${savedOrder._id} se ha creado correctamente` })
     } catch (err) {
+        console.log("ERROR PRODUCT GET", err.message)
         res.status(err.status ? 409 : 500).json({ err })
     }
 

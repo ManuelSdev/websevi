@@ -9,8 +9,8 @@ const orderCartSchema = new mongoose.Schema({
 })
 
 const orderSchema = new mongoose.Schema({
-    userId: String,
-    amount: { type: Number, index: true },
+    userId: { type: String, index: true },
+    amount: Number,
     date: Date,
     orderCart: [orderCartSchema],
 

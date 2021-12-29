@@ -153,7 +153,7 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
                     <Grid item sx={{ background: "grey" }} xs={12} sm={12} md={4} lg={4} >
                         <Paper>
                             <Typography>TOTAL: {cartTotalPrice}</Typography>
-                            {activeStep === 1 && !user.hasProfile ?
+                            {activeStep === 1 && !user?.hasProfile ?
                                 <Button disabled onClick={handleNext}> CONTINUAR</Button>
                                 :
                                 activeStep === 3 ?

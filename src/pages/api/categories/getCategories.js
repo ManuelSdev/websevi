@@ -4,7 +4,7 @@ import dbConnect from '../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
 export async function getCategories(filters) {
-    console.log('********************************************getCategories')
+    //console.log('********************************************getCategories')
     await dbConnect()
 
     const categories = await Category.find(filters)

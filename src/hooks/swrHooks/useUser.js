@@ -12,7 +12,7 @@ export default function useUser(filters) {
     // La respuesta es un array con un solo objeto user
 
     return {
-        users: data,
+        user: data,
         isLoading: !error && !data,
         isError: error,
         mutate

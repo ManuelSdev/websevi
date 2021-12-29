@@ -3,7 +3,7 @@ import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 
 export async function getProducts(filters) {
-    console.log('********************************************getProducts')
+    // console.log('********************************************getProducts')
     await dbConnect()
     const products = await Product.find(filters)
     // console.log('PRODS DE LA QUERY GET', products)
