@@ -22,9 +22,14 @@ const WishListSection = ({ user }) => {
                 <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mi lista de deseos</Typography>
 
             </Stack>
-            <ProductsGrid
-                products={favorites}
-            />
+            {favorites?.length > 0 ?
+                <ProductsGrid
+                    products={favorites}
+                />
+                :
+                <Box>NO HAY FAVORITOS</Box>
+            }
+
         </Box>
 
 

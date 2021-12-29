@@ -23,11 +23,17 @@ const Store = ({ isLogged, hola }) => {
         }
     }
     async function fetchUserData() {
-        const res = await fetch('/api/user')
-        if (res.status === 200) {
-            const json = await res.json()
-            console.log(JSON.stringify(json))
+        try {
+            const res = await fetch('/api/user')
+            if (res.status === 200) {
+                const json = await res.json()
+                console.log(JSON.stringify(json))
+            }
+        } catch (error) {
+            console.log('error Checksession', error)
         }
+
+
     }
     fetchUserData()
 
