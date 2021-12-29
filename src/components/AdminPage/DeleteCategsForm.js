@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import useForm from "../../hooks/useForm";
 import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
-import { getCategs } from "../../lib/api/category";
+import { getCategories } from "../../lib/api/category";
 
 const DeleteCategsForm = ({ onSubmit, error }) => {
 

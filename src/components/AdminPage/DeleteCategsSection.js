@@ -1,5 +1,5 @@
 import usePromise from "../../hooks/usePromise";
-import { createCategs } from "../../lib/api/category";
+import { createCategories } from "../../lib/api/category";
 import NewProductForm from "./NewProductForm"
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
