@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const orderCartSchema = new mongoose.Schema({
     productName: String,
     productAmount: Number,
+    productPrice: Number,
     productId: String,
     productImage: String
 })

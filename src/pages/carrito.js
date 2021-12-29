@@ -46,6 +46,7 @@ const CartPage = () => {
                 productName: product.name,
                 productAmount: product.amount,
                 productId: product._id,
+                productPrice: product.price,
                 productImage
             }
         })

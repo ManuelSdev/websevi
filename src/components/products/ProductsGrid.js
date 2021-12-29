@@ -5,8 +5,11 @@ import React from "react";
 import Button from "@mui/material/Button";
 const ProductsGrid = ({ products, selectedPricesRange }) => {
 
-    const [displayedProducts, setDisplayedProduct] = React.useState(9)
-
+    const [displayedProducts, setDisplayedProduct] = React.useState(0)
+    React.useEffect(() => {
+        setDisplayedProduct(9)
+        console.log('@@@@@@@@@@@@')
+    }, [products])
     const handleDisplayed = () => setDisplayedProduct(displayedProducts + 9)
     //REVIsa: cuando metas este componente en el index.js
 

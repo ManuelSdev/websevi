@@ -11,6 +11,7 @@ import useUser from "../../hooks/swrHooks/useUser"
 import DataSection from "../../components/userPage/DataSection"
 import WishListSection from "../../components/userPage/WishListSection"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
+import OrdersSection from "../../components/userPage/OrdersSection"
 const sections = [
     {
         name: 'Mis datos',
@@ -54,7 +55,10 @@ const UserPage = ({ authId, isLogged, categories }) => {
                         userSlug === 'lista-de-deseos' ?
                             <WishListSection user={user} />
                             :
-                            <Box />
+                            userSlug === 'pedidos' ?
+                                <OrdersSection user={user} />
+                                :
+                                <Box />
                 }
             />
 
