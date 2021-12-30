@@ -1,5 +1,5 @@
 
-import CollapsibleTable from '../collapsibleTable/CollapsibleTable'
+import UserOrdersTable from './UserOrdersTable'
 import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography"
@@ -19,17 +19,18 @@ const OrdersSection = ({ user }) => {
 
             </Stack>
 
-            {orders.length === 0 ?
-                <Box>No hay pedidos</Box>
+            {isLoadingOrders ?
+                <Box>LOADINGG</Box>
                 :
-                isLoadingOrders ?
-                    <Box>Loading</Box>
+                orders.length === 0 ?
+                    <Box>No hay pedidos</Box>
                     :
-                    <CollapsibleTable
+
+                    <UserOrdersTable
                         mainHeaders={mainHeaders}
                         detailsHeaders={detailsHeaders}
                         orders={orders}
-                    ></CollapsibleTable>
+                    ></UserOrdersTable>
             }
 
 

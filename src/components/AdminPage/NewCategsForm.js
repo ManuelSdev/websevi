@@ -174,10 +174,8 @@ const NewCategsForm = ({ onSubmit, error }) => {
     const fullWidthElements = (
         <Box>
 
-            <FormControl component='fieldset' variant="standard" margin='normal'>
-                <Button type="submit" >Crear Categoría</Button>
-                <SaveAndLoadButton></SaveAndLoadButton>
-            </FormControl>
+            <Button type="submit" >Crear Categoría</Button>
+            <SaveAndLoadButton></SaveAndLoadButton>
 
             {/**TODO: refina el tema de errores */}
             {error && <Box>{error}</Box>}

@@ -14,26 +14,29 @@ import IconVisa from './IconVIsa';
 import IconMaster from './IconMaster';
 import IconPaypal from './IconPaypal';
 import { Stack } from '@mui/material';
-const SelectPayment = ({ user }) => {
+const SelectPayment = ({ order, setOrder }) => {
 
-    const [value, setValue] = React.useState('Tarjeta');
+    const [payment, setPayment] = React.useState('tarjeta');
 
     const handleChange = (event) => {
-        setValue(event.target.value);
+        setPayment(event.target.value);
     };
 
+    React.useEffect(() => {
+        setOrder({ ...order, payment: payment })
+    }, [payment])
 
     return (
 
         <FormControl component="fieldset">
-            <FormLabel component="legend">Dirección de envío</FormLabel>
+            <FormLabel component="legend"></FormLabel>
             <RadioGroup
                 aria-label="payment"
                 name="controlled-radio-buttons-group"
-                value={value}
+                value={payment}
                 onChange={handleChange}
             >
-                <FormControlLabel value={'Tarjeta'} control={<Radio />} label={
+                <FormControlLabel value={'tarjeta'} control={<Radio />} label={
                     <Stack direction="row" spacing={2}>
                         <IconVisa viewBox="0 0 1000.046 323.653"
                             sx={{ fontSize: 100 }}
@@ -45,7 +48,7 @@ const SelectPayment = ({ user }) => {
 
                 } >
                 </FormControlLabel>
-                <FormControlLabel value={'PayPal'} control={<Radio />} label={
+                <FormControlLabel value={'payPal'} control={<Radio />} label={
 
                     <IconPaypal viewBox="0 0 660 100"
                         sx={{ fontSize: 200 }}

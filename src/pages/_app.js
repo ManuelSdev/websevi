@@ -8,6 +8,10 @@ import * as SuperTokensConfig from '../../config/frontendConfig'
 import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import { AppProvider } from '../components/context'
+import theme from '../assets/theme'
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from '@mui/material/CssBaseline'
+
 //import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
 //Supertokens logic
@@ -106,7 +110,10 @@ function App({ Component, pageProps }) {
 
 
       <AppProvider {...appProps}>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider >
       </AppProvider>
 
 

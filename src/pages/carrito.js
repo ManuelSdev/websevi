@@ -29,6 +29,7 @@ import useUser from "../hooks/swrHooks/useUser"
 const CartPage = () => {
     const { cart, setCart, isLogged, authId } = useAppContext()
 
+    // console.log('~$$$$$$', cart)
     const { user, isLoading, isError, mutate } = useUser(authId)
     //users es un array con un unico objeto user que contiene el campo _id: 
 
@@ -37,11 +38,13 @@ const CartPage = () => {
         userId: '',
         orderCart: [],
         amount: '',
+        payment: ''
     })
-    console.log('CARRITO', cart)
+
+    //console.log('CARRITO', cart)
     React.useEffect(() => {
         if (isLoading) return
-        console.log('USERRRR', user)
+        // console.log('USERRRR', user)
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -53,6 +56,7 @@ const CartPage = () => {
             }
         })
         setOrder({
+            ...order,
             userId: user._id,
             orderCart,
             amount: cartTotalPrice
@@ -82,7 +86,7 @@ const CartPage = () => {
     }
 
     const rowsTotalPrice = cart.map(product => product.price * product.amount)
-    console.log('rowsTotalPrice', rowsTotalPrice)
+    //console.log('rowsTotalPrice', rowsTotalPrice)
     const cartTotalPrice = cart.length > 0 ?
         sum(...rowsTotalPrice)
         :
@@ -90,8 +94,7 @@ const CartPage = () => {
     console.log('+++++++++++++++', order)
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <>
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar
                     sx={{
@@ -135,9 +138,10 @@ const CartPage = () => {
                 user={user}
                 isLoading={isLoading}
                 mutate={mutate}
+                order={order}
+                setOrder={setOrder}
             />
-
-        </ThemeProvider >
+        </>
     )
 }
 

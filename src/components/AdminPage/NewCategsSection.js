@@ -55,7 +55,7 @@ const NewCategsSection = ({ props }) => {
                 ></ConfirmAndReturn>
                 :
                 <Box>
-                    <Stack mb={2} direction='row'>
+                    <Stack direction='row'>
                         <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Crear categorías</Typography>
 
                     </Stack>

@@ -15,6 +15,9 @@ const theme = createTheme({
             main: '#FFF200',
         },
         */
+        background: {
+            default: "#F6F9FC"
+        },
         corpGreen: {
             // This is green.A700 as hex.
             main: '#009CAC',
@@ -34,13 +37,13 @@ const theme = createTheme({
             defaultProps: {
                 // The default props to change
 
-                //   variant: 'contained',
+                variant: "contained",
             },
             styleOverrides: {
                 root: {
                     // apply theme's border-radius instead of component's default
                     alignItems: 'center',
-                    //marginBottom: '1em'
+                    marginBottom: '1em'
 
                 },
             },
@@ -67,7 +70,19 @@ const theme = createTheme({
                     //  alignItems: 'center'
                 },
             },
-        }
+        },
+        MuiStepIcon: {
+            styleOverrides: {
+                root: {
+
+                    // apply theme's border-radius instead of component's default
+                    color: 'red',
+                    '& .MuiStepIcon-text': {
+                        color: 'white',
+                    },
+                },
+            },
+        },
 
     },
 

@@ -19,8 +19,7 @@ const Layout = ({ children, categories }) => {
     //console.log('*****************', categs)
     return (
 
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <>
             <Header categories={categories} />
 
             <main>
@@ -30,9 +29,9 @@ const Layout = ({ children, categories }) => {
             <footer>
                 <Footer></Footer>
             </footer>
+        </>
 
 
-        </ThemeProvider >
 
 
 

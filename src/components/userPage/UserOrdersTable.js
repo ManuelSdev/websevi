@@ -16,7 +16,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-import CollapsibleTableRow from './CollapsibleTableRow';
+import UserOrderRows from './UserOrderRows';
 
 function createData(name, calories, fat, carbs, protein, price) {
     return {
@@ -52,26 +52,24 @@ const rows = [
 
 
 
-export default function CollapsibleTable({ mainHeaders, orders, detailsHeaders }) {
+export default function UserOrdersTable({ mainHeaders, orders, detailsHeaders }) {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        {mainHeaders.map((header, index) => index === 0 || index === 1 ?
-                            <TableCell key={header}>{header}</TableCell>
-                            :
-                            <TableCell key={header} align="right">{header}</TableCell>
-                        )
 
-                        }
+                        <TableCell >Fecha</TableCell>
+                        <TableCell >ID de pedido</TableCell>
+                        <TableCell align="right">Productos</TableCell>
+                        <TableCell align="right">Total</TableCell>
 
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {orders.map(order => (
-                        <CollapsibleTableRow key={order._id} order={order} detailsHeaders={detailsHeaders} />
+                        <UserOrderRows key={order._id} order={order} detailsHeaders={detailsHeaders} />
                     ))}
                 </TableBody>
             </Table>

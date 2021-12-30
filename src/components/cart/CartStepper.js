@@ -16,6 +16,7 @@ import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpas
 
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
+import { Divider, Stack } from "@mui/material";
 
 const steps = [
     'Carrito',
@@ -24,7 +25,7 @@ const steps = [
     'Resumen'
 ];
 
-export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
+export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
 
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
@@ -117,50 +118,69 @@ export default function CartStepper({ cartTotalPrice, isLogged, user, mutate, is
 
     return (
         <Container>
-            <Box sx={{ width: '100%', background: "red" }}>
+            <Box sx={{ width: '100%', background: "#009CAC" }}>
                 <Stepper activeStep={activeStep} alternativeLabel>
                     {steps.map((label) => (
-                        <Step key={label}>
+                        <Step key={label} >
                             <StepLabel>{label}</StepLabel>
                         </Step>
                     ))}
                 </Stepper>
             </Box>
 
-            <Box sx={{ flexGrow: 1, background: "azure", marginTop: '30px' }}>
+            <Box sx={{ flexGrow: 1, marginTop: '30px' }}>
                 <Grid container spacing={2}>
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
 
                         {activeStep === 0 ?
+
                             <CartStep />
+
                             :
                             activeStep === 1 ?
-                                <ShipmentStep
-                                    user={user}
-                                    mutate={mutate}
-                                    isLoading={isLoading}
+                                <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>
+                                    <ShipmentStep
+                                        user={user}
+                                        mutate={mutate}
+                                        isLoading={isLoading}
 
-                                />
+                                    />
+                                </Paper>
                                 :
                                 activeStep === 2 ?
-                                    <PaymentStep />
+                                    <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>
+                                        <PaymentStep order={order} setOrder={setOrder} />
+                                    </Paper>
                                     :
-                                    <ResumeStep />
+
+                                    <ResumeStep
+                                        order={order}
+                                        user={user}
+
+                                    />
+
                         }
 
 
                     </Grid>
-                    <Grid item sx={{ background: "grey" }} xs={12} sm={12} md={4} lg={4} >
-                        <Paper>
-                            <Typography>TOTAL: {cartTotalPrice}</Typography>
+                    <Grid item sx={{}} xs={12} sm={12} md={4} lg={4} >
+                        <Paper sx={{ p: 2, }} >
+                            <Stack direction='row' justifyContent='space-between' sx={{ mb: 1 }}  >
+                                <Typography variant='h5' sx={{ fontWeight: 'bold' }} >TOTAL: </Typography>
+                                <Typography
+                                    variant='h5'
+                                    sx={{ fontWeight: 'bold' }}>{cartTotalPrice} €</Typography>
+                            </Stack>
+                            <Divider sx={{ mb: 2 }} ></Divider>
                             {activeStep === 1 && !user?.hasProfile ?
-                                <Button disabled onClick={handleNext}> CONTINUAR</Button>
+                                <Button fullWidth disabled onClick={handleNext}> CONTINUAR</Button>
                                 :
                                 activeStep === 3 ?
-                                    <Button onClick={handleSubmit}> PAGAR Y FINALIZAR</Button>
+                                    <Button fullWidth onClick={handleSubmit}> PAGAR Y FINALIZAR</Button>
                                     :
-                                    <Button onClick={handleNext}> CONTINUAR</Button>
+                                    <Button fullWidth onClick={handleNext}> CONTINUAR</Button>
                             }
+
 
                         </Paper>
                     </Grid>

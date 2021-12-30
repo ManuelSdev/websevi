@@ -47,7 +47,9 @@ const UserPage = ({ authId, isLogged, categories }) => {
         <Layout isLogged={isLogged} categories={categories}>
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} />}
-                content={
+                content={isLoading ?
+                    <Box>LOADINGG</Box>
+                    :
                     userSlug === 'mis-datos' ?
                         <DataSection user={user} />
                         :

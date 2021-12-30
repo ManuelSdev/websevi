@@ -2,7 +2,7 @@ import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/system/Box"
 import useMediaQuery from "@mui/material/useMediaQuery"
-import { useTheme } from "@mui/material"
+import { Paper, useTheme } from "@mui/material"
 
 
 
@@ -18,7 +18,7 @@ const SidebarLayout = ({ content, sidebar }) => {
 
     return (
         <Container>
-            <Box sx={{ mt: 5, flexGrow: 1, background: "green" }}>
+            <Box sx={{ mt: 5, flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     {
                         matches &&
@@ -28,7 +28,10 @@ const SidebarLayout = ({ content, sidebar }) => {
                     }
 
                     <Grid item xs={12} sm={12} md={9} lg={9} >
-                        {content}
+                        <Paper sx={{ p: 2, pt: 1.5 }}>
+                            {content}
+                        </Paper>
+
                     </Grid>
 
                 </Grid>

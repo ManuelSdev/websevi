@@ -200,7 +200,7 @@ const NewProductForm = ({ onSubmit, error }) => {
         <FormTemplate
             onSubmit={handleSubmit(onSubmit)}
             sx={{
-                backgroundColor: 'dimGray',
+                //backgroundColor: 'dimGray',
                 '& .MuiFormControl-root': { mb: 2, width: '100%' },
                 '& .MuiTextField-root': { mb: 2, width: '100%' }
             }}

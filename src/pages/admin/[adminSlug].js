@@ -10,6 +10,7 @@ import { toPlainString } from "../../lib/utils/stringTools"
 import NewProductSection from "../../components/AdminPage/NewProductSection"
 import NewCategsSection from "../../components/AdminPage/NewCategsSection"
 import { Paper } from "@mui/material"
+import SidebarLayout from "../../components/layouts/SidebarLayout"
 const sections = [
     {
         name: 'Pedidos',
@@ -39,29 +40,24 @@ const UserPage = ({ authId, isLogged, categories }) => {
 
     return (
         <Layout isLogged={isLogged} categories={categories}>
-            <Container sx={{ mt: '2em' }}>
-                <Box sx={{ flexGrow: 1, background: "green" }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6} sm={4} md={3} lg={3} >
-                            <ProfileBar profile={'admin'} sections={sections}></ProfileBar>
-                        </Grid>
-                        <Grid item xs={6} sm={4} md={3} lg={9} >
-                            {
-                                adminSlug === 'pedidos' ?
-                                    <Paper>Orders</Paper>
-                                    :
-                                    adminSlug === 'crear-producto' ?
-                                        <NewProductSection />
-                                        :
-                                        adminSlug === 'crear-categorias' ?
-                                            <NewCategsSection />
-                                            :
-                                            <Box />
-                            }
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Container >
+
+            <SidebarLayout
+                sidebar={<ProfileBar profile={'admin'} sections={sections} />}
+                content={
+                    adminSlug === 'pedidos' ?
+                        <Paper>Orders</Paper>
+                        :
+                        adminSlug === 'crear-producto' ?
+                            <NewProductSection />
+                            :
+                            adminSlug === 'crear-categorias' ?
+                                <NewCategsSection />
+                                :
+                                <Box />
+                }
+
+            />
+
         </Layout>
     )
 }

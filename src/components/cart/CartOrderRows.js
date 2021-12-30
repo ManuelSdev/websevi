@@ -18,7 +18,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Image from "next/image"
 import { Stack } from '@mui/material';
 
-export default function CollapsibleTableRow({ order, detailsHeaders }) {
+export default function CartOrderRows({ product }) {
     // const { row } = props;
     const [open, setOpen] = React.useState(false);
 
@@ -52,17 +52,21 @@ export default function CollapsibleTableRow({ order, detailsHeaders }) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        {detailsHeaders.map((header, index) => index === 0 || index === 1 ?
-                                            <TableCell>{header}</TableCell>
-                                            :
-                                            <TableCell align="right">{header}</TableCell>
-                                        )}
+
+                                        <TableCell >Artículo</TableCell>
+                                        <TableCell >Nombre</TableCell>
+                                        <TableCell align="right">Precio</TableCell>
+                                        <TableCell align="right">Cantidad</TableCell>
+                                        <TableCell align="right">Total</TableCell>
 
                                     </TableRow>
                                 </TableHead>
+
                                 <TableBody>
-                                    {order.orderCart.map((product) => (
-                                        <TableRow key={product._id}>
+                                    {cart.map((product) => {
+                                        const [image] = product.images
+
+                                        return <TableRow key={product._id}>
                                             <TableCell component="th" scope="row">
 
                                                 <Image
@@ -76,17 +80,18 @@ export default function CollapsibleTableRow({ order, detailsHeaders }) {
                                                     alt="Imagen de producto"
                                                 />
 
-
                                             </TableCell>
-                                            <TableCell >{product.productName}</TableCell>
-                                            <TableCell align="right">{product.productPrice} €</TableCell>
-                                            <TableCell align="right">{product.productAmount}</TableCell>
+                                            <TableCell >{product.name}</TableCell>
+                                            <TableCell align="right">{product.price} €</TableCell>
+                                            <TableCell align="right">{product.amount}</TableCell>
                                             <TableCell align="right">
-                                                {Math.round(product.productPrice * product.productAmount * 100) / 100} €
+                                                {Math.round(product.price * product.amount * 100) / 100} €
                                             </TableCell>
                                         </TableRow>
-                                    ))}
+                                    })
+                                    }
                                 </TableBody>
+
                             </Table>
                         </Box>
                     </Collapse>

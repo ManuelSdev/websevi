@@ -27,18 +27,23 @@ const DataSection = ({ user }) => {
             <Box>
                 <Stack mb={2} direction='row'>
                     <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mis datos</Typography>
-
                 </Stack>
-                <Paper>
-                    <Typography>Nombre: {user.name}</Typography>
-                    <Typography>Direccion: {addressLine}</Typography>
-                    <Typography>Móvil: {user.phone}</Typography>
-                </Paper>
-
+                <Stack mb={1} direction='row'>
+                    <Typography sx={{ fontWeight: 'bold', mr: 1 }}>Nombre:</Typography>
+                    <Typography>{user.name}</Typography>
+                </Stack>
+                <Stack mb={1} direction='row'>
+                    <Typography sx={{ fontWeight: 'bold', mr: 1 }}>Direccion:</Typography>
+                    <Typography>{addressLine}</Typography>
+                </Stack>
+                <Stack mb={1} direction='row'>
+                    <Typography sx={{ fontWeight: 'bold', mr: 1 }}>Móvil:  </Typography>
+                    <Typography>{user.phone}</Typography>
+                </Stack>
             </Box>
             :
             <>
-                <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
+                <Box sx={{ flexGrow: 1, background: "red" }}> <Typography>Dirección de envío</Typography></Box>
                 <ProfileForm
 
 
