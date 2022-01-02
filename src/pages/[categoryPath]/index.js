@@ -7,21 +7,30 @@ import Layout from '../../components/layouts/Layout'
 import { nameToUrl } from '../../lib/utils/stringTools'
 import { mapFilters } from '../../lib/mapFilters'
 import usePriceSlider from '../../hooks/usePriceSlider'
+import React from 'react'
 
 const Category = ({ isLogged, products, categories, filtersProps }) => {
     const router = useRouter()
     //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
-    // console.log('----------------------------', router.query)
+    console.log('----------------------------', router.query)
     const { pricesRange } = filtersProps
-    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
-        currentSelectedPricesRange ?
-            [...currentSelectedPricesRange]
-            :
-            [...pricesRange]
-    )
+    console.log('priceRange que entra por filtersProps', pricesRange)
+    const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
+
+
     const props = { selectedPricesRange, handlePrice, valuetext }
+
+    React.useEffect(() => {
+        console.log('+++++++++++', selectedPricesRange)
+        // props = { selectedPricesRange, handlePrice, valuetext }
+        //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
+        setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
+
+    }, [pricesRange])
+    console.log('Primeroooo', selectedPricesRange)
+
     return (
         <Layout isLogged={isLogged} categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props} />

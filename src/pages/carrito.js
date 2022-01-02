@@ -25,8 +25,13 @@ import CartStepper from "../components/cart/CartStepper"
 import CartStep from "../components/cart/CartStep"
 import { createOrder } from "../lib/api/order"
 import useUser from "../hooks/swrHooks/useUser"
-
+import Modal from "../components/cart/Modal"
+import { useRouter } from "next/router"
 const CartPage = () => {
+    const router = useRouter()
+    //VENTANA MODAL
+    const [open, setOpen] = React.useState(false);
+
     const { cart, setCart, isLogged, authId } = useAppContext()
 
     // console.log('~$$$$$$', cart)
@@ -67,8 +72,13 @@ const CartPage = () => {
         // console.log("9999999999999999999999999999999999", formValue)
         ev.preventDefault();
         try {
-            const { result, message } = await createOrder(order)
-            result === true && localStorage.removeItem('cart');
+            const { result: ok, message } = await createOrder(order)
+            if (ok) {
+                localStorage.removeItem('cart')
+                setCart([])
+                handleClickOpen()
+            }
+
 
             console.log('PEDIDO CREADO', message)
         } catch (error) {
@@ -93,8 +103,24 @@ const CartPage = () => {
         0
     console.log('+++++++++++++++', order)
 
+    //VENTANA MODAL
+    const handleClickOpen = () => {
+        setOpen(true);
+
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        router.push('/')
+    };
+
     return (
         <>
+            <Modal
+                handleClickOpen={handleClickOpen}
+                handleClose={handleClose}
+                open={open}
+            />
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar
                     sx={{

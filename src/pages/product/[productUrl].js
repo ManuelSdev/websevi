@@ -14,6 +14,7 @@ import { getCategories } from "../api/categories/getCategories"
 import ImageList from "@mui/material/ImageList"
 import ImageListItem from "@mui/material/ImageListItem"
 import Link from "@mui/material/Link"
+import { Divider, Typography } from "@mui/material"
 
 const ProductPage = ({ categories, product }) => {
     //const { errorm, throwPromise, loading, data } = usePromise()
@@ -33,7 +34,7 @@ const ProductPage = ({ categories, product }) => {
 
             <Container sx={{ background: "red" }}>
                 <Box sx={{ flexGrow: 1, background: "AliceBlue" }}>
-                    <Grid container spacing={0}>
+                    <Grid mb={2} container spacing={0}>
                         <Grid item xs={6} sm={4} md={3} lg={6} >
                             <Box
                                 sx={{
@@ -60,7 +61,12 @@ const ProductPage = ({ categories, product }) => {
                             </Box>
 
 
-                            <ImageList sx={{ width: 527, height: 450 }} cols={4} rowHeight={128.75}>
+                            <ImageList
+                                sx={{
+                                    width: 527,
+                                    //height: 450
+                                }}
+                                cols={4} rowHeight={128.75}>
                                 {images.map((image) => (
                                     <ImageListItem key={image} component={Button}
                                         sx={{
@@ -97,7 +103,37 @@ const ProductPage = ({ categories, product }) => {
                         </Grid>
 
                     </Grid>
+                    <Box>
+                        <Divider
+                            light
+                            pr={5}
+                            textAlign="left"> <Typography>Descripción</Typography></Divider>
+                        <Box p={3}>
+                            {product.description}
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Divider
+                            pr={5}
+                            textAlign="left"> <Typography>Especificaciones</Typography></Divider>
+                        <Box>
+                            <ul>
+                                {product.specs.map(spec =>
+                                    <Box key={spec}>
+                                        <li>{spec} </li>
+                                    </Box>
+                                )}
+
+
+
+                            </ul>
+                        </Box>
+                    </Box>
+
+
+
                 </Box>
+
             </Container>
         </Layout >
 

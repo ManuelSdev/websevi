@@ -17,6 +17,17 @@ function usePriceSlider(initialSelectedPricesRange) {
         // console.log('=========', newValue)
     }
 
+    const miraRange = (event, selectedPricesRange) => {
+        console.log('@@@@@@@@@@@@@@', event)
+        console.log('#################', selectedPricesRange)
+        // console.log('=========', newValue)
+    }
+
+
+
+
+
+
     function valuetext(value) {
         return `${value} €`;
     }
@@ -29,6 +40,7 @@ function usePriceSlider(initialSelectedPricesRange) {
         selectedPricesRange,
         handlePrice,
         valuetext,
+        setSelectedPricesRange,
     };
 }
 

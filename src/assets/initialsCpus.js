@@ -147,6 +147,39 @@ const cpus = [
 
 const cpusWithFilters = cpus.map(cpu => {
     cpu.filters = ['brand', 'price']
+    cpu.description = "Cuando cuentas con la arquitectura de procesadores más avanzada del mundo para jugadores y creadores de contenido, las posibilidades son infinitas. Ya sea que juegues los juegos más recientes, diseñes el próximo rascacielos o proceses datos, necesitas un procesador poderoso que pueda dar respuesta a todas estas demandas, y más. Sin lugar a dudas, los procesadores para computadoras de escritorio AMD Ryzen™ serie 5000 elevan el nivel de expectativa para jugadores y artistas por igual."
+    cpu.specs = [
+        'N.° de núcleos de CPU 6',
+        'N.° de subprocesos 12',
+        'N.° de núcleos de GPU 7',
+        'Reloj base 3.9GHz',
+        'Reloj de aumento máx. Hasta 4.4GHz',
+        'Caché L2 total 3MB',
+        'Caché L3 total 16MB',
+        'Desbloqueados Sí',
+        'CMOS TSMC 7nm FinFET',
+        'Paquete AM4',
+        'Versión de PCI Express PCIe® 3.0',
+        'Solución térmica Wraith Stealth',
+        'TDP/TDP predeterminado 65W',
+        'cTDP 45-65W',
+        'Temp. máx. 95°C',
+        '*Compatible con SO',
+        'Windows 10 edición de 64·bits',
+        'RHEL x86 edición de 64·bits',
+        'Ubuntu x86 edición de 64·bits',
+        '*El soporte del sistema operativo (SO) variará según el fabricante.',
+        'Velocidad máxima de memoria Up to 3200MHz',
+        'Tipo de memoria DDR4',
+        'Canales de memoria 2',
+        'Especificaciones de gráficos',
+        'Frecuencia de gráficos 1900 MHz',
+        'Modelo de gráficos Radeon™ Graphics',
+        'Cant. de núcleos de los gráficos 7',
+        'Funcionalidades principales',
+        'Display Port Sí',
+        'HDMI™ Sí',
+    ]
     return cpu
 })
 export default cpusWithFilters

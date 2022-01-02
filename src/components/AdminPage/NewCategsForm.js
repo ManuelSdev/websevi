@@ -137,7 +137,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             autoComplete='off'
                             fullWidth
                             size="small"
-                            label="Nombre de la categoría 2"
+                            label="Nombre de la categoría 1"
                             variant="outlined"
                             name='category_2'
                             onChange={handleChange}

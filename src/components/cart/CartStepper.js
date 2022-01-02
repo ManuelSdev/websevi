@@ -27,6 +27,7 @@ const steps = [
 
 export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
 
+
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 

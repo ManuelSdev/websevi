@@ -11,6 +11,7 @@ const productSchema = mongoose.Schema({
     ean: { type: String, unique: true },
     categories: { type: [String], index: true },
     filters: { type: [String], index: true },
+    specs: { type: [String] },
 
     images: { type: [String] },
     description: String,

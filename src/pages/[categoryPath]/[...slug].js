@@ -5,6 +5,7 @@ import usePriceSlider from "../../hooks/usePriceSlider"
 //import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from "next/router"
+import React from 'react'
 
 
 const Filters = ({ isLogged, products, categories, filtersProps }) => {
@@ -16,6 +17,7 @@ const Filters = ({ isLogged, products, categories, filtersProps }) => {
     // console.log('----------------------------', router.query)
     const { pricesRange } = filtersProps
     // console.log('++++++++++++++++++++++++++++', pricesRange)
+    /*
     const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
         currentSelectedPricesRange ?
             [...currentSelectedPricesRange]
@@ -23,6 +25,21 @@ const Filters = ({ isLogged, products, categories, filtersProps }) => {
             [...pricesRange]
     )
     const props = { selectedPricesRange, handlePrice, valuetext }
+*/
+
+    const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
+
+
+    const props = { selectedPricesRange, handlePrice, valuetext }
+
+    React.useEffect(() => {
+        console.log('+++++++++++', selectedPricesRange)
+        // props = { selectedPricesRange, handlePrice, valuetext }
+        //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
+        setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
+
+    }, [pricesRange])
+    console.log('Primeroooo', selectedPricesRange)
     return (
         <Layout isLogged={isLogged} categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props} />

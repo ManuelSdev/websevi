@@ -209,6 +209,19 @@ const mobos = [
 ]
 const mobosWithFilters = mobos.map(mobo => {
     mobo.filters = ['brand', 'chipset', 'size', 'price']
+    mobo.specs = [
+
+        'CPU Support Supports AM4 socket 3rd Gen AMD Ryzen™ Processors,and future AMD Ryzen™ processors with BIOS update',
+        'CPU Socket AMD Socket AM4',
+        'Chipset AMD B550 Chipset',
+        'Graphics Interface 1x PCI-E 4.0/3.0 x16 slot + 1x PCI-E 3.0 x16 slot Supports 2-Way AMD CrossFire™ Technology',
+        'Display Interface DisplayPort, HDMI – Requires Processor Graphics',
+        'Memory Support 4 DIMMs, Dual Channel DDR4-4400(OC)',
+        'Storage 1x M.2 Gen4 x4 + 1x M.2 Gen3 x4 slot 6x SATA 6Gb/s ports',
+        'USB ports 2x USB 3.2 Gen 2 10Gbps (1 Type-A + 1 Type-C)5x USB 3.2 Gen 1 5Gbps (4 Type-A + 1 Type-C)8x USB 2.0',
+        'LAN Realtek® RTL8111H Gigabit LAN',
+        'Audio8-Channel (7.1) HD Audio with Audio Boost',
+    ]
     return mobo
 })
 export default mobosWithFilters
