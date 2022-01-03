@@ -35,3 +35,9 @@ export const checkSession = () => {
 export const getProducts = (ids) => {
     return client.get('/products/getProducts')
 }
+
+export const searchProducts = (searchKeys) => {
+    const params = new URLSearchParams(searchKeys)
+    console.log("ppppppppppppppp", params.toString())
+    return client.get(`/products/getProducts/?${params.toString()}`)
+}

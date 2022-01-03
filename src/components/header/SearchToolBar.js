@@ -16,15 +16,35 @@ import { useRouter } from "next/router";
 import { styled } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { sum } from "../../lib/utils/sum";
+import useForm from "../../hooks/useForm";
+
+import { searchProducts } from "../../lib/api/product";
+import { IconButton } from "@mui/material";
+
 const StyledButton = styled(Button)(`
   text-transform: none;
 `);
 
 const SearchToolBar = () => {
-
+    const router = useRouter()
     //console.log('@@@@@@@@@@@@@@@@@@@@', useAppContext)
     const { isLogged, cart } = useAppContext()
     const [cartProductsAmount, setCartProductsAmount] = React.useState(0)
+    const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
+        searchKeys: ''
+    })
+
+    const { searchKeys } = formValue
+
+    const onSubmit = async () => {
+        console.log('*------------', searchKeys)
+        const params = new URLSearchParams(formValue)
+        //const resolved = await searchProducts(formValue)
+        //resolved && mutate()
+        // console.log("resolved", resolved)
+        router.push(`/buscar/?${params.toString()}`)
+        //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
+    }
 
     React.useEffect(() => {
         //console.log('USE TOOLBAR cart ', cart)
@@ -62,17 +82,30 @@ const SearchToolBar = () => {
                 sx={{ fill: "blue", height: "100%", fontSize: 250 }}
             >
             </IconCorpName>
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+            <Box
+                component='form'
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
                 <TextField
+                    required
                     sx={{ width: "75%" }}
                     id="standard-basic"
                     label="Buscar en el catálogo"
                     variant="standard"
                     color="corpGreen"
+                    name='searchKeys'
+                    value={searchKeys}
+                    onChange={handleChange}
                     InputProps={{
                         endAdornment:
-                            <InputAdornment position="start">
-                                <SearchIcon></SearchIcon>
+                            <InputAdornment
+                                position="start"
+                            >
+                                <IconButton
+                                    type='submit'
+                                >
+                                    <SearchIcon />
+                                </IconButton>
                             </InputAdornment>,
                     }}
                 />

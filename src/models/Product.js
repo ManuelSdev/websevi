@@ -14,11 +14,11 @@ const productSchema = mongoose.Schema({
     specs: { type: [String] },
 
     images: { type: [String] },
-    description: String,
+    description: { type: String, index: true },
 
 })
 
-
-
+//productSchema.index({ name: 'text' });
+productSchema.index({ name: 'text', categories: 'text', size: 'text', description: 'text' })
 const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 export default Product

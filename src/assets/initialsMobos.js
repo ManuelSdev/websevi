@@ -109,7 +109,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'ATX',
         price: 224,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'Las placas base de la serie ASUS Prime están diseñadas por expertos para liberar todo el potencial de los procesadores Intel® de 12.ª generación. Con un diseño de energía robusto, soluciones de enfriamiento integrales y opciones de ajuste inteligentes, Prime Z690-P D4 ofrece a los usuarios y constructores de PC una gama de opciones de ajuste de rendimiento a través de funciones de software y firmware intuitivas.',
         images:
             [
@@ -126,7 +126,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'ATX',
         price: 419,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'ROG Strix Z690-F Gaming WiFi ofrece suministro de energía y enfriamiento de primera calidad para liberar toda la fuerza de los procesadores Intel® Core ™ de 12.ª generación. Los fotogramas y los tiempos de carga se pueden aumentar aún más con la compatibilidad completamente nueva para la memoria DDR5 y las tarjetas de video PCIe® 5.0. ',
         images:
             [
@@ -143,7 +143,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'ATX',
         price: 273,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'Gobierna supremamente con las placas base para juegos Z690 AORUS. El nuevo rey de la plataforma de juegos continúa la legendaria línea de sangre AORUS con la entrega de energía más robusta y el diseño térmico dominante, glorificado con la tecnología de overclocking de memoria completa para coronar su PC con el mejor rendimiento de Alder Lake en todo su esplendor de juego.',
         images:
             [
@@ -160,7 +160,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'mATX',
         price: 234,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'Las placas base de la serie ASUS Prime están diseñadas por expertos para liberar todo el potencial de los procesadores Intel® de 12.ª generación. Con un diseño de energía robusto, soluciones de enfriamiento integrales y opciones de ajuste inteligentes, Prime Z690M-Plus D4 ofrece a los usuarios y constructores de PC DIY una gama de opciones de ajuste de rendimiento a través de funciones de software y firmware intuitivas.',
         images:
             [
@@ -177,7 +177,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'ITX',
         price: 470,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'El ROG Strix Z690-I Gaming WiFi incluye una entrega de energía de primera calidad y un enfriamiento de tres pisos en un factor de forma compacto mini-ITX para liberar toda la fuerza de los procesadores Intel® Core ™ de 12.ª generación. Los marcos y los tiempos de carga se pueden aumentar aún más con la compatibilidad completamente nueva para la memoria DDR5 y PCIe® 5.0',
         images:
             [
@@ -193,7 +193,7 @@ const mobos = [
         chipset: 'Intel Z690',
         size: 'ATX',
         price: 208,
-        categories: ['Componentes', 'Placas base', 'Placas base AMD'],
+        categories: ['Componentes', 'Placas base', 'Placas base Intel'],
         description: 'Las placas base MSI le permiten administrar velocidades y temperaturas para todos los ventiladores de su sistema y CPU. Total Fan Control le permite verificar las características de su sistema principal en una interfaz gráfica simplificada. También puede configurar hasta 4 objetivos de temperatura para la CPU y la placa base, que ajustarán las velocidades del ventilador automáticamente.',
         images:
             [
