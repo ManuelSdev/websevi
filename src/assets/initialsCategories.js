@@ -30,7 +30,7 @@ const initialsCategories = [
         level: 2,
         name: 'Procesadores',
         parent: 'componentes',
-        filters:
+        fields:
             [
                 { brand: ['AMD', 'Intel'] }
             ]
@@ -40,7 +40,7 @@ const initialsCategories = [
         level: 2,
         name: 'Placas base',
         parent: 'componentes',
-        filters:
+        fields:
             [
                 { brand: ['ASUS', 'Gigabyte', 'Asrock', 'MSI'] },
                 { chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },

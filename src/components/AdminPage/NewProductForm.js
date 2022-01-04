@@ -20,9 +20,9 @@ import { toPlainString } from "../../lib/utils/stringTools"
 
 const NewProductForm = ({ onSubmit, error }) => {
 
-    const { formValue: product, handleChange, handleSubmit, validate, setFormValue } = useForm({
+    const { formValue: product, handleChange: handleChangeProduct, setFormValue: setProduct } = useForm({
         name: '',
-        brand: '',
+
         price: "",
         ean: "",
         category_1: '',
@@ -30,53 +30,132 @@ const NewProductForm = ({ onSubmit, error }) => {
         description: '',
         images: null
     });
+    const { formValue: fields, handleChange: handleChangeFields, setFormValue: setFields } = useForm({
 
-    const [categories, setCategories] = React.useState({
+    });
+
+
+    const [options, setOptions] = React.useState({
         categories_1: [],
-        categories_2: []
+        categories_2: [],
+        dynamicFields: []
+
     })
 
-    const { name, brand, price, category_1, category_2, ean, description } = product;
-    const { categories_1, categories_2 } = categories
+    const { name, price, category_1, category_2, ean, description } = product;
+    const { categories_1, categories_2, dynamicFields } = options
 
-    const firstRender = React.useRef(true);
+    //Recibe onSubmit en props desde el componente superior
+    const handleSubmit = onSubmit => ev => {
+        ev.preventDefault();
+        const newProductData = { ...product, ...fields }
+        onSubmit(newProductData);
+    };
+
+    const allowUseEffects = React.useRef({
+        effect1: true,
+        effect2: true,
+        effect3: true,
+        effect4: true,
+    });
 
 
-    //Tras el primer render, setea las categorías de nivel 1
+    //Tras el primer render, usa el método setCategs para obtener los nombres de las categorías
+    //de nivel 1 y mostrarlas en el desplegable del formulario
     React.useEffect(() => {
+        console.log('c1', category_1)
         setCategs({ level: 1 }, 'categories_1')
     }, []);
 
     /**
-     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia categorie_1
-     * Mantiene el valor del formulario product salvo el valor de categorie_2
-     * y categorie_3, que vuelven a ser ''
+     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia category_1. Cuando se selecciona
+     * una categoría de nivel 1 en el despleglable del formulario, usa el método setCategs para obtener 
+     * las subcategorías correspondientes de nivel 2, setear el estado 'categories_2' con ellas 
+     * y mostrarlas en el despleglable del formulario
+     * 
+     * 
      */
     React.useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
+        console.log('c1', category_1)
+        if (allowUseEffects.current.effect1) {
+            allowUseEffects.current.effect1 = false;
             return;
         }
+        console.log('USE 2----')
+        resetFields()
         setCategs({ parent: toPlainString(category_1) }, 'categories_2')
 
-        setFormValue({
+        setProduct({
             ...product,
             category_2: ''
         })
     }, [category_1]);
 
     /**
+     * No se ejecuta tras el primer render, solo se ejecuta cuando cambia category_2. Cuando se selecciona
+     * una categoría de nivel 2 en el despleglable del formulario, usa el método setFields para obtener 
+     * los campos correspondientes a esa categoría  de nivel 2, setear el estado 'fields' con ellos
+     * y mostrar los despleglables en del formulario
+     * 
+     * 
+     */
+    React.useEffect(() => {
+        if (allowUseEffects.current.effect2) {
+            allowUseEffects.current.effect2 = false;
+            return;
+        }
+
+        if (!category_2) return
+        const createFields = async (filter) => {
+            resetFields()
+            //La promesa devuelve un array con una sola categoría
+            const [categoryRes] = await getCategories(filter)
+            const { fields: categoryFields } = categoryRes
+            //Crea el estado fields
+            const fieldsToObject = {}
+            categoryFields.map(field => {
+                const key = Object.keys(field)
+
+                //  fieldsToObject[`${key}`] = field[`${key}`]
+                fieldsToObject[`${key}`] = ''
+            })
+            setFields({ ...fieldsToObject })
+            //Añade dynamicFields al estado options. Los valores almacenados en dynamicFields 
+            //se muestrán como opciones en los desplegables dinámicos 
+            setOptions({
+                ...options,
+                dynamicFields: [...categoryFields]
+            })
+        }
+
+        createFields({ path: toPlainString(category_2) })
+
+
+
+    }, [category_2]);
+
+    /**
      * Recibe un objeto filter para filtrar categorías en bdd
      * Recibe un array categories_x que será el único 
-     * seteado en el estado "categories" con la respuesta del back
+     * seteado en el estado "options" con la respuesta del back
      */
-    const setCategs = async (filter, categoriesToChange) => {
-        const res = await getCategories(filter)
-        const newArray = res.map(category => category.name)
-        setCategories({
-            ...categories,
-            [categoriesToChange]: newArray
+    const setCategs = async (filter, categoryToChange) => {
+        const categoriesRes = await getCategories(filter)
+        const categoriesNames = categoriesRes.map(category => category.name)
+
+        setOptions({
+            ...options,
+            dynamicFields: [],
+            [categoryToChange]: categoriesNames
         })
+    }
+    //Reestablece los estados relacionados con los fields para evitar mutaciones de componentes controlados a no controlados
+    const resetFields = () => {
+        setOptions({
+            ...options,
+            dynamicFields: []
+        })
+        setFields({})
     }
 
     //const onSubmitProp = handleSubmit(onSubmit)
@@ -84,49 +163,47 @@ const NewProductForm = ({ onSubmit, error }) => {
     const column1Elements = (
         <Box>
             <TextField
+                required
                 fullWidth
                 size="small"
                 label="Nombre del producto"
                 variant="outlined"
                 name='name'
-                onChange={handleChange}
+                onChange={handleChangeProduct}
                 value={name}
             />
-            <TextField
-                fullWidth
-                size="small"
-                label="Marca"
-                variant="outlined"
-                name='brand'
-                onChange={handleChange}
-                value={brand}
 
-            />
             <TextField
+                required
                 fullWidth
                 size="small"
                 label="Código EAN"
                 variant="outlined"
                 type='number'
                 name='ean'
-                onChange={handleChange}
+                onChange={handleChangeProduct}
                 value={ean}
             />
-        </Box>
-    )
-
-    const column2Elements = (
-        <Box>
+            <TextField
+                required
+                size="small"
+                label="Precio"
+                variant="outlined"
+                type='number'
+                name='price'
+                value={price}
+                onChange={handleChangeProduct}
+            />
             <FormControl size="small" fullWidth>
                 <InputLabel id="cat1-label">Categoría 1</InputLabel>
                 <Select
-                    //required
+                    required
                     labelId="cat1-label"
                     id="cat1"
                     name='category_1'
                     value={category_1}
                     label="Categoría 1"
-                    onChange={handleChange}
+                    onChange={handleChangeProduct}
                 >
                     {categories_1.map(categ =>
                         <MenuItem key={categ} value={categ}>{categ}</MenuItem>
@@ -138,18 +215,46 @@ const NewProductForm = ({ onSubmit, error }) => {
             <FormControl size="small" fullWidth>
                 <InputLabel id="cat2-label">Categoría 2</InputLabel>
                 <Select
+                    required
                     labelId="cat2-label"
                     id="cat2"
                     name='category_2'
                     value={category_2}
                     label="Categoría 2"
-                    onChange={handleChange}
+                    onChange={handleChangeProduct}
                 >
                     {categories_2.map(categ =>
                         <MenuItem key={categ} value={categ}>{categ}</MenuItem>
                     )}
                 </Select>
             </FormControl>
+        </Box>
+    )
+
+    const column2Elements = (
+        <Box>
+
+
+            {dynamicFields?.length > 0 && dynamicFields.map(field => {
+                const key = Object.keys(field)
+                return (
+                    <FormControl key={key} size="small" fullWidth>
+                        <InputLabel id={`${key}-label`}>{`${key}`}</InputLabel>
+                        <Select
+                            required
+                            labelId={`${key}-label`}
+                            id={`${key}`}
+                            name={`${key}`}
+                            value={fields[`${key}`]}
+                            label={`${key}`}
+                            onChange={handleChangeFields}
+                        >
+                            {field[`${key}`].map(value =>
+                                <MenuItem key={`${value}`} value={value}>{value}</MenuItem>
+                            )}
+                        </Select>
+                    </FormControl>)
+            })}
 
         </Box>
     )
@@ -157,6 +262,7 @@ const NewProductForm = ({ onSubmit, error }) => {
     const fullWidthElements = (
         <Box>
             <TextField
+                required
                 fullWidth
                 multiline
                 size="small"
@@ -164,27 +270,20 @@ const NewProductForm = ({ onSubmit, error }) => {
                 variant="outlined"
                 name='description'
                 value={description}
-                onChange={handleChange}
+                onChange={handleChangeProduct}
             />
 
-            <TextField
-                size="small"
-                label="Precio"
-                variant="outlined"
-                type='number'
-                name='price'
-                value={price}
-                onChange={handleChange}
-            />
+
 
 
             <InputFile
                 //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
                 //y que salga el aviso de mui
                 name="images"
+
                 accept="image/*" id="contained-button-file"
                 // editableSrc={product?.images ?? null}
-                onChange={handleChange}
+                onChange={handleChangeProduct}
             />
 
             <Button type="submit" >Subir anuncio</Button>

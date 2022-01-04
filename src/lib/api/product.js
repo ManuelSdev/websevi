@@ -25,7 +25,7 @@ export const upload2 = (filename) => client.post('/upload2', filename)
 
 export const createProduct = withFormData(newProduct => {
     //console.log("NEW ADD*****************", newAd)
-    return client.post('/products/create', newProduct);
+    return client.post('/products/createProduct', newProduct);
 });
 
 export const checkSession = () => {

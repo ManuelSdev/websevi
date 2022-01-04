@@ -11,29 +11,6 @@ import SidebarLayout from "../layouts/SidebarLayout"
 const ProductsSection = ({ products, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
 
 
-    //PriceSlider es el único filtro (el de precio) que funciona del lado del cliente
-
-    //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
-    /*
-        const router = useRouter()
-        const { categoryPath, selectedPricesRange: currentSelectedPricesRange } = router.query
-        console.log('*****RENDER ProductsLayout CON path', categoryPath)
-        const { pricesRange } = filtersProps
-        console.log('pricesRange en ProductsLayout', pricesRange)
-    
-    
-        const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
-            currentSelectedPricesRange ?
-                [...currentSelectedPricesRange]
-                :
-                [...pricesRange]
-        )
-    */
-    //console.log('selectedPricesRange en ProductsLayout', pop)
-
-
-
-
 
     return (
 

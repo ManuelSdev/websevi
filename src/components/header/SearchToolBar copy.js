@@ -38,16 +38,12 @@ const SearchToolBar = () => {
 
     const onSubmit = async () => {
         console.log('*------------', searchKeys)
-        // const params = new URLSearchParams(formValue)
-        //router.push(`/buscar/?${params.toString()}`)
-
+        const params = new URLSearchParams(formValue)
         //const resolved = await searchProducts(formValue)
         //resolved && mutate()
         // console.log("resolved", resolved)
+        router.push(`/buscar/?${params.toString()}`)
         //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
-
-        router.push(`/buscar/${searchKeys}`)
-
     }
 
     React.useEffect(() => {

@@ -1,12 +1,12 @@
-import ProductsSection from "../../components/products/ProductsSection"
-import { getCategories } from '../api/categories/getCategories'
-import { getProducts } from "../api/products/getProducts"
-import usePriceSlider from "../../hooks/usePriceSlider"
+import ProductsSection from "../components/products/ProductsSection"
+import { getCategories } from './api/categories/getCategories'
+import { getProducts } from "./api/products/getProducts"
+import usePriceSlider from "../hooks/usePriceSlider"
 //import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
-import Layout from '../../components/layouts/Layout'
+import Layout from '../components/layouts/Layout'
 import { useRouter } from "next/router"
 import React from 'react'
-import useForm from "../../hooks/useForm"
+import useForm from "../hooks/useForm"
 
 
 const Buscar = ({ isLogged, products, categories, filtersProps }) => {
@@ -54,20 +54,12 @@ export default Buscar
 
 export async function getServerSideProps(context) {
     const { query } = context
-    //Como el nombre de la página es [...pathParams], el objeto query tiene esta forma {pathParams: [...]}
-    //El array contiene todos los path params de la url
-    //El primer elemento del array siempre es el string introducido en el buscador
-    //El resto son las posibles categorías que se usan para filtrar los resultados iniciales de la busqueda 
-
-    const { pathParams } = query
-    //Extrae el string introducido en el buscador y lo elimina del array (primer elemento del array)
-    const searchKeys = pathParams.shift()
-    //Extrae el resto de elementos del array (el primer elemento fue extraido y eliminado con shift() )
-    const queryCategories = [...pathParams]
-
-
+    const { searchKeys } = query
+    //Si la query string de la url contiene alguna categoría como filtro, se extraen.
+    //Si no, pasa un array vacío como valor
+    const { queryCategories } = query?.queryCategories ? query : { queryCategories: [] }
     console.log('&&&&&&&&&&&&&&&& QUERY PARAMS', queryCategories)
-    //Obtiene todas las categorías de la bdd para montar el header
+    //Obtiene todas las categorías para montar el header
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
 
@@ -77,7 +69,7 @@ export async function getServerSideProps(context) {
     const productsRes = queryCategories.length === 0 ?
         await getProducts({ $text: { $search: searchKeys } })
         :
-        await getProducts({ $text: { $search: searchKeys }, categories: { $in: queryCategories } })
+        await getProducts({ $text: { $search: searchKeys }, categories: { $in: [...queryCategories] } })
     const products = JSON.parse(JSON.stringify(productsRes))
     console.log('*************** PRODUCTOS FILTRADOS', products)
     //Genera un array con todas las categorías de los productos obtenidos

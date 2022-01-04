@@ -103,7 +103,7 @@ export async function getStaticProps(context) {
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
      * al objeto una variable de control hasLink=true para indicar al componente que use estos filtros
      * que deben contener un enlace
-     * Si es el campo level es dos, los filtros serán  los elementoslos elementos del campo childs  de la categoría.
+     * Si es el campo level es 2, los filtros serán  los  elementos del campo fields  de la categoría.
      * . Ahora, hasLink=false porque estos filtros contendrán un desplegable en lugar de un enlace
      * 
      */
@@ -119,7 +119,7 @@ export async function getStaticProps(context) {
         } else if (level === 2) {
             const filter = {
                 hasLink: false,
-                filters: thisCategory.filters,
+                filters: thisCategory.fields,
                 pricesRange: [minPrice, maxPrice]
 
             }

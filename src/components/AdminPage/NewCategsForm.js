@@ -19,6 +19,7 @@ import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import { getCategories } from "../../lib/api/category";
 import { toPlainString } from "../../lib/utils/stringTools";
 import FormTemplate from "../elements/FormTemplate"
+import { Typography } from "@mui/material"
 
 const NewCategsForm = ({ onSubmit, error }) => {
 
@@ -26,19 +27,19 @@ const NewCategsForm = ({ onSubmit, error }) => {
         category_1_isNew: false,
         category_1: '',
         category_2: '',
+        fields: ''
 
 
     });
 
-    const { category_1, category_2, category_1_isNew } = formValue;
+    const { category_1, category_2, category_1_isNew, fields } = formValue;
 
     const [categories, setCategories] = React.useState({
         categories_1: [],
-        categories_2: [],
 
     })
 
-    const { categories_1, categories_2 } = categories
+    const { categories_1 } = categories
 
     const [isNew, setIsNew] = React.useState(true);
 
@@ -87,11 +88,11 @@ const NewCategsForm = ({ onSubmit, error }) => {
 
     error && console.log('HAY ERROR ', error)
 
-
     const column1Elements = (
         <Box>
             <FormControl component='fieldset' variant="standard" margin='normal'>
-                <FormLabel component="legend">Añadir categoria de nivel 1</FormLabel>
+
+                <Typography variant='h6'>Añadir categoria de nivel 1</Typography>
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -139,20 +140,13 @@ const NewCategsForm = ({ onSubmit, error }) => {
                             size="small"
                             label="Nombre de la categoría 1"
                             variant="outlined"
-                            name='category_2'
+                            name='category_1'
                             onChange={handleChange}
                             value={category_1}
                         />
                     }
                 </FormGroup>
-            </FormControl>
-        </Box>
-    )
-
-    const column2Elements = (
-        <Box>
-            <FormControl component='fieldset' variant="standard" margin='normal'>
-                <FormLabel component="legend">Añadir categoria de nivel 2</FormLabel>
+                <Typography variant='h6'>Añadir categoria de nivel 2</Typography>
                 <FormGroup>
                     <TextField
 
@@ -164,6 +158,37 @@ const NewCategsForm = ({ onSubmit, error }) => {
                         name='category_2'
                         onChange={handleChange}
                         value={category_2}
+                    />
+
+                </FormGroup>
+            </FormControl>
+
+
+
+        </Box>
+    )
+
+    const column2Elements = (
+        <Box>
+            <FormControl component='fieldset' variant="standard" margin='normal'>
+                <Typography variant='h6'>Añadir campos</Typography>
+                <FormGroup>
+                    <TextField
+                        fullWidth
+                        multiline
+                        rows={4}
+                        size="small"
+                        label={'Marca:marca1/marca2,' + '\n Color:color1/color2,'}
+                        variant="outlined"
+                        name='fields'
+                        value={fields}
+                        onChange={handleChange}
+                        helperText="Los campos creados estarán disponibles al 
+                        crear un producto perteneciente a este árbol de categorías. En el ejemplo,
+                        superior, se han creado dos campos: Marca y Color. El campo Marca ofrece dos opciones, marca1 y marca2.
+                        El campo Color ofrece dos opciones, color1 y color2. Debe separar las opciones con '/' y el nombre  
+                        del campo con ':' . Los distintos campos se separan con ',' "
+
                     />
 
                 </FormGroup>

@@ -22,7 +22,7 @@ const NewCategsSection = ({ props }) => {
                     throw error
                 }
         */
-        await throwPromise(createCategs(newCategories));
+        await throwPromise(createCategories(newCategories));
         //console.log('aveee', a)
         console.log('aveee 222', confirmation)
         setUploaded(true)

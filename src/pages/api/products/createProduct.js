@@ -17,7 +17,7 @@ const handler = nc()
         try {
             if (!name) {
                 //Estos errores si deben salir en el front
-                const error = new Error('Debe indicar que producto quiere vender para subir un anuncio');
+                const error = new Error('Debe indicar el nombre del producto');
                 error.status = 401;
                 next(error);
                 return
@@ -25,7 +25,7 @@ const handler = nc()
             req.body.url = nameToUrl(name)
             await dbConnect()
             const productData = req.file ?
-                { images: req.file.location, categories, ...req.body, name }
+                { images: req.file.location, categories, ...req.body }
                 :
                 { categories, ...req.body }
 

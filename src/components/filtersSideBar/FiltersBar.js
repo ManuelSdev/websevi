@@ -21,13 +21,24 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
 
     const firstRender = React.useRef(true);
 
-    const router = useRouter()
-    const { categoryPath, slug } = router.query
+    const router = useRouter();
+    const [state, setstate] = React.useState({})
+
+    const { categoryPath, slug, pathParams } = state
+    const [searchKeys] = pathParams ? pathParams : [false]
+
+
+
+    //Extrae el string introducido en el buscador, que siempre es el primer elemento del array pathParams
+    //
+    console.log('@@@@@@@@@@@@@@-------------------------------', state)
+
 
     const { hasLink, filters, pricesRange } = filtersProps
     const [minPrice, maxPrice] = pricesRange
 
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange
+
 
 
     const marks = [
@@ -66,6 +77,9 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         });
     };
 
+
+
+
     /**
      * Cada vez que se modifica el array de filtros checkedFilters, se construye una url con el 
      * nombre de la categoría(url actual)+los nombres de los filtros seleccionados y se redirecciona
@@ -76,7 +90,10 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
             firstRender.current = false;
             return;
         }
-        const newPath = { path: `/${categoryPath}` }
+        const newPath = categoryPath ?
+            console.log('========== categoryPath', categoryPath) || { path: `/${categoryPath}` }
+            :
+            console.log('========== searchKeys', searchKeys) || { path: `/buscar/${searchKeys}` }
         checkedFilters.map(filter => {
             newPath.path = newPath.path.concat('/', filter)
         })
@@ -84,8 +101,11 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         router.push(newPath.path)
         router.push({
             pathname: newPath.path,
-            query: { selectedPricesRange },
+            //  query: { selectedPricesRange },
         })
+
+
+
     }, [checkedFilters])
 
 
@@ -97,7 +117,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         <Paper>
             <TreeView
                 //Key : https://stackoverflow.com/questions/54364872/a-component-is-changing-an-uncontrolled-input-of-type-checkbox-to-be-controlled
-                key={`treeview-${categoryPath}`}
+                key={categoryPath ? `treeview-${categoryPath}` : `treeview-${searchKeys}`}
                 //defaultExpanded={['1']}
                 defaultExpanded={hasLink ? [] : [...arrayOfIndexString, 'price']}
                 aria-label="file system navigator"
@@ -139,7 +159,8 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                         return filtersBlock
                     })
                 }
-                {!hasLink &&
+                {
+                    !hasLink && maxPrice !== minPrice &&
                     < TreeItem sx={{ pt: 2 }} nodeId={'price'} label={'Precio'}>
                         <Box sx={{ width: '90%', pl: 1 }}>
                             <Slider
@@ -154,12 +175,13 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                                 max={maxPrice}
                                 min={minPrice}
 
+
                             />
                         </Box>
                     </TreeItem>
                 }
 
-            </TreeView>
+            </TreeView >
         </Paper >
 
     )

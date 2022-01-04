@@ -13,9 +13,9 @@ const categorySchema = new mongoose.Schema({
     name: { type: String, unique: true, index: true },
     path: { type: String, unique: true, index: true },
 
-    //filters es un array de objetos/maps
+    //fields es un array de objetos/maps
     //cada valor de una propiedad del objeto será un array de string
-    filters: [{
+    fields: [{
         type: Map,
         of: [String]
     }]

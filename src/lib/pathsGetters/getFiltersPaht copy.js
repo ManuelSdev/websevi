@@ -32,8 +32,8 @@ const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numb
 //TODO: refactoriza y crea modulo en lib con esto
 
 /**
- * Recibe una categoria que tiene un campo filters
- * filters es un array de objetos
+ * Recibe una categoria que tiene un campo fields
+ * fields es un array de objetos
  * cada objeto contiene una clave es un array con los nombres de filtros asociados al nombre de la clave
  * Este método fusiona los filtros de todas las claves, de manera ordenada, en un único array
  * Devuelve un array con todos los filtros formateados para usarlos como urls

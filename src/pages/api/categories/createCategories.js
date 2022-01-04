@@ -2,17 +2,40 @@ import Category from '../../../models/Category'
 import dbConnect from '../../../lib/dbConnect'
 import { toPlainString } from '../../../lib/utils/stringTools'
 
+
+//Los siguientes métodos, ejecutados mediante el pipe en el método final strToFiltersStructure , 
+//Adaptan el string fields de tipo  'Marca:marca1/marca2, Color:color1/color2'
+//a la estructura del campo fields [{Marca:[marca1,marca2]}, Color:[color1,color2]]
+
+const pipe = (...fns) => arg => fns.reduce((acc, fn) => fn(acc), arg)
+const mySplit = text => str => str.split(text)
+const a = array => array.map(str => str.split(':'))
+const b = array => array.map(subArray => subArray.map(str => str.split('/')))
+const c = array => array.map(subArray => {
+    const [key, values] = subArray
+    return { [key]: values }
+})
+const strToFiltersStructure = str => pipe(
+    mySplit(','),
+    a,
+    b,
+    c
+)(str)
+
 export default async function handler(req, res) {
     console.log("REQ EN CREATE", req.body)
 
     try {
         await dbConnect()
-        const { category_1, category_2, categ_1_isNew: c1New } = req.body
+        const { category_1, category_2, category_1_isNew: c1New, fields: str } = req.body
+        console.log('saveddddddddddddddddddddddddddd********************', c1New)
         const nameCategory_1 = category_1.trim()
         const nameCategory_2 = category_2.trim()
 
         const pathCategory_1 = toPlainString(nameCategory_1)
         const pathCategory_2 = category_2 && toPlainString(nameCategory_2)
+
+        const fields = strToFiltersStructure(str)
 
         //Comprueba si las categorías introducidas ya existen en la bdd
         if (c1New && await Category.exists({ path: pathCategory_1 })) {
@@ -27,6 +50,7 @@ export default async function handler(req, res) {
         //TODO: Mete más errores para controlar el envio de campos vacíos
         //valida desde el front tb
         if (c1New) {
+            console.log('sNEWWWWWWWWWWWW *******************')
             const c_1 =
             {
                 name: nameCategory_1,
@@ -37,6 +61,7 @@ export default async function handler(req, res) {
             c_1.childs = category_2 ? [nameCategory_2] : []
             const newCategory_1 = await new Category(c_1)
             const saved_1 = await newCategory_1.save()
+            console.log('saveddddddddddddddddddddddddddd********************', saved_1)
         }
         else if (!c1New && category_2) {
             //Busca documento con ese _id y hace push  en el array del campo "childs"
@@ -55,7 +80,8 @@ export default async function handler(req, res) {
                 name: nameCategory_2,
                 level: 2,
                 path: pathCategory_2,
-                parent: pathCategory_1
+                parent: pathCategory_1,
+                fields
             })
             const saved_2 = await newCategory_2.save()
         }

@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
     const filters = req.query
     //console.log("req body init", req.body)
-    // console.log("req body init", filters)
+    console.log("req body init", filters)
     try {
         await dbConnect()
         const result = await getCategories(filters)

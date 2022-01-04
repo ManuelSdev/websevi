@@ -6,7 +6,6 @@ import usePriceSlider from "../../hooks/usePriceSlider"
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from "next/router"
 import React from 'react'
-import useForm from "../../hooks/useForm"
 
 
 const Buscar = ({ isLogged, products, categories, filtersProps }) => {
@@ -18,24 +17,18 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
     // console.log('----------------------------', router.query)
     const { pricesRange } = filtersProps
 
-    const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
+    const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider(pricesRange)
     //  const props = { selectedPricesRange, handlePrice, valuetext }
     //Este estado permite filtrar/renderizar desde el cliente los productos cuyas categorías coincidan
     const [{ Categorías: filters }] = filtersProps.filters
-    const [categoriesFilters, setCategoriesFilters] = React.useState([])
 
-    const { formValue, handleChange: onChange, setFormValue } = useForm({
-        checkedFilters: [],
-    });
 
-    const { checkedFilters } = formValue
-
-    const props = { selectedPricesRange, handlePrice, valuetext, checkedFilters, onChange }
+    const props = { selectedPricesRange, handlePrice, valuetext }
     React.useEffect(() => {
-        console.log('+++++++++++', selectedPricesRange)
-        // props = { selectedPricesRange, handlePrice, valuetext }
-        //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
-        setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
+        console.log('+++++++++++ selectedPricesRange', selectedPricesRange)
+        console.log('+++++++++++ pricesRange', pricesRange)
+
+        setSelectedPricesRange(pricesRange)
 
     }, [pricesRange])
     console.log('Primeroooo', selectedPricesRange)
@@ -66,24 +59,33 @@ export async function getServerSideProps(context) {
     const queryCategories = [...pathParams]
 
 
-    console.log('&&&&&&&&&&&&&&&& QUERY PARAMS', queryCategories)
+    console.log('&&&&&&&&&&&&&&&& QUERY PARAMS', query)
     //Obtiene todas las categorías de la bdd para montar el header
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
 
-    //Obtiene los productos coincidentes con las palabras de la barra de busqueda
+    //Obtiene los productos coincidentes con el string del buscador
     //Se buscan matches con los campos name, size, description y categories
     //Si existen filtros por categorías, la consulta los incluye
+    //Estos productos son los que se muestran porque su busqueda implica usar las categorías como filtros
     const productsRes = queryCategories.length === 0 ?
         await getProducts({ $text: { $search: searchKeys } })
         :
         await getProducts({ $text: { $search: searchKeys }, categories: { $in: queryCategories } })
     const products = JSON.parse(JSON.stringify(productsRes))
-    console.log('*************** PRODUCTOS FILTRADOS', products)
-    //Genera un array con todas las categorías de los productos obtenidos
-    //Se omiten las subcategorías de nivel 3 en esta etapa del prototipo
-    const allCategories = products.map(product => {
-        const [category1, category2] = product.categories
+
+    //Obtiene los valores del campo categories de todos productos coincidentes con el string del buscador
+    //Estás categorías se usan para la sidebar de filtros y dependen de los productos iniciales que coinciden
+    //con el string del buscador. Al pulsar sobre una categoría del sidebar de filtros, se hará otra busqueda 
+    //de productos teniendo en cuenta la categoría pulsada, pero esas categorías del sidebar se mantienen
+    //porque dependen de los productos que hacen match con el string del buscador, sin ningún otro filtro
+    const productsCategoriesRes = await getProducts({ $text: { $search: searchKeys } }, { categories: true, _id: false })
+    //console.log('*************** PRODUCTOS FILTRADOS', productsCategoriesRes)
+    //productsCategoriesRes es un array de objetos. Cada objeto es un campo categories de tipo {categories:[...]}
+    // un campo categories de un producto contiene 3 elementos correspondientes a 3 niveles de categorías y subcategorías
+    //En este prototipo solo se una 2 niveles de categorías. Se extraen de la propiedad categories del objeto
+    const allCategories = productsCategoriesRes.map(object => {
+        const [category1, category2] = object.categories
         return [category1, category2]
     })
 

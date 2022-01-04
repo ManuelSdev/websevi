@@ -23,38 +23,19 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
         <>
             <Box sx={{ mb: 3, flexGrow: 1, background: "green" }}>
                 <Grid container spacing={2}>
-                    {checkedFilters.length === 0 ?
-                        products && products
-                            .filter((product, index) => index <= displayedProducts - 1)
-                            .map(product =>
-                                minSelectedPrice && maxSelectedPrice ?
-                                    (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
-                                    <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
-                                        <GridCard product={product}>xs=8</GridCard>
-                                    </Grid>
-                                    :
-                                    <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
-                                        <GridCard product={product}>xs=8</GridCard>
-                                    </Grid>
-                            )
-                        :
-                        products && products
-
-                            .filter(product => {
-                                const check = checkedFilters.map(filter => product.categories.includes(filter))
-                                return check.includes(true)
-                            })
-                            .map(product =>
-                                minSelectedPrice && maxSelectedPrice ?
-                                    (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
-                                    <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
-                                        <GridCard product={product}>xs=8</GridCard>
-                                    </Grid>
-                                    :
-                                    <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
-                                        <GridCard product={product}>xs=8</GridCard>
-                                    </Grid>
-                            )
+                    {products && products
+                        .filter((product, index) => index <= displayedProducts - 1)
+                        .map(product =>
+                            minSelectedPrice && maxSelectedPrice ?
+                                (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                                :
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                        )
 
                     }
                 </Grid>
@@ -75,4 +56,59 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
     )
 }
 export default ProductsGrid
+/*
+return (
+    <>
+        <Box sx={{ mb: 3, flexGrow: 1, background: "green" }}>
+            <Grid container spacing={2}>
+                {checkedFilters.length === 0 ?
+                    products && products
+                        .filter((product, index) => index <= displayedProducts - 1)
+                        .map(product =>
+                            minSelectedPrice && maxSelectedPrice ?
+                                (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                                :
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                        )
+                    :
+                    products && products
 
+                        .filter(product => {
+                            const check = checkedFilters.map(filter => product.categories.includes(filter))
+                            return check.includes(true)
+                        })
+                        .map(product =>
+                            minSelectedPrice && maxSelectedPrice ?
+                                (product.price >= minSelectedPrice && product.price <= maxSelectedPrice) &&
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                                :
+                                <Grid key={product._id} item xs={6} sm={4} md={4} lg={4} >
+                                    <GridCard product={product}>xs=8</GridCard>
+                                </Grid>
+                        )
+
+                }
+            </Grid>
+            {displayedProducts < products.length &&
+                <Box mt={2} sx={{ display: 'flex', justifyContent: 'center', }} >
+                    <Button
+                        onClick={handleDisplayed}
+                    >
+                        Mostrar más
+                    </Button>
+                </Box>
+            }
+
+
+        </Box>
+
+    </>
+)
+*/

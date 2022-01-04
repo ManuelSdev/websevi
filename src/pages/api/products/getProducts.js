@@ -2,8 +2,8 @@
 import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 
-export async function getProducts(filters) {
-    // console.log('********************************************getProducts')
+export async function getProducts(...filters) {
+    console.log('********************************************getProducts FILTERS', [...filters])
 
     //Crea una estructura de busqueda similar a db.collection.find( { $text: { $search: "coffee" } } )
     /*
@@ -13,7 +13,7 @@ export async function getProducts(filters) {
     */
     await dbConnect()
 
-    const products = await Product.find(filters)
+    const products = await Product.find(...filters)
     // console.log('PRODS DE LA QUERY GET', products)
     //return JSON.parse(JSON.stringify(products))
     return products
