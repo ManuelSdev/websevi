@@ -3,17 +3,22 @@ import Product from '../../../models/Product'
 import dbConnect from '../../../lib/dbConnect'
 import upload from '../../../lib/utils/multerUploadS3'
 import nc from 'next-connect'
-import { nameToUrl } from '../../../lib/utils/stringTools'
+import { nameToUrl, toPlainString } from '../../../lib/utils/stringTools'
 
 //TODO: pulir validaciones aquí y en front
 const handler = nc()
-    .use(upload.single("images"))
+    //CLAVE: usa [] tras el nombre del field porque el cliente agrega []
+    //Creo que esto viene del withformdata customizado para manejar arrays
+    //https://maximorlov.com/fix-unexpected-field-error-multer/
+    .use(upload.array("images[]", 4))
     .post(async (req, res, next) => {
-        // console.log("IMG", req.file)
+        console.log("€€€€€€€€€€€€€€€€ REQ FILEsssss", req.files)
+        console.log("€€€€€€€€€€€€€€€€ REQ FILE", req.file)
         //console.log("BODY", req.body)
 
-        const { name, category_1, category_2 } = req.body
-        const categories = [category_1, category_2]
+        const { name, category_1, category_2, specs } = req.body
+        const categories = [category_1, category_2].map(elem => toPlainString(elem))
+
         try {
             if (!name) {
                 //Estos errores si deben salir en el front
@@ -23,9 +28,11 @@ const handler = nc()
                 return
             }
             req.body.url = nameToUrl(name)
+            req.body.specs = specs.split('//')
+            const locations = req.files ? req.files.map(fileObject => fileObject.location) : []
             await dbConnect()
-            const productData = req.file ?
-                { images: req.file.location, categories, ...req.body }
+            const productData = req.files ?
+                { images: locations, categories, ...req.body }
                 :
                 { categories, ...req.body }
 

@@ -67,10 +67,10 @@ export async function getServerSideProps(context) {
 
     // console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬ category', category)
     //Obtiene los filtros del path
-    const { filters } = category
+    const { fields } = category
     //console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬', filters)
     /**
-     * Genera un array de objetos equivalente al array de objetos filters de la category
+     * Genera un array de objetos equivalente al array de objetos fields de la category
      * Los objetos del array generado tienen las mismas keys del array filters de la category
      * Los valores de cada key se toman del slug y solo se añaden si existen como valor en la key equivalente
      * del array filters de la category
@@ -78,7 +78,7 @@ export async function getServerSideProps(context) {
      * Así, se hara el filtrado de productos en función de los productos cuyos campos tengan valores
      * coincidentes con las keys del mismo nombre
      */
-    const slugFiltersDirty = filters.map(filter => {
+    const slugFiltersDirty = fields.map(filter => {
         //Obtiene key de un filtro de la category
         const key = Object.keys(filter)
         //Genera un array con todos los elementos slug que pertenecen a esa key
@@ -117,6 +117,7 @@ export async function getServerSideProps(context) {
     const prices = products.map(product => product.price)
     const maxPrice = Math.max(...prices)
     const minPrice = Math.min(...prices)
+
     /**
      * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade

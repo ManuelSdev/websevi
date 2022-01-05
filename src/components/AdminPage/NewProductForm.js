@@ -17,18 +17,24 @@ import React from "react";
 import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import FormTemplate from "../elements/FormTemplate"
 import { toPlainString } from "../../lib/utils/stringTools"
+import { Stack } from "@mui/material"
 
 const NewProductForm = ({ onSubmit, error }) => {
 
     const { formValue: product, handleChange: handleChangeProduct, setFormValue: setProduct } = useForm({
         name: '',
-
+        specs: '',
         price: "",
         ean: "",
         category_1: '',
         category_2: '',
         description: '',
-        images: null
+        image_0: null,
+        image_1: null,
+        image_2: null,
+        image_3: null,
+
+
     });
     const { formValue: fields, handleChange: handleChangeFields, setFormValue: setFields } = useForm({
 
@@ -42,13 +48,14 @@ const NewProductForm = ({ onSubmit, error }) => {
 
     })
 
-    const { name, price, category_1, category_2, ean, description } = product;
+    const { name, price, category_1, category_2, ean, description, specs } = product;
     const { categories_1, categories_2, dynamicFields } = options
 
     //Recibe onSubmit en props desde el componente superior
     const handleSubmit = onSubmit => ev => {
         ev.preventDefault();
-        const newProductData = { ...product, ...fields }
+        const images = { images: [product.image_0, product.image_1, product.image_2, product.image_3] }
+        const newProductData = { name, price, category_1, category_2, ean, description, specs, ...images, ...fields }
         onSubmit(newProductData);
     };
 
@@ -273,19 +280,58 @@ const NewProductForm = ({ onSubmit, error }) => {
                 onChange={handleChangeProduct}
             />
 
-
-
-
-            <InputFile
-                //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
-                //y que salga el aviso de mui
-                name="images"
-
-                accept="image/*" id="contained-button-file"
-                // editableSrc={product?.images ?? null}
+            <TextField
+                required
+                fullWidth
+                multiline
+                size="small"
+                label="Especificaciones"
+                variant="outlined"
+                name='specs'
+                value={specs}
                 onChange={handleChangeProduct}
+                helperText="Las especificaciones se muestran en una lista. Separe el texto de cada especificación
+                o característica con '//"
             />
 
+            <Stack direction='row' spacing={2}>
+                <InputFile
+                    //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
+                    //y que salga el aviso de mui
+                    name="image_0"
+
+                    accept="image/*" id="contained-button-file"
+                    // editableSrc={product?.images ?? null}
+                    onChange={handleChangeProduct}
+                />
+                <InputFile
+                    //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
+                    //y que salga el aviso de mui
+                    name="image_1"
+
+                    accept="image/*" id="contained-button-file"
+                    // editableSrc={product?.images ?? null}
+                    onChange={handleChangeProduct}
+                />
+                <InputFile
+                    //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
+                    //y que salga el aviso de mui
+                    name="image_2"
+
+                    accept="image/*" id="contained-button-file"
+                    // editableSrc={product?.images ?? null}
+                    onChange={handleChangeProduct}
+                />
+                <InputFile
+                    //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
+                    //y que salga el aviso de mui
+                    name="image_3"
+
+                    accept="image/*" id="contained-button-file"
+                    // editableSrc={product?.images ?? null}
+                    onChange={handleChangeProduct}
+                />
+            </Stack>
             <Button type="submit" >Subir anuncio</Button>
             <SaveAndLoadButton></SaveAndLoadButton>
 

@@ -15,8 +15,7 @@ function InputFile({ onChange, editableSrc, ...props }) {
     editableSrc && setSrc(editableSrc);
     // console.log('USE EFFECT DEL INPUT', editableSrc)
   }, [editableSrc])
-  //console.log('===', src)
-  //Este método carga la ruta del archivo 
+
   const loadSrcFromFile = file => {
     if (!file) {
       setSrc(null);
@@ -30,10 +29,9 @@ function InputFile({ onChange, editableSrc, ...props }) {
     const reader = new FileReader();
     reader.onload = function () {
       setSrc(reader.result);
-      console.log('===', inputRef.current)
+      //  console.log(inputRef.current)
     };
     reader.readAsDataURL(file);
-    console.log('===', reader)
   };
 
   const handleClick = () => {

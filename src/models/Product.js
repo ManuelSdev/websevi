@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 console.log('jhsdljkhjksdhsjh')
 const productSchema = mongoose.Schema({
     name: { type: String, unique: true, index: true },
-    brand: { type: String, index: true },
+    Marca: { type: String, index: true },
     price: { type: Number, index: true },
     chipset: { type: String, index: true },
     size: { type: String, index: true },

@@ -5,7 +5,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeItem from '@mui/lab/TreeItem';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import { mapFilters } from '../../lib/mapFilters';
+import { mapNames } from '../../lib/mapFilters';
 
 import Link from '../elements/Link'
 import FormGroup from '@mui/material/FormGroup';
@@ -22,16 +22,14 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     const firstRender = React.useRef(true);
 
     const router = useRouter();
-    const [state, setstate] = React.useState({})
 
-    const { categoryPath, slug, pathParams } = state
+    const { categoryPath, slug, pathParams } = router.query
     const [searchKeys] = pathParams ? pathParams : [false]
 
 
 
     //Extrae el string introducido en el buscador, que siempre es el primer elemento del array pathParams
     //
-    console.log('@@@@@@@@@@@@@@-------------------------------', state)
 
 
     const { hasLink, filters, pricesRange } = filtersProps
@@ -128,7 +126,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                 {
                     filters.map((filter, index) => {
                         const filterKey = Object.keys(filter)
-                        // console.log('*****', filter)
                         const filtersBlock = hasLink ?
                             <Link color='black' key={filter} href={`/${toPlainString(filter)}`}>
                                 <TreeItem sx={{ pt: 2 }} nodeId={`${index}`} label={filter}>
@@ -138,7 +135,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                             :
                             <TreeItem key={filterKey} sx={{ pt: 2 }} nodeId={`${index}`} label={filterKey}>
                                 <FormGroup>
-
                                     {filter[`${filterKey}`].map(filterValue =>
 
                                         <FormControlLabel
@@ -153,7 +149,9 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                                             }
                                             label={filterValue}
                                         />
+
                                     )}
+
                                 </FormGroup>
                             </TreeItem>
                         return filtersBlock

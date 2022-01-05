@@ -26,7 +26,7 @@ const getValueByType = {
 
   radio: ({ value }) => value === "sell" ? true : false,
 
-  file: ({ files }) => files[0] || null,
+  file: ({ files }) => console.log('@@@@@@@@@@@@@@@@@', files) || files[0] || null,
 
 };
 
@@ -38,6 +38,7 @@ function useForm(initialFormValue) {
   const [formValue, setFormValue] = useStateWithCb(initialFormValue)
 
   const updateFormValue = (name, value) => {
+    console.log('###### VALUEEE', value)
     setFormValue(currentFormValue => ({
 
       ...currentFormValue,
@@ -63,7 +64,7 @@ function useForm(initialFormValue) {
     }, [formValue]);
   */
   const handleChange = ev => {
-    //console.log("EVENT TARGET")
+    console.log("EVENT TARGET", ev.target)
     // console.log("EVENT TARGET TYPE", ev.target.value)
     //console.log("EVENT TARGET NAME", ev.target.name)
     // console.log("EVENT TARGET TYPE", ev.target.type)

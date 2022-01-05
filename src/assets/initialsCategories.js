@@ -32,7 +32,7 @@ const initialsCategories = [
         parent: 'componentes',
         fields:
             [
-                { brand: ['AMD', 'Intel'] }
+                { Marca: ['AMD', 'Intel'] }
             ]
 
     },
@@ -42,9 +42,9 @@ const initialsCategories = [
         parent: 'componentes',
         fields:
             [
-                { brand: ['ASUS', 'Gigabyte', 'Asrock', 'MSI'] },
-                { chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },
-                { size: ['ATX', 'mATX', 'ITX'] }
+                { Marca: ['ASUS', 'Gigabyte', 'Asrock', 'MSI'] },
+                { Chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },
+                { Tamaño: ['ATX', 'mATX', 'ITX'] }
             ]
 
     },
