@@ -1,11 +1,7 @@
-import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid"
-import Box from "@mui/system/Box"
-import GridCard from "./GridCard"
+
 import ProductsGrid from "./ProductsGrid"
 import FiltersBar from "../filtersSideBar/FiltersBar"
-import usePriceSlider from "../../hooks/usePriceSlider"
-import { useRouter } from "next/router"
+
 import SidebarLayout from "../layouts/SidebarLayout"
 
 const ProductsSection = ({ products, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {

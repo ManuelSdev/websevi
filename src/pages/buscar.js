@@ -1,12 +1,12 @@
-import ProductsSection from "../../components/products/ProductsSection"
 import { getCategories } from '../api/categories/getCategories'
 import { getProducts } from "../api/products/getProducts"
-import usePriceSlider from "../../hooks/usePriceSlider"
 //import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
-import Layout from '../../components/layouts/Layout'
 import { useRouter } from "next/router"
 import React from 'react'
-import useForm from "../../hooks/useForm"
+import ProductsSection from '../components/products/ProductsSection'
+import usePriceSlider from '../hooks/usePriceSlider'
+import Layout from '../components/layouts/Layout'
+import useForm from '../hooks/useForm'
 
 
 const Buscar = ({ isLogged, products, categories, filtersProps }) => {
@@ -41,7 +41,7 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
     console.log('Primeroooo', selectedPricesRange)
     return (
         <Layout isLogged={isLogged} categories={categories}>
-            <ProductsSection products={products} filtersProps={filtersProps} {...props} />
+            <ProductsSection products={products} filtersProps={filtersProps} {...props}></ProductsSection>
         </Layout>
 
     )
