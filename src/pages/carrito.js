@@ -17,7 +17,9 @@ import ss from '@mui/icons-material/CloseOutlined';
 import { useAppContext } from "../components/context"
 import React from "react"
 import { sum } from "../lib/utils/sum"
-import { AppBar, CssBaseline, IconButton, Toolbar } from "@mui/material"
+import Toolbar from "@mui/material/Toolbar"
+
+import AppBar from "@mui/material/AppBar"
 import IconCorpName from "../components/elements/IconCorpName"
 import { ThemeProvider } from "@emotion/react"
 import theme from "../assets/theme"
@@ -27,6 +29,10 @@ import { createOrder } from "../lib/api/order"
 import useUser from "../hooks/swrHooks/useUser"
 import Modal from "../components/cart/Modal"
 import { useRouter } from "next/router"
+import Stack from "@mui/material/Stack"
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+
+
 const CartPage = () => {
     const router = useRouter()
     //VENTANA MODAL
@@ -134,7 +140,16 @@ const CartPage = () => {
                     }}
                 >
 
-                    <p>Lunes a jueves ........635 41 55 73 </p>
+                    <Stack
+                        alignItems='center'
+                        direction='row'>
+                        <Typography
+                            mr={3}
+                            variant="subtitle1">Lunes a jueves 10-19h. Viernes 10-15h </Typography>
+                        <LocalPhoneIcon
+                        />
+                        <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
+                    </Stack>
                 </Toolbar>
                 <Toolbar
 

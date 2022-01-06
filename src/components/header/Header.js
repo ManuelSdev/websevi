@@ -11,7 +11,9 @@ import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 const Header = ({ categories }) => {
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
     const { setIsLogged } = useAppContext()
@@ -46,7 +48,18 @@ const Header = ({ categories }) => {
                 <Link href="/user/test">
                     Profile
                 </Link>
-                <p>Lunes a jueves ........635 41 55 73 </p>
+
+
+                <Stack
+                    alignItems='center'
+                    direction='row'>
+                    <Typography
+                        mr={3}
+                        variant="subtitle1">Lunes a jueves 10-19h. Viernes 10-15h </Typography>
+                    <LocalPhoneIcon
+                    />
+                    <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
+                </Stack>
             </Toolbar>
 
             <SearchToolBar />

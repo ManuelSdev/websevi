@@ -68,6 +68,10 @@ const ProductDetails = ({ product }) => {
         //console.log('CUANTOS', amount + amountField + cartCurrentAmountOfThisProduct)
         return setProductToCart({ ...product, amount: amount + amountField + cartCurrentAmountOfThisProduct })
     }
+
+    const goToCart = () => {
+        addToCart()
+    }
     React.useEffect(() => {
         if (firstRender.current) {
             firstRender.current = false;
@@ -221,7 +225,7 @@ const ProductDetails = ({ product }) => {
             <Box>
                 <Link href="/carrito">
                     <Button
-
+                        onClick={addToCart}
                     >Comprar</Button>
                 </Link>
             </Box>

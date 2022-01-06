@@ -11,9 +11,6 @@ export default function Modal({ open, handleClickOpen, handleClose }) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open alert dialog
-            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
