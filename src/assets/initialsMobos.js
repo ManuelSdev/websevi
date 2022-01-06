@@ -14,7 +14,8 @@ const mobos = [
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/3-asus-tuf-gaming-b550-plus-mejor-precio.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/4-asus-tuf-gaming-b550-plus-caracteristicas.jpg'
 
-            ]
+            ],
+        featured: true
 
     },
     {
@@ -67,7 +68,8 @@ const mobos = [
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/2-asrock-x570m.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/3-asrock-x570m.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/4-asrock-x570m.jpg'
-            ]
+            ],
+        featured: true
     },
     {
         name: 'Asrock X570 Phantom Gaming-ITX TB3',
@@ -185,7 +187,8 @@ const mobos = [
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/2-asus-rog-strix-z690-i-gaming-wifi-comprar.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/3-asus-rog-strix-z690-i-gaming-wifi-mejor-precio.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/4-asus-rog-strix-z690-i-gaming-wifi-caracteristicas.jpg'
-            ]
+            ],
+        featured: true
     },
     {
         name: 'MSI MPG Z690 CARBON WIFI',
@@ -202,7 +205,8 @@ const mobos = [
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/3-msi-mpg-z690-carbon-wifi-mejor-precio.jpg',
                 'https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/motherboard/4-msi-mpg-z690-carbon-wifi-especificaciones.jpg'
 
-            ]
+            ],
+        featured: true
     }
 
 

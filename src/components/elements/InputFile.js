@@ -30,10 +30,10 @@ function InputFile({ onChange, editableSrc, ...props }) {
     const reader = new FileReader();
     reader.onload = function () {
       setSrc(reader.result);
-      console.log('===', inputRef.current)
+      //  console.log('===', inputRef.current)
     };
     reader.readAsDataURL(file);
-    console.log('===', reader)
+    // console.log('===', reader)
   };
 
   const handleClick = () => {
@@ -43,7 +43,7 @@ function InputFile({ onChange, editableSrc, ...props }) {
   };
 
   const handleChange = ev => {
-    console.log('##########################', ev.target.files)
+    //  console.log('##########################', ev.target.files)
     const file = ev.target.files[0];
     loadSrcFromFile(file);
     onChange(ev);

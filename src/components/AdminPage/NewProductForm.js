@@ -70,7 +70,7 @@ const NewProductForm = ({ onSubmit, error }) => {
     //Tras el primer render, usa el método setCategs para obtener los nombres de las categorías
     //de nivel 1 y mostrarlas en el desplegable del formulario
     React.useEffect(() => {
-        console.log('c1', category_1)
+        // console.log('c1', category_1)
         setCategs({ level: 1 }, 'categories_1')
     }, []);
 
@@ -83,12 +83,12 @@ const NewProductForm = ({ onSubmit, error }) => {
      * 
      */
     React.useEffect(() => {
-        console.log('c1', category_1)
+        // console.log('c1', category_1)
         if (allowUseEffects.current.effect1) {
             allowUseEffects.current.effect1 = false;
             return;
         }
-        console.log('USE 2----')
+        //console.log('USE 2----')
         resetFields()
         setCategs({ parent: toPlainString(category_1) }, 'categories_2')
 
@@ -126,17 +126,23 @@ const NewProductForm = ({ onSubmit, error }) => {
                 //  fieldsToObject[`${key}`] = field[`${key}`]
                 fieldsToObject[`${key}`] = ''
             })
-            setFields({ ...fieldsToObject })
+
+            mounted && setFields({ ...fieldsToObject })
             //Añade dynamicFields al estado options. Los valores almacenados en dynamicFields 
             //se muestrán como opciones en los desplegables dinámicos 
-            setOptions({
+            mounted && setOptions({
                 ...options,
                 dynamicFields: [...categoryFields]
             })
         }
 
+        //Uso de función cleanUP
+        let mounted = true;
         createFields({ path: toPlainString(category_2) })
-
+        return () => {
+            //console.log("4- Tira a mounted false")
+            mounted = false;
+        };
 
 
     }, [category_2]);

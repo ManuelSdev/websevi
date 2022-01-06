@@ -1,5 +1,4 @@
-import { getCategories } from '../api/categories/getCategories'
-import { getProducts } from "../api/products/getProducts"
+
 //import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
 import { useRouter } from "next/router"
 import React from 'react'
@@ -7,6 +6,8 @@ import ProductsSection from '../components/products/ProductsSection'
 import usePriceSlider from '../hooks/usePriceSlider'
 import Layout from '../components/layouts/Layout'
 import useForm from '../hooks/useForm'
+import { getProducts } from "./api/products/getProducts"
+import { getCategories } from "./api/categories/getCategories"
 
 
 const Buscar = ({ isLogged, products, categories, filtersProps }) => {

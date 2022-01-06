@@ -24,11 +24,11 @@ const NewCategsSection = ({ props }) => {
         */
         await throwPromise(createCategories(newCategories));
         //console.log('aveee', a)
-        console.log('aveee 222', confirmation)
+        // console.log('aveee 222', confirmation)
         setUploaded(true)
         //history.push("/user");
     };
-    console.log('confiii 1111', confirmation)
+    //   console.log('confiii 1111', confirmation)
     const firstRenderForUploaded = React.useRef(true);
     /*
     React.useEffect(() => {

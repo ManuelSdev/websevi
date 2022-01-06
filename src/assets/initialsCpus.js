@@ -4,7 +4,8 @@ const cpus = [
         Marca: 'AMD',
         price: 174,
         categories: ['Componentes', 'Procesadores', 'Procesadores AMD'],
-        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/1600.jpg']
+        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/1600.jpg'],
+        featured: true
 
     },
     {
@@ -36,7 +37,8 @@ const cpus = [
         Marca: 'AMD',
         price: 310,
         categories: ['Componentes', 'Procesadores', 'Procesadores AMD'],
-        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/3800x.jpg']
+        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/3800x.jpg'],
+
 
     },
     {
@@ -52,7 +54,8 @@ const cpus = [
         Marca: 'AMD',
         price: 330,
         categories: ['Componentes', 'Procesadores', 'Procesadores AMD'],
-        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/1315-amd-ryzen-7-5700g-46ghz.jpg']
+        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+amd/1315-amd-ryzen-7-5700g-46ghz.jpg'],
+        featured: true
 
     },
     {
@@ -100,7 +103,8 @@ const cpus = [
         Marca: 'Intel',
         price: 478,
         categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
-        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12700k.jpg']
+        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12700k.jpg'],
+        featured: true
 
     },
     {
@@ -140,7 +144,8 @@ const cpus = [
         Marca: 'Intel',
         price: 357,
         categories: ['Componentes', 'Procesadores', 'Procesadores Intel'],
-        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12600KF.jpg']
+        images: ['https://bucketmoon.s3.eu-west-3.amazonaws.com/initProducts/cpu+intel/12600KF.jpg'],
+        featured: true
 
     }
 ]

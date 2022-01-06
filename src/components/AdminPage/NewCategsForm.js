@@ -48,7 +48,14 @@ const NewCategsForm = ({ onSubmit, error }) => {
 
     //Tras el primer render, setea las categorías de nivel 1
     React.useEffect(() => {
+        //Uso de función cleanUP
+
+        let mounted = true;
         setCategs({ level: 1 }, 'categories_1')
+        return () => {
+            //console.log("4- Tira a mounted false")
+            mounted = false;
+        };
     }, [])
 
     /**
@@ -78,12 +85,12 @@ const NewCategsForm = ({ onSubmit, error }) => {
     const setCategs = async (filter, categoriesToChange) => {
         const res = await getCategories(filter)
         const newArray = res.map(category => category.name)
-        console.log('query  1', res)
+        // console.log('query  1', res)
         await setCategories({
             ...categories,
             [categoriesToChange]: newArray
         })
-        console.log('cattt', categories)
+        //  console.log('cattt', categories)
     }
 
     error && console.log('HAY ERROR ', error)
