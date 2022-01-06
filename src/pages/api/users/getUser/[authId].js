@@ -5,11 +5,11 @@ import dbConnect from '../../../../lib/dbConnect'
 //import categs from '../../../assets/categories'
 
 export async function getUser(filters) {
-    //console.log('get user', filters)
+    console.log('-------------------get user', filters)
     await dbConnect()
 
     const [user] = await User.find(filters)
-    // console.log('PRODS DE LA QUERY GET', cat)
+    console.log('USER SACADO-------------------------', user)
     return user
 }
 

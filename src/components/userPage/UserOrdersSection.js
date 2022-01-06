@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography"
 import useOrders from '../../hooks/swrHooks/useOrders';
 
-const OrdersSection = ({ user }) => {
+const UserOrdersSection = ({ user }) => {
     const { orders, isLoadingOrders, isErrorOrders, mutateOrders } = useOrders(user._id)
 
     console.log('==============', orders)
@@ -38,4 +38,4 @@ const OrdersSection = ({ user }) => {
     )
 }
 
-export default OrdersSection
+export default UserOrdersSection

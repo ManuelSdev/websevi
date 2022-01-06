@@ -3,15 +3,16 @@ import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Stack from '@mui/material/Stack';
+import { updateUser } from '../../lib/api/user';
 
 
 
 const DataSection = ({ user }) => {
-
+    console.log('*------------', user._id)
     const onSubmit = async (newUserValues) => {
         console.log('*------------', user._id)
         const { resolved } = await updateUser(user._id, newUserValues)
-        resolved && mutate()
+        // resolved && mutate()
 
         //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
     }

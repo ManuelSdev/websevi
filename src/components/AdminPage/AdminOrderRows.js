@@ -18,6 +18,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Image from "next/image"
 import { Stack } from '@mui/material';
 import FullDate from '../../lib/utils/formatDate';
+
+
 export default function CollapsibleTableRow({ order, detailsHeaders }) {
     // const { row } = props;
     const [open, setOpen] = React.useState(false);
@@ -37,6 +39,7 @@ export default function CollapsibleTableRow({ order, detailsHeaders }) {
                 <TableCell component="th" scope="row">
                     <FullDate namedMonth={false}>{order.date}</FullDate>
                 </TableCell>
+                <TableCell >{order.userId}</TableCell>
                 <TableCell >{order._id}</TableCell>
                 <TableCell align="right">{order.orderCart.length}</TableCell>
                 <TableCell align="right">{order.amount} €</TableCell>

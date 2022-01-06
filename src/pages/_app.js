@@ -11,6 +11,7 @@ import { AppProvider } from '../components/context'
 import theme from '../assets/theme'
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline'
+import { getUser } from '../lib/api/user'
 
 //import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
@@ -71,10 +72,10 @@ function App({ Component, pageProps }) {
        */
       const { admin, userId: authId } = state && await Session.getAccessTokenPayloadSecurely()
       const info = state && await Session.getAccessTokenPayloadSecurely()
-
-      console.log('INFO EN FRONT @@@@@@@@@@@@@@', authId)
+      const user = await getUser(authId)
+      console.log('INFO EN FRONT @@@@@@@@@@@@@@', user)
       //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
-      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '' })
+      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
 
     }
     checkSession()
@@ -93,11 +94,11 @@ function App({ Component, pageProps }) {
 
   const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart }
   pageProps.authId = isLogged.authId
-  //pageProps.isLogged = isLogged
+  pageProps.isLogged = { ...isLogged }
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
 
-  //console.log('LOGIN', isLogged)
+  console.log('LOGIN', isLogged)
   return (
     <>
 

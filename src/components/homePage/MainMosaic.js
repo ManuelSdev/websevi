@@ -10,50 +10,26 @@ import nvidia from '../../assets/images/banners/nvidia.png'
 const MainMosaic = () => {
 
     return (
-        <Box mb={5} sx={{ flexGrow: 1, background: "green" }}>
-            <Grid container rowSpacing={0}>
-                <Grid item xs={12}  >
-                    <Paper
-                        sx={{
-                            color: "white",
-                            background: 'linear-gradient(-45deg, rgba(34,193,195,1) 0%, rgba(0,0,0,1) 79%)',
-                            display: 'block'
-                        }}
-                    >
-                        <Box>
-                            <Image
 
-                                src={tr}
-                            >
+        <Paper
 
-                            </Image>
-                        </Box>
-                    </Paper>
-                </Grid>
-                <Grid item xs={6} >
-                    <Paper square
-                        sx={{ backgroundColor: 'grey.600', height: '350px' }}
-                    >
+            sx={{
+                color: "white",
+                background: 'linear-gradient(-45deg, rgba(34,193,195,1) 0%, rgba(0,0,0,1) 79%)',
+                display: 'block'
+            }}
+        >
+            <Box
+                mb={3}>
+                <Image
 
-                    </Paper>
-                </Grid>
-                <Grid item xs={6}  >
-                    <Paper square
-                        sx={{ backgroundColor: 'grey.400', }}
-                    >
-                        <Box>
-                            <Image
+                    src={tr}
+                >
 
-                                src={nvidia}
-                            >
+                </Image>
+            </Box>
+        </Paper>
 
-                            </Image>
-                        </Box>
-                    </Paper>
-                </Grid>
-
-            </Grid>
-        </Box >
     )
 }
 

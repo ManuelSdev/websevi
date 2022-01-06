@@ -16,7 +16,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-import UserOrderRows from './UserOrderRows';
+import AdminOrderRows from './AdminOrderRows';
 import formatDate from '../../lib/utils/formatDate'
 
 
@@ -30,6 +30,7 @@ export default function UserOrdersTable({ mainHeaders, orders, detailsHeaders })
                         <TableCell />
 
                         <TableCell >Fecha</TableCell>
+                        <TableCell >ID de cliente</TableCell>
                         <TableCell >ID de pedido</TableCell>
                         <TableCell align="right">Productos</TableCell>
                         <TableCell align="right">Total</TableCell>
@@ -38,7 +39,7 @@ export default function UserOrdersTable({ mainHeaders, orders, detailsHeaders })
                 </TableHead>
                 <TableBody>
                     {orders.map(order => (
-                        <UserOrderRows key={order._id} order={order} detailsHeaders={detailsHeaders} />
+                        <AdminOrderRows key={order._id} order={order} detailsHeaders={detailsHeaders} />
                     ))}
                 </TableBody>
             </Table>

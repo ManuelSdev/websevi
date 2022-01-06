@@ -11,7 +11,7 @@ import useUser from "../../hooks/swrHooks/useUser"
 import DataSection from "../../components/userPage/DataSection"
 import WishListSection from "../../components/userPage/WishListSection"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
-import OrdersSection from "../../components/userPage/OrdersSection"
+import OrdersSection from "../../components/userPage/UserOrdersSection"
 const sections = [
     {
         name: 'Mis datos',
@@ -39,16 +39,18 @@ const sections = [
 const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
-
-    const { user, isLoading, isError, mutate } = useUser(authId)
+    const { user } = isLogged
+    console.log('*------------', authId)
+    //const { user, isLoading, isError, mutate } = useUser(authId)
     //users es un array con un unico objeto user que contiene el campo _id: 
-
+    console.log('*------------', isLogged)
+    //isLoading ? console.log('*------------LOADING',) : console.log('*------------', user)
     return (
         <Layout isLogged={isLogged} categories={categories}>
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} />}
-                content={isLoading ?
-                    <Box>LOADINGG</Box>
+                content={!user ?
+                    <Box>HOla</Box>
                     :
                     userSlug === 'mis-datos' ?
                         <DataSection user={user} />
@@ -93,30 +95,24 @@ export async function getStaticProps(context) {
 }
 
 /*
-<Container sx={{ mt: '2em' }}>
-<Box sx={{ flexGrow: 1, background: "green" }}>
-    <Grid container spacing={2}>
-        <Grid item xs={6} sm={4} md={3} lg={3} >
-            <ProfileBar sections={sections}></ProfileBar>
-        </Grid>
-
-        <Grid item xs={6} sm={4} md={3} lg={9} >
-            {
-                userSlug === 'mis-datos' ?
-                    <DataSection user={user} />
+<Layout isLogged={isLogged} categories={categories}>
+<SidebarLayout
+    sidebar={<ProfileBar sections={sections} />}
+    content={isLoading ?
+        <Box>LOADINGG</Box>
+        :
+        userSlug === 'mis-datos' ?
+            <DataSection user={user} />
+            :
+            userSlug === 'lista-de-deseos' ?
+                <WishListSection user={user} />
+                :
+                userSlug === 'pedidos' ?
+                    <OrdersSection user={user} />
                     :
-                    userSlug === 'lista-de-deseos' ?
-                        <WishListSection user={user} />
-                        :
-                        <Box />
+                    <Box />
+    }
+/>
 
-            }
-
-
-
-        </Grid>
-
-    </Grid>
-</Box>
-</Container >
+</Layout>
 */

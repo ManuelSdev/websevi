@@ -11,6 +11,7 @@ import NewProductSection from "../../components/AdminPage/NewProductSection"
 import NewCategsSection from "../../components/AdminPage/NewCategsSection"
 import { Paper } from "@mui/material"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
+import AdminOrdersSection from "../../components/AdminPage/AdminOrdersSection"
 const sections = [
     {
         name: 'Pedidos',
@@ -45,7 +46,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
                 sidebar={<ProfileBar profile={'admin'} sections={sections} />}
                 content={
                     adminSlug === 'pedidos' ?
-                        <Paper>Orders</Paper>
+                        <AdminOrdersSection />
                         :
                         adminSlug === 'crear-producto' ?
                             <NewProductSection />

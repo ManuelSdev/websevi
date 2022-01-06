@@ -10,6 +10,7 @@ export default async function handler(req, res) {
 
     try {
         await dbConnect()
+        //El campo orders del modelo User es un array con los id´s de los pedidos que ha hecho el usuario
         const { orders } = await User.findById(userId, 'orders')
         console.log('primeros favoritos', orders)
         const userOrders = await Promise.all(

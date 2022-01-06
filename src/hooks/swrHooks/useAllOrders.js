@@ -3,8 +3,8 @@ import useSWR, { useSWRConfig } from 'swr'
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function useOrders(filters) {
-    const { data, error, mutate } = useSWR(filters ? `/api/orders/getUserOrders/${filters}` : null, fetcher)
+export default function useAllOrders() {
+    const { data, error, mutate } = useSWR(`/api/orders/getAdminOrders`, fetcher)
 
     //console.log('render useUser', data)
     //const handleMutate = () => mutate(`/api/users/getUser/${filters}`)

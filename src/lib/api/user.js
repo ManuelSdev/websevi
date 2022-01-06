@@ -20,3 +20,7 @@ export const updateFavorites = (userIdParam, productIdParam) => {
     return client.put(`/users/updateFavorites/${userIdParam}/${productIdParam}`)
 }
 
+export const getUser = (authId) => {
+    // console.log('@@@@@@@@@@@@@@@ ideparamas', newUserValue)
+    return client.get(`users/getUser/${authId}`)
+}
