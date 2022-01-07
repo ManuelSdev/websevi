@@ -14,9 +14,14 @@ import IconButton from '@mui/material/IconButton';
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import Switch from "@mui/material/Switch"
+import SwitchMode from "./SwitchMode"
+
+
 const Header = ({ categories }) => {
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
-    const { setIsLogged } = useAppContext()
+
+    const { setIsLogged, isLogged } = useAppContext()
     async function logoutClicked() {
         await ThirdPartyEmailPassword.signOut()
         setIsLogged({ state: false, admin: false, authId: '' })
@@ -37,17 +42,24 @@ const Header = ({ categories }) => {
                     }
                 }}
             >
+
+
                 <Button
                     onClick={logoutClicked}
                 >
                     Salir
                 </Button>
-                <Link href="/admin/pedidos">
+                {/**
+                TODO: BORRA
+  <Link href="/admin/pedidos">
                     Admin
                 </Link>
                 <Link href="/user/test">
                     Profile
                 </Link>
+
+                 */}
+
 
 
                 <Stack
@@ -60,6 +72,8 @@ const Header = ({ categories }) => {
                     />
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>
+
+                <SwitchMode />
             </Toolbar>
 
             <SearchToolBar />

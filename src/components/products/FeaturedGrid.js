@@ -21,7 +21,10 @@ const FeaturedGrid = ({ products, selectedPricesRange }) => {
      */
     return (
         <>
-            <Box sx={{ mb: 3, flexGrow: 1, background: "green" }}>
+            <Box sx={{
+                mb: 3, flexGrow: 1,
+                //background: "green"
+            }}>
                 <Grid container spacing={2}>
                     {products && products.map(product =>
                         <Grid key={product._id} item xs={6} sm={4} md={3} lg={3} >

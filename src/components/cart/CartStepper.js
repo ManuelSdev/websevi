@@ -119,8 +119,10 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
 
     return (
         <Container>
-            <Box sx={{ width: '100%', background: "#009CAC" }}>
-                <Stepper activeStep={activeStep} alternativeLabel>
+            <Box pt={2} pb={2} sx={{ width: '100%', background: "#009CAC" }}>
+                <Stepper
+
+                    activeStep={activeStep} alternativeLabel>
                     {steps.map((label) => (
                         <Step key={label} >
                             <StepLabel>{label}</StepLabel>

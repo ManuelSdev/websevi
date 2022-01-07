@@ -21,7 +21,10 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
      */
     return (
         <>
-            <Box sx={{ mb: 3, flexGrow: 1, background: "green" }}>
+            <Box sx={{
+                mb: 3, flexGrow: 1,
+                // background: "green"
+            }}>
                 <Grid container spacing={2}>
                     {products && products
                         .filter((product, index) => index <= displayedProducts - 1)

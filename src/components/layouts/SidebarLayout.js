@@ -28,7 +28,7 @@ const SidebarLayout = ({ content, sidebar }) => {
                     }
 
                     <Grid item xs={12} sm={12} md={9} lg={9} >
-                        <Paper sx={{ p: 2, pt: 1.5 }}>
+                        <Paper elevation={0} sx={{ p: 2, pt: 1.5 }}>
                             {content}
                         </Paper>
 

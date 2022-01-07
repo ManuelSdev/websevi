@@ -14,6 +14,7 @@ import useUser from '../../hooks/swrHooks/useUser';
 import { updateFavorites } from '../../lib/api/user';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { IconButton, Stack } from '@mui/material';
 const ProductDetails = ({ product }) => {
 
     const { setCart, cart, authId } = useAppContext()
@@ -146,16 +147,36 @@ const ProductDetails = ({ product }) => {
             </Box>
 
 
-            <Box marginBottom='dense' variant="contained">
-                <Button
+            <Stack
+                direction='row'
+                alignItems='center'
+                //marginBottom='dense'
+                mb={1.5}
+            >
+                <IconButton
                     onClick={decreaseAmount}
+                    disableElevation='false'
+
+                    sx={{
+                        bgcolor: 'corpGreen.main',
+                        borderRadius: 1,
+                        color: 'white',
+                        '&:hover': {
+                            bgcolor: 'rgb(0, 109, 120)',
+                            color: 'white',
+                            boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)'
+
+
+                        }
+                    }}
                 >
                     <SvgIcon>
                         <svg ><path d="M19 13H5v-2h14v2z"></path></svg>
 
                     </SvgIcon>
-                </Button>
+                </IconButton>
                 <TextField
+
                     sx={{
                         width: "5ch",
                     }}
@@ -164,62 +185,78 @@ const ProductDetails = ({ product }) => {
                     value={amountField}
                     id="outlined-basic"
                     variant="outlined" />
-                <Button
+                <IconButton
                     onClick={increaseAmount}
+
+                    sx={{
+                        bgcolor: 'corpGreen.main',
+                        borderRadius: 1,
+                        color: 'white',
+                        '&:hover': {
+                            bgcolor: 'rgb(0, 109, 120)',
+                            color: 'white',
+                            boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)'
+
+                        }
+                    }}
                 >
-                    <SvgIcon>
+                    <SvgIcon >
                         <svg  ><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
 
                     </SvgIcon>
-                </Button>
-            </Box>
+                </IconButton >
+
+            </Stack>
 
             <Box>
                 <Button
                     onClick={addToCart}
                 >Añadir al carrito</Button>
             </Box>
-            {user?.favorites ? console.log('PUTO USER', user) ||
-                user.favorites.includes(product._id) ?
-                <Box>
-                    <Button
-                        onClick={handleFavorites}
-                        endIcon={
-                            <FavoriteIcon
-                                color='corpGreen'
+            {
+                user?.favorites ?
+                    user.favorites.includes(product._id) ?
+                        <Box>
+                            <Button
+                                onClick={handleFavorites}
+                                endIcon={
+                                    <FavoriteIcon
+                                        // color='secondary'
+                                        sx={{
+                                            color: 'red'
+                                        }}
 
-
-                            />}
-                    >
-                        Eliminar de la lista de deseos
-                    </Button>
-                </Box>
-                :
-                <Box>
-                    <Button
-                        onClick={handleFavorites}
-                        endIcon={
-                            <FavoriteBorderIcon
-                                color='corpGreen'
-                                fontSize='large'
-                            />}
-                    >
-                        Añadir a la lista de deseos
-                    </Button>
-                </Box>
-                :
-                <Box>
-                    <Button
-                        onClick={handleFavorites}
-                        endIcon={
-                            <FavoriteBorderIcon
-                                color='corpGreen'
-                                fontSize='large'
-                            />}
-                    >
-                        Añadir a la lista de deseos
-                    </Button>
-                </Box>
+                                    />}
+                            >
+                                Eliminar de la lista de deseos
+                            </Button>
+                        </Box>
+                        :
+                        <Box>
+                            <Button
+                                onClick={handleFavorites}
+                                endIcon={
+                                    <FavoriteIcon
+                                        // color='corpGreen'
+                                        fontSize='large'
+                                    />}
+                            >
+                                Añadir a la lista de deseos
+                            </Button>
+                        </Box>
+                    :
+                    <Box>
+                        <Button
+                            onClick={handleFavorites}
+                            endIcon={
+                                <FavoriteIcon
+                                    //color='corpGreen'
+                                    fontSize='large'
+                                />}
+                        >
+                            Añadir a la lista de deseos
+                        </Button>
+                    </Box>
             }
 
             <Box>

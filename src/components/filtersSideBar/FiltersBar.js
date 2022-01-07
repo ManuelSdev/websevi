@@ -112,7 +112,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     //para desplegar por defecto los componentes TreeItem cuyo nodeId coincida con un número del array de strings
     const arrayOfIndexString = filters.map((filter, index) => `${index}`)
     return (
-        <Paper>
+        <Paper >
             <TreeView
                 //Key : https://stackoverflow.com/questions/54364872/a-component-is-changing-an-uncontrolled-input-of-type-checkbox-to-be-controlled
                 key={categoryPath ? `treeview-${categoryPath}` : `treeview-${searchKeys}`}

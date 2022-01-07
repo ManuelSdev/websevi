@@ -1,22 +1,24 @@
 import { createTheme } from "@mui/material/styles";
+import { bgcolor } from "@mui/system";
 
 
 
 const theme = createTheme({
     //Paleta de colores
     palette: {
-        /*
+
         primary: {
             // Rojo.
             main: "#009CAC",
         },
+        /*
         secondary: {
             // Amarillo
             main: '#FFF200',
         },
         */
         background: {
-            default: "#F6F9FC"
+            default: "white"
         },
         corpGreen: {
             // This is green.A700 as hex.
@@ -71,18 +73,55 @@ const theme = createTheme({
                 },
             },
         },
-        MuiStepIcon: {
-            styleOverrides: {
-                root: {
 
-                    // apply theme's border-radius instead of component's default
-                    color: 'red',
-                    '& .MuiStepIcon-text': {
-                        color: 'white',
+        MuiStepIcon: {
+
+            styleOverrides: {
+
+                root: {
+                    //color: '#CCCCCC',
+                    '&.Mui-active': {
+                        color: 'black',
                     },
+                    '&.Mui-completed': {
+                        color: 'black',
+                    },
+
                 },
+
             },
         },
+
+        MuiStepConnector: {
+
+            styleOverrides: {
+
+
+                root: {
+                    '&.Mui-active .MuiStepConnector-line': {
+                        color: 'black',
+                        borderColor: 'black',
+
+                    },
+                    '&.Mui-completed .MuiStepConnector-line': {
+                        color: 'black',
+                        borderColor: 'black',
+
+                    },
+                    '& .MuiStepConnector-line': {
+                        color: 'black',
+                        borderColor: '#bdbdbd',
+
+                    },
+
+                },
+
+
+
+            },
+        },
+
+
 
     },
 

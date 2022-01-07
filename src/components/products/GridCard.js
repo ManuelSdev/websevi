@@ -17,7 +17,7 @@ const GridCard = ({ product }) => {
 
     const [mainImage] = product.images
     return (
-        <Card
+        <Card elevation={0}
         >
             <CardActionArea component={Link} href={`/product/${product.url}`}>
 
@@ -47,7 +47,9 @@ const GridCard = ({ product }) => {
                 </CardContent>
 
             </CardActionArea>
-            <CardActions
+            {/**
+            TODO: borra
+  <CardActions
                 sx={{
                     display: 'flex',
                     justifyContent: 'center'
@@ -59,6 +61,8 @@ const GridCard = ({ product }) => {
                 <FavoriteBorderIcon />
                 <Link href='/' />
             </CardActions>
+             */}
+
 
 
 
