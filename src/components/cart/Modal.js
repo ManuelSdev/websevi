@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function Modal({ open, handleClickOpen, handleClose }) {
+export default function Modal({ open, mainMessage, handleClose }) {
 
 
     return (
@@ -18,11 +18,11 @@ export default function Modal({ open, handleClickOpen, handleClose }) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {" El pedido ha sido completado"}
+                    {mainMessage}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        El pedido se ha sido completado
+                        {/**El pedido se ha sido completado*/}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

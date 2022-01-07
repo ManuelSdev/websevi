@@ -30,6 +30,8 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import Modal from '../../components/cart/Modal'
+
 /*
 const StyledButton = styled(Button)(
     `text-transform: none;`,
@@ -43,7 +45,19 @@ const StyledButton = styled(Button)({
 
 const SearchToolBar = () => {
     const router = useRouter()
-    //console.log('@@@@@@@@@@@@@@@@@@@@', useAppContext)
+
+    //VENTANA MODAL
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+
+    };
+    const handleClose = () => {
+        setOpen(false);
+
+    };
+
+
     const { setIsLogged, isLogged, cart } = useAppContext()
     const [cartProductsAmount, setCartProductsAmount] = React.useState(0)
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
@@ -91,51 +105,81 @@ const SearchToolBar = () => {
 
 
     return (
-        <Toolbar
+        <>
+            <Modal
+                handleClickOpen={handleClickOpen}
+                handleClose={handleClose}
+                open={open}
+                mainMessage={"No tiene nigún artículo en el carrito"}
+            />
+            <Toolbar
 
-            sx={{
-                //borderRadius: "80px",
+                sx={{
+                    //borderRadius: "80px",
 
-                bgcolor: 'corpWhite.main',
-                justifyContent: 'space-between',
-                height: "5em",
-                //color: "corpBlack.main"
-            }}
-        >
-            <IconCorpName viewBox="0 0 381.17 68.88"
-
-                sx={{ fill: "blue", height: "100%", fontSize: 250 }}
+                    bgcolor: 'corpWhite.main',
+                    justifyContent: 'space-between',
+                    height: "5em",
+                    //color: "corpBlack.main"
+                }}
             >
-            </IconCorpName>
-            <Box
-                component='form'
-                onSubmit={handleSubmit(onSubmit)}
-                sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-                <TextField
-                    required
-                    sx={{ width: "75%" }}
-                    id="standard-basic"
-                    label="Buscar en el catálogo"
-                    variant="standard"
-                    color="corpGreen"
-                    name='searchKeys'
-                    value={searchKeys}
-                    onChange={handleChange}
-                    InputProps={{
-                        endAdornment:
-                            <InputAdornment
-                                position="start"
-                            >
-                                <IconButton
-                                    type='submit'
+                <IconCorpName viewBox="0 0 381.17 68.88"
+
+                    sx={{ fill: "blue", height: "100%", fontSize: 250 }}
+                >
+                </IconCorpName>
+                <Box
+                    component='form'
+                    onSubmit={handleSubmit(onSubmit)}
+                    sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+                    <TextField
+                        required
+                        sx={{ width: "75%" }}
+                        id="standard-basic"
+                        label="Buscar en el catálogo"
+                        variant="standard"
+                        color="corpGreen"
+                        name='searchKeys'
+                        value={searchKeys}
+                        onChange={handleChange}
+                        InputProps={{
+                            endAdornment:
+                                <InputAdornment
+                                    position="start"
                                 >
-                                    <SearchIcon />
-                                </IconButton>
-                            </InputAdornment>,
-                    }}
-                />
-            </Box>
-            {isLogged.state &&
+                                    <IconButton
+                                        type='submit'
+                                    >
+                                        <SearchIcon />
+                                    </IconButton>
+                                </InputAdornment>,
+                        }}
+                    />
+                </Box>
+                {isLogged.state &&
+                    <Box
+                        sx={{
+                            mr: 2,
+                            height: '75%',
+                            border: 1,
+                            '&:hover': {
+                                borderColor: 'corpGreen.main',
+                                borderRadius: 1,
+                            }
+                        }}
+                    >
+                        <Link href="/">
+                            <StyledButton
+                                onClick={logoutClicked}
+                                size="large" variant="text"
+                                // sx={{ fontSize: '1.1rem', height: '100%', color: "black", textTransform: "none" }}
+                                startIcon={<LogoutIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                            >
+                                Salir
+                            </StyledButton>
+                        </Link>
+                    </Box>
+                }
                 <Box
                     sx={{
                         mr: 2,
@@ -147,102 +191,103 @@ const SearchToolBar = () => {
                         }
                     }}
                 >
-                    <Link href="/">
-                        <StyledButton
-                            onClick={logoutClicked}
-                            size="large" variant="text"
-                            // sx={{ fontSize: '1.1rem', height: '100%', color: "black", textTransform: "none" }}
-                            startIcon={<LogoutIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
-                        >
-                            Salir
-                        </StyledButton>
-                    </Link>
-                </Box>
-            }
-            <Box
-                sx={{
-                    mr: 2,
-                    height: '75%',
-                    border: 1,
-                    '&:hover': {
-                        borderColor: 'corpGreen.main',
-                        borderRadius: 1,
-                    }
-                }}
-            >
-                {isLogged.state ?
-                    isLogged.admin ?
-                        <Link href="/admin/pedidos">
-                            <StyledButton
-                                //TODO: limpia todos los sx tapados
-                                size="large" variant="text"
-                                //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                                startIcon={<ManageAccountsOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
-                            >
-                                Panel de administrador
-                            </StyledButton>
-                        </Link>
+                    {isLogged.state ?
+                        isLogged.admin ?
+                            <Link href="/admin/pedidos">
+                                <StyledButton
+                                    //TODO: limpia todos los sx tapados
+                                    size="large" variant="text"
+                                    //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
+                                    startIcon={<ManageAccountsOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                >
+                                    Panel de administrador
+                                </StyledButton>
+                            </Link>
+                            :
+                            <Link href="/user/mis-datos">
+                                <StyledButton
+
+                                    size="large" variant="text"
+                                    // sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
+                                    startIcon={<PermIdentityOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                >
+                                    Mi cuenta
+                                </StyledButton>
+                            </Link>
                         :
-                        <Link href="/user/mis-datos">
+                        <Link href="/auth">
                             <StyledButton
 
                                 size="large" variant="text"
                                 // sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                                startIcon={<PermIdentityOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                startIcon={<LoginIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                             >
-                                Mi cuenta
+                                Iniciar sesión
                             </StyledButton>
                         </Link>
-                    :
-                    <Link href="/auth">
-                        <StyledButton
-
-                            size="large" variant="text"
-                            // sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                            startIcon={<LoginIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
-                        >
-                            Iniciar sesión
-                        </StyledButton>
-                    </Link>
-                }
-            </Box>
-
-            {!isLogged.admin &&
-                <Box
-                    sx={{
-                        height: '75%',
-                        border: 1,
-                        '&:hover': {
-                            borderColor: 'corpGreen.main',
-                            borderRadius: 1,
-                        }
-                    }}
-                >
-
-                    <Link href="/carrito">
-                        <StyledButton
-                            //onClick={customRouterPush('/href')}
-                            size="large" variant="text"
-                            //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', width: '100%', color: "black", textTransform: "none" }}
-                            startIcon={
-                                <Badge
-                                    sx={{
-                                        '& .MuiBadge-badge': {
-                                            right: -5,
-                                            top: -1,
-                                            padding: '0 4px',
-                                        },
-                                    }}
-                                    badgeContent={cartProductsAmount} color="corpGreen">
-                                    <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
-                                </Badge>}
-                        >
-                            Carrito
-                        </StyledButton>
-                    </Link>
+                    }
                 </Box>
-            }
-        </Toolbar >
+
+                {!isLogged.admin &&
+                    <Box
+                        sx={{
+                            height: '75%',
+                            border: 1,
+                            '&:hover': {
+                                borderColor: 'corpGreen.main',
+                                borderRadius: 1,
+                            }
+                        }}
+                    >
+
+                        {cart.length > 0 ?
+                            <Link href="/carrito">
+                                <StyledButton
+                                    size="large" variant="text"
+                                    //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', width: '100%', color: "black", textTransform: "none" }}
+                                    startIcon={
+                                        <Badge
+                                            sx={{
+                                                '& .MuiBadge-badge': {
+                                                    right: -5,
+                                                    top: -1,
+                                                    padding: '0 4px',
+                                                },
+                                            }}
+                                            badgeContent={cartProductsAmount} color="corpGreen">
+                                            <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
+                                        </Badge>}
+                                >
+                                    Carrito
+                                </StyledButton>
+                            </Link>
+                            :
+                            <StyledButton
+                                onClick={handleClickOpen}
+                                size="large" variant="text"
+                                //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', width: '100%', color: "black", textTransform: "none" }}
+                                startIcon={
+                                    <Badge
+                                        sx={{
+                                            '& .MuiBadge-badge': {
+                                                right: -5,
+                                                top: -1,
+                                                padding: '0 4px',
+                                            },
+                                        }}
+                                        badgeContent={cartProductsAmount} color="corpGreen">
+                                        <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
+                                    </Badge>}
+                            >
+                                Carrito
+                            </StyledButton>
+                        }
+
+                    </Box>
+                }
+            </Toolbar >
+        </>
+
 
     )
 }

@@ -126,6 +126,7 @@ const CartPage = () => {
                 handleClickOpen={handleClickOpen}
                 handleClose={handleClose}
                 open={open}
+                mainMessage={"El pedido ha sido completado"}
             />
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar

@@ -4,16 +4,15 @@ import Box from '@mui/system/Box'
 import Link from '../elements/Link'
 import DropdownMenu from '../elements/DropdownMenu'
 
-import Button from "@mui/material/Button"
+
 import React from "react"
 import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
-import MenuIcon from '@mui/icons-material/Menu';
-import IconButton from '@mui/material/IconButton';
+
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import Switch from "@mui/material/Switch"
+
 import SwitchMode from "./SwitchMode"
 
 
@@ -100,46 +99,3 @@ const Header = ({ categories }) => {
 }
 
 export default Header
-
-/**
-
-     <Box sx={{ p: 1, m: 1, color: "corpWhite.main", }}>
-
-                            <DropdownMenu
-                                category={item}
-                                href={headerItems[normalizeStr(item)].href}
-                            ></DropdownMenu>
-                        </Box>
-
-
-
- */
-
-/*
-<Box
-                        href="/cart"
-                        display='flex'
-                        direction="row"
-
-                        sx={{
-                            height: '75%',
-                            alignItems: 'center',
-                            border: 2,
-                            borderColor: 'white',
-                            fontWeight: 'bold',
-                            '&:hover': {
-
-                                borderColor: 'corpGreen.main',
-                            },
-
-                        }}
-                    >
-                        <ButtonBase
-                            sx={{ padding: 2, height: '100%' }}
-                        >
-                            <ShoppingCartIcon sx={{ color: "black" }} fontSize="medium" />
-
-                            <Typography sx={{ fontWeight: 'bold', color: "black" }}>Carrito</Typography>
-                        </ButtonBase>
-                    </Box >
-                    */

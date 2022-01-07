@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import { Divider } from '@mui/material';
 
 
 export default function Home({ categories, products }) {
@@ -27,14 +28,15 @@ export default function Home({ categories, products }) {
 
       <MainMosaic />
       <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }}>
-        <Box>
-          <Typography color='primary' align='center' mb={4} mt={9} variant='h5' sx={{ fontWeight: 'bold' }} >
+        <Box mb={4} >
+          <Typography color='primary' align='center' mb={2} mt={9} variant='h5' sx={{ fontWeight: 'bold' }} >
             PRODUCTOS DESTACADOS
           </Typography>
-
+          <Divider ></Divider>
         </Box>
 
         <FeaturedGrid products={products} />
+        <Divider ></Divider>
         <Grid mt={5} mb={5} textAlign='center' container spacing={2}>
 
           <Grid item xs={4} sm={4} md={4} lg={4} >
