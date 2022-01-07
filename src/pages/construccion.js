@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import React, { useRef } from "react";
 import Layout from "../components/layouts/Layout";
 import { getCategories } from "./api/categories/getCategories";
-
+import revalidateTime from '../lib/utils/revalidateTime'
 
 
 export default function Construccion({ categories }) {
@@ -49,4 +49,6 @@ export async function getStaticProps(context) {
     return {
         props: { categories }, // will be passed to the page component as props
     }
+    revalidate: revalidateTime,
+    
 }

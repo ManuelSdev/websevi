@@ -8,28 +8,29 @@ import { nameToUrl } from '../../lib/utils/stringTools'
 import { mapFilters } from '../../lib/mapFilters'
 import usePriceSlider from '../../hooks/usePriceSlider'
 import React from 'react'
+import revalidateTime from '../../lib/utils/revalidateTime'
 
 const Category = ({ isLogged, products, categories, filtersProps }) => {
     const router = useRouter()
     //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
 
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
-    console.log('----------------------------', router.query)
+    console.log('CategoryPath en index router query', router.query)
     const { pricesRange } = filtersProps
-    console.log('priceRange que entra por filtersProps', pricesRange)
+    // console.log('priceRange que entra por filtersProps', pricesRange)
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
 
 
     const props = { selectedPricesRange, handlePrice, valuetext }
 
     React.useEffect(() => {
-        console.log('+++++++++++', selectedPricesRange)
+        //   console.log('+++++++++++', selectedPricesRange)
         // props = { selectedPricesRange, handlePrice, valuetext }
         //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
 
     }, [pricesRange])
-    console.log('Primeroooo', selectedPricesRange)
+    //console.log('Primeroooo', selectedPricesRange)
 
     return (
         <Layout isLogged={isLogged} categories={categories}>
@@ -131,4 +132,5 @@ export async function getStaticProps(context) {
     return {
         props: { categories, products, filtersProps }, // will be passed to the page component as props
     }
+    revalidate: revalidateTime
 }

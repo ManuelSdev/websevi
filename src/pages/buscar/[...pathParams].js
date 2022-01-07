@@ -25,8 +25,8 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
 
     const props = { selectedPricesRange, handlePrice, valuetext }
     React.useEffect(() => {
-        console.log('+++++++++++ selectedPricesRange', selectedPricesRange)
-        console.log('+++++++++++ pricesRange', pricesRange)
+        //console.log('+++++++++++ selectedPricesRange', selectedPricesRange)
+        //console.log('+++++++++++ pricesRange', pricesRange)
 
         setSelectedPricesRange(pricesRange)
 

@@ -14,7 +14,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { Divider } from '@mui/material';
-
+import revalidateTime from '../lib/utils/revalidateTime';
 
 export default function Home({ categories, products }) {
 
@@ -86,4 +86,6 @@ export async function getStaticProps(context) {
   return {
     props: { categories, products }, // will be passed to the page component as props
   }
+  revalidate: revalidateTime,
+
 }

@@ -18,6 +18,7 @@ import { Divider, Typography } from "@mui/material"
 import ButtonBase from '@mui/material/ButtonBase';
 import { ButtonUnstyled } from '@mui/base/ButtonUnstyled';
 import Modal from '@mui/material/Modal';
+import revalidateTime from "../../lib/utils/revalidateTime"
 //import Link from '../../components/elements/Link'
 
 const style = {
@@ -225,4 +226,5 @@ export async function getStaticProps({ params }) {
     return {
         props: { product, categories }, // will be passed to the page component as props
     }
+    revalidate: revalidateTime
 }

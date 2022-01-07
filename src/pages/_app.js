@@ -98,7 +98,7 @@ function App({ Component, pageProps }) {
   // pageProps.cart = [...cart]
   //pageProps.setCart = setCart
 
-  console.log('LOGIN', isLogged)
+  //console.log('LOGIN', isLogged)
   return (
     <>
 

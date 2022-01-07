@@ -19,6 +19,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import Working from "../../components/elements/Working"
+import revalidateTime from "../../lib/utils/revalidateTime"
 const sections = [
     {
         name: 'Mis datos',
@@ -103,27 +104,6 @@ export async function getStaticProps(context) {
     return {
         props: { categories }, // will be passed to the page component as props
     }
+    revalidate: revalidateTime
 }
 
-/*
-<Layout isLogged={isLogged} categories={categories}>
-<SidebarLayout
-    sidebar={<ProfileBar sections={sections} />}
-    content={isLoading ?
-        <Box>LOADINGG</Box>
-        :
-        userSlug === 'mis-datos' ?
-            <DataSection user={user} />
-            :
-            userSlug === 'lista-de-deseos' ?
-                <WishListSection user={user} />
-                :
-                userSlug === 'pedidos' ?
-                    <OrdersSection user={user} />
-                    :
-                    <Box />
-    }
-/>
-
-</Layout>
-*/

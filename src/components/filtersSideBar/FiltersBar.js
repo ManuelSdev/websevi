@@ -112,7 +112,9 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     //para desplegar por defecto los componentes TreeItem cuyo nodeId coincida con un número del array de strings
     const arrayOfIndexString = filters.map((filter, index) => `${index}`)
     return (
-        <Paper >
+        <Paper
+            sx={{ mb: 15 }}
+        >
             <TreeView
                 //Key : https://stackoverflow.com/questions/54364872/a-component-is-changing-an-uncontrolled-input-of-type-checkbox-to-be-controlled
                 key={categoryPath ? `treeview-${categoryPath}` : `treeview-${searchKeys}`}
@@ -121,6 +123,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                 aria-label="file system navigator"
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
+
             //sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
             >
                 {

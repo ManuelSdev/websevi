@@ -136,7 +136,7 @@ const ProductDetails = ({ product }) => {
             }}>
                 <Typography
                     sx={{ fontWeight: 'bold', mr: 5 }}>Marca :</Typography>
-                <Typography gutterBottom>{product.brand} </Typography>
+                <Typography gutterBottom>{product.Marca} </Typography>
             </Box>
             <Box sx={{
                 display: 'flex',
@@ -155,7 +155,7 @@ const ProductDetails = ({ product }) => {
             >
                 <IconButton
                     onClick={decreaseAmount}
-                    disableElevation='false'
+                    //  disableElevation='false'
 
                     sx={{
                         bgcolor: 'corpGreen.main',

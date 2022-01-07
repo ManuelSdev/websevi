@@ -19,6 +19,7 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Working from "../../components/elements/Working"
+import revalidateTime from "../../lib/utils/revalidateTime"
 
 const sections = [
     {
@@ -103,4 +104,5 @@ export async function getStaticProps(context) {
     return {
         props: { categories }, // will be passed to the page component as props
     }
+    revalidate: revalidateTime
 }

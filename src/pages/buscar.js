@@ -33,13 +33,13 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
 
     const props = { selectedPricesRange, handlePrice, valuetext, checkedFilters, onChange }
     React.useEffect(() => {
-        console.log('+++++++++++', selectedPricesRange)
+        //console.log('+++++++++++', selectedPricesRange)
         // props = { selectedPricesRange, handlePrice, valuetext }
         //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
 
     }, [pricesRange])
-    console.log('Primeroooo', selectedPricesRange)
+    //console.log('Primeroooo', selectedPricesRange)
     return (
         <Layout isLogged={isLogged} categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props}></ProductsSection>

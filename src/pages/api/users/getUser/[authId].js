@@ -9,7 +9,7 @@ export async function getUser(filters) {
     await dbConnect()
 
     const [user] = await User.find(filters)
-    console.log('USER SACADO-------------------------', user)
+    // console.log('USER SACADO-------------------------', user)
     return user
 }
 

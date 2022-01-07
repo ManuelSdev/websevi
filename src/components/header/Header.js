@@ -80,16 +80,7 @@ const Header = ({ categories }) => {
                     </Box>
                 )}
 
-                <Box sx={{ color: "black" }}>
-                    <Link href="/privado">
-                        privado
-                    </Link>
-                </Box>
-                <Box sx={{ color: "black" }}>
-                    <Link href="/checkSession">
-                        checkSesion
-                    </Link>
-                </Box>
+
             </Toolbar>
         </AppBar >
 
