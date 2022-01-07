@@ -35,6 +35,20 @@ const theme = createTheme({
     },
     components: {
         // Name of the component ⚛️
+        MuiContainer: {
+            defaultProps: {
+                // The default props to change
+
+                // height: '100vh',
+            },
+            styleOverrides: {
+                root: {
+                    // apply theme's border-radius instead of component's default
+                    // minHeight: 'calc(100vh - 488.02px)'
+
+                },
+            },
+        },
         MuiButton: {
             defaultProps: {
                 // The default props to change

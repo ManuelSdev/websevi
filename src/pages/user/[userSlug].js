@@ -53,7 +53,8 @@ const UserPage = ({ authId, isLogged, categories }) => {
     console.log('*------------', isLogged)
     //isLoading ? console.log('*------------LOADING',) : console.log('*------------', user)
     return (
-        <Layout isLogged={isLogged} categories={categories}>
+        <Layout sx={{ zIndex: 'tooltip' }} isLogged={isLogged} categories={categories}>
+
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} />}
                 content={!user ?
@@ -72,6 +73,8 @@ const UserPage = ({ authId, isLogged, categories }) => {
                                 <Working />
                 }
             />
+
+
 
         </Layout>
     )

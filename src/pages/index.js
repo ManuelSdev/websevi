@@ -9,9 +9,10 @@ import { getCategories } from './api/categories/getCategories';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FeaturedGrid from '../components/products/FeaturedGrid';
-
-
-console.log(unescape('sPerif&#xE9;ricos'))
+import Grid from '@mui/material/Grid';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 
 export default function Home({ categories, products }) {
@@ -25,15 +26,46 @@ export default function Home({ categories, products }) {
     <Layout categories={categories} >
 
       <MainMosaic />
-      <Container>
+      <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }}>
         <Box>
-          <Typography align='center' pb={2} variant='h5' sx={{ fontWeight: 'bold' }} >
+          <Typography color='primary' align='center' mb={4} mt={9} variant='h5' sx={{ fontWeight: 'bold' }} >
             PRODUCTOS DESTACADOS
           </Typography>
 
         </Box>
 
         <FeaturedGrid products={products} />
+        <Grid mt={5} mb={5} textAlign='center' container spacing={2}>
+
+          <Grid item xs={4} sm={4} md={4} lg={4} >
+            <Box pr={5} pl={5}
+
+            >
+              <LocalShippingIcon color='primary' sx={{ fontSize: '60px' }} />
+              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Envío en 24/48 horas</Typography>
+              <Typography variant='body1' color='primary'>Compra ahora y recibe tu pedido en un plazo máximo de 2 días laborables </Typography>
+
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} >
+            <Box pr={5} pl={5}>
+              <ThumbUpAltIcon color='primary' sx={{ fontSize: '60px' }} />
+              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Garantía de satisfacción</Typography>
+              <Typography variant='body1' color='primary'>Dispones de 30 días para realizar una devolución si no quedas satisfecho y de 2 años de garantía en todos nuestros productos </Typography>
+
+            </Box>
+          </Grid>
+          <Grid item xs={4} sm={4} md={4} lg={4} >
+            <Box pr={5} pl={5}>
+              <SupportAgentIcon color='primary' sx={{ fontSize: '60px' }} />
+              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Soporte técnico</Typography>
+
+              <Typography variant='body1' color='primary'>Ponemos a tu disposición el mejor servicio técnico para resolver todas tus dudas </Typography>
+
+            </Box>
+          </Grid>
+
+        </Grid>
       </Container>
 
     </Layout>

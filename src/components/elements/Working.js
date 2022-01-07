@@ -7,7 +7,7 @@ export default function Working() {
         import("@lottiefiles/lottie-player");
     });
     return (
-        <Box sx={{ width: '70%' }} >
+        <Box mb={-3} sx={{ width: '70%', zIndex: -1500 }} >
             <Typography align='center' variant='h5' sx={{ fontWeight: 'bold' }}>En construcción</Typography>
             <lottie-player
                 id="firstLottie"

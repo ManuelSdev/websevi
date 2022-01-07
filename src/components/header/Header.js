@@ -24,7 +24,7 @@ const Header = ({ categories }) => {
 
     return (
 
-        <AppBar position="sticky" sx={{ minWidth: 600, mb: '2em', background: "red" }} >
+        <AppBar position="sticky" sx={{ minWidth: 600, background: "red" }} >
 
             <Toolbar
                 sx={{

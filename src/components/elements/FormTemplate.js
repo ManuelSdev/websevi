@@ -13,8 +13,7 @@ const FormTemplate = ({ column1Elements, column2Elements, fullWidthElements, ...
     return (
         <Container
             component='form'
-
-
+            sx={{ minHeight: 'calc(100vh - 488.02px)' }}
             {...props}
         >
 

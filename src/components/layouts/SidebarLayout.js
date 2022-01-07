@@ -17,7 +17,7 @@ const SidebarLayout = ({ content, sidebar }) => {
 
 
     return (
-        <Container>
+        <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }} >
             <Box sx={{ mt: 5, flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     {

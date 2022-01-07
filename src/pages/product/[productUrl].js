@@ -73,124 +73,125 @@ const ProductPage = ({ categories, product }) => {
             </Box>
         </Modal>
 
-    return (
-        //TODO: UNIFICA con admin.js
-        <>
-            <ModalImage />
-            <Layout categories={categories} >
-                <Container sx={{ background: "red" }}>
-                    <Box sx={{ flexGrow: 1, background: "AliceBlue" }}>
-                        <Grid mb={2} container spacing={0}>
-                            <Grid item xs={6} sm={4} md={3} lg={6} >
-                                <Box
-                                    component={Button}
-                                    onClick={handleOpen}
-                                    sx={{
-                                        // pr: 15,
-                                        background: "blue",
-                                        display: 'flex',
-                                        justifyContent: 'center',
+}
+return (
+    //TODO: UNIFICA con admin.js
+    <>
+        <ModalImage />
+        <Layout categories={categories} >
+            <Container sx={{ background: "red", minHeight: 'calc(100vh - 488.02px)' }}>
+                <Box sx={{ flexGrow: 1, background: "AliceBlue" }}>
+                    <Grid mb={2} container spacing={0}>
+                        <Grid item xs={6} sm={4} md={3} lg={6} >
+                            <Box
+                                component={Button}
+                                onClick={handleOpen}
+                                sx={{
+                                    // pr: 15,
+                                    background: "blue",
+                                    display: 'flex',
+                                    justifyContent: 'center',
 
-                                        width: '527px',
-                                        height: '527px',
-                                        position: 'relative'
-                                    }}
-                                >
+                                    width: '527px',
+                                    height: '527px',
+                                    position: 'relative'
+                                }}
+                            >
 
-                                    <Image
-                                        width='100%'
-                                        height='100%'
-                                        objectFit='contain'
-                                        layout='fill'
-                                        //src={product.images}
-                                        src={mainImage}
-                                        //
-                                        alt="Imagen de producto"
-                                    />
-
-
-                                </Box>
+                                <Image
+                                    width='100%'
+                                    height='100%'
+                                    objectFit='contain'
+                                    layout='fill'
+                                    //src={product.images}
+                                    src={mainImage}
+                                    //
+                                    alt="Imagen de producto"
+                                />
 
 
-                                <ImageList
-                                    sx={{
-                                        width: 527,
-                                        //height: 450
-                                    }}
-                                    cols={4} rowHeight={128.75}>
-                                    {images.map((image) => (
-                                        <ImageListItem key={image} component={Button}
-                                            sx={{
+                            </Box>
 
-                                                border: 1,
-                                                borderColor: 'DarkGrey',
-                                                borderRadius: 0,
-                                                '&:hover': {
-                                                    border: 2,
-                                                    borderColor: 'corpGreen.main',
-                                                    //  borderRadius: 0,
 
-                                                }
-                                            }}
-                                        >
+                            <ImageList
+                                sx={{
+                                    width: 527,
+                                    //height: 450
+                                }}
+                                cols={4} rowHeight={128.75}>
+                                {images.map((image) => (
+                                    <ImageListItem key={image} component={Button}
+                                        sx={{
 
-                                            <Image
+                                            border: 1,
+                                            borderColor: 'DarkGrey',
+                                            borderRadius: 0,
+                                            '&:hover': {
+                                                border: 2,
+                                                borderColor: 'corpGreen.main',
+                                                //  borderRadius: 0,
 
-                                                objectFit='contain'
-                                                layout='fill'
-                                                //src={product.images}
-                                                src={image}
-                                                alt="Imagen de producto"
-                                                onClick={handleMainImage(image)}
-                                            />
+                                            }
+                                        }}
+                                    >
 
-                                        </ImageListItem>
-                                    ))}
-                                </ImageList>
+                                        <Image
 
-                            </Grid>
-                            <Grid item xs={6} sm={4} md={3} lg={6} >
-                                <ProductDetails product={product} ></ProductDetails>
-                            </Grid>
+                                            objectFit='contain'
+                                            layout='fill'
+                                            //src={product.images}
+                                            src={image}
+                                            alt="Imagen de producto"
+                                            onClick={handleMainImage(image)}
+                                        />
+
+                                    </ImageListItem>
+                                ))}
+                            </ImageList>
 
                         </Grid>
-                        <Box>
-                            <Divider
-                                light
-                                pr={5}
-                                textAlign="left"> <Typography>Descripción</Typography></Divider>
-                            <Box p={3}>
-                                {product.description}
-                            </Box>
+                        <Grid item xs={6} sm={4} md={3} lg={6} >
+                            <ProductDetails product={product} ></ProductDetails>
+                        </Grid>
+
+                    </Grid>
+                    <Box>
+                        <Divider
+                            light
+                            pr={5}
+                            textAlign="left"> <Typography>Descripción</Typography></Divider>
+                        <Box p={3}>
+                            {product.description}
                         </Box>
+                    </Box>
+                    <Box>
+                        <Divider
+                            pr={5}
+                            textAlign="left"> <Typography>Especificaciones</Typography></Divider>
                         <Box>
-                            <Divider
-                                pr={5}
-                                textAlign="left"> <Typography>Especificaciones</Typography></Divider>
-                            <Box>
-                                <ul>
-                                    {product.specs.map(spec =>
-                                        <Box key={spec}>
-                                            <li>{spec} </li>
-                                        </Box>
-                                    )}
+                            <ul>
+                                {product.specs.map(spec =>
+                                    <Box key={spec}>
+                                        <li>{spec} </li>
+                                    </Box>
+                                )}
 
 
 
-                                </ul>
-                            </Box>
+                            </ul>
                         </Box>
-
-
-
                     </Box>
 
-                </Container>
-            </Layout >
-        </>
 
 
-    )
+                </Box>
+
+            </Container>
+        </Layout >
+    </>
+
+
+)
 }
 
 export default ProductPage

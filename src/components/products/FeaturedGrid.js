@@ -20,24 +20,21 @@ const FeaturedGrid = ({ products, selectedPricesRange }) => {
      * array.map: usado para el filtro de precio 
      */
     return (
-        <>
-            <Box sx={{
-                mb: 3, flexGrow: 1,
-                //background: "green"
-            }}>
-                <Grid container spacing={2}>
-                    {products && products.map(product =>
-                        <Grid key={product._id} item xs={6} sm={4} md={3} lg={3} >
-                            <GridCard product={product}>xs=8</GridCard>
-                        </Grid>
-                    )}
-                </Grid>
+
+        <Box sx={{
+            mb: 3, flexGrow: 1,
+            background: "green"
+        }}>
+            <Grid container spacing={2}>
+                {products && products.map(product =>
+                    <Grid key={product._id} item xs={6} sm={4} md={3} lg={3} >
+                        <GridCard product={product}>xs=8</GridCard>
+                    </Grid>
+                )}
+            </Grid>
+        </Box>
 
 
-
-            </Box>
-
-        </>
     )
 }
 export default FeaturedGrid

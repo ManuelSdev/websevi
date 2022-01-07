@@ -41,7 +41,7 @@ const SelectPayment = ({ order, setOrder }) => {
                         <IconVisa viewBox="0 0 1000.046 323.653"
                             sx={{ fontSize: 100 }}
                         ></IconVisa>,
-                        <IconMaster viewBox="0 0 190 120.4146"
+                        <IconMaster viewBox="0 -3 190 120.4146"
                             sx={{ fontSize: 100 }}
                         ></IconMaster>
                     </Stack>
@@ -49,10 +49,12 @@ const SelectPayment = ({ order, setOrder }) => {
                 } >
                 </FormControlLabel>
                 <FormControlLabel value={'payPal'} control={<Radio />} label={
+                    <Box height='100px'>
+                        <IconPaypal viewBox="0 180 660 100"
+                            sx={{ fontSize: 200 }}
+                        ></IconPaypal>
 
-                    <IconPaypal viewBox="0 0 660 100"
-                        sx={{ fontSize: 200 }}
-                    ></IconPaypal>
+                    </Box>
 
 
 
