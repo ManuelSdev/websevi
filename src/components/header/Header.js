@@ -5,7 +5,6 @@ import Link from '../elements/Link'
 import DropdownMenu from '../elements/DropdownMenu'
 
 import Button from "@mui/material/Button"
-import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import React from "react"
 import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
@@ -22,11 +21,7 @@ const Header = ({ categories }) => {
     //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
 
     const { setIsLogged, isLogged } = useAppContext()
-    async function logoutClicked() {
-        await ThirdPartyEmailPassword.signOut()
-        setIsLogged({ state: false, admin: false, authId: '' })
-        // ThirdPartyEmailPassword.redirectToAuth()
-    }
+
     return (
 
         <AppBar position="sticky" sx={{ minWidth: 600, mb: '2em', background: "red" }} >
@@ -43,25 +38,6 @@ const Header = ({ categories }) => {
                 }}
             >
 
-
-                <Button
-                    onClick={logoutClicked}
-                >
-                    Salir
-                </Button>
-                {/**
-                TODO: BORRA
-  <Link href="/admin/pedidos">
-                    Admin
-                </Link>
-                <Link href="/user/test">
-                    Profile
-                </Link>
-
-                 */}
-
-
-
                 <Stack
                     alignItems='center'
                     direction='row'>
@@ -73,7 +49,8 @@ const Header = ({ categories }) => {
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>
 
-                <SwitchMode />
+                {isLogged.state && <SwitchMode />}
+
             </Toolbar>
 
             <SearchToolBar />
@@ -86,15 +63,7 @@ const Header = ({ categories }) => {
                     color: "corpWhite.main",
                 }}
             >
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    <MenuIcon />
-                </IconButton>
+
 
                 {categories.length > 0 && categories.map(category =>
                     category.level === 1 &&

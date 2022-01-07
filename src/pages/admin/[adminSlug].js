@@ -12,24 +12,41 @@ import NewCategsSection from "../../components/AdminPage/NewCategsSection"
 import { Paper } from "@mui/material"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
 import AdminOrdersSection from "../../components/AdminPage/AdminOrdersSection"
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import Working from "../../components/elements/Working"
+
 const sections = [
     {
         name: 'Pedidos',
         path: 'pedidos',
-        icon: <ContentCut fontSize="small" />
+        icon: <ShoppingCartIcon fontSize="small" />
+    },
+    {
+        name: 'Productos',
+        path: 'productos',
+        icon: <AssignmentIcon fontSize="small" />
     },
     {
         name: 'Crear producto',
-        icon: <ContentCut fontSize="small" />
+        icon: <NoteAddIcon fontSize="small" />
     },
     {
         name: 'Crear categorías',
-        icon: <ContentCut fontSize="small" />
+        icon: <CreateNewFolderIcon fontSize="small" />
+    },
+    {
+        name: 'Importar catálogo',
+        icon: <FileDownloadIcon fontSize="small" />
     },
 
     {
         name: 'Reiniciar estado',
-        icon: <ContentCut fontSize="small" />
+        icon: <RestartAltIcon fontSize="small" />
     }
 ]
 
@@ -54,7 +71,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
                             adminSlug === 'crear-categorias' ?
                                 <NewCategsSection />
                                 :
-                                <Box />
+                                <Working />
                 }
 
             />

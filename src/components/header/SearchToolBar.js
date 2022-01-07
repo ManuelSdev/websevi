@@ -10,6 +10,7 @@ import Button from "@mui/material/Button"
 import Box from '@mui/system/Box'
 import Link from '../elements/Link'
 import React from "react";
+import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 
 import { useAppContext } from "../context";
 import { useRouter } from "next/router";
@@ -20,15 +21,30 @@ import useForm from "../../hooks/useForm";
 
 import { searchProducts } from "../../lib/api/product";
 import { IconButton } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+/*
+const StyledButton = styled(Button)(
+    `text-transform: none;`,
 
-const StyledButton = styled(Button)(`
-  text-transform: none;
-`);
+);
+*/
+const StyledButton = styled(Button)({
+    fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none"
+});
+
 
 const SearchToolBar = () => {
     const router = useRouter()
     //console.log('@@@@@@@@@@@@@@@@@@@@', useAppContext)
-    const { isLogged, cart } = useAppContext()
+    const { setIsLogged, isLogged, cart } = useAppContext()
     const [cartProductsAmount, setCartProductsAmount] = React.useState(0)
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
         searchKeys: ''
@@ -49,7 +65,12 @@ const SearchToolBar = () => {
         router.push(`/buscar/${searchKeys}`)
 
     }
-
+    //Método logout
+    async function logoutClicked() {
+        await ThirdPartyEmailPassword.signOut()
+        setIsLogged({ state: false, admin: false, authId: '' })
+        // ThirdPartyEmailPassword.redirectToAuth()
+    }
     React.useEffect(() => {
         //console.log('USE TOOLBAR cart ', cart)
         //  console.log('PRODUCTOS EN EL CARRO USE', cart)
@@ -114,7 +135,30 @@ const SearchToolBar = () => {
                     }}
                 />
             </Box>
-
+            {isLogged.state &&
+                <Box
+                    sx={{
+                        mr: 2,
+                        height: '75%',
+                        border: 1,
+                        '&:hover': {
+                            borderColor: 'corpGreen.main',
+                            borderRadius: 1,
+                        }
+                    }}
+                >
+                    <Link href="/">
+                        <StyledButton
+                            onClick={logoutClicked}
+                            size="large" variant="text"
+                            // sx={{ fontSize: '1.1rem', height: '100%', color: "black", textTransform: "none" }}
+                            startIcon={<LogoutIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                        >
+                            Salir
+                        </StyledButton>
+                    </Link>
+                </Box>
+            }
             <Box
                 sx={{
                     mr: 2,
@@ -130,12 +174,12 @@ const SearchToolBar = () => {
                     isLogged.admin ?
                         <Link href="/admin/pedidos">
                             <StyledButton
-
+                                //TODO: limpia todos los sx tapados
                                 size="large" variant="text"
-                                sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                                startIcon={<AccountCircle sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
+                                startIcon={<ManageAccountsOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                             >
-                                Dashboard
+                                Panel de administrador
                             </StyledButton>
                         </Link>
                         :
@@ -143,8 +187,8 @@ const SearchToolBar = () => {
                             <StyledButton
 
                                 size="large" variant="text"
-                                sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                                startIcon={<AccountCircle sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                // sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
+                                startIcon={<PermIdentityOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                             >
                                 Mi cuenta
                             </StyledButton>
@@ -154,16 +198,15 @@ const SearchToolBar = () => {
                         <StyledButton
 
                             size="large" variant="text"
-                            sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
-                            startIcon={<AccountCircle sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                            // sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none" }}
+                            startIcon={<LoginIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                         >
                             Iniciar sesión
                         </StyledButton>
                     </Link>
                 }
-
-
             </Box>
+
             {!isLogged.admin &&
                 <Box
                     sx={{
@@ -178,10 +221,9 @@ const SearchToolBar = () => {
 
                     <Link href="/carrito">
                         <StyledButton
-
                             //onClick={customRouterPush('/href')}
                             size="large" variant="text"
-                            sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', width: '100%', color: "black", textTransform: "none" }}
+                            //  sx={{ fontSize: '1.1rem', fontWeight: 'bold', height: '100%', width: '100%', color: "black", textTransform: "none" }}
                             startIcon={
                                 <Badge
                                     sx={{
@@ -192,7 +234,7 @@ const SearchToolBar = () => {
                                         },
                                     }}
                                     badgeContent={cartProductsAmount} color="corpGreen">
-                                    <ShoppingCartIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
+                                    <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
                                 </Badge>}
                         >
                             Carrito

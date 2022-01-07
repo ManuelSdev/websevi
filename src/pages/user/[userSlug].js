@@ -12,27 +12,34 @@ import DataSection from "../../components/userPage/DataSection"
 import WishListSection from "../../components/userPage/WishListSection"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
 import OrdersSection from "../../components/userPage/UserOrdersSection"
+
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
+import Working from "../../components/elements/Working"
 const sections = [
     {
         name: 'Mis datos',
         path: 'mis-datos',
-        icon: <ContentCut fontSize="small" />
+        icon: <PersonOutlineIcon fontSize="small" />
     },
     {
         name: 'Lista de deseos',
-        icon: <ContentCut fontSize="small" />
+        icon: <FavoriteBorderIcon fontSize="small" />
     },
     {
         name: 'Valoraciones',
-        icon: <ContentCut fontSize="small" />
+        icon: <StarBorderIcon fontSize="small" />
     },
     {
-        name: 'Pédidos',
-        icon: <ContentCut fontSize="small" />
+        name: 'Pedidos',
+        icon: <ShoppingBagOutlinedIcon fontSize="small" />
     },
     {
         name: 'Opciones de pago',
-        icon: <ContentCut fontSize="small" />
+        icon: <PaymentOutlinedIcon fontSize="small" />
     }
 ]
 
@@ -50,6 +57,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} />}
                 content={!user ?
+                    /**TODO: revisa este hola */
                     <Box>HOla</Box>
                     :
                     userSlug === 'mis-datos' ?
@@ -61,7 +69,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
                             userSlug === 'pedidos' ?
                                 <OrdersSection user={user} />
                                 :
-                                <Box />
+                                <Working />
                 }
             />
 
