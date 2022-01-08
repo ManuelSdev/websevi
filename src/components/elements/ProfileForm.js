@@ -170,10 +170,6 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
             <Button
                 type="submit" >
                 Guardar datos</Button>
-
-            <SaveAndLoadButton></SaveAndLoadButton>
-            {/**TODO: refina el tema de errores */}
-            {/*error && <Box>{error}</Box>*/}
         </Box>
     )
 
@@ -181,7 +177,7 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
         <FormTemplate
             onSubmit={handleSubmit(onSubmit)}
             sx={{
-                backgroundColor: 'dimGray',
+                //  backgroundColor: 'dimGray',
                 '& .MuiFormControl-root': { mb: 2, width: '100%' },
                 '& .MuiTextField-root': { mb: 2, width: '100%' }
             }}

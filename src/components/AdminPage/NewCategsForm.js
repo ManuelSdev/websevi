@@ -49,7 +49,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         //Uso de función cleanUP
 
         let mounted = true;
-        setCategs({ level: 1 }, 'categories_1')
+        mounted && setCategs({ level: 1 }, 'categories_1')
         return () => {
             mounted = false;
         };
@@ -65,7 +65,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
             return;
         }
         let mounted = true;
-        setFormValue({
+        mounted && setFormValue({
             ...formValue,
             category_1: '',
             category_1_isNew: !category_1_isNew
@@ -207,7 +207,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         <Box>
 
             <Button type="submit" >Crear Categoría</Button>
-            <SaveAndLoadButton></SaveAndLoadButton>
+
 
             {/**TODO: refina el tema de errores */}
             {error && <Box>{error}</Box>}
@@ -220,7 +220,7 @@ const NewCategsForm = ({ onSubmit, error }) => {
         <FormTemplate
             onSubmit={onSubmitProp}
             sx={{
-                backgroundColor: 'dimGray',
+                // backgroundColor: 'dimGray',
                 '& .MuiFormControl-root': { mb: 2, width: '100%' },
                 '& .MuiTextField-root': { mb: 2, width: '100%' }
             }}

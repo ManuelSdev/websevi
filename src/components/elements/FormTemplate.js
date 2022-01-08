@@ -12,16 +12,22 @@ import Grid from "@mui/material/Grid"
 const FormTemplate = ({ column1Elements, column2Elements, fullWidthElements, ...props }) => {
     return (
         <Container
+
             component='form'
             sx={{ minHeight: 'calc(100vh - 488.02px)' }}
             {...props}
         >
 
-            <Grid sx={{ backgroundColor: 'beige', }} container spacing={3} columns={2}>
+            <Grid
+
+                // sx={{ backgroundColor: 'beige', }} 
+                container spacing={3} columns={2}>
                 <Grid item xs={6} sm={4} md={3} lg={1} >
                     {column1Elements}
                 </Grid>
-                <Grid sx={{ backgroundColor: 'floralWhite' }} item xs={6} sm={4} md={3} lg={1} >
+                <Grid
+                    //  sx={{ backgroundColor: 'floralWhite' }} 
+                    item xs={6} sm={4} md={3} lg={1} >
                     {column2Elements}
                 </Grid>
             </Grid>

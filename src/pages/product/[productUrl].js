@@ -4,22 +4,16 @@ import Container from "@mui/material/Container"
 import ProductDetails from "../../components/products/ProductDetails"
 import Button from "@mui/material/Button"
 import Image from "next/image"
-import giga from '../../assets/images/giga.jpg'
 import React from "react"
 import { getProducts } from "../api/products/getProducts"
 import Layout from "../../components/layouts/Layout"
-//import { getCategsPath } from "../../lib/staticsPathFilters/categsStaticsPaths"
-//import { getCategoryPath } from "../../lib/pathsGetters/getCategoryPath"
+
 import { getCategories } from "../api/categories/getCategories"
 import ImageList from "@mui/material/ImageList"
 import ImageListItem from "@mui/material/ImageListItem"
-import Link from "@mui/material/Link"
 import { Divider, Typography } from "@mui/material"
-import ButtonBase from '@mui/material/ButtonBase';
-import { ButtonUnstyled } from '@mui/base/ButtonUnstyled';
+
 import Modal from '@mui/material/Modal';
-import revalidateTime from "../../lib/utils/revalidateTime"
-//import Link from '../../components/elements/Link'
 
 const style = {
     position: 'absolute',
@@ -79,16 +73,26 @@ const ProductPage = ({ categories, product }) => {
         <>
             <ModalImage />
             <Layout categories={categories} >
-                <Container sx={{ background: "red", minHeight: 'calc(100vh - 488.02px)' }}>
-                    <Box sx={{ flexGrow: 1, background: "AliceBlue" }}>
+                <Container sx={{
+                    // background: "red",
+                    minHeight: 'calc(100vh - 488.02px)'
+                }}>
+                    <Box
+                        mt={10}
+                        mb={10}
+                        sx={{
+                            flexGrow: 1,
+                            // background: "AliceBlue"
+                        }}>
                         <Grid mb={2} container spacing={0}>
                             <Grid item xs={6} sm={4} md={3} lg={6} >
                                 <Box
+                                    disableElevation
                                     component={Button}
                                     onClick={handleOpen}
                                     sx={{
                                         // pr: 15,
-                                        background: "blue",
+                                        //background: "blue",
                                         display: 'flex',
                                         justifyContent: 'center',
 
@@ -97,7 +101,6 @@ const ProductPage = ({ categories, product }) => {
                                         position: 'relative'
                                     }}
                                 >
-
                                     <Image
                                         width='100%'
                                         height='100%'
@@ -108,11 +111,7 @@ const ProductPage = ({ categories, product }) => {
                                         //
                                         alt="Imagen de producto"
                                     />
-
-
                                 </Box>
-
-
                                 <ImageList
                                     sx={{
                                         width: 527,
@@ -122,7 +121,6 @@ const ProductPage = ({ categories, product }) => {
                                     {images.map((image) => (
                                         <ImageListItem key={image} component={Button}
                                             sx={{
-
                                                 border: 1,
                                                 borderColor: 'DarkGrey',
                                                 borderRadius: 0,
@@ -130,13 +128,10 @@ const ProductPage = ({ categories, product }) => {
                                                     border: 2,
                                                     borderColor: 'corpGreen.main',
                                                     //  borderRadius: 0,
-
                                                 }
                                             }}
                                         >
-
                                             <Image
-
                                                 objectFit='contain'
                                                 layout='fill'
                                                 //src={product.images}
@@ -144,22 +139,19 @@ const ProductPage = ({ categories, product }) => {
                                                 alt="Imagen de producto"
                                                 onClick={handleMainImage(image)}
                                             />
-
                                         </ImageListItem>
                                     ))}
                                 </ImageList>
-
                             </Grid>
                             <Grid item xs={6} sm={4} md={3} lg={6} >
                                 <ProductDetails product={product} ></ProductDetails>
                             </Grid>
-
                         </Grid>
                         <Box>
                             <Divider
                                 light
                                 pr={5}
-                                textAlign="left"> <Typography>Descripción</Typography></Divider>
+                                textAlign="left"> <Typography sx={{ fontWeight: 'bold' }}>Descripción</Typography></Divider>
                             <Box p={3}>
                                 {product.description}
                             </Box>
@@ -167,7 +159,7 @@ const ProductPage = ({ categories, product }) => {
                         <Box>
                             <Divider
                                 pr={5}
-                                textAlign="left"> <Typography>Especificaciones</Typography></Divider>
+                                textAlign="left"> <Typography sx={{ fontWeight: 'bold' }}>Especificaciones</Typography></Divider>
                             <Box>
                                 <ul>
                                     {product.specs.map(spec =>
@@ -175,17 +167,11 @@ const ProductPage = ({ categories, product }) => {
                                             <li>{spec} </li>
                                         </Box>
                                     )}
-
-
-
                                 </ul>
                             </Box>
                         </Box>
-
-
-
+                        <Divider></Divider>
                     </Box>
-
                 </Container>
             </Layout >
         </>

@@ -35,14 +35,3 @@ const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoadi
 
 export default PaymentStep
 
-/*
- user.addresses.length < 0 ?
-                <SelectAddressForm user={user}></SelectAddressForm>
-                :
-                <>
-                    <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
-                    <ProfileForm
-                        onSubmit={onSubmit}
-                    />
-                </>
-                */

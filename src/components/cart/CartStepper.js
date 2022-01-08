@@ -63,7 +63,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
     };
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        activeStep > 0 && setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
     const handleStep = (step) => () => {
@@ -131,7 +131,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                 </Stepper>
             </Box>
 
-            <Box sx={{ flexGrow: 1, marginTop: '30px' }}>
+            <Box mb={2} sx={{ flexGrow: 1, marginTop: '30px' }}>
                 <Grid container spacing={2}>
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
 
@@ -189,10 +189,13 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                     </Grid>
                 </Grid>
             </Box>
-            <Button
+            {activeStep > 0 &&
+                <Button
 
-                onClick={handleBack}
-            >ATRÁS</Button>
+                    onClick={handleBack}
+                >ATRÁS</Button>
+            }
+
         </Container >
     );
 }

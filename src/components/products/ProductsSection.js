@@ -10,7 +10,7 @@ const ProductsSection = ({ products, filtersProps, selectedPricesRange, handlePr
 
     return (
 
-        <SidebarLayout
+        <SidebarLayout elevationPaper={0}
             sidebar={
                 <FiltersBar
                     filtersProps={filtersProps}

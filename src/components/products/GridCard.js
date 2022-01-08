@@ -42,8 +42,8 @@ const GridCard = ({ product }) => {
 
                     </Box>
 
-                    <Typography align='center'> {product.name}</Typography>
-                    <Typography align='center'> {product.price} €</Typography>
+                    <Typography mt={1} align='center'> {product.name}</Typography>
+                    <Typography mt={2} variant='h5' sx={{ fontWeight: 'bold' }} align='center'> {product.price} €</Typography>
                 </CardContent>
 
             </CardActionArea>

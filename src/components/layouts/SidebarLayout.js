@@ -6,7 +6,7 @@ import { Paper, useTheme } from "@mui/material"
 
 
 
-const SidebarLayout = ({ content, sidebar }) => {
+const SidebarLayout = ({ content, sidebar, elevationPaper }) => {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('md'));
@@ -18,7 +18,7 @@ const SidebarLayout = ({ content, sidebar }) => {
 
     return (
         <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }} >
-            <Box sx={{ mt: 5, flexGrow: 1 }}>
+            <Box sx={{ mt: 5, mb: 10, flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     {
                         matches &&
@@ -28,7 +28,7 @@ const SidebarLayout = ({ content, sidebar }) => {
                     }
 
                     <Grid item xs={12} sm={12} md={9} lg={9} >
-                        <Paper elevation={0} sx={{ p: 2, pt: 1.5 }}>
+                        <Paper elevation={elevationPaper} sx={{ p: 2, pt: 1.5 }}>
                             {content}
                         </Paper>
 

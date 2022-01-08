@@ -1,14 +1,13 @@
 import Box from "@mui/system/Box"
 
 import Typography from "@mui/material/Typography"
-import useUser from '../../hooks/swrHooks/useUser'
-import { useAppContext } from '../../components/context'
+
 
 import ProfileForm from "../elements/ProfileForm"
 import { updateUser } from "../../lib/api/user"
-import SelectAddressForm from "../elements/SelectPayment"
-import { useRouter } from "next/dist/client/router"
-import { Paper, Stack } from "@mui/material"
+
+import Stack from "@mui/material/Stack"
+import CircularProgress from "@mui/material/CircularProgress"
 
 
 const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
@@ -37,7 +36,10 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
 
     return (
         isLoading ?
-            <Box>LOADING</Box>
+            <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
+                <CircularProgress color="primary" />
+
+            </Stack>
             :
             user?.hasProfile ?
 
@@ -60,13 +62,21 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
                 </Box>
                 :
                 <>
-                    <Box sx={{ flexGrow: 1, background: "green" }}> <Typography>Dirección de envío</Typography></Box>
+                    <Box sx={{
+                        flexGrow: 1,
+                        //background: "green"
+                    }}>
+                        <Typography p={2} variant='h5' sx={{ fontWeight: 'bold' }} >
+                            Dirección de envío
+                        </Typography>
+                    </Box>
                     <ProfileForm
                         {...props}
 
                         onSubmit={onSubmit}
                     />
                 </>
+
     )
 }
 

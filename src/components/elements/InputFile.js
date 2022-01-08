@@ -54,14 +54,16 @@ function InputFile({ onChange, editableSrc, ...props }) {
   return (
     <div >
       <input
-        //required
         ref={inputRef}
         type="file"
         style={{ display: 'none' }}
+
+
         onChange={handleChange}
         {...props}
       />
       <Image
+
         onClick={handleClick}
         src={src || placeholder}
         alt=""

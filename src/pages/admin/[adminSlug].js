@@ -61,7 +61,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
         <Layout isLogged={isLogged} categories={categories}>
 
             <SidebarLayout
-                sidebar={<ProfileBar profile={'admin'} sections={sections} />}
+                sidebar={<ProfileBar profile={'admin'} sections={sections} elevationPaper={1} />}
                 content={
                     adminSlug === 'pedidos' ?
                         <AdminOrdersSection />

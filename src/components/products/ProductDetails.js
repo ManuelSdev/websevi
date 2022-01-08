@@ -99,13 +99,10 @@ const ProductDetails = ({ product }) => {
 
     return (
         <Box sx={{ flexGrow: 1, background: "white" }}>
-
             <Typography
                 sx={{ fontWeight: 'bold' }}
-
                 variant="h6"
                 component="div"
-
             >
                 {product.name}
             </Typography>
@@ -115,7 +112,6 @@ const ProductDetails = ({ product }) => {
                 gutterBottom
                 variant="h3"
                 component="div"
-
             >
                 {product.price} €
             </Typography>

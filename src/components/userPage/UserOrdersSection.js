@@ -4,6 +4,7 @@ import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography"
 import useOrders from '../../hooks/swrHooks/useOrders';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const UserOrdersSection = ({ user }) => {
     const { orders, isLoadingOrders, isErrorOrders, mutateOrders } = useOrders(user._id)
@@ -20,7 +21,10 @@ const UserOrdersSection = ({ user }) => {
             </Stack>
 
             {isLoadingOrders ?
-                <Box>LOADINGG</Box>
+                <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
+                    <CircularProgress color="primary" />
+
+                </Stack>
                 :
                 orders.length === 0 ?
                     <Box>No hay pedidos</Box>

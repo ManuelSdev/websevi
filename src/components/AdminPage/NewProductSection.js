@@ -28,7 +28,7 @@ const NewProductSection = ({ props }) => {
     };
     return (
         loading ?
-            <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
+            <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
                 <CircularProgress color="primary" />
 
             </Stack>

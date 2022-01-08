@@ -15,7 +15,7 @@ const FindedProductsSection = ({ products, filtersProps, selectedPricesRange, ha
 
     return (
 
-        <SidebarLayout
+        <SidebarLayout elevationPaper={0}
             sidebar={
                 <SearchFiltersBar
                     filtersProps={filtersProps}
