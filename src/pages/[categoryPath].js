@@ -7,18 +7,18 @@ import Layout from '../components/layouts/Layout'
 import usePriceSlider from '../hooks/usePriceSlider'
 import React from 'react'
 
-const Category = ({ isLogged, products, categories, filtersProps }) => {
-    const router = useRouter()
-
-    const { selectedPricesRange: currentSelectedPricesRange } = router.query
+const CategoryPage = ({ isLogged, products, categories, filtersProps }) => {
+    // const router = useRouter()
+    //const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
+
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
 
     const props = { selectedPricesRange, handlePrice, valuetext }
 
     React.useEffect(() => {
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
-
+        // setSelectedPricesRange(pricesRange)
     }, [pricesRange])
 
     return (
@@ -28,7 +28,7 @@ const Category = ({ isLogged, products, categories, filtersProps }) => {
     )
 }
 
-export default Category
+export default CategoryPage
 
 //TODO: revisa fallback y revalidate en prod
 export async function getStaticPaths() {

@@ -7,10 +7,10 @@ import { useRouter } from "next/router"
 import React from 'react'
 
 
-const Filters = ({ isLogged, products, categories, filtersProps }) => {
+const FilteredProductsPage = ({ isLogged, products, categories, filtersProps }) => {
 
-    const router = useRouter()
-    const { selectedPricesRange: currentSelectedPricesRange } = router.query
+    // const router = useRouter()
+    //const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
 
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
@@ -19,7 +19,7 @@ const Filters = ({ isLogged, products, categories, filtersProps }) => {
 
     React.useEffect(() => {
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
-
+        // setSelectedPricesRange(pricesRange)
     }, [pricesRange])
 
     return (
@@ -29,7 +29,7 @@ const Filters = ({ isLogged, products, categories, filtersProps }) => {
     )
 }
 
-export default Filters
+export default FilteredProductsPage
 
 export async function getServerSideProps(context) {
     const { query } = context
