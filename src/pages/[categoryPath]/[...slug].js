@@ -110,7 +110,7 @@ export async function getServerSideProps(context) {
         }
     }
     const filtersProps = getFiltersProps()
-
+    console.log('****************', filtersProps)
     return {
         props: { products, categories, filtersProps }, // will be passed to the page component as props
     }

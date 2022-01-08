@@ -98,6 +98,7 @@ export async function getStaticProps(context) {
         }
     }
     const filtersProps = getFiltersProps()
+    console.log('****************', filtersProps)
 
     return {
         props: { categories, products, filtersProps } // will be passed to the page component as props
