@@ -19,7 +19,7 @@ const FilteredProductsPage = ({ isLogged, products, categories, filtersProps }) 
 
     React.useEffect(() => {
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
-        // setSelectedPricesRange(pricesRange)
+        setSelectedPricesRange(pricesRange)
     }, [pricesRange])
 
     return (
