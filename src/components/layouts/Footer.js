@@ -32,10 +32,12 @@ const Footer = () => {
                     </Grid>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
                         <Box pl={5} pr={5}>
-                            <Typography mb={2} sx={{ fontWeight: 'bold' }} variant='h5' color='white' >Sobre nosotros</Typography>
-                            <Typography variant='body1' color='white'>Quiénes somos </Typography>
-                            <Typography variant='body1' color='white'>Nuestra tienda </Typography>
-                            <Typography variant='body1' color='white'>Términos y condiciones</Typography>
+                            <Link href='/construccion'>
+                                <Typography mb={2} sx={{ fontWeight: 'bold' }} variant='h5' color='white' >Sobre nosotros</Typography>
+                                <Typography variant='body1' color='white'>Quiénes somos </Typography>
+                                <Typography variant='body1' color='white'>Nuestra tienda </Typography>
+                                <Typography variant='body1' color='white'>Términos y condiciones</Typography>
+                            </Link>
                             <Link href='/legalInfo'>
                                 <Typography variant='body1' color='white'>Política de privacidad</Typography>
 

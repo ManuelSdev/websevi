@@ -14,16 +14,10 @@ import initialsCategories from '../../assets/initialsCategories';
 import initialsProducts from '../../assets/initialsProducts';
 
 const ProfileBar = ({ sections, profile }) => {
-    // const router = useRouter()
-    // const { userSlug } = router.query
 
-    // const handlePush = sectionName => router.push(`/user/${toPlainString(sectionName)}`)
     const restartCategs = async () => {
-        //const categs = allCategsOnArray()
-        //console.log(categs)
         await resetCategories(initialsCategories)
         await resetProducts(initialsProducts)
-
     }
 
     return (

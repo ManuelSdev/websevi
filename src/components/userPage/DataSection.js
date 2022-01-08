@@ -8,13 +8,9 @@ import { updateUser } from '../../lib/api/user';
 
 
 const DataSection = ({ user }) => {
-    console.log('*------------', user._id)
-    const onSubmit = async (newUserValues) => {
-        console.log('*------------', user._id)
-        const { resolved } = await updateUser(user._id, newUserValues)
-        // resolved && mutate()
 
-        //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
+    const onSubmit = async (newUserValues) => {
+        const { resolved } = await updateUser(user._id, newUserValues)
     }
 
     if (user.hasProfile) {
@@ -45,11 +41,7 @@ const DataSection = ({ user }) => {
             :
             <>
                 <Box sx={{ flexGrow: 1, background: "red" }}> <Typography>Dirección de envío</Typography></Box>
-                <ProfileForm
-
-
-                    onSubmit={onSubmit}
-                />
+                <ProfileForm onSubmit={onSubmit} />
             </>
     )
 }

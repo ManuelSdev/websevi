@@ -2,14 +2,11 @@ import FormTemplate from "./FormTemplate"
 import Box from "@mui/system/Box"
 import TextField from "@mui/material/TextField"
 import useForm from "../../hooks/useForm"
-import InputFile from "./InputFile"
 import { Button } from "@mui/material"
-import SaveAndLoadButton from './SaveAndLoadButton'
 import React from "react"
 
 
 const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => {
-
 
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
         name: '',
@@ -22,28 +19,11 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
         region: '',
         country: '',
         moreInfo: '',
-
-
     });
+
     const { name, lastName, idCard, phone, address, postCode, city, region, country, moreInfo } = formValue
-
     const formValueInArray = [name, lastName, idCard, phone, address, postCode, city, region, country, moreInfo]
-    //Recorre los elementos del estado y filtra los que no han sido completados (son false)
-    //Si el array resultante formIsComplete está vacio, significa que el formulario esta completo
-    /*
-    React.useEffect(() => {
-        const formIsComplete = formValueInArray.filter(element => !element)
-    
-        if (formIsComplete.length === 0) {
-            //handleMutate()
 
-            setButtonIsActive(true)
-        } else { setButtonIsActive(false) }
-        //console.log('renderrrrrrrr', formIsComplete.length)
-        // console.log('ennnn', formIsComplete)
-
-    }, [formValue]);
-    */
     const column1Elements = (
         <Box>
             <TextField
@@ -65,9 +45,7 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
                 name='idCard'
                 onChange={handleChange}
                 value={idCard}
-
             />
-
         </Box>
     )
     const column2Elements = (
@@ -93,7 +71,6 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
                 onChange={handleChange}
                 value={phone}
             />
-
         </Box>
     )
 
@@ -110,7 +87,6 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
                 value={address}
                 onChange={handleChange}
             />
-
             <TextField
                 size="small"
                 label="Información opcional"
@@ -164,9 +140,6 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
                 value={postCode}
                 onChange={handleChange}
             />
-
-
-
             <Button
                 type="submit" >
                 Guardar datos</Button>
@@ -184,10 +157,7 @@ const UserDataForm = ({ user, onSubmit, buttonIsActive, setButtonIsActive }) => 
             column1Elements={column1Elements}
             column2Elements={column2Elements}
             fullWidthElements={fullWidthElements}
-
         />
-
-
     )
 }
 

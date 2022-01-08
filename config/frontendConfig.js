@@ -14,16 +14,13 @@ export const frontendConfig = () => {
                 onHandleEvent: async (context) => {
                     if (context.action === "SESSION_ALREADY_EXISTS") {
                         // TODO:
-                        console.log("SESSION_ALREADY_EXISTS")
                     } else {
                         let { id, email } = context.user;
                         if (context.action === "SUCCESS") {
                             if (context.isNewUser) {
                                 // TODO: Sign up
-                                console.log("SUCCESS context.isNewUser", context)
                             } else {
                                 // TODO: Sign in
-                                console.log("SUCCESS")
                             }
                         }
                     }
@@ -81,18 +78,8 @@ export const frontendConfig = () => {
                             * In this case, the <EmailPasswordSignInHeader> will render the default component
                             * wrapped in div with octocat picture above it.
                             */
-
-
-                            console.log('+++', { DefaultComponent })
-
-
-
                             return (
-
                                 <DefaultComponent {...props} />
-
-
-
                             );
                         },
                         EmailPasswordSignInHeader: ({ DefaultComponent, ...props }) => {
@@ -101,11 +88,6 @@ export const frontendConfig = () => {
                             * wrapped in div with octocat picture above it.
                             */
 
-
-                            // console.log('+++', { DefaultComponent })
-
-
-
                             return (
                                 <Box>
                                     <IconCorpName
@@ -115,8 +97,6 @@ export const frontendConfig = () => {
                                     ></IconCorpName>
                                     <DefaultComponent {...props} />
                                 </Box>
-
-
                             );
                         },
                         EmailPasswordSignUpHeader: ({ DefaultComponent, ...props }) => {
@@ -124,12 +104,6 @@ export const frontendConfig = () => {
                             * In this case, the <EmailPasswordSignInHeader> will render the default component
                             * wrapped in div with octocat picture above it.
                             */
-
-
-                            // console.log('+++', { DefaultComponent })
-
-
-
                             return (
                                 <Box>
                                     <IconCorpName
@@ -139,8 +113,6 @@ export const frontendConfig = () => {
                                     ></IconCorpName>
                                     <DefaultComponent {...props} />
                                 </Box>
-
-
                             );
                         },
                     },

@@ -40,14 +40,12 @@ export async function createUserSP(supertokensResponse) {
       favorites: [],
       orders: [],
 
-
     })
     const savedUser = await newUser.save()
     console.log(`Se ha creado un nuevo usuario con el email asociado ${email}`)
   } catch (err) {
     console.log("ERROR al crear un nuevo usuario: ", err.message)
   }
-
 
 }
 
@@ -56,11 +54,8 @@ export default async function handler(req, res) {
 
   try {
     await dbConnect()
-
-
     res.status(201)
       .json({ message: `El árbol de categorías se ha creado correctamente` })
-    // throw new Error('uff')
   } catch (err) {
     console.log("ERROR Category CREATE", err.message)
     res.status(err.status ? 409 : 500)

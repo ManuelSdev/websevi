@@ -55,9 +55,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
         };
     }, [])
 
-    /**
-     * CUando 
-     */
 
     React.useEffect(() => {
         if (isFirstRender.current) {
@@ -85,12 +82,10 @@ const NewCategsForm = ({ onSubmit, error }) => {
     const setCategs = async (filter, categoriesToChange) => {
         const res = await getCategories(filter)
         const newArray = res.map(category => category.name)
-        // console.log('query  1', res)
         await setCategories({
             ...categories,
             [categoriesToChange]: newArray
         })
-        //  console.log('cattt', categories)
     }
 
     error && console.log('HAY ERROR ', error)

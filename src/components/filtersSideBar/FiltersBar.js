@@ -4,9 +4,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeItem from '@mui/lab/TreeItem';
 import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import { mapNames } from '../../lib/mapFilters';
-
 import Link from '../elements/Link'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -14,9 +11,9 @@ import Checkbox from '@mui/material/Checkbox';
 import { toPlainString } from '../../lib/utils/stringTools';
 import useForm from '../../hooks/useForm';
 import { useRouter } from 'next/router';
-import { Box } from '@mui/system';
-import { Slider } from '@mui/material';
-import usePriceSlider from '../../hooks/usePriceSlider';
+import Box from '@mui/system/Box';
+import Slider from '@mui/material/Slider';
+
 const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
 
     const firstRender = React.useRef(true);
@@ -26,25 +23,16 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     const { categoryPath, slug, pathParams } = router.query
     const [searchKeys] = pathParams ? pathParams : [false]
 
-
-
-    //Extrae el string introducido en el buscador, que siempre es el primer elemento del array pathParams
-    //
-
-
     const { hasLink, filters, pricesRange } = filtersProps
     const [minPrice, maxPrice] = pricesRange
 
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange
-
-
 
     const marks = [
         {
             value: minPrice,
             label: `${minSelectedPrice}`,
         },
-
         {
             value: maxPrice,
             label: `${maxSelectedPrice}`,
@@ -56,11 +44,8 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
     });
 
     const { checkedFilters } = formValue
+
     /**Slider */
-
-
-    //console.log('VALUE', selectedPricesRange)
-
     const handleChange = ev => {
         const { name, checked, value: filterValue } = ev.target;
         //onChange recibe un objeto similar al objeto event
@@ -75,9 +60,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         });
     };
 
-
-
-
     /**
      * Cada vez que se modifica el array de filtros checkedFilters, se construye una url con el 
      * nombre de la categoría(url actual)+los nombres de los filtros seleccionados y se redirecciona
@@ -89,9 +71,9 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
             return;
         }
         const newPath = categoryPath ?
-            console.log('========== categoryPath', categoryPath) || { path: `/${categoryPath}` }
+            { path: `/${categoryPath}` }
             :
-            console.log('========== searchKeys', searchKeys) || { path: `/buscar/${searchKeys}` }
+            { path: `/buscar/${searchKeys}` }
         checkedFilters.map(filter => {
             newPath.path = newPath.path.concat('/', filter)
         })
@@ -99,13 +81,8 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
         router.push(newPath.path)
         router.push({
             pathname: newPath.path,
-            //  query: { selectedPricesRange },
         })
-
-
-
     }, [checkedFilters])
-
 
     //Genera un array con los índices del array filters como strings
     //Lo recibe la propiedad , que recibe valores en este formato defaultExpanded={['1', '2'...]}
@@ -123,8 +100,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                 aria-label="file system navigator"
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
-
-            //sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
             >
                 {
                     filters.map((filter, index) => {
@@ -139,7 +114,6 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                             <TreeItem key={filterKey} sx={{ pt: 2 }} nodeId={`${index}`} label={filterKey}>
                                 <FormGroup>
                                     {filter[`${filterKey}`].map(filterValue =>
-
                                         <FormControlLabel
                                             key={filterValue}
                                             control={
@@ -152,9 +126,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                                             }
                                             label={filterValue}
                                         />
-
                                     )}
-
                                 </FormGroup>
                             </TreeItem>
                         return filtersBlock
@@ -175,13 +147,10 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext 
                                 step={10}
                                 max={maxPrice}
                                 min={minPrice}
-
-
                             />
                         </Box>
                     </TreeItem>
                 }
-
             </TreeView >
         </Paper >
 

@@ -49,7 +49,6 @@ const allCategsOnArray = () => {
         )
         const [op] = categsOk.length > 0 ? categsOk : [{ childName: '' }]
         const { childsNames } = op
-        // console.log('#################', childsNames)
         return childsNames
     }
 
@@ -66,88 +65,9 @@ const allCategsOnArray = () => {
     )
     var merged = [].concat.apply([], array2d);
 
-    console.log(merged)
-    /*
-        const categsWithFilters = merged.map(elem => {
-            elem.filters = elem.level === 1 ?
-                [...[1, 2]]
-                :
-                elem.id === 'procesadores' ?
-                    { brand: ['AMD', 'Intel'] }
-                    :
-                    elem.id === 'placas-base' ?
-                        [
-                            { brand: ['ASUS', 'Gigabyte', 'AsRock', 'MSI'] },
-                            { chipset: ['AMD B550', 'AMD X570', 'Intel z690'] },
-                            { size: ['ATX', 'mATX', 'ITX'] }
-                        ]
-                        :
-                        []
-        })
-    */
     return merged
 }
 
 
 export default allCategsOnArray
 
-/*
-,
-    {
-        path: ',Componentes,Procesadores,',
-        childsNames: ['Procesadores INTEL', 'Procesadores AMD'],
-        level: 3
-    },
-
-    {
-        path: ',Componentes,Placas base,',
-        childsNames: ['Placas base INTEL', 'Placas base AMD'],
-        level: 3
-    },
-    {
-        path: ',Componentes,Tarjetas gráficas,',
-        childsNames: ['Tarjetas gráficas NVIDIA', 'Tarjetas gráficas AMD'],
-        level: 3
-    },
-    {
-        path: ',Componentes,Memoria RAM,',
-        childsNames: ['DIMM', 'SODIMM'],
-        level: 3
-    },
-    {
-        path: ',Componentes,Almacenamiento,',
-        childsNames: ['HDD', 'SSD'],
-        level: 3
-    },
-    {
-        path: ',Componentes,Refrigeración,',
-        childsNames: ['Aire', 'Líquida'],
-        level: 3
-    },
-    {
-        path: ',Componentes,Otros componentes,',
-        childsNames: ['Cajas de ordenador', 'Fuentes de alimentación', 'Tarjetas de sonido', 'Capturadoras', 'Unidades ópticas'],
-        level: 3
-    },
-
-    {
-        path: ',Periféricos,Almacenamiento externo,',
-        childsNames: ['Discos externos', 'Memorias USB', 'Tarjetas de memoria'],
-        level: 3
-    },
-    {
-        path: ',Periféricos,Redes,',
-        childsNames: ['Adaptadores de red', 'Cables', 'Antenas', 'Routers', 'Repetidores', 'Switches'],
-        level: 3
-    },
-    {
-        path: ',Ordenadores,Portátiles,',
-        childsNames: ['MSI', 'Asus', 'Gigabyte', 'Lenovo', 'Dell', 'HP'],
-        level: 3
-    },
-    {
-        path: ',Ordenadores,Sobremesa,',
-        childsNames: ['Gaming', 'Workstation', 'All-in-one', 'Básico', 'A medida'],
-        level: 3
-    },
-    */

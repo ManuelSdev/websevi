@@ -44,10 +44,6 @@ const SearchFiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valu
 
 
     /**Slider */
-
-
-    //console.log('VALUE', selectedPricesRange)
-
     const handleChange = ev => {
         const { name, checked, value: filterValue } = ev.target;
         //onChange recibe un objeto similar al objeto event
@@ -62,30 +58,7 @@ const SearchFiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valu
         });
     };
 
-    /**
-     * Cada vez que se modifica el array de filtros checkedFilters, se construye una url con el 
-     * nombre de la categoría(url actual)+los nombres de los filtros seleccionados y se redirecciona
-     * a ella
-     */
-    /*
-    React.useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-        const newPath = { path: `/${categoryPath}` }
-        checkedFilters.map(filter => {
-            newPath.path = newPath.path.concat('/', filter)
-        })
-        //CLAVE: revisa si sobra esto
-        router.push(newPath.path)
-        router.push({
-            pathname: newPath.path,
-            query: { selectedPricesRange },
-        })
-    }, [checkedFilters])
 
-*/
     //Genera un array con los índices del array filters como strings
     //Lo recibe la propiedad , que recibe valores en este formato defaultExpanded={['1', '2'...]}
     //para desplegar por defecto los componentes TreeItem cuyo nodeId coincida con un número del array de strings
@@ -95,23 +68,18 @@ const SearchFiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valu
             <TreeView
                 //Key : https://stackoverflow.com/questions/54364872/a-component-is-changing-an-uncontrolled-input-of-type-checkbox-to-be-controlled
                 key={`treeview-${categoryPath}`}
-                //defaultExpanded={['1']}
                 defaultExpanded={hasLink ? [] : [...arrayOfIndexString, 'price']}
                 aria-label="file system navigator"
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
-            //sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
             >
                 {
                     filters.map((filter, index) => {
                         const filterKey = Object.keys(filter)
-                        // console.log('*****', filter)
                         const filtersBlock =
                             <TreeItem key={filterKey} sx={{ pt: 2 }} nodeId={`${index}`} label={filterKey}>
                                 <FormGroup>
-
                                     {filter[`${filterKey}`].map(filterValue =>
-
                                         <FormControlLabel
                                             key={filterValue}
                                             control={
@@ -144,15 +112,12 @@ const SearchFiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valu
                                 step={10}
                                 max={maxPrice}
                                 min={minPrice}
-
                             />
                         </Box>
                     </TreeItem>
                 }
-
             </TreeView>
         </Paper >
-
     )
 }
 

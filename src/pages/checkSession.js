@@ -2,18 +2,12 @@
 import { checkSession } from "../lib/api/user"
 import usePromise from "../hooks/usePromise"
 import React from "react"
-import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
 
-
-//import Test from "./checkSessionL";
-
+//test de obtención de datos del session de supertokens
 const Store = ({ isLogged, hola }) => {
-
-    console.log('LOGGED ', isLogged)
 
     const { loading, error, throwPromise, data } = usePromise({})
 
-    // const history = useHistory()
     const handleSubmit = async () => {
         const res = await throwPromise(checkSession())
         console.log(res.b)
@@ -32,29 +26,14 @@ const Store = ({ isLogged, hola }) => {
         } catch (error) {
             console.log('error Checksession', error)
         }
-
-
     }
     fetchUserData()
-
-
     return (
         <div>
-            HOLA
+            test
 
         </div>
     )
 }
 
-
-
 export default Store
-
-/*
-  return (
-        <ThirdPartyEmailPasswordAuth requireAuth={false}>
-            <Test />
-        </ThirdPartyEmailPasswordAuth>
-    )
-
-    */

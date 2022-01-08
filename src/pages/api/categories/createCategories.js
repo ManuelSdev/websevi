@@ -23,8 +23,6 @@ const strToFiltersStructure = str => pipe(
 )(str)
 
 export default async function handler(req, res) {
-    console.log("REQ EN CREATE", req.body)
-
     try {
         await dbConnect()
         const { category_1, category_2, category_1_isNew: c1New, fields: str } = req.body
@@ -46,10 +44,8 @@ export default async function handler(req, res) {
             error.status = 409
             throw error
         }
-        //TODO: Mete más errores para controlar el envio de campos vacíos
-        //valida desde el front tb
+
         if (c1New) {
-            console.log('sNEWWWWWWWWWWWW *******************')
             const c_1 =
             {
                 name: nameCategory_1,
@@ -60,7 +56,6 @@ export default async function handler(req, res) {
             c_1.childs = category_2 ? [nameCategory_2] : []
             const newCategory_1 = await new Category(c_1)
             const saved_1 = await newCategory_1.save()
-            console.log('saveddddddddddddddddddddddddddd********************', saved_1)
         }
         else if (!c1New && category_2) {
             //Busca documento con ese _id y hace push  en el array del campo "childs"
@@ -87,7 +82,6 @@ export default async function handler(req, res) {
 
         res.status(201)
             .json({ message: `El árbol de categorías /${nameCategory_1}/${nameCategory_2 && nameCategory_2} se ha creado correctamente` })
-        // throw new Error('uff')
     } catch (err) {
         console.log("ERROR Category CREATE", err.message)
         res.status(err.status ? 409 : 500)

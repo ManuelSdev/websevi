@@ -171,16 +171,6 @@ const addElements = (categories) => categories.map(categ => {
     return categ
 })
 
-
-
-
 const modCategories = addElements(initialsCategories)
-//console.log('hiodsjs//////////////', modCategories)
+
 export default modCategories
-
-/*
-{ brand: ['ASUS', 'Gigabyte', 'AsRock', 'MSI'] },
-                { chipset: ['AMD B550', 'AMD X570', 'Intel Z690'] },
-                { size: ['ATX', 'mATX', 'ITX'] }
-
-                */

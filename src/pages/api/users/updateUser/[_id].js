@@ -6,20 +6,15 @@ import dbConnect from '../../../../lib/dbConnect'
 
 
 export default async function handler(req, res) {
-    //console.log('peticion UPDATE USER')
     //Obtiene el _id del usuario de los path params
     //el objeto req.query contiene la propiedad _id porque el nombre de esta ruta dínamica es [_id].js
     const { _id } = req.query
-    //console.log(' UPDATE USER body', req.body)
     //Obtiene nuevos valores de usuario del req.body
     const { name, lastName, idCard, phone, company, address, postCode, city, region, country, moreInfo } = req.body
     //TODO: Validaciones BACK
-
     //El campo addresses del modelo User es un array de objetos.Cada objeto contiene los siguientes campos
     const newAddress = { address, postCode, city, region, country, moreInfo }
-    //
     const newValues = { name, lastName, idCard, phone, company }
-
     try {
         await dbConnect()
         //Se hacen comprobaciones para que solo una dirección/address del array de objetos addresses sea default=true
@@ -29,15 +24,11 @@ export default async function handler(req, res) {
 
         //CASO 1: usuario completa perfil añadiendo  datos personales y dirección
         //Como no existen direcciones guardada, la dirección entrante se guarda como default
-        console.log(' currentAddresses', currentAddresses)
         if (currentAddresses.length === 0) {
             //Establece la direccion entrante como default
-            //   console.log(' UPDATE USER id', { _id })
-            //   console.log(' UPDATE USER newValues', newValues)
             newAddress.defaultAddress = true
             //Como se está completando el perfil de usuario en esta solicitud, asignamos hasProfile=true
             newValues.hasProfile = true
-
             //Se actualizan todos los valores del usuario excepto las direcciones/addresses
             //La dirección se añade al array de direcciones addresses
             //CLAVE: ejemplo de como actualizar unos campos y añadir elementos a otros en la misma consulta
@@ -45,12 +36,10 @@ export default async function handler(req, res) {
                 new: true,
                 useFindAndModify: false
             });
-            //   console.log(' UPDATEDDUSER', updatedUser)
 
         }
         //CASO 2: usuario con perfil que añade una dirección  marcada como default en el formulario
         //Si la dirección entrante se señaló como default en el formulario, crea un nuevo array de direcciones actuales con todas ellas con defaultAddress=false
-
         else if (currentAddresses.length > 0 && defaultAddress) {
             //Crea un nuevo array con todaslas direcciones actuales con defaultAddress=false 
             const currentAddressesNoDefault = currentAddresses.mapp(addressObject = () => {
@@ -77,11 +66,7 @@ export default async function handler(req, res) {
                 useFindAndModify: false
             });
 
-
-
-
         }
-        //console.log('€€€€€€€€€€€€€€€€€€€€€', updatedUser)
         res.status(201)
             .json({ resolved: true, message: 'Usuario actualizado' })
     } catch (err) {

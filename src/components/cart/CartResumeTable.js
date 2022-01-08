@@ -15,19 +15,19 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Image from "next/image"
-
 import CartOrderRows from './CartOrderRows';
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
 import Link from '../elements/Link'
 import IconVisa from '../elements/IconVIsa';
 import IconPaypal from '../elements/IconPaypal';
-import { Stack } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 export default function CartResumeTable({ user, order }) {
     const [mainAddress] = user.addresses
     const { address, moreInfo, city, postCode, region, country } = mainAddress
     const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
+
     return (
         <>
             <TableContainer component={Paper}>
@@ -62,7 +62,6 @@ export default function CartResumeTable({ user, order }) {
                                             <Typography>{user.name}</Typography>
                                             <Typography>Tarjeta de crédito terminada en ...XXXX</Typography>
                                         </Box>
-
                                     </Stack>
                                     :
                                     <Stack direction="row" spacing={2}>
@@ -73,7 +72,6 @@ export default function CartResumeTable({ user, order }) {
                                             <Typography>{user.name}</Typography>
                                             <Typography>PayPal</Typography>
                                         </Box>
-
                                     </Stack>
                                 }
                             </TableCell>
@@ -81,26 +79,19 @@ export default function CartResumeTable({ user, order }) {
                         </TableRow>
                     </TableBody>
                 </Table>
-
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-
-
                             <TableCell ><Typography variant='h6' sx={{ fontWeight: 'bold' }} >Artículos</Typography></TableCell>
                             <TableCell />
                             <TableCell align="right">Precio</TableCell>
                             <TableCell align="right">Cantidad</TableCell>
                             <TableCell align="right">Total</TableCell>
                             <TableCell align="right" />
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {order.orderCart.map((product) => {
-                            //  console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬', product)
-
-
                             return <TableRow
                                 key={product.productId}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -108,35 +99,26 @@ export default function CartResumeTable({ user, order }) {
                                 <TableCell component="th" scope="row">
                                     <Link href={`/product/${product.url}`}>
                                         <Image
-
                                             width='100%'
                                             height='100%'
                                             objectFit='contain'
-
-                                            //src={product.images}
                                             src={product.productImage}
-
                                             alt="Imagen de producto"
                                         />
                                     </Link>
                                 </TableCell>
-
                                 <TableCell >{product.productName}</TableCell>
-
                                 <TableCell align="right">{product.productPrice} €</TableCell>
                                 <TableCell align="right">{product.productAmount}</TableCell>
                                 <TableCell align="right">
                                     {Math.round(product.productPrice * product.productAmount * 100) / 100} €
                                 </TableCell>
-
                             </TableRow>
                         })
                         }
                     </TableBody>
                 </Table>
             </TableContainer>
-
-
         </>
     );
 }

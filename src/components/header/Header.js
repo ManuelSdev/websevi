@@ -17,14 +17,11 @@ import SwitchMode from "./SwitchMode"
 
 
 const Header = ({ categories }) => {
-    //console.log('@@@@@@@@@@@@@@@@@@@@', cart)
 
     const { setIsLogged, isLogged } = useAppContext()
 
     return (
-
         <AppBar position="sticky" sx={{ minWidth: 600, background: "red" }} >
-
             <Toolbar
                 sx={{
                     bgcolor: 'corpBlack.main',
@@ -36,7 +33,6 @@ const Header = ({ categories }) => {
                     }
                 }}
             >
-
                 <Stack
                     alignItems='center'
                     direction='row'>
@@ -47,9 +43,7 @@ const Header = ({ categories }) => {
                     />
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>
-
                 {isLogged.state && <SwitchMode />}
-
             </Toolbar>
 
             <SearchToolBar />
@@ -62,25 +56,15 @@ const Header = ({ categories }) => {
                     color: "corpWhite.main",
                 }}
             >
-
-
                 {categories.length > 0 && categories.map(category =>
                     category.level === 1 &&
                     <Box key={category._id}
                         sx={{
                             p: 1, m: 1,
-                            /*
-                            '& :hover': {
-                                backgroundColor: "blue",
-                            },
-                            */
                         }}>
-
                         <DropdownMenu categ_1={category} categories={categories}></DropdownMenu>
                     </Box>
                 )}
-
-
             </Toolbar>
         </AppBar >
 

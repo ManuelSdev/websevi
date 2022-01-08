@@ -23,11 +23,6 @@ const own_objectToFormData = object => {
 
 
 export const withFormData = fn => (object, adId) => {
-  /* 
-  for (var value of formData.values()) {
-    console.log(value);
-  }
-  */
   const formData = objectToFormData(object);
   return adId ?
     fn(formData, adId)

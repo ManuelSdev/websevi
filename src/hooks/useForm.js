@@ -34,54 +34,26 @@ const defaultGetValue = ({ value }) => value;
 
 function useForm(initialFormValue) {
 
-  //const [formValue, setFormValue] = React.useState(initialFormValue);
   const [formValue, setFormValue] = useStateWithCb(initialFormValue)
 
   const updateFormValue = (name, value) => {
-    //console.log('###### VALUEEE', value)
     setFormValue(currentFormValue => ({
-
       ...currentFormValue,
       [name]: value,
     }));
-
-    /*
-     setFormValue(currentFormValue => {
-       // const a = [name]
-       // console.log("00000000000000000", name);
-       //console.log("11111111111111111", value);
-       currentFormValue[name] = value;
- 
-       //console.log("222222222222222222", currentFormValue);
-       return { ...currentFormValue }
-     });
- */
-
   };
-  /*
-    React.useEffect(() => {
-      console.log("USE EFFECT DE useFORM : CAMBIO EN formValue y pasan a ser: ", formValue)
-    }, [formValue]);
-  */
+
   const handleChange = ev => {
-    // console.log("EVENT TARGET", ev.target)
-    // console.log("EVENT TARGET TYPE", ev.target.value)
-    //console.log("EVENT TARGET NAME", ev.target.name)
-    // console.log("EVENT TARGET TYPE", ev.target.type)
-    // console.log("llamada a handleChange de useForm")
     const valueGetter = getValueByType[ev.target.type] || defaultGetValue;
     updateFormValue(ev.target.name, valueGetter(ev.target));
-    //console.log("EVENT TARGET NAME", ev.target.name)
-    //console.log("VALOR VALUE GETTER", valueGetter(ev.target))
-    //console.log("FORM VALUE", formValue)
 
   };
 
   const handleSubmit = onSubmit => ev => {
-    // console.log("9999999999999999999999999999999999", formValue)
     ev.preventDefault();
     onSubmit(formValue);
   };
+
   /**
    * El método every de un array devuelve una función que recibé como parametro true si todos
    * los elementos del array son true

@@ -1,30 +1,12 @@
 
-import Button from "@mui/material/Button"
-import CardMedia from "@mui/material/CardMedia"
-import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
-import Step from "@mui/material/Step"
-import StepLabel from "@mui/material/StepLabel"
-import Stepper from "@mui/material/Stepper"
 import Typography from "@mui/material/Typography"
-
-
-import Box from "@mui/system/Box"
-import DeleteIcon from '@mui/icons-material/HighlightOffOutlined';
-import s from '@mui/icons-material/DeleteForeverOutlined';
-import ss from '@mui/icons-material/CloseOutlined';
 import { useAppContext } from "../components/context"
 import React from "react"
 import { sum } from "../lib/utils/sum"
 import Toolbar from "@mui/material/Toolbar"
-
 import AppBar from "@mui/material/AppBar"
 import IconCorpName from "../components/elements/IconCorpName"
-import { ThemeProvider } from "@emotion/react"
-import theme from "../assets/theme"
 import CartStepper from "../components/cart/CartStepper"
-import CartStep from "../components/cart/CartStep"
 import { createOrder } from "../lib/api/order"
 import useUser from "../hooks/swrHooks/useUser"
 import Modal from "../components/cart/Modal"
@@ -32,18 +14,13 @@ import { useRouter } from "next/router"
 import Stack from "@mui/material/Stack"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-
 const CartPage = () => {
     const router = useRouter()
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
     const { cart, setCart, isLogged, authId } = useAppContext()
-
-    // console.log('~$$$$$$', cart)
     const { user, isLoading, isError, mutate } = useUser(authId)
-    //users es un array con un unico objeto user que contiene el campo _id: 
-
 
     const [order, setOrder] = React.useState({
         userId: '',
@@ -52,10 +29,8 @@ const CartPage = () => {
         payment: ''
     })
 
-    //console.log('CARRITO', cart)
     React.useEffect(() => {
         if (isLoading) return
-        // console.log('USERRRR', user)
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -75,7 +50,6 @@ const CartPage = () => {
     }, [user, cart])
 
     const handleSubmit = async ev => {
-        // console.log("9999999999999999999999999999999999", formValue)
         ev.preventDefault();
         try {
             const { result: ok, message } = await createOrder(order)
@@ -84,30 +58,18 @@ const CartPage = () => {
                 setCart([])
                 handleClickOpen()
             }
-
-
-            console.log('PEDIDO CREADO', message)
         } catch (error) {
             console.log(error)
         }
 
     };
 
-
-    const handleDeletes = productToDelete => ev => {
-        ev.preventDefault()
-        const newCart = cart.filter(product => product._id !== productToDelete._id)
-        //console.log('newcart jskjskjslksjlñ', newCart)
-        setCart(newCart)
-    }
-
     const rowsTotalPrice = cart.map(product => product.price * product.amount)
-    //console.log('rowsTotalPrice', rowsTotalPrice)
+
     const cartTotalPrice = cart.length > 0 ?
         sum(...rowsTotalPrice)
         :
         0
-    console.log('+++++++++++++++', order)
 
     //VENTANA MODAL
     const handleClickOpen = () => {
@@ -140,7 +102,6 @@ const CartPage = () => {
                         }
                     }}
                 >
-
                     <Stack
                         alignItems='center'
                         direction='row'>
@@ -153,26 +114,17 @@ const CartPage = () => {
                     </Stack>
                 </Toolbar>
                 <Toolbar
-
                     sx={{
-                        //borderRadius: "80px",
-
                         bgcolor: 'corpWhite.main',
                         justifyContent: 'space-between',
                         height: "5em",
-                        //color: "corpBlack.main"
                     }}
                 >
                     <IconCorpName viewBox="0 0 381.17 68.88"
-
                         sx={{ height: "100%", fontSize: 250 }}
                     ></IconCorpName>
                 </Toolbar>
-
             </AppBar>
-
-
-
             <CartStepper
                 cartTotalPrice={cartTotalPrice}
                 handleSubmit={handleSubmit}
@@ -189,6 +141,3 @@ const CartPage = () => {
 
 export default CartPage
 
-/*
-
-            */

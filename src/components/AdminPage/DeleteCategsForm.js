@@ -40,15 +40,6 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
         toggled_2: true
     })
 
-    //Tras el primer render, setea las categorías de nivel 1
-    /*
-    React.useEffect(() => {
-        console.log('USEEEEEEEEEEEEEEEEEEEEEEEEE')
-        setCategs()
-    }, [])
-*/
-
-
     /**
      * Recibe un objeto filter para filtrar categorías en bdd
      * Recibe un array categories_x que será el único 
@@ -76,12 +67,10 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
                     })
 
         )
-        console.log('cattt', categories)
     }
     const setCategsZZ = async (filter, categoriesToChange) => {
         const query = await getCategs(filter)
         const newArray = query.map(categorie => categorie._id)
-        console.log('query  1', query)
         await setCategories({
             ...categories,
             [categoriesToChange]: newArray
@@ -91,7 +80,6 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
     const test = async e => {
         e.preventDefault();
         const query = await getTree()
-        console.log('   queryyyy', query)
     }
 
     error && console.log('HAY ERROR ', error)

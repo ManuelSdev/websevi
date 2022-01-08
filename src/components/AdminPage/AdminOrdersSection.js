@@ -8,7 +8,6 @@ import { CircularProgress } from '@mui/material';
 const AdminOrdersSection = () => {
     const { orders, isLoadingOrders, isErrorOrders, mutateOrders } = useAllOrders()
 
-    console.log('==============', orders)
     const mainHeaders = ['Fecha', 'ID de usuario', 'ID de pedido', 'Productos', 'Total']
     const detailsHeaders = ['Artículo', 'Nombre', 'Precio', 'Cantidad', 'Total']
     return (

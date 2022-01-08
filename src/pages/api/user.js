@@ -42,11 +42,9 @@ export default async function user(req, res) {
     // if it comes here, it means that the session verification was successful
     let userId = req.session.getUserId();
     let userInfo = await ThirdPartyEmailPassword.getUserById(userId);
-    //console.log('JKJKSKSJS', userInfo)
 
     return res.json({
         note: 'Fetch any data from your application for authenticated user after using verifySession middleware',
-
         time: req.session.getTimeCreated(),
         userId: req.session.getUserId(),
         sessionHandle: req.session.getHandle(),

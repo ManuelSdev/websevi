@@ -46,9 +46,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
     const { user } = isLogged
-    //users es un array con un unico objeto user que contiene el campo _id: 
-    console.log('*------------', isLogged)
-    //isLoading ? console.log('*------------LOADING',) : console.log('*------------', user)
+
     return (
         <Layout sx={{ zIndex: 'tooltip' }} isLogged={isLogged} categories={categories}>
             <SidebarLayout
@@ -78,17 +76,12 @@ export default UserPage
 
 export async function getStaticPaths() {
     const paths = sections.map(section => ({ params: { userSlug: toPlainString(section.name) } }))
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
     return { paths, fallback: 'blocking' }
 }
-
 export async function getStaticProps(context) {
-    console.log('CONTEXTT', context.params)
     //CATEGORIAS
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
-
     return {
         props: { categories }, // will be passed to the page component as props
     }

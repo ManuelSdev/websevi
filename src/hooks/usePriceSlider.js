@@ -6,25 +6,16 @@
 import { useState } from 'react';
 
 function usePriceSlider(initialSelectedPricesRange) {
-    // console.log('=========', initialSelectedPricesRange)
 
     const [selectedPricesRange, setSelectedPricesRange] = useState(initialSelectedPricesRange);
 
-    //console.log('+++++++', selectedPricesRange)
-
     const handlePrice = (event, newValue) => {
         setSelectedPricesRange(newValue);
-        // console.log('=========', newValue)
     }
-
 
     function valuetext(value) {
         return `${value} €`;
     }
-    /**
-     *  marks pasa como prop al slider. La clave value representa en que punto del slider, de 0 100, se pinta el label. 
-     */
-
 
     return {
         selectedPricesRange,

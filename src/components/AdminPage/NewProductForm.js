@@ -86,12 +86,10 @@ const NewProductForm = ({ onSubmit, error }) => {
      * 
      */
     React.useEffect(() => {
-        // console.log('c1', category_1)
         if (allowUseEffects.current.effect1) {
             allowUseEffects.current.effect1 = false;
             return;
         }
-        //console.log('USE 2----')
         let mounted = true;
         mounted && resetFields()
         mounted && setCategs({ parent: toPlainString(category_1) }, 'categories_2')
@@ -120,6 +118,7 @@ const NewProductForm = ({ onSubmit, error }) => {
         }
 
         if (!category_2) return
+        //Uso de función cleanUP
         let mounted = true;
         const createFields = async (filter) => {
             mounted && resetFields()
@@ -130,11 +129,8 @@ const NewProductForm = ({ onSubmit, error }) => {
             const fieldsToObject = {}
             categoryFields.map(field => {
                 const key = Object.keys(field)
-
-                //  fieldsToObject[`${key}`] = field[`${key}`]
                 fieldsToObject[`${key}`] = ''
             })
-
             mounted && setFields({ ...fieldsToObject })
             //Añade dynamicFields al estado options. Los valores almacenados en dynamicFields 
             //se muestrán como opciones en los desplegables dinámicos 
@@ -144,11 +140,8 @@ const NewProductForm = ({ onSubmit, error }) => {
             })
         }
 
-        //Uso de función cleanUP
-
         createFields({ path: toPlainString(category_2) })
         return () => {
-            //console.log("4- Tira a mounted false")
             mounted = false;
         };
 

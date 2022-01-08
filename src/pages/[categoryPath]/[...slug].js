@@ -2,7 +2,6 @@ import ProductsSection from "../../components/products/ProductsSection"
 import { getCategories } from '../api/categories/getCategories'
 import { getProducts } from "../api/products/getProducts"
 import usePriceSlider from "../../hooks/usePriceSlider"
-//import { getCategsPath } from '../../lib/pathsGetters/getCategoryPath'
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from "next/router"
 import React from 'react'
@@ -11,64 +10,37 @@ import React from 'react'
 const Filters = ({ isLogged, products, categories, filtersProps }) => {
 
     const router = useRouter()
-    //IMPORTANT: ARREGLA EL MAMONEO DEL USESLIDER....MANTIENE PRECIOS DE pagina componentes al pasar a pagina placas-base
-
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
-    // console.log('----------------------------', router.query)
     const { pricesRange } = filtersProps
-    // console.log('++++++++++++++++++++++++++++', pricesRange)
-    /*
-    const { selectedPricesRange, handlePrice, valuetext } = usePriceSlider(
-        currentSelectedPricesRange ?
-            [...currentSelectedPricesRange]
-            :
-            [...pricesRange]
-    )
-    const props = { selectedPricesRange, handlePrice, valuetext }
-*/
 
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider([])
-
 
     const props = { selectedPricesRange, handlePrice, valuetext }
 
     React.useEffect(() => {
-        //      console.log('+++++++++++', selectedPricesRange)
-        // props = { selectedPricesRange, handlePrice, valuetext }
-        //setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
         setSelectedPricesRange(currentSelectedPricesRange ? currentSelectedPricesRange : pricesRange)
 
     }, [pricesRange])
-    //   console.log('Primeroooo', selectedPricesRange)
+
     return (
         <Layout isLogged={isLogged} categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props} />
         </Layout>
-
     )
 }
 
-
-
 export default Filters
 
-
 export async function getServerSideProps(context) {
-    console.log('SERVER: getServerSideProps en /pages/[categoryPath]/[...slug].js')
-    console.log('SERVER context en /pages/[categoryPath]/[...slug].js', context.params)
     const { query } = context
     const { categoryPath, slug } = query
-
     //Obtiene todas las categorías para montar el header
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
     //Obtiene la categoría del path/url: es un array compuesto por un único elemento/objeto category
     const [category] = categories.filter(categ => categ.path === categoryPath)
-
-    // console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬ category', category)
     //Obtiene los filtros del path
     const { fields } = category
-    //console.log('¬¬¬¬¬¬¬¬¬¬¬¬¬¬', filters)
     /**
      * Genera un array de objetos equivalente al array de objetos fields de la category
      * Los objetos del array generado tienen las mismas keys del array filters de la category
@@ -99,13 +71,8 @@ export async function getServerSideProps(context) {
 
     //TODO: refactoriza y externaliza TODO esto que viene ahora y que se repite en [categoryPath].js
     const thisCategoryInArray = categories.filter(categ => categ.path === categoryPath)
-    //console.log('*******************', categs)
     const [thisCategory] = thisCategoryInArray
-    //console.log('*******************', thisCategory)
     const { level } = thisCategory
-
-
-
     //Obtiene los productos
     const productsRes = await getProducts(productsFilter)
     const products = JSON.parse(JSON.stringify(productsRes))
@@ -117,7 +84,6 @@ export async function getServerSideProps(context) {
     const prices = products.map(product => product.price)
     const maxPrice = Math.max(...prices)
     const minPrice = Math.min(...prices)
-
     /**
      * Si el campo level de  la categoría que extraemos del path (context.params) es de nivel 1,
      * crea un objeto cuyos filtros serán los elementos del campo childs  de la categoría. Se añade
@@ -143,8 +109,8 @@ export async function getServerSideProps(context) {
             return filter
         }
     }
-
     const filtersProps = getFiltersProps()
+
     return {
         props: { products, categories, filtersProps }, // will be passed to the page component as props
     }

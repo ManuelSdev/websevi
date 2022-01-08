@@ -11,35 +11,14 @@ import Typography from "@mui/material/Typography"
 const NewCategsSection = ({ props }) => {
     const { error, throwPromise, loading, data: confirmation } = usePromise({})
     const [uploaded, setUploaded] = React.useState(false)
-    //const { bucket, region } = props
-    //console.log(region)
+
     const handleSubmit = async newCategories => {
-        /*
-                try {
-                    await createProduct(newProduct)
-                } catch (error) {
-                    console.log('ERROR', error.message)
-                    throw error
-                }
-        */
+
         await throwPromise(createCategories(newCategories));
-        //console.log('aveee', a)
-        // console.log('aveee 222', confirmation)
         setUploaded(true)
-        //history.push("/user");
     };
-    //   console.log('confiii 1111', confirmation)
-    const firstRenderForUploaded = React.useRef(true);
-    /*
-    React.useEffect(() => {
-        if (firstRenderForUploaded.current) {
-            firstRenderForUploaded.current = false;
-            return;
-        }
-        setUploaded(true)
-        console.log('condddddfffff', confirmation)
-    }, [confirmation])
-    */
+
+
     return (
         loading ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">

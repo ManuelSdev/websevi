@@ -9,18 +9,11 @@ import Typography from "@mui/material/Typography"
 const WishListSection = ({ user }) => {
 
     const { favorites, isLoadingFavs, isErrorFavs, mutateFavs } = useFavorites(user._id)
-    console.log('favorites en wishlistsection', favorites)
-    /*
-        React.useEffect(() => {
-    
-        }, [])
-        */
-    return (
 
+    return (
         <Box>
             <Stack mb={2} direction='row'>
                 <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mi lista de deseos</Typography>
-
             </Stack>
             {favorites?.length > 0 ?
                 <ProductsGrid
@@ -29,11 +22,7 @@ const WishListSection = ({ user }) => {
                 :
                 <Box>NO HAY FAVORITOS</Box>
             }
-
         </Box>
-
-
-
     )
 }
 

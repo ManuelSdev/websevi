@@ -8,10 +8,13 @@ import revalidateTime from '../lib/utils/revalidateTime'
 
 
 export default function Construccion({ categories }) {
+
     const ref = useRef(null);
+
     React.useEffect(() => {
         import("@lottiefiles/lottie-player");
     });
+
     return (
         <Layout categories={categories} >
             <Container align='center' sx={{ minHeight: 'calc(100vh - 488.02px)' }} >
@@ -23,26 +26,17 @@ export default function Construccion({ categories }) {
                         autoplay
                         //controls
                         loop
-
                         mode="normal"
                         src="https://assets6.lottiefiles.com/packages/lf20_egicfodc.json"
-                    //style={{ width: "600px", height: "600px" }}
                     />
                 </Box>
-
-
-
             </Container>
-
         </Layout>
 
     );
 }
 
-
 export async function getStaticProps(context) {
-    //  console.log('CONTEXTT', context.params)
-
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
 
@@ -50,5 +44,4 @@ export async function getStaticProps(context) {
         props: { categories }, // will be passed to the page component as props
     }
     revalidate: 1
-
 }

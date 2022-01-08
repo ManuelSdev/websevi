@@ -66,7 +66,6 @@ export const backendConfig = () => {
 
                                 if (response.status === "OK") {
                                     // TODO: some post sign up logic
-                                    console.log('NUEVO USUARIO EN SUPERTOKENS', response.user.email)
                                     createUserSP(response)
                                 }
 
@@ -104,15 +103,11 @@ export const backendConfig = () => {
                                     if (response.createdNewUser) {
                                         //Cuando el usuario se crea en la bdd de supertokens
                                         // TODO: some post sign up logic
-                                        console.log('NUEVO USUARIO EN SUPERTOKENS', response.user.email)
                                         createUserSP(response)
                                     } else {
                                         //Cuando el usuario ya existe en la bdd de supertokens
                                         // TODO: some post sign in logic
-                                        console.log('USUARIO EXISTENTE EN SUPERTOKENS ', response.user.email)
                                         createUserSP(response)
-                                        // console.log('response', response)
-                                        // console.log('input', input)
                                     }
                                 }
 
@@ -132,7 +127,6 @@ export const backendConfig = () => {
                                 ...originalImplementation,
                                 createNewSession: async function (input) {
                                     let userId = input.userId;
-                                    //console.log('USER ID**************************', input)
                                     //gestion del rol admin 
                                     let admin = userId === 'c05864ca-8e53-4100-8f01-d0070f6e4a7e'
 
@@ -141,7 +135,6 @@ export const backendConfig = () => {
                                         admin,
                                         userId
                                     };
-                                    console.log('el rol admin////////////////', input)
                                     return originalImplementation.createNewSession(input);
                                 },
                             };

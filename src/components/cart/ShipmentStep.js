@@ -1,30 +1,17 @@
 import Box from "@mui/system/Box"
-
 import Typography from "@mui/material/Typography"
-
-
 import ProfileForm from "../elements/ProfileForm"
 import { updateUser } from "../../lib/api/user"
-
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
 
 
 const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
 
-
-    // user.hasProfile ? setButtonIsActive(true) : setButtonIsActive(false)
-
     const onSubmit = async (newUserValues) => {
-        console.log('*------------', user._id)
         const { resolved } = await updateUser(user._id, newUserValues)
         resolved && mutate()
-
-        //   mutate(`/api/users/getUser/${authId}`, updatedRes, false)
     }
-    //console.log('authId', authId)
-    //isLoading || console.log('*******************user id', user.addresses)
-    //console.log('*******************user id', user._id)
 
     //Obtiene dirección principal del array de direcciones
     if (user?.hasProfile) {
@@ -33,16 +20,13 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
         const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
     }
 
-
     return (
         isLoading ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
                 <CircularProgress color="primary" />
-
             </Stack>
             :
             user?.hasProfile ?
-
                 <Box>
                     <Stack mb={2} direction='row'>
                         <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mis datos</Typography>
@@ -64,7 +48,6 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
                 <>
                     <Box sx={{
                         flexGrow: 1,
-                        //background: "green"
                     }}>
                         <Typography p={2} variant='h5' sx={{ fontWeight: 'bold' }} >
                             Dirección de envío
@@ -72,11 +55,9 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
                     </Box>
                     <ProfileForm
                         {...props}
-
                         onSubmit={onSubmit}
                     />
                 </>
-
     )
 }
 

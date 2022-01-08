@@ -3,18 +3,17 @@ import Box from "@mui/system/Box"
 import GridCard from './GridCard'
 import React from "react";
 import Button from "@mui/material/Button";
-const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
+const ProductsGrid = ({ products, selectedPricesRange }) => {
 
     const [displayedProducts, setDisplayedProduct] = React.useState(0)
+
     React.useEffect(() => {
         setDisplayedProduct(9)
-        //    console.log('@@@@@@@@@@@@')
     }, [products])
     const handleDisplayed = () => setDisplayedProduct(displayedProducts + 9)
-    //REVIsa: cuando metas este componente en el index.js
 
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange ? selectedPricesRange : []
-    //  console.log('DISPLAYED', displayedProducts)
+
     /**
      * array.filter: usado para la paginación. Se mostrarán un número de productos igual displayedProducts
      * array.map: usado para el filtro de precio 
@@ -23,7 +22,6 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
         <>
             <Box sx={{
                 mb: 3, flexGrow: 1,
-                // background: "green"
             }}>
                 <Grid container spacing={2}>
                     {products && products
@@ -39,7 +37,6 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
                                     <GridCard product={product}>xs=8</GridCard>
                                 </Grid>
                         )
-
                     }
                 </Grid>
                 {displayedProducts < products.length &&
@@ -51,11 +48,9 @@ const ProductsGrid = ({ products, selectedPricesRange, checkedFilters }) => {
                         </Button>
                     </Box>
                 }
-
-
             </Box>
-
         </>
     )
 }
+
 export default ProductsGrid

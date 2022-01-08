@@ -3,8 +3,6 @@
  * campo path del una categoría
  */
 
-
-
 const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numberOfParents)
 
 /**
@@ -26,7 +24,7 @@ const pathToArray = path => numberOfParents => path.split(',').slice(1, 1 + numb
     *  extraer del path con pathToArray(path)(númeroDePadres)
     *  En este caso, como solo usaremos rutas de nivel 2, extraemos solo el primer padre
     */
-//console.log('*********************************', categories)
+
 //TODO: refactoriza y crea modulo en lib con esto
 export const getCategsPath_sin_uso = categories => categories.map(categ => {
     //console.log('****************************,categories')

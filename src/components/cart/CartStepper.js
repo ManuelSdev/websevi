@@ -54,7 +54,8 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
     const handleNext = () => {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
-                ? // It's the last step, but not all steps have been completed,
+                ?
+                // It's the last step, but not all steps have been completed,
                 // find the first step that has been completed
                 steps.findIndex((step, i) => !(i in completed))
                 :
@@ -83,7 +84,6 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
     };
 
 
-    //console.log('----------------------', window.sessionStorage.getItem('activeStep'))
     /**
      * Si, en el paso 2 (activeStep=1) el usuario no está logado, se le redirige a la página de login
      * Una vez logado, la propiedad redirectBack: true lo volverá a traer a este punto
@@ -100,28 +100,21 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
             waitingForChangeIsLogged.current = false;
             return;
         }
-
         if (sessionStorage.getItem('step1Anchor')) {
             waitingForChangeIsLogged.current = true
             sessionStorage.removeItem('step1Anchor')
             setActiveStep(1)
         }
-
         if (activeStep === 1 && !isLogged.state && !waitingForChangeIsLogged.current) {
             sessionStorage.setItem('step1Anchor', true)
             redirectToAuth({ redirectBack: true })
         }
-
-
     }, [activeStep])
-
-
 
     return (
         <Container>
             <Box pt={2} pb={2} sx={{ width: '100%', background: "#009CAC" }}>
                 <Stepper
-
                     activeStep={activeStep} alternativeLabel>
                     {steps.map((label) => (
                         <Step key={label} >
@@ -130,15 +123,11 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                     ))}
                 </Stepper>
             </Box>
-
             <Box mb={2} sx={{ flexGrow: 1, marginTop: '30px' }}>
                 <Grid container spacing={2}>
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
-
                         {activeStep === 0 ?
-
                             <CartStep />
-
                             :
                             activeStep === 1 ?
                                 <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>
@@ -146,7 +135,6 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                                         user={user}
                                         mutate={mutate}
                                         isLoading={isLoading}
-
                                     />
                                 </Paper>
                                 :
@@ -159,12 +147,8 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                                     <ResumeStep
                                         order={order}
                                         user={user}
-
                                     />
-
                         }
-
-
                     </Grid>
                     <Grid item sx={{}} xs={12} sm={12} md={4} lg={4} >
                         <Paper sx={{ p: 2, }} >
@@ -183,15 +167,12 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                                     :
                                     <Button fullWidth onClick={handleNext}> CONTINUAR</Button>
                             }
-
-
                         </Paper>
                     </Grid>
                 </Grid>
             </Box>
             {activeStep > 0 &&
                 <Button
-
                     onClick={handleBack}
                 >ATRÁS</Button>
             }
