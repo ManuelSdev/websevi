@@ -182,6 +182,7 @@ export async function getStaticProps({ params }) {
     const [product] = JSON.parse(JSON.stringify(productRes))
     return {
         props: { product, categories }, // will be passed to the page component as props
+        revalidate: 1
     }
-    revalidate: 1
+
 }

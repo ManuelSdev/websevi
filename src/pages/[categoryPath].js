@@ -101,7 +101,8 @@ export async function getStaticProps(context) {
     console.log('****************', filtersProps)
 
     return {
-        props: { categories, products, filtersProps } // will be passed to the page component as props
+        props: { categories, products, filtersProps }, // will be passed to the page component as props
+        revalidate: 1
     }
-    revalidate: 1
+
 }
