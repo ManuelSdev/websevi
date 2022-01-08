@@ -12,20 +12,17 @@ const MainMosaic = () => {
     return (
 
         <Paper
-
             sx={{
                 color: "white",
                 background: 'linear-gradient(-45deg, rgba(34,193,195,1) 0%, rgba(0,0,0,1) 79%)',
                 display: 'block'
             }}
         >
-            <Box
+            <Box sx={{ display: 'flex', justifyContent: 'center', }}
                 mb={3}>
                 <Image
-
                     src={tr}
                 >
-
                 </Image>
             </Box>
         </Paper>

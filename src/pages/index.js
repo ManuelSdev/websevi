@@ -13,6 +13,19 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { Divider } from '@mui/material';
 
+export async function getStaticProps(context) {
+  const categoriesRes = await getCategories()
+  const categories = JSON.parse(JSON.stringify(categoriesRes))
+  const productsRes = await getProducts({ featured: true })
+  const products = JSON.parse(JSON.stringify(productsRes))
+  return {
+    props: { categories, products }, // will be passed to the page component as props
+  }
+  revalidate: 1
+
+}
+
+
 export default function Home({ categories, products }) {
 
   return (
@@ -59,14 +72,3 @@ export default function Home({ categories, products }) {
 }
 
 
-export async function getStaticProps(context) {
-  const categoriesRes = await getCategories()
-  const categories = JSON.parse(JSON.stringify(categoriesRes))
-  const productsRes = await getProducts({ featured: true })
-  const products = JSON.parse(JSON.stringify(productsRes))
-  return {
-    props: { categories, products }, // will be passed to the page component as props
-  }
-  revalidate: 1
-
-}
