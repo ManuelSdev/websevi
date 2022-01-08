@@ -8,7 +8,7 @@ import { updateUser } from '../../lib/api/user';
 
 
 const DataSection = ({ user }) => {
-
+    console.log('user que llega a DataSection.js', user)
     const onSubmit = async (newUserValues) => {
         const { resolved } = await updateUser(user._id, newUserValues)
     }

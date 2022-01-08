@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
-import ProductsSection from "../../components/products/ProductsSection"
-import { getProducts } from "./../api/products/getProducts"
-import { getCategories } from './../api/categories/getCategories'
-import { getCategoryPath } from '../../lib/pathsGetters/getCategoryPath'
-import Layout from '../../components/layouts/Layout'
-import usePriceSlider from '../../hooks/usePriceSlider'
+import ProductsSection from "../components/products/ProductsSection"
+import { getProducts } from "./api/products/getProducts"
+import { getCategories } from './api/categories/getCategories'
+import { getCategoryPath } from '../lib/pathsGetters/getCategoryPath'
+import Layout from '../components/layouts/Layout'
+import usePriceSlider from '../hooks/usePriceSlider'
 import React from 'react'
 
 const Category = ({ isLogged, products, categories, filtersProps }) => {

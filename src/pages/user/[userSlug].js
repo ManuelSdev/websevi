@@ -46,7 +46,8 @@ const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
     const { user } = isLogged
-
+    console.log('user que llega a [userSlug].js', user)
+    console.log('isLogged que llega a [userSlug].js', isLogged)
     return (
         <Layout sx={{ zIndex: 'tooltip' }} isLogged={isLogged} categories={categories}>
             <SidebarLayout
