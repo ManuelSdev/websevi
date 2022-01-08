@@ -88,6 +88,7 @@ const NewProductForm = ({ onSubmit, error }) => {
             return;
         }
         //console.log('USE 2----')
+        let mounted = true;
         resetFields()
         setCategs({ parent: toPlainString(category_1) }, 'categories_2')
 
@@ -95,6 +96,10 @@ const NewProductForm = ({ onSubmit, error }) => {
             ...product,
             category_2: ''
         })
+        return () => {
+            //console.log("4- Tira a mounted false")
+            mounted = false;
+        };
     }, [category_1]);
 
     /**

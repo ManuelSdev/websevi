@@ -51,7 +51,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
         let mounted = true;
         setCategs({ level: 1 }, 'categories_1')
         return () => {
-            //console.log("4- Tira a mounted false")
             mounted = false;
         };
     }, [])
@@ -65,12 +64,15 @@ const NewCategsForm = ({ onSubmit, error }) => {
             isFirstRender.current = false;
             return;
         }
+        let mounted = true;
         setFormValue({
             ...formValue,
             category_1: '',
             category_1_isNew: !category_1_isNew
         })
-
+        return () => {
+            mounted = false;
+        };
     }, [isNew])
 
 

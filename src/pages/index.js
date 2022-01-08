@@ -86,6 +86,6 @@ export async function getStaticProps(context) {
   return {
     props: { categories, products }, // will be passed to the page component as props
   }
-  revalidate: revalidateTime
+  revalidate: 1
 
 }

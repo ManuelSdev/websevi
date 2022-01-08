@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-console.log('jhsdljkhjksdhsjh')
 const productSchema = mongoose.Schema({
     name: { type: String, unique: true, index: true, "sparse": true },
     Marca: { type: String, index: true },

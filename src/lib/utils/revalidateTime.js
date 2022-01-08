@@ -1,3 +1,3 @@
 
-const revalidateTime = 10
+const revalidateTime = 1
 export default revalidateTime
