@@ -28,7 +28,6 @@ export default async function handler(req, res) {
     try {
         await dbConnect()
         const { category_1, category_2, category_1_isNew: c1New, fields: str } = req.body
-        console.log('saveddddddddddddddddddddddddddd********************', c1New)
         const nameCategory_1 = category_1.trim()
         const nameCategory_2 = category_2.trim()
 
