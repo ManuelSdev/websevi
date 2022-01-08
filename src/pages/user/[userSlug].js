@@ -83,7 +83,7 @@ export async function getStaticProps(context) {
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
     return {
-        props: { categories }, // will be passed to the page component as props
+        props: { categories } // will be passed to the page component as props
     }
     revalidate: 1
 }

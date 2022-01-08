@@ -73,7 +73,7 @@ export default UserPage
 
 export async function getStaticPaths() {
     const paths = sections.map(section => ({ params: { adminSlug: toPlainString(section.name) } }))
-    return { paths, fallback: 'blocking', }
+    return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps(context) {
@@ -81,7 +81,7 @@ export async function getStaticProps(context) {
     const categoriesRes = await getCategories()
     const categories = JSON.parse(JSON.stringify(categoriesRes))
     return {
-        props: { categories }, // will be passed to the page component as props
+        props: { categories } // will be passed to the page component as props
     }
     revalidate: 1
 }
