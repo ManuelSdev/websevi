@@ -12,7 +12,7 @@ const DataSection = ({ user }) => {
     const onSubmit = async (newUserValues) => {
         const { resolved } = await updateUser(user._id, newUserValues)
     }
-
+    console.log('user has profile', user)
     if (user.hasProfile) {
         const [mainAddress] = user.addresses
         const { address, moreInfo, city, postCode, region, country } = mainAddress
@@ -40,7 +40,13 @@ const DataSection = ({ user }) => {
             </Box>
             :
             <>
-                <Box sx={{ flexGrow: 1, background: "red" }}> <Typography>Dirección de envío</Typography></Box>
+                <Box sx={{
+                    flexGrow: 1,
+                }}>
+                    <Typography p={2} variant='h5' sx={{ fontWeight: 'bold' }} >
+                        Dirección de envío
+                    </Typography>
+                </Box>
                 <ProfileForm onSubmit={onSubmit} />
             </>
     )

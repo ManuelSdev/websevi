@@ -28,9 +28,9 @@ export const frontendConfig = () => {
                 signInAndUpFeature: {
                     providers: [
                         ThirdPartyEmailPasswordReact.Google.init(),
-                        ThirdPartyEmailPasswordReact.Facebook.init(),
-                        ThirdPartyEmailPasswordReact.Github.init(),
-                        ThirdPartyEmailPasswordReact.Apple.init(),
+                        //  ThirdPartyEmailPasswordReact.Facebook.init(),
+                        // ThirdPartyEmailPasswordReact.Github.init(),
+                        // ThirdPartyEmailPasswordReact.Apple.init(),
                     ],
                     signInForm: {
                         formFields: [
