@@ -40,7 +40,7 @@ export async function getStaticPaths() {
     // We'll pre-render only these paths at build time.
     // { fallback: false } means other routes should 404.
     //Retornamos el array paths añadiendo una nueva ruta para las busquedas del buscador 
-    return { paths, fallback: 'blocking' }
+    return { paths, fallback: true }
 }
 
 export async function getStaticProps(context) {
