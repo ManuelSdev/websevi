@@ -4,14 +4,21 @@ import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Stack from '@mui/material/Stack';
 import { updateUser } from '../../lib/api/user';
+import { useAppContext } from '../context';
+import useUser from '../../hooks/swrHooks/useUser';
 
 
 
-const DataSection = ({ user }) => {
-    console.log('user que llega a DataSection.js', user)
+const DataSection = ({ }) => {
+    // console.log('user que llega a DataSection.js', user)
+
+    const { authId } = useAppContext()
+    const { user, isLoading, isError, mutate } = useUser(authId)
     const onSubmit = async (newUserValues) => {
         const { resolved } = await updateUser(user._id, newUserValues)
+        resolved && mutate()
     }
+
     console.log('user has profile', user)
     if (user.hasProfile) {
         const [mainAddress] = user.addresses
@@ -19,8 +26,12 @@ const DataSection = ({ user }) => {
         const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
     }
 
-    return (
-        user.hasProfile ?
+    return (isLoading ?
+        <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
+            <CircularProgress color="primary" />
+        </Stack>
+        :
+        user?.hasProfile ?
             <Box>
                 <Stack mb={2} direction='row'>
                     <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Mis datos</Typography>
