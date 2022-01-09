@@ -81,6 +81,7 @@ const ProductPage = ({ categories, product }) => {
                                     component={Button}
                                     onClick={handleOpen}
                                     sx={{
+                                        bgcolor: 'white',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         width: '527px',
@@ -106,6 +107,7 @@ const ProductPage = ({ categories, product }) => {
                                     {images.map((image) => (
                                         <ImageListItem key={image} component={Button}
                                             sx={{
+                                                bgcolor: 'white',
                                                 border: 1,
                                                 borderColor: 'DarkGrey',
                                                 borderRadius: 0,
