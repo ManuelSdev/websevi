@@ -12,15 +12,23 @@ import { updateFavorites } from '../../lib/api/user';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { useRouter } from 'next/router';
+import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
 const ProductDetails = ({ product }) => {
 
-    const { setCart, cart, authId } = useAppContext()
+    const { setCart, cart, authId, isLogged } = useAppContext()
     /**GESTIÓN DE FAVORITOS */
     const { user, isLoading, isError, mutate } = useUser(authId)
 
+    const router = useRouter()
     const handleFavorites = async () => {
-        const res = await updateFavorites(user._id, product._id)
-        res.resolved && mutate()
+        if (isLogged.state) {
+            console.log(isLogged)
+            const res = await updateFavorites(user._id, product._id)
+            res.resolved && mutate()
+        } else redirectToAuth({ redirectBack: true })
+
     }
 
     const [productToCart, setProductToCart] = React.useState({

@@ -20,12 +20,12 @@ const Footer = () => {
             >
                 <Grid container spacing={0} rowSpacing={0}>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
-                        <Link href='/'>
-                            <IconCorpNameSecondary viewBox="0 65 381.17 68.88"
 
-                                sx={{ fill: "blue", height: "100%", fontSize: 250 }}
-                            ></IconCorpNameSecondary>
-                        </Link>
+                        <IconCorpNameSecondary viewBox="0 65 381.17 68.88"
+
+                            sx={{ fill: "blue", height: "100%", fontSize: 250 }}
+                        ></IconCorpNameSecondary>
+
                     </Grid>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
                         <Box pl={5} pr={5}>
