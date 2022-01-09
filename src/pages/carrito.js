@@ -19,8 +19,8 @@ const CartPage = () => {
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
-    const { cart, setCart, isLogged, authId } = useAppContext()
-    const { user, isLoading, isError, mutate } = useUser(authId)
+    const { cart, setCart, isLogged, authId, user, isLoading, mutate } = useAppContext()
+    //const { user, isLoading, isError, mutate } = useUser(authId)
 
     const [order, setOrder] = React.useState({
         userId: '',
