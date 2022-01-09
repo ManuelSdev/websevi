@@ -16,19 +16,16 @@ const Footer = () => {
                 position: 'relative'
             }}
         >
-
             <Container
-
             >
                 <Grid container spacing={0} rowSpacing={0}>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
+                        <Link href='/'>
+                            <IconCorpNameSecondary viewBox="0 65 381.17 68.88"
 
-
-                        <IconCorpNameSecondary viewBox="0 65 381.17 68.88"
-
-                            sx={{ fill: "blue", height: "100%", fontSize: 250 }}
-                        ></IconCorpNameSecondary>
-
+                                sx={{ fill: "blue", height: "100%", fontSize: 250 }}
+                            ></IconCorpNameSecondary>
+                        </Link>
                     </Grid>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
                         <Box pl={5} pr={5}>
@@ -40,10 +37,8 @@ const Footer = () => {
                             </Link>
                             <Link href='/legalInfo'>
                                 <Typography variant='body1' color='white'>Política de privacidad</Typography>
-
                             </Link>
                         </Box>
-
                     </Grid>
                     <Grid item sx={{ mt: 8 }} xs={6} sm={4} md={3} lg={3}>
                         <Box pr={5}>
@@ -72,7 +67,6 @@ const Footer = () => {
                                 }}
                             >
                                 <Typography variant='body1' color='white'>info@sevimatic.com</Typography>
-
                             </Link>
                         </Box>
                     </Grid>
