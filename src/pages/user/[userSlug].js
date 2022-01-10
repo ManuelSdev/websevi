@@ -17,6 +17,7 @@ import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import Working from "../../components/elements/Working"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
+import useUser from "../../hooks/swrHooks/useUser"
 
 const sections = [
     {
@@ -45,7 +46,8 @@ const sections = [
 const UserPage = ({ authId, isLogged, categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
-    const { user } = isLogged
+    //const { user } = isLogged
+    const { user, isLoading, isError, mutate } = useUser(authId)
     console.log('user que llega a [userSlug].js', user)
     console.log('isLogged que llega a [userSlug].js', isLogged)
     return (
@@ -58,7 +60,10 @@ const UserPage = ({ authId, isLogged, categories }) => {
                     </Stack>
                     :
                     userSlug === 'mis-datos' ?
-                        <DataSection user={user} />
+                        <DataSection
+                            mutate={mutate}
+                            isLoading={isLoading}
+                            user={user} />
                         :
                         userSlug === 'lista-de-deseos' ?
                             <WishListSection user={user} />
