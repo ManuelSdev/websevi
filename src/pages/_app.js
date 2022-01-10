@@ -11,7 +11,6 @@ import theme from '../assets/theme'
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline'
 import { getUser } from '../lib/api/user'
-import useUser from '../hooks/swrHooks/useUser'
 
 
 //Supertokens logic
@@ -32,7 +31,7 @@ function App({ Component, pageProps }) {
   const [isLogged, setIsLogged] = React.useState({ state: false, admin: false, authId: '' })
   //Guarda productos que se van añádiendo o quitando del carrito
   const [cart, setCart] = React.useState([])
-  const { user, isLoading, isError, mutate } = useUser(isLogged.authId)
+
 
   //Supertokens logic
   useEffect(() => {
@@ -65,8 +64,7 @@ function App({ Component, pageProps }) {
        */
       const { admin, userId: authId } = state && await Session.getAccessTokenPayloadSecurely()
       const info = state && await Session.getAccessTokenPayloadSecurely()
-      //const user = await getUser(authId)
-      mutate()
+      const user = await getUser(authId)
       //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
       setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
     }
@@ -83,7 +81,7 @@ function App({ Component, pageProps }) {
     return null
   }
 
-  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart, user, isLoading, mutate }
+  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart }
   pageProps.authId = isLogged.authId
   pageProps.isLogged = { ...isLogged }
 

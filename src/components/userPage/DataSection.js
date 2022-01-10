@@ -9,11 +9,11 @@ import useUser from '../../hooks/swrHooks/useUser';
 
 
 
-const DataSection = ({ user, isLoading, mutate }) => {
+const DataSection = ({ }) => {
     // console.log('user que llega a DataSection.js', user)
 
-    //const { authId } = useAppContext()
-    //const { user, isLoading, isError, mutate } = useUser(authId)
+    const { authId } = useAppContext()
+    const { user, isLoading, isError, mutate } = useUser(authId)
     const onSubmit = async (newUserValues) => {
         const { resolved } = await updateUser(user._id, newUserValues)
         resolved && mutate()
