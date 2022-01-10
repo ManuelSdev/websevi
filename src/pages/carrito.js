@@ -21,7 +21,7 @@ const CartPage = () => {
 
     const { cart, setCart, isLogged, authId } = useAppContext()
     const { user, isLoading, isError, mutate } = useUser(authId)
-
+    console.log('#### carrito user del useUser', user)
     const [order, setOrder] = React.useState({
         userId: '',
         orderCart: [],
@@ -41,7 +41,7 @@ const CartPage = () => {
                 productImage
             }
         })
-        setOrder({
+        user && setOrder({
             ...order,
             userId: user._id,
             orderCart,
