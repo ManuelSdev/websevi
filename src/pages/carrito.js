@@ -19,8 +19,8 @@ const CartPage = () => {
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
-    const { cart, setCart, isLogged, authId } = useAppContext()
-    const { user, isLoading, isError, mutate } = useUser(authId)
+    const { cart, setCart, user, isLoadingUser } = useAppContext()
+    //const { user, isLoading, isError, mutate } = useUser(authId)
     console.log('#### carrito user del useUser', user)
     const [order, setOrder] = React.useState({
         userId: '',
@@ -30,7 +30,7 @@ const CartPage = () => {
     })
 
     React.useEffect(() => {
-        if (isLoading) return
+        if (isLoadingUser) return
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -128,10 +128,6 @@ const CartPage = () => {
             <CartStepper
                 cartTotalPrice={cartTotalPrice}
                 handleSubmit={handleSubmit}
-                isLogged={isLogged}
-                user={user}
-                isLoading={isLoading}
-                mutate={mutate}
                 order={order}
                 setOrder={setOrder}
             />

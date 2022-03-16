@@ -13,7 +13,7 @@ import ShipmentStep from './ShipmentStep'
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-
+import { useAppContext } from "../context";
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
 import { Divider, Stack } from "@mui/material";
@@ -25,16 +25,16 @@ const steps = [
     'Resumen'
 ];
 
-export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged, user, mutate, isLoading, handleSubmit }) {
+export default function CartStepper({ order, setOrder, cartTotalPrice, handleSubmit }) {
 
-
+    const { isLogged, user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
-    console.log('#### cartStepper user entrante', user)
+    console.log(mutateUser)
 
     const totalSteps = () => {
         return steps.length;
@@ -133,8 +133,8 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, isLogged,
                                 <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>
                                     <ShipmentStep
                                         user={user}
-                                        mutate={mutate}
-                                        isLoading={isLoading}
+                                        mutate={mutateUser}
+                                        isLoading={isLoadingUser}
                                     />
                                 </Paper>
                                 :

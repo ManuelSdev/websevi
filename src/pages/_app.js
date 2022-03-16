@@ -11,7 +11,7 @@ import theme from '../assets/theme'
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline'
 import { getUser } from '../lib/api/user'
-
+import useUser from '../hooks/swrHooks/useUser'
 
 //Supertokens logic
 async function initNode() {
@@ -29,6 +29,10 @@ if (typeof window !== 'undefined') {
 function App({ Component, pageProps }) {
 
   const [isLogged, setIsLogged] = React.useState({ state: false, admin: false, authId: '' })
+  const { authId } = isLogged
+  const { user, isLoading: isLoadingUser, isError: isErrorUser, mutate: mutateUser } = useUser(authId)
+  //console.log(mutateUser)
+  console.log('## app ', user)
   //Guarda productos que se van añádiendo o quitando del carrito
   const [cart, setCart] = React.useState([])
 
@@ -66,7 +70,9 @@ function App({ Component, pageProps }) {
       const info = state && await Session.getAccessTokenPayloadSecurely()
       const user = await getUser(authId)
       //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
-      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
+      // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
+      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '' })
+
     }
     checkSession()
   }, [])
@@ -81,9 +87,10 @@ function App({ Component, pageProps }) {
     return null
   }
 
-  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart }
+  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart, user, isLoadingUser, isErrorUser, mutateUser }
   pageProps.authId = isLogged.authId
   pageProps.isLogged = { ...isLogged }
+  pageProps.hola = 'adios'
 
   return (
     <>
@@ -96,6 +103,11 @@ function App({ Component, pageProps }) {
       <AppProvider {...appProps}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          {
+            //pageProps solo bajan a la página que entra como Component, si quieres alguna pageProp
+            // en algún componente de la página, o lo baja esa página como prop al componente
+            //o el componente lo pilla directamente de un provider como AppProvider
+          }
           <Component {...pageProps} />
         </ThemeProvider >
       </AppProvider>

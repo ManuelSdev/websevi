@@ -27,8 +27,8 @@ export async function getStaticProps(context) {
 }
 
 
-export default function Home({ categories, products }) {
-
+export default function Home({ categories, products, hola }) {
+  console.log(hola)
   return (
 
     <Layout categories={categories} >
@@ -40,7 +40,7 @@ export default function Home({ categories, products }) {
           </Typography>
           <Divider ></Divider>
         </Box>
-        <FeaturedGrid products={products} />
+        <FeaturedGrid products={products} hola={hola} />
         <Divider ></Divider>
         <Grid mt={5} mb={5} textAlign='center' container spacing={2}>
           <Grid item xs={4} sm={4} md={4} lg={4} >

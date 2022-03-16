@@ -3,8 +3,8 @@ import Box from "@mui/system/Box"
 import GridCard from './GridCard'
 import React from "react";
 
-const FeaturedGrid = ({ products }) => {
-
+const FeaturedGrid = ({ products, hola }) => {
+    //console.log('FeaturedGrid.....', hola)
     return (
         <Box sx={{
             mb: 3, flexGrow: 1,
