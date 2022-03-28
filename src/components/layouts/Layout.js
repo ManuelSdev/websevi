@@ -4,7 +4,12 @@ import Header from "../header/Header";
 import Footer from "./Footer";
 
 const Layout = ({ children, categories }) => {
-    const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
+    //const matches = useMediaQuery("(min-width:600px)", { color: 'red', });
+    //const lgDown = useMediaQuery(theme.breakpoints.down('lg'));
+
+
+    // console.log(matches)
+
     return (
         <>
             <Header categories={categories} />

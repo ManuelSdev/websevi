@@ -11,11 +11,6 @@ const SidebarLayout = ({ content, sidebar, elevationPaper }) => {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('md'));
 
-
-
-
-
-
     return (
         <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }} >
             <Box sx={{ mt: 5, mb: 10, flexGrow: 1 }}>

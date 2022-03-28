@@ -16,12 +16,12 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import SwitchMode from "./SwitchMode"
 
 
-const Header = ({ categories }) => {
+const Header = ({ categories, mdUp }) => {
 
     const { setIsLogged, isLogged } = useAppContext()
 
     return (
-        <AppBar position="sticky" sx={{ minWidth: 600, background: "red" }} >
+        <AppBar position="sticky" sx={{ minWidth: 600 }} >
             <Toolbar
                 sx={{
                     bgcolor: 'corpBlack.main',

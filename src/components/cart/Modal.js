@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function Modal({ open, mainMessage, handleClose }) {
+export default function Modal({ open, mainMessage, handleClose, full, children }) {
 
 
     return (
@@ -16,6 +16,7 @@ export default function Modal({ open, mainMessage, handleClose }) {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                fullScreen={full ? true : false}
             >
                 <DialogTitle id="alert-dialog-title">
                     {mainMessage}
@@ -26,7 +27,7 @@ export default function Modal({ open, mainMessage, handleClose }) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-
+                    {children}
                     <Button onClick={handleClose} autoFocus>Aceptar</Button>
                 </DialogActions>
             </Dialog>
