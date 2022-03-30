@@ -18,7 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import { experimental_sx } from "@mui/material"
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
@@ -26,14 +26,22 @@ import Modal from '../../components/cart/Modal'
 
 
 import Searcher from './Searcher'
-import { Collapse, Dialog } from "@mui/material"
+import { Dialog } from "@mui/material"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import useBreakpoints from "../../hooks/useBreakpoints"
 
-const StyledButton = styled(Button)({
-    fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
-});
+
+const StyledButton = styled(Button)(
+    experimental_sx({ minWidth: { xs: '45px', sm: '45px', md: '45px' } }),
+    {
+        // padding: '0px',
+
+        //minWidth: '45px',
+
+
+        fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
+    });
 
 
 const ButtonBox = ({ children }) => {
@@ -42,7 +50,7 @@ const ButtonBox = ({ children }) => {
         <Box
             sx={{
                 display: 'flex', justifyContent: 'center',
-                mr: { md: 2 },
+                ml: { md: 2 },
 
                 height: '75%',
                 border: 1,
@@ -57,7 +65,7 @@ const ButtonBox = ({ children }) => {
     )
 }
 
-const SearchToolBar = () => {
+const SearchToolBar = ({ handleChangeCollapsed }) => {
 
     const { md950Up, sm750Up } = useBreakpoints()
 
@@ -147,7 +155,9 @@ const SearchToolBar = () => {
                     justifyContent: 'space-between',
                     height: "5em",
                     // mb: '2em',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    pl: 0.5,
+                    pr: 0
                 }}
             >
                 <Box
@@ -156,7 +166,7 @@ const SearchToolBar = () => {
                     {sm750Up ||
                         <ButtonBox>
                             <StyledButton
-                                onClick={handleClickOpenn}
+                                onClick={handleChangeCollapsed}
                                 size="large" variant="text"
                                 startIcon={<DensityMediumIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                             >
@@ -176,19 +186,13 @@ const SearchToolBar = () => {
                                 sm750Up ?
                                     200
                                     :
-                                    150
+                                    130
                         }}
                     >
                     </IconCorpName>
                 </Box>
 
-
-
                 {sm750Up && <Searcher StyledButton={StyledButton} md950Up={md950Up} sm750Up={sm750Up} />}
-
-
-
-
 
                 <Box
                     sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}
@@ -196,13 +200,12 @@ const SearchToolBar = () => {
                     {sm750Up ||
                         <ButtonBox>
                             <Link href="/">
-
                                 <StyledButton
+                                    //sx={{ padding: '0px' }}
                                     onClick={handleClickOpenn}
                                     size="large" variant="text"
-                                    startIcon={<SearchIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
+                                    startIcon={<SearchIcon sx={{ padding: '0px', mr: -0.5, width: 30, height: 30 }} />}
                                 >
-
                                 </StyledButton>
                             </Link>
                         </ButtonBox>
@@ -300,9 +303,7 @@ const SearchToolBar = () => {
                 </Box>
 
             </Toolbar >
-            <Collapse orientation="horizontal">
-                hola
-            </Collapse>
+
         </>
     )
 }

@@ -10,9 +10,9 @@ const Footer = () => {
         <Box
             pb={10}
             sx={{
-                minWidth: 600,
+                // minWidth: 400,
                 bgcolor: 'corpGreen.main',
-                zIndex: 'tooltip',
+                zIndex: 'snackbar',
                 position: 'relative'
             }}
         >

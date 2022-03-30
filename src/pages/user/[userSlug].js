@@ -51,7 +51,7 @@ const UserPage = ({ authId, isLogged, categories }) => {
     console.log('user que llega a [userSlug].js', user)
     console.log('isLogged que llega a [userSlug].js', isLogged)
     return (
-        <Layout sx={{ zIndex: 'tooltip' }} isLogged={isLogged} categories={categories}>
+        <Layout sx={{ zIndex: 'snackbar' }} isLogged={isLogged} categories={categories}>
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} elevationPaper={1} />}
                 content={!user ?

@@ -1,4 +1,5 @@
 
+import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../header/Header";
 import Footer from "./Footer";
@@ -11,7 +12,9 @@ const Layout = ({ children, categories }) => {
     // console.log(matches)
 
     return (
-        <>
+        <Box
+            sx={{ minWidth: '400px' }}
+        >
             <Header categories={categories} />
             <main>
                 {children}
@@ -19,7 +22,7 @@ const Layout = ({ children, categories }) => {
             <footer>
                 <Footer></Footer>
             </footer>
-        </>
+        </Box>
     )
 }
 

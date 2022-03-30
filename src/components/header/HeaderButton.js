@@ -3,12 +3,15 @@
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button"
 import { Box } from "@mui/system";
+import { useState } from "react";
 
 const StyledButton = styled(Button)({
-    fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
+    flexDirection: 'column', fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
 });
 
 const HeaderButton = ({ onClick, IconComponent, text }) => {
+
+    const [isActive, setActive] = useState()
 
     return (
         <Box
@@ -25,13 +28,14 @@ const HeaderButton = ({ onClick, IconComponent, text }) => {
             }}
         >
             <StyledButton
+                name={text}
                 onClick={onClick}
                 size="large" variant="text"
                 startIcon={<IconComponent sx={{ mr: -0.5, width: 30, height: 30 }} />}
             >
                 {text}
             </StyledButton>
-        </Box>
+        </Box >
 
     )
 }

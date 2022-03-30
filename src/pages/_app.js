@@ -108,7 +108,7 @@ function App({ Component, pageProps }) {
             // en algún componente de la página, o lo baja esa página como prop al componente
             //o el componente lo pilla directamente de un provider como AppProvider
           }
-          <Component {...pageProps} />
+          <Component id={'aa'} {...pageProps} />
         </ThemeProvider >
       </AppProvider>
     </>
