@@ -12,8 +12,8 @@ const Footer = () => {
             sx={{
                 // minWidth: 400,
                 bgcolor: 'corpGreen.main',
-                zIndex: 'snackbar',
-                position: 'relative'
+                //zIndex: 'snackbar',
+                //  position: 'relative'
             }}
         >
             <Container

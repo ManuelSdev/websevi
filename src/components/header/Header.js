@@ -5,7 +5,7 @@ import Link from '../elements/Link'
 import DropdownMenu from '../elements/DropdownMenu'
 
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import SearchToolBar from './SearchToolBar'
 import { useAppContext } from "../context"
 
@@ -22,11 +22,24 @@ const Header = ({ categories, mdUp }) => {
     const { sm750Up } = useBreakpoints()
     const { setIsLogged, isLogged } = useAppContext()
 
+    const [{ childs: initialChilds }] = categories
     const [isCollapsed, setCollapsed] = useState(false)
-
+    const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
+    /*
+        useEffect(() => {
+            //  setSelectedValue(0)
+            console.log('daleeeeeeeeeeeeee')
+            setSelectedCategoryChilds(initialChilds)
+        }, [])
+        */
+    //CLAVE
     const handleChangeCollapsed = () => {
+        //console.log(categories)
+        isCollapsed || setSelectedCategoryChilds(initialChilds)
+
         setCollapsed((prev) => !prev);
 
+        // action()
     };
 
     return (
@@ -84,11 +97,15 @@ const Header = ({ categories, mdUp }) => {
 
 
             </AppBar >
-
             <CollapsedCategs
                 categories={categories}
                 isCollapsed={isCollapsed}
+                setCollapsed={setCollapsed}
+                selectedCategoryChilds={selectedCategoryChilds}
+                setSelectedCategoryChilds={setSelectedCategoryChilds}
             ></CollapsedCategs>
+
+
         </>
     )
 }

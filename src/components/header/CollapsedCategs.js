@@ -1,24 +1,32 @@
 import Collapse from "@mui/material/Collapse"
-import ProfileBar from "../elements/ProfileBar"
 import HeaderButton from "./HeaderButton"
 import MemoryIcon from '@mui/icons-material/Memory';
-import { ListItem, ListItemText, MenuItem, MenuList, Paper, Stack } from "@mui/material";
+import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined';
+import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
+import { ListItemText, MenuItem, MenuList, Stack } from "@mui/material";
 import { Box } from "@mui/system";
-
+import Link from '../../components/elements/Link'
 import { useState } from "react";
+import { toPlainString } from "../../lib/utils/stringTools";
 
-const CollapsedCategs = ({ isCollapsed, categories }) => {
-    console.log(categories)
 
-    const [{ name: initialTarget }] = categories
-    const [target, setTarget] = useState([])
+const CollapsedCategs = ({ isCollapsed, setCollapsed, categories, selectedCategoryChilds, setSelectedCategoryChilds }) => {
+    //console.log(categories)
+    // const [isCollapsed, setCollapsed] = useState(false)
+    //Extrae el primer elemento del array, que es un objeto y del objeto extrae la propiedad childs
+    const [{ childs: initialChilds }] = categories
+    // const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
+    const [className, setClassName] = useState('hover')
 
-    const handleChange = cat => ev => {
-        setTarget(cat.childs)
-        console.log(ev.target.name)
-        console.log(cat)
-
+    const handleChange = category => ev => {
+        setClassName('')
+        setSelectedCategoryChilds(category.childs)
     };
+
+    const handleChangeCollapsed = () => {
+        setCollapsed((prev) => !prev);
+    };
+
     return (
         <Collapse
             // collapsedSize='100px'
@@ -26,56 +34,105 @@ const CollapsedCategs = ({ isCollapsed, categories }) => {
                 zIndex: 'tooltip', bgcolor: 'white', position: 'fixed', resize: 'none', height: '100%',
                 //minWidth: '400px',
                 width: '100% !important',
+                //  borderTop: '0.1rem solid',
+                //borderColor: 'black',
+                // border: '0.1rem solid',
+                //overflowX: 'hidden',
+                //  overflowY: 'auto',
                 // pr: '2em'
+                '& .MuiCollapse-wrapperInner': { width: '100%' },
             }}
             orientation="horizontal"
-            in={isCollapsed}>
-
-
+            in={isCollapsed}
+        >
             <Stack
                 spacing={0}
                 direction="row"
-
+                sx={{
+                    //  height: '100%',
+                }}
             >
-                <Box>
+                <Box
+                    sx={{
+                        //   height: '100%',
+                    }}
+                >
                     <Stack
                         //direction="row"
-                        //sx={{ minWidth: '155px' }}
-                        spacing={0}>
-                        {categories.length > 0 && categories.map(category =>
+                        sx={{
+                            // zIndex: 'tooltip', position: 'relative',
+                            //   outline: '1px solid black',
+                            // overflow: 'scroll'
+                            //     height: '100%',
+                            //      overflowX: 'hidden',
+                            //    overflowY: 'auto',
+                        }}
+                        spacing={0}
+                    >
+                        {categories.length > 0 && categories.map((category, index) =>
                             category.level === 1 &&
-                            <Box key={category._id}
-                            //  sx={{ p: 1, m: 1, }}
-                            >
-                                <HeaderButton onClick={handleChange(category)} IconComponent={MemoryIcon} text={category.name} />
-                            </Box>
+                            <HeaderButton
+                                onClick={handleChange(category)}
+                                className={index === 0 && className}
+                                key={category._id}
+                                text={category.name}
+                                IconComponent={category.path === 'componentes' ?
+                                    MemoryIcon
+                                    :
+                                    category.path === 'perifericos' ?
+                                        MouseOutlinedIcon
+                                        :
+                                        DesktopWindowsIcon
+                                } />
                         )}
                     </Stack>
                 </Box>
-                <MenuList
-                    sx={{ width: '100%', }}
+                <Box
+                    sx={{
+                        //   outline: '1px solid black',
+                        width: '100%',
+                        //  height: '100%',
+                        //     overflowX: 'hidden',
+                        //   overflowY: 'auto',
+                    }}
                 >
-                    {target.map(section =>
-                        <MenuItem key={section}
-                        //    onClick={restartCategs}
-                        >
-
-                            <ListItemText>{section}</ListItemText>
-                        </MenuItem>
-                    )
-                    }
-                </MenuList>
-
-
-            </Stack>
-
-
-
-
-
-
+                    <MenuList
+                        sx={{
+                            width: '100%', flexGrow: 1, bgcolor: 'white',
+                            //outline: '1px solid black',
+                            //border: '1px solid',
+                            zIndex: 'fab',
+                            height: '100%',
+                            border: 1,
+                            // overflowX: 'hidden',
+                            // overflowY: 'auto',
+                        }}
+                    >
+                        {selectedCategoryChilds.map(child =>
+                            <MenuItem key={child}
+                            //    onClick={restartCategs}
+                            >
+                                <ListItemText
+                                    onClick={handleChangeCollapsed}
+                                >
+                                    <Link
+                                        href={`/${toPlainString(child)}`}
+                                        sx={{
+                                            color: 'black',
+                                            '& :hover': {
+                                                color: "white",
+                                            },
+                                        }}
+                                    >
+                                        {child}
+                                    </Link>
+                                </ListItemText>
+                            </MenuItem>
+                        )}
+                    </MenuList>
+                </Box>
+            </Stack >
         </Collapse >
-
     )
 }
 
