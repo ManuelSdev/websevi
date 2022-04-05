@@ -6,7 +6,7 @@ import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import { ListItemText, MenuItem, MenuList, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import Link from '../../components/elements/Link'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toPlainString } from "../../lib/utils/stringTools";
 
 
@@ -18,13 +18,19 @@ const CollapsedCategs = ({ isCollapsed, setCollapsed, categories, selectedCatego
     // const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
     const [className, setClassName] = useState('hover')
 
+    useEffect(() => {
+        setClassName('hover')
+    }, [isCollapsed])
+
     const handleChange = category => ev => {
         setClassName('')
         setSelectedCategoryChilds(category.childs)
     };
 
     const handleChangeCollapsed = () => {
+
         setCollapsed((prev) => !prev);
+
     };
 
     return (
@@ -55,6 +61,9 @@ const CollapsedCategs = ({ isCollapsed, setCollapsed, categories, selectedCatego
                 <Box
                     sx={{
                         //   height: '100%',
+                        //borderTop: '1px',
+                        //   borderTopColor: 'black',
+                        // mt: '-1px',
                     }}
                 >
                     <Stack

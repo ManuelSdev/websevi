@@ -25,6 +25,7 @@ const Header = ({ categories, mdUp }) => {
     const [{ childs: initialChilds }] = categories
     const [isCollapsed, setCollapsed] = useState(false)
     const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
+
     /*
         useEffect(() => {
             //  setSelectedValue(0)
@@ -35,6 +36,7 @@ const Header = ({ categories, mdUp }) => {
     //CLAVE
     const handleChangeCollapsed = () => {
         //console.log(categories)
+        // isCollapsed || setClassName('hover')
         isCollapsed || setSelectedCategoryChilds(initialChilds)
 
         setCollapsed((prev) => !prev);
@@ -101,6 +103,7 @@ const Header = ({ categories, mdUp }) => {
                 categories={categories}
                 isCollapsed={isCollapsed}
                 setCollapsed={setCollapsed}
+
                 selectedCategoryChilds={selectedCategoryChilds}
                 setSelectedCategoryChilds={setSelectedCategoryChilds}
             ></CollapsedCategs>

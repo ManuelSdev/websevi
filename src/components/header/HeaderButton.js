@@ -6,7 +6,15 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 
 const StyledButton = styled(Button)({
-    flexDirection: 'column', fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
+
+    flexDirection: 'column',
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    height: '100%',
+    width: '100%',
+    color: "black",
+    textTransform: "none",
+    marginBottom: '0em'
 });
 
 const HeaderButton = ({ onClick, IconComponent, text, value, className, hover }) => {
@@ -17,7 +25,7 @@ const HeaderButton = ({ onClick, IconComponent, text, value, className, hover })
         <Box
             className={className}
             sx={{
-                display: 'flex', justifyContent: 'center',
+                display: 'flex', justifyContent: 'flex-start',
                 // mr: { md: 2 },
                 alignItems: 'center',
                 height: '75%',
@@ -36,6 +44,7 @@ const HeaderButton = ({ onClick, IconComponent, text, value, className, hover })
                     borderRightColor: 'white',
                     borderRadius: 0,
                     mr: '-1px',
+                    pl: '1px',
                     zIndex: 'tooltip',
                     position: 'relative'
                 },
@@ -44,6 +53,7 @@ const HeaderButton = ({ onClick, IconComponent, text, value, className, hover })
                     borderRightColor: 'white',
                     borderRadius: 0,
                     mr: '-1px',
+                    pl: '1px',
                     zIndex: 'tooltip',
                     position: 'relative'
                     //border: 'none',
