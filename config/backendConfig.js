@@ -127,6 +127,7 @@ export const backendConfig = () => {
                                 ...originalImplementation,
                                 createNewSession: async function (input) {
                                     let userId = input.userId;
+                                    console.log('####################', input.response)
                                     //gestion del rol admin 
                                     let admin = userId === 'c05864ca-8e53-4100-8f01-d0070f6e4a7e'
 

@@ -14,6 +14,7 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { Divider } from '@mui/material';
 
 export async function getStaticProps(context) {
+  console.log('##################################################')
   const categoriesRes = await getCategories()
   const categories = JSON.parse(JSON.stringify(categoriesRes))
   const productsRes = await getProducts({ featured: true })

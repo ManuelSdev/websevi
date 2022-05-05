@@ -1,28 +1,27 @@
-import Container from "@mui/material/Container"
-
-
-import * as React from 'react';
+import { Divider, Stack } from "@mui/material";
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
-import CartStep from "./CartStep";
-import ShipmentStep from './ShipmentStep'
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
+import Stepper from '@mui/material/Stepper';
+import Typography from "@mui/material/Typography";
+import * as React from 'react';
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import { useAppContext } from "../context";
+import CartStep from "./CartStep";
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
-import { Divider, Stack } from "@mui/material";
+import ShipmentStep from './ShipmentStep';
 
 const steps = [
     'Carrito',
     'Envío',
     'Pago',
     'Resumen'
+
 ];
 
 export default function CartStepper({ order, setOrder, cartTotalPrice, handleSubmit }) {
