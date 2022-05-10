@@ -13,13 +13,20 @@ import Modal from "../components/cart/Modal"
 import { useRouter } from "next/router"
 import Stack from "@mui/material/Stack"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import { useDispatch, useSelector } from "react-redux"
+import { getCart, getCartPrice } from "../app/store/selectors"
+import { cartSet } from "../app/store/cartSlice"
 
 const CartPage = () => {
     const router = useRouter()
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
-    const { cart, setCart, user, isLoadingUser } = useAppContext()
+    const { user, isLoadingUser } = useAppContext()
+    const { cartProducts: cart } = useSelector(getCart)
+    const cartTotalPrice = useSelector(getCartPrice)
+
+    const dispatch = useDispatch()
     //const { user, isLoading, isError, mutate } = useUser(authId)
     console.log('#### carrito user del useUser', user)
     const [order, setOrder] = React.useState({
@@ -45,7 +52,7 @@ const CartPage = () => {
             ...order,
             userId: user._id,
             orderCart,
-            amount: cartTotalPrice
+            amount: getCartPrice
         })
     }, [user, cart])
 
@@ -55,7 +62,7 @@ const CartPage = () => {
             const { result: ok, message } = await createOrder(order)
             if (ok) {
                 localStorage.removeItem('cart')
-                setCart([])
+                dispatch(cartSet([]))
                 handleClickOpen()
             }
         } catch (error) {
@@ -63,14 +70,14 @@ const CartPage = () => {
         }
 
     };
-
-    const rowsTotalPrice = cart.map(product => product.price * product.amount)
-
-    const cartTotalPrice = cart.length > 0 ?
-        sum(...rowsTotalPrice)
-        :
-        0
-
+    /*
+        const rowsTotalPrice = cart.map(product => product.price * product.amount)
+    
+        const cartTotalPrice = cart.length > 0 ?
+            sum(...rowsTotalPrice)
+            :
+            0
+    */
     //VENTANA MODAL
     const handleClickOpen = () => {
         setOpen(true);

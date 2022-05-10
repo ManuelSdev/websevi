@@ -9,12 +9,17 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from "@mui/material/Typography";
 import * as React from 'react';
+
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
 import { useAppContext } from "../context";
 import CartStep from "./CartStep";
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
 import ShipmentStep from './ShipmentStep';
+
+import { useSelector } from "react-redux";
+import { getAuth } from "../../app/store/selectors";
 
 const steps = [
     'Carrito',
@@ -24,9 +29,10 @@ const steps = [
 
 ];
 
-export default function CartStepper({ order, setOrder, cartTotalPrice, handleSubmit }) {
+export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit }) {
 
-    const { isLogged, user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+    const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+    const { isLogged } = useSelector(getAuth)
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
@@ -95,7 +101,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, handleSub
      */
     React.useEffect(() => {
         //Controla la redirección al paso 2(step=1) tras el login
-        if (waitingForChangeIsLogged.current && isLogged.state) {
+        if (waitingForChangeIsLogged.current && isLogged) {
             waitingForChangeIsLogged.current = false;
             return;
         }
@@ -104,7 +110,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, handleSub
             sessionStorage.removeItem('step1Anchor')
             setActiveStep(1)
         }
-        if (activeStep === 1 && !isLogged.state && !waitingForChangeIsLogged.current) {
+        if (activeStep === 1 && !isLogged && !waitingForChangeIsLogged.current) {
             sessionStorage.setItem('step1Anchor', true)
             redirectToAuth({ redirectBack: true })
         }

@@ -15,8 +15,9 @@ import useUser from '../hooks/swrHooks/useUser'
 
 import { Provider, useSelector, useDispatch } from 'react-redux'
 import { wrapper } from '../app/store'
-import { getAuth } from '../app/store/selectors'
+import { getAuth, getCart } from '../app/store/selectors'
 import { authLoginAdmin, authLoginUser } from '../app/store/authSlice'
+import { cartSet } from '../app/store/cartSlice'
 
 //Supertokens logic
 async function initNode() {
@@ -33,14 +34,13 @@ if (typeof window !== 'undefined') {
 
 function App({ Component, pageProps }) {
   //REDUX
-  const { isLoggedPP, isAdmin, id } = useSelector(getAuth)
-  const [isLogged, setIsLogged] = React.useState({ state: false, admin: false, authId: '' })
-  const { authId } = isLogged
+  const { isLogged, isAdmin, authId } = useSelector(getAuth)
+  const { cartProducts } = useSelector(getCart)
   const { user, isLoading: isLoadingUser, isError: isErrorUser, mutate: mutateUser } = useUser(authId)
   //console.log(mutateUser)
   console.log('## app ', user)
   //Guarda productos que se van añádiendo o quitando del carrito
-  const [cart, setCart] = React.useState([])
+  //const [cart, setCart] = React.useState([])
 
 
   const dispatch = useDispatch()
@@ -64,7 +64,7 @@ function App({ Component, pageProps }) {
   useEffect(() => {
 
     const storedCart = JSON.parse(localStorage.getItem("cart"));
-    storedCart && setCart(storedCart)
+    storedCart && dispatch(cartSet(storedCart))
     const checkSession = async () => {
       //Si existe una sesión activa, la promesa devuelve true
       // setIsLogged(await Session.doesSessionExist())
@@ -80,9 +80,9 @@ function App({ Component, pageProps }) {
         //const user = await getUser(authId)
         //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
         // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
-        setIsLogged({ state: true, admin: !!admin, authId: authId ? authId : '' })
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@', authId)
-        !!admin ? dispatch(authLoginUser(authId)) : dispatch(authLoginAdmin(authId))
+        //setIsLogged({ state: true, admin: !!admin, authId: authId ? authId : '' })
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@@', admin)
+        !!admin ? dispatch(authLoginAdmin(authId)) : dispatch(authLoginUser(authId))
 
       }
 
@@ -90,20 +90,25 @@ function App({ Component, pageProps }) {
     }
     checkSession()
   }, [])
-
+  /*
+    useEffect(() => {
+      localStorage.setItem("cart", JSON.stringify(cart))
+  
+    }, [cart])
+  */
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    localStorage.setItem("cart", JSON.stringify(cartProducts))
 
-  }, [cart])
-
+  }, [cartProducts])
 
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
 
-  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart, user, isLoadingUser, isErrorUser, mutateUser }
-  pageProps.authId = isLogged.authId
-  pageProps.isLogged = { ...isLogged }
+  //const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart, user, isLoadingUser, isErrorUser, mutateUser }
+  //const appProps = { cart, setCart, user, isLoadingUser, isErrorUser, mutateUser }
+  const appProps = { user, isLoadingUser, isErrorUser, mutateUser }
+
   pageProps.hola = 'adios'
 
   return (

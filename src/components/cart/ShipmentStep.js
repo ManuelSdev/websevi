@@ -4,7 +4,6 @@ import ProfileForm from "../elements/ProfileForm"
 import { updateUser } from "../../lib/api/user"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
-import { useAppContext } from "../context"
 
 const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
 

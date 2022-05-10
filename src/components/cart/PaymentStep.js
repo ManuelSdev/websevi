@@ -13,12 +13,6 @@ import { Stack } from "@mui/material"
 
 const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoading, ...props }) => {
 
-
-
-
-
-
-
     return (
         <Box>
             <Stack mb={2} direction='row'>
@@ -27,9 +21,7 @@ const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoadi
             <Box pl={2}>
                 <SelectPayment order={order} setOrder={setOrder}></SelectPayment>
             </Box>
-
         </Box>
-
     )
 }
 

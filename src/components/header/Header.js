@@ -16,12 +16,13 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import SwitchMode from "./SwitchMode"
 import CollapsedCategs from "./CollapsedCategs"
 import useBreakpoints from "../../hooks/useBreakpoints"
+import { useSelector } from "react-redux"
+import { getAuth } from "../../app/store/selectors"
 
 
 const Header = ({ categories, mdUp }) => {
     const { sm750Up } = useBreakpoints()
-    const { setIsLogged, isLogged } = useAppContext()
-
+    const { isLogged } = useSelector(getAuth)
     const [{ childs: initialChilds }] = categories
     const [isCollapsed, setCollapsed] = useState(false)
     const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
@@ -71,7 +72,7 @@ const Header = ({ categories, mdUp }) => {
                         />
                         <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                     </Stack>
-                    {isLogged.state && <SwitchMode />}
+                    {isLogged && <SwitchMode />}
                 </Toolbar>
 
                 <SearchToolBar handleChangeCollapsed={handleChangeCollapsed} />

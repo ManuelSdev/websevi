@@ -44,12 +44,12 @@ const sections = [
     }
 ]
 
-const UserPage = ({ authId, isLogged, categories }) => {
+const UserPage = ({ categories }) => {
     const router = useRouter()
     const { adminSlug } = router.query
 
     return (
-        <Layout isLogged={isLogged} categories={categories}>
+        <Layout categories={categories}>
             <SidebarLayout
                 sidebar={<ProfileBar profile={'admin'} sections={sections} elevationPaper={1} />}
                 content={

@@ -24,34 +24,30 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import Modal from '../../components/cart/Modal'
 
-
 import Searcher from './Searcher'
 import { Dialog } from "@mui/material"
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import useBreakpoints from "../../hooks/useBreakpoints"
+import { authLogout } from "../../app/store/authSlice"
 
+import { useDispatch, useSelector } from "react-redux"
+import { getAuth, getCart, getCartVolume } from "../../app/store/selectors"
 
 const StyledButton = styled(Button)(
     experimental_sx({ minWidth: { xs: '45px', sm: '45px', md: '45px' } }),
     {
         // padding: '0px',
-
         //minWidth: '45px',
-
-
         fontSize: '1.1rem', fontWeight: 'bold', height: '100%', color: "black", textTransform: "none", marginBottom: '0em'
     });
 
-
 const ButtonBox = ({ children }) => {
-
     return (
         <Box
             sx={{
                 display: 'flex', justifyContent: 'center',
                 ml: { md: 2 },
-
                 height: '75%',
                 border: 1,
                 '&:hover': {
@@ -68,7 +64,6 @@ const ButtonBox = ({ children }) => {
 const SearchToolBar = ({ handleChangeCollapsed }) => {
 
     const { md950Up, sm750Up } = useBreakpoints()
-
 
     //VENTANA MODAL 1
     const [open, setOpen] = React.useState(false);
@@ -90,29 +85,34 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
         setOpenn(false);
 
     };
-    const { setIsLogged, isLogged, cart } = useAppContext()
+    //TOREDUX
+    //const { cartProducts } = useSelector(getCart)
+    const cartVolume = useSelector(getCartVolume)
+    console.log('wwwwwwwwwwwwwww', cartVolume)
     const [cartProductsAmount, setCartProductsAmount] = React.useState(0)
+    const { isLogged, isAdmin } = useSelector(getAuth)
 
+    const dispatch = useDispatch()
 
     //Método logout
     async function logoutClicked() {
         await ThirdPartyEmailPassword.signOut()
-        setIsLogged({ state: false, admin: false, authId: '' })
+        dispatch(authLogout())
+
         // ThirdPartyEmailPassword.redirectToAuth()
     }
-
-    React.useEffect(() => {
-
-        if (cart.length > 0) {
-            const amountOfEachProduct = cart.map(product => product.amount)
-            //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/rest_parameters
-            //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-            const totalProductsAmount = sum(...amountOfEachProduct)
-            setCartProductsAmount(totalProductsAmount)
-        }
-    }, [cart])
-
-
+    /*
+        React.useEffect(() => {
+    
+            if (cart.length > 0) {
+                const amountOfEachProduct = cart.map(product => product.amount)
+                //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/rest_parameters
+                //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+                const totalProductsAmount = sum(...amountOfEachProduct)
+                setCartProductsAmount(totalProductsAmount)
+            }
+        }, [cart])
+    */
 
     return (
         <>
@@ -132,7 +132,6 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
             >
                 <Box
                     sx={{
-
                         p: '2em', width: '100%', alignSelf: 'center', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center',
                         // bgcolor: 'corpWhite.main',
                         //mt: '-1em', pb: '0.3em'
@@ -141,13 +140,10 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                     <ArrowBackOutlinedIcon
                         sx={{ mr: '1em' }}
                         onClick={handleClosen}
-
                     />
                     <Searcher handleClosen={handleClosen} StyledButton={StyledButton} md950Up={md950Up} sm750Up={sm750Up} />
                 </Box>
-
             </Dialog>
-
             <Toolbar
                 //disableGutters={true}
                 sx={{
@@ -170,13 +166,9 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                                 size="large" variant="text"
                                 startIcon={<DensityMediumIcon sx={{ mr: -0.5, width: 30, height: 30 }} />}
                             >
-
                             </StyledButton>
-
                         </ButtonBox>
-
                     }
-
                     <IconCorpName viewBox="0 0 381.17 68.88"
                         sx={{
                             fill: "blue", height: "50%",
@@ -209,9 +201,8 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                                 </StyledButton>
                             </Link>
                         </ButtonBox>
-
                     }
-                    {isLogged.state &&
+                    {isLogged &&
                         <ButtonBox>
                             <Link href="/">
 
@@ -226,8 +217,8 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                         </ButtonBox>
                     }
                     <ButtonBox>
-                        {isLogged.state ?
-                            isLogged.admin ?
+                        {isLogged ?
+                            isAdmin ?
                                 <Link href="/admin/pedidos">
                                     <StyledButton
                                         size="large" variant="text"
@@ -256,10 +247,10 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                             </Link>
                         }
                     </ButtonBox>
-                    {!isLogged.admin &&
+                    {!isAdmin &&
                         <ButtonBox>
-                            {cart.length > 0 ?
-                                <Link >
+                            {cartVolume > 0 ?
+                                <Link href="/carrito">
                                     <StyledButton
                                         size="large" variant="text"
                                         startIcon={
@@ -271,13 +262,14 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                                                         padding: '0 4px',
                                                     },
                                                 }}
-                                                badgeContent={cartProductsAmount} color="corpGreen">
+                                                //badgeContent={cartProductsAmount} color="corpGreen">
+                                                badgeContent={cartVolume} color="corpGreen">
                                                 <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
                                             </Badge>}
                                     >
                                         {md950Up && 'Carrito'}
                                     </StyledButton>
-                                </Link>
+                                </Link >
                                 :
                                 <StyledButton
                                     onClick={handleClickOpen}
@@ -291,7 +283,9 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                                                     padding: '0 4px',
                                                 },
                                             }}
-                                            badgeContent={cartProductsAmount} color="corpGreen">
+                                            // badgeContent={cartProductsAmount} color="corpGreen">
+                                            badgeContent={cartVolume} color="corpGreen">
+
                                             <ShoppingCartOutlinedIcon sx={{ mr: -0.5, width: 30, height: 30 }} />
                                         </Badge>}
                                 >
@@ -301,7 +295,6 @@ const SearchToolBar = ({ handleChangeCollapsed }) => {
                         </ButtonBox>
                     }
                 </Box>
-
             </Toolbar >
 
         </>

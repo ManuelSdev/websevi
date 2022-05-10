@@ -18,6 +18,8 @@ import Working from "../../components/elements/Working"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
 import useUser from "../../hooks/swrHooks/useUser"
+import { useSelector } from "react-redux"
+import { getAuth } from "../../app/store/selectors"
 
 const sections = [
     {
@@ -43,15 +45,15 @@ const sections = [
     }
 ]
 
-const UserPage = ({ authId, isLogged, categories }) => {
+const UserPage = ({ categories }) => {
     const router = useRouter()
     const { userSlug } = router.query
-    //const { user } = isLogged
+    const { authId } = useSelector(getAuth)
+
     const { user, isLoading, isError, mutate } = useUser(authId)
     console.log('user que llega a [userSlug].js', user)
-    console.log('isLogged que llega a [userSlug].js', isLogged)
     return (
-        <Layout sx={{ zIndex: 'snackbar' }} isLogged={isLogged} categories={categories}>
+        <Layout sx={{ zIndex: 'snackbar' }} categories={categories}>
             <SidebarLayout
                 sidebar={<ProfileBar sections={sections} elevationPaper={1} />}
                 content={!user ?

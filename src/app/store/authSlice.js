@@ -14,12 +14,14 @@ export const authSlice = createSlice({
             console.log(action)
             state.isLogged = true
             state.isAdmin = false
-            state.authId = action.payload
+            //state.authId = action.payload
+            if (action.payload) state.authId = action.payload
         },
         authLoginAdmin: (state, action) => {
             state.isLogged = true
             state.isAdmin = true
-            state.authId = action.payload
+            //state.authId = action.payload
+            if (action.payload) state.authId = action.payload
         },
         authLogout: (state) => {
             state.isLogged = false

@@ -7,7 +7,7 @@ import Layout from '../components/layouts/Layout'
 import usePriceSlider from '../hooks/usePriceSlider'
 import React from 'react'
 
-const CategoryPage = ({ isLogged, products, categories, filtersProps }) => {
+const CategoryPage = ({ products, categories, filtersProps }) => {
     // const router = useRouter()
     //const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
@@ -22,7 +22,7 @@ const CategoryPage = ({ isLogged, products, categories, filtersProps }) => {
     }, [pricesRange])
 
     return (
-        <Layout isLogged={isLogged} categories={categories}>
+        <Layout categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props} />
         </Layout>
     )

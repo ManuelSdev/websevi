@@ -10,7 +10,7 @@ import { getProducts } from "./api/products/getProducts"
 import { getCategories } from "./api/categories/getCategories"
 
 
-const Buscar = ({ isLogged, products, categories, filtersProps }) => {
+const Buscar = ({ products, categories, filtersProps }) => {
 
     const router = useRouter()
     const { selectedPricesRange: currentSelectedPricesRange } = router.query
@@ -35,7 +35,7 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
     }, [pricesRange])
 
     return (
-        <Layout isLogged={isLogged} categories={categories}>
+        <Layout categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props}></ProductsSection>
         </Layout>
     )
