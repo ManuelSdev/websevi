@@ -19,6 +19,15 @@ import { getAuth, getCart } from '../app/store/selectors'
 import { authLoginAdmin, authLoginUser } from '../app/store/authSlice'
 import { cartSet } from '../app/store/cartSlice'
 
+import createEmotionCache from '../lib/createEmotionCache'
+import { CacheProvider } from '@emotion/react';
+
+//Material UI-Next.js
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+
+
 //Supertokens logic
 async function initNode() {
   const supertokensNode = await import('supertokens-node')
@@ -32,7 +41,7 @@ if (typeof window !== 'undefined') {
   initNode().catch(console.error)
 }
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   //REDUX
   const { isLogged, isAdmin, authId } = useSelector(getAuth)
   const { cartProducts } = useSelector(getCart)
@@ -112,7 +121,7 @@ function App({ Component, pageProps }) {
   pageProps.hola = 'adios'
 
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
         <meta name="google-site-verification" content="zbvzA8Zrgps5RRh86gp797a6HsdJkBRhP5vY0K0KkjQ" />
         <title>Sevimatic</title>
@@ -131,8 +140,10 @@ function App({ Component, pageProps }) {
           <Component id={'aa'} {...pageProps} />
         </ThemeProvider >
       </AppProvider>
+    </CacheProvider>
 
-    </>
+
+
   )
 }
 
