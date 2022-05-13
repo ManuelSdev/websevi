@@ -48,7 +48,6 @@ const Header = ({ categories, mdUp }) => {
     return (
         <>
             <AppBar position="sticky"
-
             // sx={{ minWidth: 400 }}
             >
                 <Toolbar
@@ -95,10 +94,7 @@ const Header = ({ categories, mdUp }) => {
                             </Box>
                         )}
                     </Toolbar>
-
                 }
-
-
             </AppBar >
             <CollapsedCategs
                 categories={categories}
@@ -108,8 +104,6 @@ const Header = ({ categories, mdUp }) => {
                 selectedCategoryChilds={selectedCategoryChilds}
                 setSelectedCategoryChilds={setSelectedCategoryChilds}
             ></CollapsedCategs>
-
-
         </>
     )
 }
