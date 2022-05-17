@@ -60,18 +60,18 @@ const ProductImageSwiper = ({ product }) => {
                 />
                 <Stack sx={{ height: '100%', overflow: 'scroll' }} direction='column' spacing={2}>
                     {images.map((image, index) =>
-                        <Box key={index}>
 
-                            <img
-                                //   objectfit='cover'
-                                // height='500px'
 
-                                //src={product.images}
-                                src={image}
-                                //
-                                alt="Imagen de producto"
-                            />
-                        </Box>
+                        <img
+                            //   objectfit='cover'
+                            // height='500px'
+
+                            //src={product.images}
+                            src={image}
+                            //
+                            alt="Imagen de producto"
+                        />
+
 
                     )}
                 </Stack>
@@ -91,7 +91,7 @@ const ProductImageSwiper = ({ product }) => {
                 onClick={handleOpen}
                 pagination={true} modules={[Pagination]} className="mySwiper">
                 {images.map((image, index) =>
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                         <img src={image} />
 
                     </SwiperSlide>
