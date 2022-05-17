@@ -7,7 +7,7 @@ import React from 'react';
 import Box from "@mui/system/Box";
 import { useAppContext } from '../context';
 import useUser from '../../hooks/swrHooks/useUser';
-import Link from '../../components/elements/Link'
+import Link from '../elements/Link'
 import { updateFavorites } from '../../lib/api/user';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../../app/store/selectors';
 import { cartAddProduct } from '../../app/store/cartSlice';
 
-const ProductDetails = ({ product }) => {
+const ProductActions = ({ product }) => {
 
     // const { setCart, cart } = useAppContext()
     /**GESTIÓN DE FAVORITOS */
@@ -220,5 +220,5 @@ const ProductDetails = ({ product }) => {
     )
 }
 
-export default ProductDetails
+export default ProductActions
 

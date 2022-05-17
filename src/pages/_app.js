@@ -22,6 +22,11 @@ import { cartSet } from '../app/store/cartSlice'
 import createEmotionCache from '../lib/createEmotionCache'
 import { CacheProvider } from '@emotion/react';
 
+// eslint-disable-next-line
+//import "swiper/css/bundle";
+import "../styles/globals.css"
+
+
 //Material UI-Next.js
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
