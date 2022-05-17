@@ -65,7 +65,7 @@ const ProductImageSwiper = ({ product }) => {
                         <img
                             //   objectfit='cover'
                             // height='500px'
-
+                            key={index}
                             //src={product.images}
                             src={image}
                             //
