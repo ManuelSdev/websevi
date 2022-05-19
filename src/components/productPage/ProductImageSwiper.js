@@ -53,6 +53,7 @@ const ProductImageSwiper = ({ product }) => {
         >
             <Box sx={style}>
                 <HighlightOffTwoToneIcon
+                    onClick={handleClose}
                     color='primary'
                     sx={{
                         position: 'absolute', top: '10px', right: '20px', fontSize: '40px', width: '30 % ', flexShrink: 0

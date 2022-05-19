@@ -1,5 +1,5 @@
 import Collapse from "@mui/material/Collapse"
-import HeaderButton from "./HeaderButton"
+import HeaderButton from "./CollapseCategsButton"
 import MemoryIcon from '@mui/icons-material/Memory';
 import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';

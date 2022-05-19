@@ -1,13 +1,11 @@
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Box from '@mui/system/Box'
-import Link from '../elements/Link'
 import DropdownMenu from '../elements/DropdownMenu'
 
 
 import React, { useEffect, useState } from "react"
-import SearchToolBar from './SearchToolBar'
-import { useAppContext } from "../context"
+import SearchToolBar from './WhiteToolBar'
 
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"

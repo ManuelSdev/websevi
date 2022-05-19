@@ -3,7 +3,6 @@
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button"
 import { Box } from "@mui/system";
-import { useState } from "react";
 
 const StyledButton = styled(Button)({
 
@@ -17,7 +16,7 @@ const StyledButton = styled(Button)({
     marginBottom: '0em'
 });
 
-const HeaderButton = ({ onClick, IconComponent, text, value, className, hover }) => {
+const CollapseCategsButton = ({ onClick, IconComponent, text, value, className, hover }) => {
 
     // const [isActive, setActive] = useState()
     console.log(hover)
@@ -80,4 +79,4 @@ const HeaderButton = ({ onClick, IconComponent, text, value, className, hover })
     )
 }
 
-export default HeaderButton
+export default CollapseCategsButton

@@ -28,7 +28,7 @@ const CartPage = () => {
 
     const dispatch = useDispatch()
     //const { user, isLoading, isError, mutate } = useUser(authId)
-    console.log('#### carrito user del useUser', user)
+    console.log('#### carrito user del useUser', order)
     const [order, setOrder] = React.useState({
         userId: '',
         orderCart: [],
@@ -52,15 +52,17 @@ const CartPage = () => {
             ...order,
             userId: user._id,
             orderCart,
-            amount: getCartPrice
+            amount: cartTotalPrice
         })
     }, [user, cart])
 
     const handleSubmit = async ev => {
         ev.preventDefault();
+        console.log('@@@@@@@@@@@@@@@@@@@', order)
         try {
             const { result: ok, message } = await createOrder(order)
             if (ok) {
+                console.log('@@@@@@@@@@@@@@@@@@@', order)
                 localStorage.removeItem('cart')
                 dispatch(cartSet([]))
                 handleClickOpen()
