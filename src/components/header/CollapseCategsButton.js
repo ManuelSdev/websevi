@@ -19,7 +19,7 @@ const StyledButton = styled(Button)({
 const CollapseCategsButton = ({ onClick, IconComponent, text, value, className, hover }) => {
 
     // const [isActive, setActive] = useState()
-    console.log(hover)
+    //console.log(hover)
     return (
         <Box
             className={className}

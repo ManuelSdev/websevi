@@ -18,7 +18,7 @@ import HomeInfo from '../components/home/HomeInfo';
 import CompactHomeInfo from '../components/home/CompactHomeInfo';
 
 export async function getStaticProps(context) {
-  console.log('##################################################')
+  //console.log('##################################################')
   const categoriesRes = await getCategories()
   const categories = JSON.parse(JSON.stringify(categoriesRes))
   const productsRes = await getProducts({ featured: true })
@@ -33,7 +33,7 @@ export async function getStaticProps(context) {
 
 
 export default function Home({ categories, products, hola }) {
-  console.log(hola)
+  //console.log(hola)
   const theme = useTheme()
   const sm750Up = useMediaQuery(theme.breakpoints.up('sm750'));
 

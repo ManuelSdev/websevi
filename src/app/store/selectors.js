@@ -26,7 +26,7 @@ export const getCartPrice = state => {
     if (products.length > 0) {
         const priceOfEachProduct = products.map(product => product.price * product.amount)
         const price = sum(...priceOfEachProduct)
-        console.log('@@@@@@@@@', price)
+        //console.log('@@@@@@@@@', price)
         return price
     } else { return 0 }
 

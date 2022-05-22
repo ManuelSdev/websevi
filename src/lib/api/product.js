@@ -26,6 +26,6 @@ export const getProducts = (ids) => {
 
 export const searchProducts = (searchKeys) => {
     const params = new URLSearchParams(searchKeys)
-    console.log("ppppppppppppppp", params.toString())
+    //console.log("ppppppppppppppp", params.toString())
     return client.get(`/products/getProducts/?${params.toString()}`)
 }

@@ -16,6 +16,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useDispatch, useSelector } from "react-redux"
 import { getCart, getCartPrice } from "../app/store/selectors"
 import { cartSet } from "../app/store/cartSlice"
+import { useAddOrderMutation } from "../app/store/services/nextApi"
 
 const CartPage = () => {
     const router = useRouter()
@@ -28,14 +29,14 @@ const CartPage = () => {
 
     const dispatch = useDispatch()
     //const { user, isLoading, isError, mutate } = useUser(authId)
-    console.log('#### carrito user del useUser', order)
+
     const [order, setOrder] = React.useState({
         userId: '',
         orderCart: [],
         amount: '',
         payment: ''
     })
-
+    console.log('#### carrito user del useUser', order)
     React.useEffect(() => {
         if (isLoadingUser) return
         const orderCart = cart.map(product => {
@@ -56,22 +57,26 @@ const CartPage = () => {
         })
     }, [user, cart])
 
+    const [addOrder, result] = useAddOrderMutation()
     const handleSubmit = async ev => {
         ev.preventDefault();
         console.log('@@@@@@@@@@@@@@@@@@@', order)
         try {
-            const { result: ok, message } = await createOrder(order)
-            if (ok) {
-                console.log('@@@@@@@@@@@@@@@@@@@', order)
+            //const { result: ok, message } = await createOrder(order)
+            await addOrder(order)
+            console.log('@@@@@@@@@@@@@@@@@@@', result)
+            if (result) {
+                //console.log('@@@@@@@@@@@@@@@@@@@', order)
                 localStorage.removeItem('cart')
                 dispatch(cartSet([]))
                 handleClickOpen()
             }
         } catch (error) {
-            console.log(error)
+            console.log('ERROR ADD ORDER EN CARRITO.JS', error)
         }
-
     };
+
+
     /*
         const rowsTotalPrice = cart.map(product => product.price * product.amount)
     

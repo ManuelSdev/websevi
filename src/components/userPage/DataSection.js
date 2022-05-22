@@ -20,7 +20,7 @@ const DataSection = ({ user, isLoading, isError, mutate }) => {
         resolved && mutate()
     }
 
-    console.log('user has profile', user)
+    //console.log('user has profile', user)
     if (user.hasProfile) {
         const [mainAddress] = user.addresses
         const { address, moreInfo, city, postCode, region, country } = mainAddress

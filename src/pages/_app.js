@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 
+import axios from "axios";
 import Head from 'next/head'
 import SuperTokensReact from 'supertokens-auth-react'
 import * as SuperTokensConfig from '../../config/frontendConfig'
@@ -25,14 +26,47 @@ import { CacheProvider } from '@emotion/react';
 // eslint-disable-next-line
 //import "swiper/css/bundle";
 import "../styles/globals.css"
+import { restartCategsss } from '../lib/init-db'
+import { useAddOrderMutation } from '../app/store/services/nextApi';
 
-
+Session.addAxiosInterceptors(axios);
 //Material UI-Next.js
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
+//restartCategsss()
 
 
+
+/*
+fetch('/api/orders/createOrder', {
+  // Adding method type
+  method: "POST",
+
+  // Adding body or contents to send
+  body: JSON.stringify({
+    firstName: 'aaaaaaaaaaa',
+    lastName: 'hola'
+  }),
+
+  // Adding headers to the request
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8"
+  }
+})
+*/
+/*
+axios.post('/api/orders/createOrder', {
+  firstName: 'Fred',
+  lastName: 'Flintstone'
+})
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+*/
 //Supertokens logic
 async function initNode() {
   const supertokensNode = await import('supertokens-node')
@@ -47,12 +81,47 @@ if (typeof window !== 'undefined') {
 }
 
 function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
+
+  const [addOrder, result] = useAddOrderMutation()
+  const handleSubmit = () => {
+    //ev.preventDefault();
+    //console.log('@@@@@@@@@@@@@@@@@@@', order)
+    try {
+      // const { result: ok, message } = await createOrder(order)
+      addOrder(
+        JSON.stringify({
+          firstName: 'aaaaaaaaaaa',
+          lastName: 'hola'
+        })
+      )
+      // console.log('@@@@@@@@@@@@@@@@@@@', result)
+      if (ok) {
+        //console.log('@@@@@@@@@@@@@@@@@@@', order)
+        localStorage.removeItem('cart')
+        dispatch(cartSet([]))
+        handleClickOpen()
+      }
+    } catch (error) {
+      console.log('ERROR ADD ORDER EN CARRITO.JS', error)
+    }
+  };
+
   //REDUX
+  /*
+    axios({
+      method: 'post',
+      url: '/api/orders/createOrder',
+      data: {
+        firstName: 'Finn',
+        lastName: 'Williams'
+      }
+    }).then(console.log).catch(console.log)
+  */
   const { isLogged, isAdmin, authId } = useSelector(getAuth)
   const { cartProducts } = useSelector(getCart)
   const { user, isLoading: isLoadingUser, isError: isErrorUser, mutate: mutateUser } = useUser(authId)
   //console.log(mutateUser)
-  console.log('## app ', user)
+  // console.log('## app ', user)
   //Guarda productos que se van añádiendo o quitando del carrito
   //const [cart, setCart] = React.useState([])
 
@@ -77,6 +146,24 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
 
   useEffect(() => {
 
+    addOrder(
+      {
+        firstName: 'aaaaaaaaaaa',
+        lastName: 'hola',
+      }
+    )
+
+    /*
+        axios({
+          method: 'post',
+          url: '/api/orders/createOrder',
+          data: {
+            firstName: 'Finn',
+            lastName: 'Williams'
+          }
+        }).then(console.log).catch(console.log)
+    */
+
     const storedCart = JSON.parse(localStorage.getItem("cart"));
     storedCart && dispatch(cartSet(storedCart))
     const checkSession = async () => {
@@ -95,7 +182,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
         //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
         // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
         //setIsLogged({ state: true, admin: !!admin, authId: authId ? authId : '' })
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@', admin)
+        //console.log('@@@@@@@@@@@@@@@@@@@@@@@@', admin)
         !!admin ? dispatch(authLoginAdmin(authId)) : dispatch(authLoginUser(authId))
 
       }
@@ -107,7 +194,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   /*
     useEffect(() => {
       localStorage.setItem("cart", JSON.stringify(cart))
-  
+   
     }, [cart])
   */
   useEffect(() => {

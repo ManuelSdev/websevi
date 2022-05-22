@@ -3,12 +3,16 @@ import Order from '../../../models/Order'
 import User from '../../../models/User'
 
 export default async function handler(req, res) {
-    console.log('LA REQ CREATE PRODUC', req.body)
+    console.log('LA REQ CREATE PRODUC--------------------', req.body)
+    console.log('typo++++++++++++++++++++++++++++++++++++', typeof req.body)
+
     try {
         await dbConnect()
         //AÑADIR PEDIDO A LA BDD
         const order = { date: new Date(), ...req.body }
+        // console.log('ORDER COMPLETO', order)
         const newOrder = await new Order(order)
+        // console.log('NEW ORDER', newOrder)
         const savedOrder = await newOrder.save()
 
         //AÑADIR PEDIDO AL USUARIO QUE LO HA REALIZADO
@@ -29,3 +33,4 @@ export default async function handler(req, res) {
 
 
 }
+
