@@ -27,7 +27,7 @@ import { CacheProvider } from '@emotion/react';
 //import "swiper/css/bundle";
 import "../styles/globals.css"
 import { restartCategsss } from '../lib/init-db'
-import { useAddOrderMutation } from '../app/store/services/nextApi';
+import { useAddOrderMutation } from '../app/store/services/baseApi';
 
 Session.addAxiosInterceptors(axios);
 //Material UI-Next.js
@@ -81,31 +81,31 @@ if (typeof window !== 'undefined') {
 }
 
 function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
-
-  const [addOrder, result] = useAddOrderMutation()
-  const handleSubmit = () => {
-    //ev.preventDefault();
-    //console.log('@@@@@@@@@@@@@@@@@@@', order)
-    try {
-      // const { result: ok, message } = await createOrder(order)
-      addOrder(
-        JSON.stringify({
-          firstName: 'aaaaaaaaaaa',
-          lastName: 'hola'
-        })
-      )
-      // console.log('@@@@@@@@@@@@@@@@@@@', result)
-      if (ok) {
-        //console.log('@@@@@@@@@@@@@@@@@@@', order)
-        localStorage.removeItem('cart')
-        dispatch(cartSet([]))
-        handleClickOpen()
+  /*
+    const [addOrder, result] = useAddOrderMutation()
+    const handleSubmit = () => {
+      //ev.preventDefault();
+      //console.log('@@@@@@@@@@@@@@@@@@@', order)
+      try {
+        // const { result: ok, message } = await createOrder(order)
+        addOrder(
+          JSON.stringify({
+            firstName: 'aaaaaaaaaaa',
+            lastName: 'hola'
+          })
+        )
+        // console.log('@@@@@@@@@@@@@@@@@@@', result)
+        if (ok) {
+          //console.log('@@@@@@@@@@@@@@@@@@@', order)
+          localStorage.removeItem('cart')
+          dispatch(cartSet([]))
+          handleClickOpen()
+        }
+      } catch (error) {
+        console.log('ERROR ADD ORDER EN CARRITO.JS', error)
       }
-    } catch (error) {
-      console.log('ERROR ADD ORDER EN CARRITO.JS', error)
-    }
-  };
-
+    };
+  */
   //REDUX
   /*
     axios({
@@ -145,14 +145,15 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   }, [pageProps.fromSupertokens])
 
   useEffect(() => {
-
-    addOrder(
-      {
-        firstName: 'aaaaaaaaaaa',
-        lastName: 'hola',
-      }
-    )
-
+    /*
+        addOrder(
+          {
+            firstName: 'aaaaaaaaaaa',
+            lastName: 'hola',
+          }
+        )
+        console.log('====================', result)
+    */
     /*
         axios({
           method: 'post',

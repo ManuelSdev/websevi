@@ -16,7 +16,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useDispatch, useSelector } from "react-redux"
 import { getCart, getCartPrice } from "../app/store/selectors"
 import { cartSet } from "../app/store/cartSlice"
-import { useAddOrderMutation } from "../app/store/services/nextApi"
+import { useAddOrderMutation } from "../app/store/services/orderApi"
 
 const CartPage = () => {
     const router = useRouter()
@@ -36,7 +36,8 @@ const CartPage = () => {
         amount: '',
         payment: ''
     })
-    console.log('#### carrito user del useUser', order)
+
+    // console.log('#### carrito user del useUser', order)
     React.useEffect(() => {
         if (isLoadingUser) return
         const orderCart = cart.map(product => {
@@ -57,16 +58,43 @@ const CartPage = () => {
         })
     }, [user, cart])
 
-    const [addOrder, result] = useAddOrderMutation()
+    const [
+        addOrder,
+        { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
+    ] = useAddOrderMutation({ fixedCacheKey: 'carrito-key', })
+
     const handleSubmit = async ev => {
         ev.preventDefault();
-        console.log('@@@@@@@@@@@@@@@@@@@', order)
+
         try {
-            //const { result: ok, message } = await createOrder(order)
-            await addOrder(order)
-            console.log('@@@@@@@@@@@@@@@@@@@', result)
-            if (result) {
-                //console.log('@@@@@@@@@@@@@@@@@@@', order)
+            /**
+             * If you need to access the error or success payload immediately after a mutation, you can chain .unwrap().
+             * Si no usas unwrap, no hace catch del error
+             */
+            await addOrder(order).unwrap()
+            localStorage.removeItem('cart')
+            dispatch(cartSet([]))
+            handleClickOpen()
+        } catch (error) {
+            console.log('ERROR ADD ORDER EN CARRITO.JS', error)
+            handleClickOpen()
+        }
+        /*
+        const { ok } = await addOrder(order).unwrap()
+        console.log('@@@ ', isSuccess)
+        if (done) {
+            localStorage.removeItem('cart')
+            dispatch(cartSet([]))
+            handleClickOpen()
+        }
+        isError && console.log('ERROR ADD ORDER EN CARRITO.JS', isError)
+        */
+        /*
+        try {
+            const { message } = await addOrder(order).unwrap()
+            console.log('@@@ data 3', data)
+            // await addOrder(order).unwrap()
+            if (isSuccess) {
                 localStorage.removeItem('cart')
                 dispatch(cartSet([]))
                 handleClickOpen()
@@ -74,6 +102,7 @@ const CartPage = () => {
         } catch (error) {
             console.log('ERROR ADD ORDER EN CARRITO.JS', error)
         }
+        */
     };
 
 
@@ -93,7 +122,7 @@ const CartPage = () => {
 
     const handleClose = () => {
         setOpen(false);
-        router.push('/')
+        isSuccess && router.push('/')
     };
 
     return (
@@ -102,7 +131,12 @@ const CartPage = () => {
                 handleClickOpen={handleClickOpen}
                 handleClose={handleClose}
                 open={open}
-                mainMessage={"El pedido ha sido completado"}
+                mainMessage={
+                    isSuccess ?
+                        'El pedido se realizó correctamente'
+                        :
+                        'Hubo un error al procesar su pedido. Vuelva a intentarlo'
+                }
             />
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar

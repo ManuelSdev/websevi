@@ -7,10 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress"
 
 const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
 
-    console.log('#### shipmentstep user entrante', user)
-    console.log('#### shipmentstep resolved', mutate)
+    //console.log('#### shipmentstep user entrante', user)
+    // console.log('#### shipmentstep resolved', mutate)
     const onSubmit = async (newUserValues) => {
-        console.log('#### shipmentstep user submit', user)
+        //   console.log('#### shipmentstep user submit', user)
         const { resolved } = await updateUser(user._id, newUserValues)
 
         resolved && mutate()

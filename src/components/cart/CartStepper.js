@@ -39,7 +39,7 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
-    console.log(mutateUser)
+    //console.log(mutateUser)
 
     const totalSteps = () => {
         return steps.length;

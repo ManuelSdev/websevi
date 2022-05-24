@@ -4,7 +4,6 @@ import User from '../../../models/User'
 
 export default async function handler(req, res) {
     console.log('LA REQ CREATE PRODUC--------------------', req.body)
-    console.log('typo++++++++++++++++++++++++++++++++++++', typeof req.body)
 
     try {
         await dbConnect()
@@ -24,7 +23,7 @@ export default async function handler(req, res) {
             useFindAndModify: false
         })
 
-        res.status(201).json({ result: true, message: `El pedido con ID ${savedOrder._id} se ha creado correctamente` })
+        res.status(201).json({ done: true, message: `El pedido con ID ${savedOrder._id} se ha creado correctamente` })
     } catch (err) {
         console.log("ERROR PRODUCT GET", err.message)
         res.status(err.status ? 409 : 500).json({ err })

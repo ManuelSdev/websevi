@@ -9,7 +9,7 @@ import Session from "supertokens-auth-react/recipe/session";
 Session.addAxiosInterceptors(axios);
 
 async function callAPI() {
-    // use axios as you normally do
+
     let response = await axios.get();
 }
 

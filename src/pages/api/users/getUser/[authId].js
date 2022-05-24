@@ -4,7 +4,7 @@ import User from '../../../../models/User'
 import dbConnect from '../../../../lib/dbConnect'
 
 export async function getUser(filters) {
-    console.log('-------------------get user', filters)
+    // console.log('-------------------get user', filters)
     await dbConnect()
     const [user] = await User.find(filters)
     return user

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { nextApi } from './services/nextApi'
+import { baseApi } from './services/baseApi'
 
 import counterReducer from './counterSlice'
 import authReducer from './authSlice'
@@ -16,12 +16,12 @@ const makeStore = () =>
             auth: authReducer,
             cart: cartReducer,
             counter: counterReducer,
-            [nextApi.reducerPath]: nextApi.reducer,
+            [baseApi.reducerPath]: baseApi.reducer,
         },
         // Adding the api middleware enables caching, invalidation, polling,
         // and other useful features of `rtk-query`.
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(nextApi.middleware),
+            getDefaultMiddleware().concat(baseApi.middleware),
         devTools: true,
     });
 

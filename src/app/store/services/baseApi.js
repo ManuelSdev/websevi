@@ -2,17 +2,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define a service using a base URL and expected endpoints
-export const nextApi = createApi({
+export const baseApi = createApi({
     //reducerPath: clave única que define dónde el store Redux almacenará el caché.
-    reducerPath: 'nextApi',
+    reducerPath: 'baseApi',
     baseQuery: fetchBaseQuery({
         baseUrl: '/api',
+        /*
+        headers globales sustituidos por headers propios de cada parte del api
         prepareHeaders: (headers) => {
             //headers.set('Authorization', `Bearer ${token}`);
             headers.set('Content-Type', 'application/json; charset=UTF-8');
             headers.set('Accept', 'application/json');
             return headers;
         }
+        */
     }),
 
     //endpoints: conjunto de operaciones que queremos realizar contra el servidor
@@ -21,7 +24,7 @@ export const nextApi = createApi({
             query: (name) => `pokemon/${name}`,
         }),
         addOrder: builder.mutation({
-            query: (order) => (console.log('EL ORDERRRRRRRRRRRRR', order) || {
+            query: (order) => ({
                 url: "/orders/createOrder",
                 method: "POST",
                 /**
@@ -30,10 +33,7 @@ export const nextApi = createApi({
                                     "Content-type": "application/json; charset=UTF-8"
                                 },
                  */
-                body: {
-                    firstName: 'aaaaaaaaaaa',
-                    lastName: 'hola',
-                }
+                body: order
             })
         }),
     }),
@@ -42,9 +42,9 @@ export const nextApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
-    useAddOrderMutation,
+    // useAddOrderMutation,
     useEjemploQuery,
-} = nextApi
+} = baseApi
 
 
 /**
