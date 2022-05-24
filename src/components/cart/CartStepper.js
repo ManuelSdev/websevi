@@ -20,6 +20,7 @@ import ShipmentStep from './ShipmentStep';
 
 import { useSelector } from "react-redux";
 import { getAuth } from "../../app/store/selectors";
+import { useGetUserQuery } from "../../app/store/services/userApi";
 
 const steps = [
     'Carrito',
@@ -31,7 +32,9 @@ const steps = [
 
 export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit }) {
 
-    const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+    //const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+
+    const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery()
     const { isLogged } = useSelector(getAuth)
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);

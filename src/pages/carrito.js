@@ -24,7 +24,7 @@ const CartPage = () => {
 
     const dispatch = useDispatch()
 
-    const { user, isLoading: isLoadingUser, isFetching: isFetchingUser } = useGetUserQuery()
+    const { user, isFetching: isFetchingUser } = useGetUserQuery()
 
     const [
         addOrder,
@@ -42,7 +42,7 @@ const CartPage = () => {
     })
 
     React.useEffect(() => {
-        if (isLoadingUser || isFetchingUser) return
+        if (isFetchingUser) return
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
