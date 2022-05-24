@@ -14,13 +14,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCart, getCartPrice } from "../app/store/selectors"
 import { cartSet } from "../app/store/cartSlice"
 import { useAddOrderMutation } from "../app/store/services/orderApi"
+import { useGetUserQuery } from "../app/store/services/userApi"
 
 const CartPage = () => {
     const router = useRouter()
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
-    const { user, isLoadingUser } = useAppContext()
+    const { user, isLoading, isFetching } = useGetUserQuery()
     const { cartProducts: cart } = useSelector(getCart)
     const cartTotalPrice = useSelector(getCartPrice)
 
@@ -34,7 +35,7 @@ const CartPage = () => {
     })
 
     React.useEffect(() => {
-        if (isLoadingUser) return
+        if (isLoading || isFetching) return
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
