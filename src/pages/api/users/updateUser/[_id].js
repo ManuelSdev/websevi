@@ -68,7 +68,7 @@ export default async function handler(req, res) {
 
         }
         res.status(201)
-            .json({ resolved: true, message: 'Usuario actualizado' })
+            .json({ done: true, message: 'Usuario actualizado' })
     } catch (err) {
         console.log("ERROR USER UPDATE", err.message)
         res.status(500).json({ resolved: false, message: err.message })

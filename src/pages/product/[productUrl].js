@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid"
 import Box from "@mui/system/Box"
 import Container from "@mui/material/Container"
-import ProductActions from "../../components/productPage/ProductActions"
+import ProductPanel from "../../components/productPage/ProductPanel"
 import React from "react"
 import { getProducts } from "../api/products/getProducts"
 import Layout from "../../components/layouts/Layout"
@@ -31,7 +31,7 @@ const ProductPage = ({ categories, product }) => {
 
                         </Grid>
                         <Grid item xs='auto' sm={6} md={6} lg={6} >
-                            <ProductActions product={product} ></ProductActions>
+                            <ProductPanel product={product} ></ProductPanel>
                         </Grid>
                     </Grid>
 

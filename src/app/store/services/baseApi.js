@@ -23,19 +23,7 @@ export const baseApi = createApi({
         ejemplo: builder.query({
             query: (name) => `pokemon/${name}`,
         }),
-        addOrder: builder.mutation({
-            query: (order) => ({
-                url: "/orders/createOrder",
-                method: "POST",
-                /**
-                                headers: {
-                                    //'Accept': 'application/json',
-                                    "Content-type": "application/json; charset=UTF-8"
-                                },
-                 */
-                body: order
-            })
-        }),
+
     }),
 })
 

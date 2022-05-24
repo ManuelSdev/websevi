@@ -1,23 +1,17 @@
 import ProfileForm from '../elements/ProfileForm'
-import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Stack from '@mui/material/Stack';
 import { updateUser } from '../../lib/api/user';
-import { useAppContext } from '../context';
-import useUser from '../../hooks/swrHooks/useUser';
 import { CircularProgress } from '@mui/material';
 
 
 
-const DataSection = ({ user, isLoading, isError, mutate }) => {
-    // console.log('user que llega a DataSection.js', user)
+const DataSection = ({ user, isLoading, isFetching, isError, refetch }) => {
 
-    //const { authId } = useAppContext()
-    // const { user, isLoading, isError, mutate } = useUser(authId)
     const onSubmit = async (newUserValues) => {
-        const { resolved } = await updateUser(user._id, newUserValues)
-        resolved && mutate()
+        const { done } = await updateUser(user._id, newUserValues)
+        done && refetch()
     }
 
     //console.log('user has profile', user)
@@ -27,7 +21,7 @@ const DataSection = ({ user, isLoading, isError, mutate }) => {
         const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
     }
 
-    return (isLoading ?
+    return (isFetching ?
         <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
             <CircularProgress color="primary" />
         </Stack>

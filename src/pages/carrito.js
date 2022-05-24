@@ -2,13 +2,10 @@
 import Typography from "@mui/material/Typography"
 import { useAppContext } from "../components/context"
 import React from "react"
-import { sum } from "../lib/utils/sum"
 import Toolbar from "@mui/material/Toolbar"
 import AppBar from "@mui/material/AppBar"
 import IconCorpName from "../components/elements/IconCorpName"
 import CartStepper from "../components/cart/CartStepper"
-import { createOrder } from "../lib/api/order"
-import useUser from "../hooks/swrHooks/useUser"
 import Modal from "../components/cart/Modal"
 import { useRouter } from "next/router"
 import Stack from "@mui/material/Stack"
@@ -28,7 +25,6 @@ const CartPage = () => {
     const cartTotalPrice = useSelector(getCartPrice)
 
     const dispatch = useDispatch()
-    //const { user, isLoading, isError, mutate } = useUser(authId)
 
     const [order, setOrder] = React.useState({
         userId: '',
@@ -37,7 +33,6 @@ const CartPage = () => {
         payment: ''
     })
 
-    // console.log('#### carrito user del useUser', order)
     React.useEffect(() => {
         if (isLoadingUser) return
         const orderCart = cart.map(product => {
@@ -79,41 +74,9 @@ const CartPage = () => {
             console.log('ERROR ADD ORDER EN CARRITO.JS', error)
             handleClickOpen()
         }
-        /*
-        const { ok } = await addOrder(order).unwrap()
-        console.log('@@@ ', isSuccess)
-        if (done) {
-            localStorage.removeItem('cart')
-            dispatch(cartSet([]))
-            handleClickOpen()
-        }
-        isError && console.log('ERROR ADD ORDER EN CARRITO.JS', isError)
-        */
-        /*
-        try {
-            const { message } = await addOrder(order).unwrap()
-            console.log('@@@ data 3', data)
-            // await addOrder(order).unwrap()
-            if (isSuccess) {
-                localStorage.removeItem('cart')
-                dispatch(cartSet([]))
-                handleClickOpen()
-            }
-        } catch (error) {
-            console.log('ERROR ADD ORDER EN CARRITO.JS', error)
-        }
-        */
+
     };
 
-
-    /*
-        const rowsTotalPrice = cart.map(product => product.price * product.amount)
-    
-        const cartTotalPrice = cart.length > 0 ?
-            sum(...rowsTotalPrice)
-            :
-            0
-    */
     //VENTANA MODAL
     const handleClickOpen = () => {
         setOpen(true);

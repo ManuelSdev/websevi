@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../../app/store/selectors';
 import { cartAddProduct } from '../../app/store/cartSlice';
 
-const ProductActions = ({ product }) => {
+const ProductPanel = ({ product }) => {
 
     // const { setCart, cart } = useAppContext()
     /**GESTIÓN DE FAVORITOS */
@@ -220,5 +220,5 @@ const ProductActions = ({ product }) => {
     )
 }
 
-export default ProductActions
+export default ProductPanel
 

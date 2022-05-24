@@ -11,6 +11,7 @@ export async function getUser(filters) {
 }
 
 export default async function handler(req, res) {
+    console.log('la req user', req.query)
     const { authId } = req.query
     try {
         const result = await getUser({ authId })

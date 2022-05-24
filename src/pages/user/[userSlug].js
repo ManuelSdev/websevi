@@ -1,7 +1,6 @@
 import { useRouter } from "next/router"
 import Layout from "../../components/layouts/Layout"
 import ProfileBar from "../../components/elements/ProfileBar"
-import Box from "@mui/material/Box"
 import { getCategories } from "../api/categories/getCategories"
 import { toPlainString } from "../../lib/utils/stringTools"
 import DataSection from "../../components/userPage/DataSection"
@@ -17,9 +16,9 @@ import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import Working from "../../components/elements/Working"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
-import useUser from "../../hooks/swrHooks/useUser"
 import { useSelector } from "react-redux"
 import { getAuth } from "../../app/store/selectors"
+import { useGetUserQuery } from "../../app/store/services/userApi"
 
 const sections = [
     {
@@ -46,12 +45,15 @@ const sections = [
 ]
 
 const UserPage = ({ categories }) => {
+
     const router = useRouter()
+
     const { userSlug } = router.query
+
     const { authId } = useSelector(getAuth)
 
-    const { user, isLoading, isError, mutate } = useUser(authId)
-    console.log('user que llega a [userSlug].js', user)
+    const { data: user, isLoading, isFetching, isError, refetch } = useGetUserQuery(authId)
+
     return (
         <Layout sx={{ zIndex: 'snackbar' }} categories={categories}>
             <SidebarLayout
@@ -63,8 +65,8 @@ const UserPage = ({ categories }) => {
                     :
                     userSlug === 'mis-datos' ?
                         <DataSection
-                            mutate={mutate}
-                            isLoading={isLoading}
+                            refetch={refetch}
+                            isFetching={isFetching}
                             user={user} />
                         :
                         userSlug === 'lista-de-deseos' ?

@@ -27,7 +27,7 @@ export default async function handler(req, res) {
                 useFindAndModify: false
             })
             res.status(201)
-                .json({ resolved: true, message: 'Favorito añadido' })
+                .json({ done: true, message: 'Favorito añadido' })
         }
     } catch (err) {
         console.log("ERROR favorites UPDATE", err.message)

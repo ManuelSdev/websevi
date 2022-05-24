@@ -1,7 +1,6 @@
 import Box from "@mui/system/Box"
 
 import Typography from "@mui/material/Typography"
-import useUser from '../../hooks/swrHooks/useUser'
 import { useAppContext } from '../context'
 
 import ProfileForm from "../elements/ProfileForm"
