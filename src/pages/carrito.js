@@ -18,14 +18,21 @@ import { useGetUserQuery } from "../app/store/services/userApi"
 
 const CartPage = () => {
     const router = useRouter()
-    //VENTANA MODAL
-    const [open, setOpen] = React.useState(false);
-
-    const { user, isLoading, isFetching } = useGetUserQuery()
     const { cartProducts: cart } = useSelector(getCart)
+
     const cartTotalPrice = useSelector(getCartPrice)
 
     const dispatch = useDispatch()
+
+    const { user, isLoading: isLoadingUser, isFetching: isFetchingUser } = useGetUserQuery()
+
+    const [
+        addOrder,
+        { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
+    ] = useAddOrderMutation({ fixedCacheKey: 'carrito-key', })
+
+    //VENTANA MODAL
+    const [open, setOpen] = React.useState(false);
 
     const [order, setOrder] = React.useState({
         userId: '',
@@ -35,7 +42,7 @@ const CartPage = () => {
     })
 
     React.useEffect(() => {
-        if (isLoading || isFetching) return
+        if (isLoadingUser || isFetchingUser) return
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -54,10 +61,7 @@ const CartPage = () => {
         })
     }, [user, cart])
 
-    const [
-        addOrder,
-        { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
-    ] = useAddOrderMutation({ fixedCacheKey: 'carrito-key', })
+
 
     const handleSubmit = async ev => {
         ev.preventDefault();
