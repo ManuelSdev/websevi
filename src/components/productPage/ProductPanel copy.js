@@ -6,74 +6,80 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import Box from "@mui/system/Box";
 import { useAppContext } from '../context';
-import Link from '../elements/Link'
 import useUser from '../../hooks/swrHooks/useUser';
+import Link from '../elements/Link'
 import { updateFavorites } from '../../lib/api/user';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { useRouter } from 'next/router';
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from '../../app/store/selectors';
+import { cartAddProduct } from '../../app/store/cartSlice';
 
-const ProductDetails = ({ product }) => {
+const ProductPanel = ({ product }) => {
 
-    const { setCart, cart, authId, isLogged } = useAppContext()
+    // const { setCart, cart } = useAppContext()
     /**GESTIÓN DE FAVORITOS */
-    const { user, isLoading, isError, mutate } = useUser(authId)
+    const { isLogged, authId } = useSelector(getAuth)
 
+    const dispatch = useDispatch()
+
+    const { user, isLoading, isError, mutate } = useUser(authId)
     const router = useRouter()
     const handleFavorites = async () => {
-        if (isLogged.state) {
-            console.log(isLogged)
+        if (isLogged) {
             const res = await updateFavorites(user._id, product._id)
             res.resolved && mutate()
         } else redirectToAuth({ redirectBack: true })
 
     }
-
-    const [productToCart, setProductToCart] = React.useState({
-        ...product,
-        amount: 0,
-    })
+    /*
+        const [productToCart, setProductToCart] = React.useState({
+            ...product,
+            amount: 0,
+        })
+       const { amount } = productToCart
+    */
     const [amountField, setAmountField] = React.useState(1)
 
-    const { amount } = productToCart
     const firstRender = React.useRef(true);
     const allowUseEffect = React.useRef(false);
 
     const increaseAmount = () => setAmountField(amountField + 1)
     const decreaseAmount = () => amountField > 1 && setAmountField(amountField - 1)
 
-
-    const addToCart = () => {
-        allowUseEffect.current = true
-        let cartCurrentAmountOfThisProduct = 0
-        cart.map(productInCart => {
-            //Si el producto actual ya se encuentra en el carrito, actualiza el valor
-            //amount sumando el amount del producto del carrito con el amount del producto actual
-            if (productInCart._id === product._id) {
-                cartCurrentAmountOfThisProduct = productInCart.amount
+    /*
+        const addToCart = () => {
+            allowUseEffect.current = true
+            let cartCurrentAmountOfThisProduct = 0
+            cart.map(productInCart => {
+                //Si el producto actual ya se encuentra en el carrito, actualiza el valor
+                //amount sumando el amount del producto del carrito con el amount del producto actual
+                if (productInCart._id === product._id) {
+                    cartCurrentAmountOfThisProduct = productInCart.amount
+                }
+            })
+            return setProductToCart({ ...product, amount: amount + amountField + cartCurrentAmountOfThisProduct })
+        }
+    
+        React.useEffect(() => {
+            if (firstRender.current) {
+                firstRender.current = false;
+                return;
             }
-        })
-        return setProductToCart({ ...product, amount: amount + amountField + cartCurrentAmountOfThisProduct })
-    }
-
-    React.useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false;
-            return;
-        }
-        if (!allowUseEffect.current) {
-            return
-        }
-        const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
-        const newCart = Array.from([...cartWithoutThisProduct, productToCart])
-        setCart([...newCart])
-        setProductToCart({ ...product, amount: 0 })
-        allowUseEffect.current = false
-    }, [productToCart])
-
-
+            if (!allowUseEffect.current) {
+                return
+            }
+            const cartWithoutThisProduct = cart.filter(productInCart => productInCart._id !== product._id)
+            const newCart = Array.from([...cartWithoutThisProduct, productToCart])
+            setCart([...newCart])
+            setProductToCart({ ...product, amount: 0 })
+            allowUseEffect.current = false
+        }, [productToCart])
+    
+    */
     return (
         <Box sx={{ flexGrow: 1, background: "white" }}>
             <Typography
@@ -167,7 +173,7 @@ const ProductDetails = ({ product }) => {
             </Stack>
             <Box>
                 <Button
-                    onClick={addToCart}
+                    onClick={() => dispatch(cartAddProduct([product, amountField]))}
                 >Añadir al carrito</Button>
             </Box>
             {
@@ -206,7 +212,7 @@ const ProductDetails = ({ product }) => {
             <Box>
                 <Link href="/carrito">
                     <Button
-                        onClick={addToCart}
+                        onClick={() => dispatch(cartAddProduct([product, amountField]))}
                     >Comprar</Button>
                 </Link>
             </Box>
@@ -214,5 +220,5 @@ const ProductDetails = ({ product }) => {
     )
 }
 
-export default ProductDetails
+export default ProductPanel
 

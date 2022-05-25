@@ -1,17 +1,35 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
+import axios from "axios";
 import Head from 'next/head'
 import SuperTokensReact from 'supertokens-auth-react'
 import * as SuperTokensConfig from '../../config/frontendConfig'
 import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
-import { AppProvider } from '../components/context'
 import theme from '../assets/theme'
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from '@mui/material/CssBaseline'
-import { getUser } from '../lib/api/user'
-import useUser from '../hooks/swrHooks/useUser'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { wrapper } from '../app/store'
+import { getAuth, getCart } from '../app/store/selectors'
+import { authLoginAdmin, authLoginUser } from '../app/store/authSlice'
+import { cartSet } from '../app/store/cartSlice'
+
+import createEmotionCache from '../lib/createEmotionCache'
+import { CacheProvider } from '@emotion/react';
+
+// Del Swipper eslint-disable-next-line
+//import "swiper/css/bundle";
+
+import "../styles/globals.css"
+
+Session.addAxiosInterceptors(axios);
+
+//Material UI-Next.js
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
 //Supertokens logic
 async function initNode() {
@@ -26,16 +44,13 @@ if (typeof window !== 'undefined') {
   initNode().catch(console.error)
 }
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
 
-  const [isLogged, setIsLogged] = React.useState({ state: false, admin: false, authId: '' })
-  const { authId } = isLogged
-  const { user, isLoading: isLoadingUser, isError: isErrorUser, mutate: mutateUser } = useUser(authId)
-  //console.log(mutateUser)
-  console.log('## app ', user)
-  //Guarda productos que se van añádiendo o quitando del carrito
-  const [cart, setCart] = React.useState([])
+  const { isLogged, isAdmin, authId } = useSelector(getAuth)
 
+  const { cartProducts } = useSelector(getCart)
+
+  const dispatch = useDispatch()
 
   //Supertokens logic
   useEffect(() => {
@@ -50,70 +65,60 @@ function App({ Component, pageProps }) {
       }
     }
     doRefresh()
-
   }, [pageProps.fromSupertokens])
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
-    storedCart && setCart(storedCart)
+    storedCart && dispatch(cartSet(storedCart))
     const checkSession = async () => {
       //Si existe una sesión activa, la promesa devuelve true
       // setIsLogged(await Session.doesSessionExist())
-      const state = await Session.doesSessionExist()
-      /**
-       * Si el userId del usuario logado tiene asignado el rol de administrador, admin=true
-       * userdId es el identificador de usuario en la bdd de supertokens. Se obtiene y se renombra a authID
-       * authId es un identificador de usuario en la bdd de la app. Permite relacionar el usuario logado
-       * con supertokens con su perfil de usuario en la bdd de la app.
-       */
-      const { admin, userId: authId } = state && await Session.getAccessTokenPayloadSecurely()
-      const info = state && await Session.getAccessTokenPayloadSecurely()
-      const user = await getUser(authId)
-      //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
-      // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
-      setIsLogged({ state, admin: !!admin, authId: authId ? authId : '' })
-
+      if (await Session.doesSessionExist()) {
+        /**
+             * Si el userId del usuario logado tiene asignado el rol de administrador, admin=true
+             * userdId es el identificador de usuario en la bdd de supertokens. Se obtiene y se renombra a authID
+             * authId es un identificador de usuario en la bdd de la app. Permite relacionar el usuario logado
+             * con supertokens con su perfil de usuario en la bdd de la app.
+             */
+        const { admin, userId: authId } = await Session.getAccessTokenPayloadSecurely()
+        //const info = state && await Session.getAccessTokenPayloadSecurely()
+        //const user = await getUser(authId)
+        //Convierte el valor admin en booleano porque, cuando no es true, devuelve undefined
+        // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
+        //setIsLogged({ state: true, admin: !!admin, authId: authId ? authId : '' })
+        //console.log('@@@@@@@@@@@@@@@@@@@@@@@@', admin)
+        !!admin ? dispatch(authLoginAdmin(authId)) : dispatch(authLoginUser(authId))
+      }
     }
     checkSession()
   }, [])
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    localStorage.setItem("cart", JSON.stringify(cartProducts))
 
-  }, [cart])
-
+  }, [cartProducts])
 
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
 
-  const appProps = { authId: isLogged.authId, isLogged, setIsLogged, cart, setCart, user, isLoadingUser, isErrorUser, mutateUser }
-  pageProps.authId = isLogged.authId
-  pageProps.isLogged = { ...isLogged }
-  pageProps.hola = 'adios'
 
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
         <meta name="google-site-verification" content="zbvzA8Zrgps5RRh86gp797a6HsdJkBRhP5vY0K0KkjQ" />
         <title>Sevimatic</title>
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AppProvider {...appProps}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {
-            //pageProps solo bajan a la página que entra como Component, si quieres alguna pageProp
-            // en algún componente de la página, o lo baja esa página como prop al componente
-            //o el componente lo pilla directamente de un provider como AppProvider
-          }
-          <Component id={'aa'} {...pageProps} />
-        </ThemeProvider >
-      </AppProvider>
-    </>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component  {...pageProps} />
+      </ThemeProvider >
+    </CacheProvider>
   )
 }
 
-export default App
+
+export default wrapper.withRedux(App)
 

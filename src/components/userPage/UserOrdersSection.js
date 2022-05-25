@@ -7,8 +7,9 @@ import useOrders from '../../hooks/swrHooks/useOrders';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const UserOrdersSection = ({ user }) => {
-    const { orders, isLoadingOrders } = useOrders(user._id)
 
+    const { orders, isLoadingOrders } = useOrders(user._id)
+    console.log('orders que llega ', orders)
     const mainHeaders = ['Fecha', 'ID de pedido', 'Productos', 'Total']
     const detailsHeaders = ['Artículo', 'Nombre', 'Precio', 'Cantidad', 'Total']
 

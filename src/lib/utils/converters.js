@@ -3,7 +3,7 @@ const isNullOrUndefined = value => [null, undefined].includes(value);
 const isValidValue = complement(isNullOrUndefined);
 // const isValidValue = (value) => !isNullOrUndefined(value);
 
-const objectToFormData = object =>
+export const objectToFormData = object =>
   Object.entries(object).reduce((formData, [key, value]) => {
     if (isValidValue(value)) {
       Array.isArray(value)

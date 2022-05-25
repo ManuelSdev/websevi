@@ -7,25 +7,60 @@ import ConfirmAndReturn from "../elements/ConfirmAndReturn";
 import React from "react";
 import Box from '@mui/system/Box';
 import Typography from "@mui/material/Typography"
+import { useAddProductMutation } from "../../app/store/services/productApi";
+
 const NewProductSection = () => {
 
-    const { error, throwPromise, loading, data: confirmation, setData } = usePromise({})
-    const [uploaded, setUploaded] = React.useState(false)
-
+    const [
+        addProduct,
+        { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
+    ] = useAddProductMutation()
 
     const handleSubmit = async newProduct => {
-        await throwPromise(createProduct(newProduct));
-        setUploaded(true)
-        //history.push("/user");
+        await addProduct(newProduct)
     };
 
     return (
-        loading ?
+        isLoading ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
                 <CircularProgress color="primary" />
             </Stack>
             :
-            uploaded ?
+            isSuccess ?
+                <ConfirmAndReturn
+                    message={data.message}
+                    action={() => reset()}
+                ></ConfirmAndReturn>
+                :
+                <Box>
+                    <Stack mb={2} direction='row'>
+                        <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Crear producto</Typography>
+                    </Stack>
+                    <NewProductForm error={isError && isError.data} onSubmit={handleSubmit}></NewProductForm>
+                </Box>
+    )
+}
+
+export default NewProductSection
+
+
+
+/*
+const { error, throwPromise, loading, data: confirmation, setData } = usePromise({})
+const [uploaded, setUploaded] = React.useState(false)
+const handleSubmit = async newProduct => {
+await throwPromise(createProduct(newProduct));
+    setUploaded(true)
+    //history.push("/user");
+};
+
+   return (
+        isLoading ?
+            <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
+                <CircularProgress color="primary" />
+            </Stack>
+            :
+            isSuccess ?
                 <ConfirmAndReturn
                     message={confirmation.message}
                     action={() => setUploaded(false)}
@@ -35,9 +70,7 @@ const NewProductSection = () => {
                     <Stack mb={2} direction='row'>
                         <Typography variant='h5' sx={{ fontWeight: 'bold' }} >Crear producto</Typography>
                     </Stack>
-                    <NewProductForm error={error?.data} onSubmit={handleSubmit}></NewProductForm>
+                    <NewProductForm error={isError?.isError.data} onSubmit={handleSubmit}></NewProductForm>
                 </Box>
     )
-}
-
-export default NewProductSection
+*/

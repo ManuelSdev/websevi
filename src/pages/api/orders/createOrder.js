@@ -3,12 +3,15 @@ import Order from '../../../models/Order'
 import User from '../../../models/User'
 
 export default async function handler(req, res) {
-    console.log('LA REQ CREATE PRODUC', req.body)
+    console.log('LA REQ CREATE PRODUC--------------------', req.body)
+
     try {
         await dbConnect()
         //AÑADIR PEDIDO A LA BDD
         const order = { date: new Date(), ...req.body }
+        // console.log('ORDER COMPLETO', order)
         const newOrder = await new Order(order)
+        // console.log('NEW ORDER', newOrder)
         const savedOrder = await newOrder.save()
 
         //AÑADIR PEDIDO AL USUARIO QUE LO HA REALIZADO
@@ -20,7 +23,7 @@ export default async function handler(req, res) {
             useFindAndModify: false
         })
 
-        res.status(201).json({ result: true, message: `El pedido con ID ${savedOrder._id} se ha creado correctamente` })
+        res.status(201).json({ done: true, message: `El pedido con ID ${savedOrder._id} se ha creado correctamente` })
     } catch (err) {
         console.log("ERROR PRODUCT GET", err.message)
         res.status(err.status ? 409 : 500).json({ err })
@@ -29,3 +32,4 @@ export default async function handler(req, res) {
 
 
 }
+

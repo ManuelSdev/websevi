@@ -1,40 +1,48 @@
-import Container from "@mui/material/Container"
-
-
-import * as React from 'react';
+import { Divider, Stack } from "@mui/material";
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Grid from "@mui/material/Grid"
-import Paper from "@mui/material/Paper"
-import CartStep from "./CartStep";
-import ShipmentStep from './ShipmentStep'
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
+import Stepper from '@mui/material/Stepper';
+import Typography from "@mui/material/Typography";
+import * as React from 'react';
+
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
 import { useAppContext } from "../context";
+import CartStep from "./CartStep";
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
-import { Divider, Stack } from "@mui/material";
+import ShipmentStep from './ShipmentStep';
+
+import { useSelector } from "react-redux";
+import { getAuth } from "../../app/store/selectors";
+import { useGetUserQuery } from "../../app/store/services/userApi";
 
 const steps = [
     'Carrito',
     'Envío',
     'Pago',
     'Resumen'
+
 ];
 
-export default function CartStepper({ order, setOrder, cartTotalPrice, handleSubmit }) {
+export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit }) {
 
-    const { isLogged, user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+    //const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
+
+    const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery()
+    const { isLogged } = useSelector(getAuth)
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
-    console.log(mutateUser)
+    //console.log(mutateUser)
 
     const totalSteps = () => {
         return steps.length;
@@ -96,7 +104,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, handleSub
      */
     React.useEffect(() => {
         //Controla la redirección al paso 2(step=1) tras el login
-        if (waitingForChangeIsLogged.current && isLogged.state) {
+        if (waitingForChangeIsLogged.current && isLogged) {
             waitingForChangeIsLogged.current = false;
             return;
         }
@@ -105,7 +113,7 @@ export default function CartStepper({ order, setOrder, cartTotalPrice, handleSub
             sessionStorage.removeItem('step1Anchor')
             setActiveStep(1)
         }
-        if (activeStep === 1 && !isLogged.state && !waitingForChangeIsLogged.current) {
+        if (activeStep === 1 && !isLogged && !waitingForChangeIsLogged.current) {
             sessionStorage.setItem('step1Anchor', true)
             redirectToAuth({ redirectBack: true })
         }

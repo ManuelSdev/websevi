@@ -1,13 +1,11 @@
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Box from '@mui/system/Box'
-import Link from '../elements/Link'
 import DropdownMenu from '../elements/DropdownMenu'
 
 
 import React, { useEffect, useState } from "react"
-import SearchToolBar from './SearchToolBar'
-import { useAppContext } from "../context"
+import SearchToolBar from './WhiteToolBar'
 
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
@@ -16,12 +14,13 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import SwitchMode from "./SwitchMode"
 import CollapsedCategs from "./CollapsedCategs"
 import useBreakpoints from "../../hooks/useBreakpoints"
+import { useSelector } from "react-redux"
+import { getAuth } from "../../app/store/selectors"
 
 
 const Header = ({ categories, mdUp }) => {
     const { sm750Up } = useBreakpoints()
-    const { setIsLogged, isLogged } = useAppContext()
-
+    const { isLogged } = useSelector(getAuth)
     const [{ childs: initialChilds }] = categories
     const [isCollapsed, setCollapsed] = useState(false)
     const [selectedCategoryChilds, setSelectedCategoryChilds] = useState([])
@@ -47,7 +46,6 @@ const Header = ({ categories, mdUp }) => {
     return (
         <>
             <AppBar position="sticky"
-
             // sx={{ minWidth: 400 }}
             >
                 <Toolbar
@@ -71,7 +69,7 @@ const Header = ({ categories, mdUp }) => {
                         />
                         <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                     </Stack>
-                    {isLogged.state && <SwitchMode />}
+                    {isLogged && <SwitchMode />}
                 </Toolbar>
 
                 <SearchToolBar handleChangeCollapsed={handleChangeCollapsed} />
@@ -94,10 +92,7 @@ const Header = ({ categories, mdUp }) => {
                             </Box>
                         )}
                     </Toolbar>
-
                 }
-
-
             </AppBar >
             <CollapsedCategs
                 categories={categories}
@@ -107,8 +102,6 @@ const Header = ({ categories, mdUp }) => {
                 selectedCategoryChilds={selectedCategoryChilds}
                 setSelectedCategoryChilds={setSelectedCategoryChilds}
             ></CollapsedCategs>
-
-
         </>
     )
 }

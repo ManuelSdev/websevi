@@ -298,7 +298,7 @@ const NewProductForm = ({ onSubmit, error }) => {
                 value={specs}
                 onChange={handleChangeProduct}
                 helperText="Las especificaciones se muestran en una lista. Separe el texto de cada especificación
-                o característica con '//"
+                o característica con '//'"
             />
             <Typography mt={1} mb={1}>Debe seleccionar, como mínimo, una imagen para crear el producto.</Typography>
             <Typography mb={1}>Si selecciona más de una imagen, la primera será la imagen principal del producto.</Typography>

@@ -2,26 +2,38 @@
 import Typography from "@mui/material/Typography"
 import { useAppContext } from "../components/context"
 import React from "react"
-import { sum } from "../lib/utils/sum"
 import Toolbar from "@mui/material/Toolbar"
 import AppBar from "@mui/material/AppBar"
 import IconCorpName from "../components/elements/IconCorpName"
 import CartStepper from "../components/cart/CartStepper"
-import { createOrder } from "../lib/api/order"
-import useUser from "../hooks/swrHooks/useUser"
 import Modal from "../components/cart/Modal"
 import { useRouter } from "next/router"
 import Stack from "@mui/material/Stack"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import { useDispatch, useSelector } from "react-redux"
+import { getCart, getCartPrice } from "../app/store/selectors"
+import { cartSet } from "../app/store/cartSlice"
+import { useAddOrderMutation } from "../app/store/services/orderApi"
+import { useGetUserQuery } from "../app/store/services/userApi"
 
 const CartPage = () => {
     const router = useRouter()
+    const { cartProducts: cart } = useSelector(getCart)
+
+    const cartTotalPrice = useSelector(getCartPrice)
+
+    const dispatch = useDispatch()
+
+    const { user, isFetching: isFetchingUser } = useGetUserQuery()
+
+    const [
+        addOrder,
+        { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
+    ] = useAddOrderMutation({ fixedCacheKey: 'carrito-key', })
+
     //VENTANA MODAL
     const [open, setOpen] = React.useState(false);
 
-    const { cart, setCart, user, isLoadingUser } = useAppContext()
-    //const { user, isLoading, isError, mutate } = useUser(authId)
-    console.log('#### carrito user del useUser', user)
     const [order, setOrder] = React.useState({
         userId: '',
         orderCart: [],
@@ -30,7 +42,7 @@ const CartPage = () => {
     })
 
     React.useEffect(() => {
-        if (isLoadingUser) return
+        if (isFetchingUser) return
         const orderCart = cart.map(product => {
             const [productImage] = product.images
             return {
@@ -49,27 +61,26 @@ const CartPage = () => {
         })
     }, [user, cart])
 
+
+
     const handleSubmit = async ev => {
         ev.preventDefault();
+
         try {
-            const { result: ok, message } = await createOrder(order)
-            if (ok) {
-                localStorage.removeItem('cart')
-                setCart([])
-                handleClickOpen()
-            }
+            /**
+             * If you need to access the error or success payload immediately after a mutation, you can chain .unwrap().
+             * Si no usas unwrap, no hace catch del error
+             */
+            await addOrder(order).unwrap()
+            localStorage.removeItem('cart')
+            dispatch(cartSet([]))
+            handleClickOpen()
         } catch (error) {
-            console.log(error)
+            console.log('ERROR ADD ORDER EN CARRITO.JS', error)
+            handleClickOpen()
         }
 
     };
-
-    const rowsTotalPrice = cart.map(product => product.price * product.amount)
-
-    const cartTotalPrice = cart.length > 0 ?
-        sum(...rowsTotalPrice)
-        :
-        0
 
     //VENTANA MODAL
     const handleClickOpen = () => {
@@ -79,7 +90,7 @@ const CartPage = () => {
 
     const handleClose = () => {
         setOpen(false);
-        router.push('/')
+        isSuccess && router.push('/')
     };
 
     return (
@@ -88,7 +99,12 @@ const CartPage = () => {
                 handleClickOpen={handleClickOpen}
                 handleClose={handleClose}
                 open={open}
-                mainMessage={"El pedido ha sido completado"}
+                mainMessage={
+                    isSuccess ?
+                        'El pedido se realizó correctamente'
+                        :
+                        'Hubo un error al procesar su pedido. Vuelva a intentarlo'
+                }
             />
             <AppBar position="sticky" sx={{ mb: '2em' }}>
                 <Toolbar

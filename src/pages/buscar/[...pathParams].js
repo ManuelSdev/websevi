@@ -7,7 +7,7 @@ import { useRouter } from "next/router"
 import React from 'react'
 
 
-const Buscar = ({ isLogged, products, categories, filtersProps }) => {
+const Buscar = ({ products, categories, filtersProps }) => {
 
     const router = useRouter()
 
@@ -23,7 +23,7 @@ const Buscar = ({ isLogged, products, categories, filtersProps }) => {
     }, [pricesRange])
 
     return (
-        <Layout isLogged={isLogged} categories={categories}>
+        <Layout categories={categories}>
             <ProductsSection products={products} filtersProps={filtersProps} {...props} />
         </Layout>
     )
@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
     const productsCategoriesRes = await getProducts({ $text: { $search: searchKeys } }, { categories: true, _id: false })
     //productsCategoriesRes es un array de objetos. Cada objeto es un campo categories de tipo {categories:[...]}
     // un campo categories de un producto contiene 3 elementos correspondientes a 3 niveles de categorías y subcategorías
-    //En este prototipo solo se una 2 niveles de categorías. Se extraen de la propiedad categories del objeto
+    //En este prototipo solo se usan 2 niveles de categorías. Se extraen de la propiedad categories del objeto
     const allCategories = productsCategoriesRes.map(object => {
         const [category1, category2] = object.categories
         return [category1, category2]

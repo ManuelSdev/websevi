@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             orders.map(async function (orderId) {
                 return await Order.findById(orderId)
             })
-        ).then(userOrders => console.log('ESTO', userOrders) || userOrders)
+        ).then(userOrders => userOrders)
         res.status(201).json(userOrders)
 
     } catch (err) {

@@ -1,7 +1,6 @@
 import Box from "@mui/system/Box"
 
 import Typography from "@mui/material/Typography"
-import useUser from '../../hooks/swrHooks/useUser'
 import { useAppContext } from '../context'
 
 import ProfileForm from "../elements/ProfileForm"
@@ -13,12 +12,6 @@ import { Stack } from "@mui/material"
 
 const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoading, ...props }) => {
 
-
-
-
-
-
-
     return (
         <Box>
             <Stack mb={2} direction='row'>
@@ -27,9 +20,7 @@ const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoadi
             <Box pl={2}>
                 <SelectPayment order={order} setOrder={setOrder}></SelectPayment>
             </Box>
-
         </Box>
-
     )
 }
 

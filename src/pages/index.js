@@ -11,9 +11,14 @@ import Grid from '@mui/material/Grid';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import { Divider } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import HomeInfo from '../components/home/HomeInfo';
+import CompactHomeInfo from '../components/home/CompactHomeInfo';
 
 export async function getStaticProps(context) {
+  //console.log('##################################################')
   const categoriesRes = await getCategories()
   const categories = JSON.parse(JSON.stringify(categoriesRes))
   const productsRes = await getProducts({ featured: true })
@@ -28,7 +33,11 @@ export async function getStaticProps(context) {
 
 
 export default function Home({ categories, products, hola }) {
-  console.log(hola)
+  //console.log(hola)
+  const theme = useTheme()
+  const sm750Up = useMediaQuery(theme.breakpoints.up('sm750'));
+
+
   return (
 
     <Layout categories={categories} >
@@ -42,31 +51,11 @@ export default function Home({ categories, products, hola }) {
         </Box>
         <FeaturedGrid products={products} hola={hola} />
         <Divider ></Divider>
-        <Grid mt={5} mb={5} textAlign='center' container spacing={2}>
-          <Grid item xs={4} sm={4} md={4} lg={4} >
-            <Box pr={5} pl={5}
-            >
-              <LocalShippingIcon color='primary' sx={{ fontSize: '60px' }} />
-              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Envío en 24/48 horas</Typography>
-              <Typography variant='body1' color='primary'>Compra ahora y recibe tu pedido en un plazo máximo de 2 días laborables </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} >
-            <Box pr={5} pl={5}>
-              <ThumbUpAltIcon color='primary' sx={{ fontSize: '60px' }} />
-              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Garantía de satisfacción</Typography>
-              <Typography variant='body1' color='primary'>Dispones de 30 días para realizar una devolución si no quedas satisfecho y de 2 años de garantía en todos nuestros productos </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4} >
-            <Box pr={5} pl={5}>
-              <SupportAgentIcon color='primary' sx={{ fontSize: '60px' }} />
-              <Typography mb={1} sx={{ fontWeight: 'bold' }} variant='h5' color='primary' >Soporte técnico</Typography>
-              <Typography variant='body1' color='primary'>Ponemos a tu disposición el mejor servicio técnico para resolver todas tus dudas </Typography>
-            </Box>
-          </Grid>
-        </Grid>
+        <HomeInfo />
+
+
       </Container>
+
     </Layout>
 
   )

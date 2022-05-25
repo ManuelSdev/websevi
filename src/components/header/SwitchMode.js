@@ -7,17 +7,26 @@ import Stack from "@mui/material/Stack"
 import { useAppContext } from '../context';
 import Box from '@mui/system/Box';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from '../../app/store/selectors';
+import { authLoginAdmin, authLoginUser } from '../../app/store/authSlice';
 
 const SwitchMode = () => {
     const router = useRouter()
-    const { setIsLogged, isLogged } = useAppContext()
+    //  const { setIsLogged, isLogged } = useAppContext()
 
-    const [checked, setChecked] = React.useState(true);
+    const { isLogged, isAdmin } = useSelector(getAuth)
+    const dispatch = useDispatch()
+
 
     const handleChange = (event) => {
         router.push('/')
-        setIsLogged({ ...isLogged, admin: event.target.checked });
+        //setIsLogged({ ...isLogged, admin: event.target.checked });
+        //check en true > loga como admin
+
+        event.target.checked ? dispatch(authLoginAdmin()) : dispatch(authLoginUser())
     };
+
 
     return (
 
@@ -31,7 +40,7 @@ const SwitchMode = () => {
 
                     },
                 }}
-                checked={isLogged.admin}
+                checked={isAdmin}
                 onChange={handleChange}
                 inputProps={{ 'aria-label': 'controlled' }}
 

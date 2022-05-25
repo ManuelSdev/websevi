@@ -15,7 +15,7 @@ mongoose.connection.on('error', err => {
   //Fundamentos 5- 3:14
   //process.exit(1);
 });
-//Cuando se conecta conecta correctamente (open)
+//Cuando se conecta  correctamente (open)
 mongoose.connection.once('open', () => {
   console.log('Conectado a MongoDB en', mongoose.connection.name);
 })
