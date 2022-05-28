@@ -104,7 +104,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
     return null
   }
 
-  const { data: user, isFetching: isFetchingUser } = console.log('---_app.js') || useGetUserQuery(authId)
+  //const { data: user, isFetching: isFetchingUser } = console.log('---_app.js') || useGetUserQuery(authId)
 
   return (
     <CacheProvider value={emotionCache}>

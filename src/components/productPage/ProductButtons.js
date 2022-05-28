@@ -21,7 +21,7 @@ const ProductButtons = ({ product }) => {
     const [updateUserFav, result] = useUpdateUserFavMutation()
     const dispatch = useDispatch()
 
-    const { data: user, isLoading, isFetching, isError, refetch } = console.log('----ProductButtons.js') || useGetUserQuery(authId)
+    const { data: user, isLoading, isFetching, isError, refetch } = useGetUserQuery(authId)
 
     const handleFavorites = async () => {
         isLogged ?

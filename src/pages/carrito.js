@@ -26,7 +26,7 @@ const CartPage = () => {
 
     const dispatch = useDispatch()
 
-    const { data: user, isFetching: isFetchingUser, refetch: refetchUser } = console.log('---carrito') || useGetUserQuery(authId)
+    const { data: user, isFetching: isFetchingUser, refetch: refetchUser } = useGetUserQuery(authId)
     console.log('-------carrito user', user)
     const [
         addOrder,
