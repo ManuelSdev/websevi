@@ -12,21 +12,24 @@ import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpas
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../../app/store/selectors';
 import { cartAddProduct } from '../../app/store/cartSlice';
-import { useGetUserQuery } from '../../app/store/services/userApi';
+import { useGetUserQuery, useUpdateUserFavMutation } from '../../app/store/services/userApi';
 
 const ProductButtons = ({ product }) => {
 
     const { isLogged, authId } = useSelector(getAuth)
 
+    const [updateUserFav, result] = useUpdateUserFavMutation()
     const dispatch = useDispatch()
 
-    const { data: user, isLoading, isFetching, isError, refetch } = useGetUserQuery(authId)
+    const { data: user, isLoading, isFetching, isError, refetch } = console.log('----ProductButtons.js') || useGetUserQuery(authId)
 
     const handleFavorites = async () => {
-        if (isLogged) {
-            const { done } = await updateFavorites(user._id, product._id)
-            done && refetch()
-        } else redirectToAuth({ redirectBack: true })
+        isLogged ?
+            //  const { done } = await updateFavorites(user._id, product._id)
+            // done && refetch()
+            await updateUserFav({ userId: user._id, productId: product._id })
+            :
+            redirectToAuth({ redirectBack: true })
 
     }
 

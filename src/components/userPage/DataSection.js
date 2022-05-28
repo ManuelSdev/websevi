@@ -2,16 +2,25 @@ import ProfileForm from '../elements/ProfileForm'
 import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Stack from '@mui/material/Stack';
-import { updateUser } from '../../lib/api/user';
+//import { updateUser } from '../../lib/api/user';
 import { CircularProgress } from '@mui/material';
+import { useUpdateUserDataMutation } from '../../app/store/services/userApi';
 
-
+useUpdateUserDataMutation
 
 const DataSection = ({ user, isLoading, isFetching, isError, refetch }) => {
 
+    const [updateUserData, result] = useUpdateUserDataMutation()
+
+    //TODO:ERRORES EN PANTALLA
     const onSubmit = async (newUserValues) => {
-        const { done } = await updateUser(user._id, newUserValues)
-        done && refetch()
+        // const { done } = await updateUser(user._id, newUserValues)
+        // done && refetch()
+        try {
+            await updateUserData({ id: user._id, ...newUserValues })
+        } catch (error) {
+            console.log('ERROR updateUser EN ShipmentStep.JS', error)
+        }
     }
 
     //console.log('user has profile', user)

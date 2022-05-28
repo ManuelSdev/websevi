@@ -30,12 +30,19 @@ const steps = [
 
 ];
 
-export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit }) {
+export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit,
+    user, isFetchingUser, refetchUser
+}) {
 
     //const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
 
-    const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery()
-    const { isLogged } = useSelector(getAuth)
+    const { isLogged, authId } = useSelector(getAuth)
+    console.log('auth', authId)
+
+    //const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery(authId)
+
+    console.log('user', user)
+
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
 
@@ -141,8 +148,8 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
                                 <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>
                                     <ShipmentStep
                                         user={user}
-                                        mutate={mutateUser}
-                                        isLoading={isLoadingUser}
+                                        refetchUser={refetchUser}
+                                        isFetchingUser={isFetchingUser}
                                     />
                                 </Paper>
                                 :

@@ -11,21 +11,23 @@ import { useRouter } from "next/router"
 import Stack from "@mui/material/Stack"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useDispatch, useSelector } from "react-redux"
-import { getCart, getCartPrice } from "../app/store/selectors"
+import { getAuth, getCart, getCartPrice } from "../app/store/selectors"
 import { cartSet } from "../app/store/cartSlice"
 import { useAddOrderMutation } from "../app/store/services/orderApi"
 import { useGetUserQuery } from "../app/store/services/userApi"
 
 const CartPage = () => {
     const router = useRouter()
+    const { isLogged, authId } = useSelector(getAuth)
+
     const { cartProducts: cart } = useSelector(getCart)
 
     const cartTotalPrice = useSelector(getCartPrice)
 
     const dispatch = useDispatch()
 
-    const { user, isFetching: isFetchingUser } = useGetUserQuery()
-
+    const { data: user, isFetching: isFetchingUser, refetch: refetchUser } = console.log('---carrito') || useGetUserQuery(authId)
+    console.log('-------carrito user', user)
     const [
         addOrder,
         { status, isUninitialized, isLoading, isSuccess, data, isError, reset }
@@ -146,6 +148,9 @@ const CartPage = () => {
                 handleSubmit={handleSubmit}
                 order={order}
                 setOrder={setOrder}
+                refetchUser={refetchUser}
+                user={user}
+                isFetchingUser={isFetchingUser}
             />
         </>
     )

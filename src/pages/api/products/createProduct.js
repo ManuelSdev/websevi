@@ -12,8 +12,8 @@ const handler = nc()
     //https://maximorlov.com/fix-unexpected-field-error-multer/
     .use(upload.array("images[]", 4))
     .post(async (req, res, next) => {
-        console.log(req.files)
-        console.log(req.body)
+        //  console.log(req.files)
+        //   console.log(req.body)
         const { name, category_1, category_2, specs } = req.body
         const categories = [category_1, category_2].map(elem => toPlainString(elem))
 

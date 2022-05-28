@@ -1,16 +1,11 @@
 import Box from "@mui/system/Box"
 
 import Typography from "@mui/material/Typography"
-import { useAppContext } from '../context'
 
-import ProfileForm from "../elements/ProfileForm"
-import { updateUser } from "../../lib/api/user"
-import SelectAddressForm from "../elements/SelectPayment"
-import { useRouter } from "next/dist/client/router"
 import SelectPayment from '../elements/SelectPayment'
 import { Stack } from "@mui/material"
 
-const PaymentStep = ({ setOrder, order, setButtonIsActive, user, mutate, isLoading, ...props }) => {
+const PaymentStep = ({ setOrder, order, ...props }) => {
 
     return (
         <Box>

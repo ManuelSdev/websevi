@@ -11,10 +11,11 @@ export async function getUser(filters) {
 }
 
 export default async function handler(req, res) {
-    console.log('la req user', req.query)
+    console.log('la req userssss', req.query)
     const { authId } = req.query
     try {
         const result = await getUser({ authId })
+        console.log('RESULT api/user/getUser/[autId]', result)
         res.status(201).json(result)
     } catch (err) {
         console.log("ERROR USER GET", err.message)

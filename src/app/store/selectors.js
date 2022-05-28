@@ -32,3 +32,5 @@ export const getCartPrice = state => {
 
 
 }
+
+export const getDrawer = state => state.drawer

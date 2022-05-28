@@ -1,10 +1,19 @@
 import { Counter } from "../features/counter/Counter"
 import { wrapper } from "../app/store"
 import { increment, incrementByAmount } from "../features/counter/counterSlice"
+import { Box } from "@mui/system"
+import { makeStyles } from "@mui/styles"
 
 const A = ({ prueba }) => {
+
+    makeStyles
     return (
-        <Counter a={prueba}></Counter>
+        <Box>
+            <Counter a={prueba}></Counter>
+
+            <Box sx={{ bgcolor: 'red' }}>CAJON</Box>
+
+        </Box>
     )
 }
 

@@ -32,7 +32,7 @@ const SwitchMode = () => {
 
 
         <Stack direction="row" spacing={1} alignItems="center" sx={{ flexGrow: 1 }} >
-            <Typography>Modo usuario</Typography>
+            <Typography>Modo administrador</Typography>
             <Switch
                 sx={{
                     '& .MuiSwitch-track ': {
@@ -45,7 +45,7 @@ const SwitchMode = () => {
                 inputProps={{ 'aria-label': 'controlled' }}
 
             />
-            <Typography>Modo administrador</Typography>
+
         </Stack>
 
 

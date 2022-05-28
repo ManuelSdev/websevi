@@ -6,11 +6,14 @@ import dbConnect from '../../../../lib/dbConnect'
 
 
 export default async function handler(req, res) {
+    console.log('******************body req  updateUser', req.body)
+    console.log('query req updateUser', req.query)
     //Obtiene el _id del usuario de los path params
     //el objeto req.query contiene la propiedad _id porque el nombre de esta ruta dínamica es [_id].js
     const { _id } = req.query
     //Obtiene nuevos valores de usuario del req.body
     const { name, lastName, idCard, phone, company, address, postCode, city, region, country, moreInfo } = req.body
+    console.log('-----------------------body req  updateUser', req.body)
     //TODO: Validaciones BACK
     //El campo addresses del modelo User es un array de objetos.Cada objeto contiene los siguientes campos
     const newAddress = { address, postCode, city, region, country, moreInfo }

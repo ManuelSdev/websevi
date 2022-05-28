@@ -5,7 +5,7 @@ import DropdownMenu from '../elements/DropdownMenu'
 
 
 import React, { useEffect, useState } from "react"
-import SearchToolBar from './WhiteToolBar'
+import WhiteToolBar from './WhiteToolBar'
 
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
@@ -19,6 +19,7 @@ import { getAuth } from "../../app/store/selectors"
 
 
 const Header = ({ categories, mdUp }) => {
+
     const { sm750Up } = useBreakpoints()
     const { isLogged } = useSelector(getAuth)
     const [{ childs: initialChilds }] = categories
@@ -72,7 +73,7 @@ const Header = ({ categories, mdUp }) => {
                     {isLogged && <SwitchMode />}
                 </Toolbar>
 
-                <SearchToolBar handleChangeCollapsed={handleChangeCollapsed} />
+                <WhiteToolBar handleChangeCollapsed={handleChangeCollapsed} categories={categories} />
                 {sm750Up &&
                     <Toolbar
                         sx={{

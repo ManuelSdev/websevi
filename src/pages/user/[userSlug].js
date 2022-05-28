@@ -7,42 +7,16 @@ import DataSection from "../../components/userPage/DataSection"
 import WishListSection from "../../components/userPage/WishListSection"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
 import OrdersSection from "../../components/userPage/UserOrdersSection"
-
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 import Working from "../../components/elements/Working"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
 import { useSelector } from "react-redux"
 import { getAuth } from "../../app/store/selectors"
 import { useGetUserQuery } from "../../app/store/services/userApi"
+import { userPageSections } from "../../items/profilePageSections"
 
-const sections = [
-    {
-        name: 'Mis datos',
-        path: 'mis-datos',
-        icon: <PersonOutlineIcon fontSize="small" />
-    },
-    {
-        name: 'Lista de deseos',
-        icon: <FavoriteBorderIcon fontSize="small" />
-    },
-    {
-        name: 'Valoraciones',
-        icon: <StarBorderIcon fontSize="small" />
-    },
-    {
-        name: 'Pedidos',
-        icon: <ShoppingBagOutlinedIcon fontSize="small" />
-    },
-    {
-        name: 'Opciones de pago',
-        icon: <PaymentOutlinedIcon fontSize="small" />
-    }
-]
+
+const sections = userPageSections
 
 const UserPage = ({ categories }) => {
 

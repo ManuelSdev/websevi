@@ -1,20 +1,27 @@
 import Box from "@mui/system/Box"
 import Typography from "@mui/material/Typography"
 import ProfileForm from "../elements/ProfileForm"
-import { updateUser } from "../../lib/api/user"
+//import { updateUser } from "../../lib/api/user"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
+import { useUpdateUserDataMutation } from "../../app/store/services/userApi"
+//import { updateUser } from "../../lib/api/user"
 
-const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
+const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
 
-    //console.log('#### shipmentstep user entrante', user)
-    // console.log('#### shipmentstep resolved', mutate)
+    console.log('#### shipmentstep user', user)
+    const [updateUserData, result] = useUpdateUserDataMutation()
+    //TODO:ERRORES EN PANTALLA
     const onSubmit = async (newUserValues) => {
-        //   console.log('#### shipmentstep user submit', user)
-        const { resolved } = await updateUser(user._id, newUserValues)
-
-        resolved && mutate()
+        //const { done } = await updateUser(user._id, newUserValues)
+        //  done && refetchUser()
+        try {
+            await updateUserData({ id: user._id, ...newUserValues })
+        } catch (error) {
+            console.log('ERROR updateUser EN ShipmentStep.JS', error)
+        }
     }
+
 
     //Obtiene dirección principal del array de direcciones
     if (user?.hasProfile) {
@@ -24,7 +31,7 @@ const ShipmentStep = ({ user, mutate, isLoading, ...props }) => {
     }
 
     return (
-        isLoading ?
+        isFetchingUser ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
                 <CircularProgress color="primary" />
             </Stack>

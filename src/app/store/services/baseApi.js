@@ -17,7 +17,7 @@ export const baseApi = createApi({
         }
         */
     }),
-
+    tagTypes: ['User', 'Product', 'Order'],
     //endpoints: conjunto de operaciones que queremos realizar contra el servidor
     endpoints: (builder) => ({
         ejemplo: builder.query({

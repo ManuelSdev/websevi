@@ -1,36 +1,24 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState = {
-    isActive: false,
-    isAdmin: false,
-    authId: '',
+    userDrawerIsOpen: false,
+    categDrawerIsOpen: false,
 }
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const drawerSlice = createSlice({
+    name: 'drawer',
     initialState,
     reducers: {
-        authLoginUser: (state, action) => {
-            console.log(action)
-            state.isLogged = true
-            state.isAdmin = false
-            //state.authId = action.payload
-            if (action.payload) state.authId = action.payload
+        toggleUserDrawer: (state) => {
+            state.userDrawerIsOpen = !state.userDrawerIsOpen
         },
-        authLoginAdmin: (state, action) => {
-            state.isLogged = true
-            state.isAdmin = true
-            //state.authId = action.payload
-            if (action.payload) state.authId = action.payload
+        toggleCategDrawer: (state) => {
+            state.categDrawerIsOpen = !state.categDrawerIsOpen
         },
-        authLogout: (state) => {
-            state.isLogged = false
-            state.isAdmin = false
-            state.authId = ''
-        },
+
     },
 })
 
-export const { authLoginUser, authLoginAdmin, authLogout, authId } = authSlice.actions
+export const { toggleUserDrawer, toggleCategDrawer } = drawerSlice.actions
 
-export default authSlice.reducer
+export default drawerSlice.reducer

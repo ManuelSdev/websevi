@@ -24,6 +24,7 @@ import { CacheProvider } from '@emotion/react';
 //import "swiper/css/bundle";
 
 import "../styles/globals.css"
+import { useGetUserQuery } from '../app/store/services/userApi';
 
 Session.addAxiosInterceptors(axios);
 
@@ -41,7 +42,7 @@ async function initNode() {
 if (typeof window !== 'undefined') {
   SuperTokensReact.init(SuperTokensConfig.frontendConfig())
 } else {
-  initNode().catch(console.error)
+  initNode().catch('ERROR INIT SUPERTOKENS _APP.JS', console.error)
 }
 
 function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
@@ -87,6 +88,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
         // setIsLogged({ state, admin: !!admin, authId: authId ? authId : '', user: user })
         //setIsLogged({ state: true, admin: !!admin, authId: authId ? authId : '' })
         //console.log('@@@@@@@@@@@@@@@@@@@@@@@@', admin)
+
         !!admin ? dispatch(authLoginAdmin(authId)) : dispatch(authLoginUser(authId))
       }
     }
@@ -102,6 +104,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
     return null
   }
 
+  const { data: user, isFetching: isFetchingUser } = console.log('---_app.js') || useGetUserQuery(authId)
 
   return (
     <CacheProvider value={emotionCache}>

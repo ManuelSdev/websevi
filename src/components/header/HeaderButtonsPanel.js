@@ -11,8 +11,10 @@ import useBreakpoints from "../../hooks/useBreakpoints"
 
 import { authLogout } from "../../app/store/authSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { getAuth } from "../../app/store/selectors"
+import { getAuth, getDrawer } from "../../app/store/selectors"
 import HeaderButtonBox from "./HeaderButtonBox"
+import { toggleUserDrawer } from '../../app/store/drawerSlice';
+import UserPageDrawer from './UserPageDrawer';
 
 
 const HeaderButtonsPanel = () => {
@@ -20,7 +22,7 @@ const HeaderButtonsPanel = () => {
     const { sm750Up } = useBreakpoints()
 
     const { isLogged, isAdmin } = useSelector(getAuth)
-
+    // const { isOpen } = useSelector(getDrawer)
     const dispatch = useDispatch()
     //TODO REDUX
     //Método logout
@@ -30,24 +32,32 @@ const HeaderButtonsPanel = () => {
 
         // ThirdPartyEmailPassword.redirectToAuth()
     }
-
+    const handleDrawer = () => dispatch(toggleUserDrawer())
     return (
-        <Box
-            sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}
-        >
-            {sm750Up || <CompactSearchButton sm750Up={sm750Up} />}
-            {isLogged && <HeaderButtonBox href={'/'} onClick={logoutClicked} IconByProps={LogoutIcon} buttonText={'Salir'} />}
-            {isLogged ?
-                isAdmin ?
-                    <HeaderButtonBox href={'/admin/pedidos'} IconByProps={ManageAccountsOutlinedIcon} buttonText={'Panel de administrador'} />
+        <>
+            <Box
+                sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}
+            >
+                {sm750Up || <CompactSearchButton sm750Up={sm750Up} />}
+                {isLogged && <HeaderButtonBox href={'/'} onClick={logoutClicked} IconByProps={LogoutIcon} buttonText={'Salir'} />}
+                {isLogged ?
+                    isAdmin ?
+                        <HeaderButtonBox href={'/admin/pedidos'} IconByProps={ManageAccountsOutlinedIcon} buttonText={'Panel de administrador'} />
+                        :
+                        <HeaderButtonBox onClick={handleDrawer} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
                     :
-                    <HeaderButtonBox href={'/user/mis-datos'} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
-                :
-                <HeaderButtonBox href={'/auth'} IconByProps={LoginIcon} buttonText={'Iniciar sesión'} />
-            }
-            {!isAdmin && <CartButton />}
-        </Box>
+                    <HeaderButtonBox href={'/auth'} IconByProps={LoginIcon} buttonText={'Iniciar sesión'} />
+                }
+                {!isAdmin && <CartButton />}
+            </Box>
+            <UserPageDrawer onClose={handleDrawer} />
+        </>
+
     )
 }
 
 export default HeaderButtonsPanel
+
+/**
+  <HeaderButtonBox href={'/user/mis-datos'} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
+ */

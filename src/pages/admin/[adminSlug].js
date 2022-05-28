@@ -7,44 +7,12 @@ import NewProductSection from "../../components/AdminPage/NewProductSection"
 import NewCategsSection from "../../components/AdminPage/NewCategsSection"
 import SidebarLayout from "../../components/layouts/SidebarLayout"
 import AdminOrdersSection from "../../components/AdminPage/AdminOrdersSection"
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Working from "../../components/elements/Working"
+import { adminPageSections } from "../../items/profilePageSections"
 
-const sections = [
-    {
-        name: 'Pedidos',
-        path: 'pedidos',
-        icon: <ShoppingCartIcon fontSize="small" />
-    },
-    {
-        name: 'Productos',
-        path: 'productos',
-        icon: <AssignmentIcon fontSize="small" />
-    },
-    {
-        name: 'Crear producto',
-        icon: <NoteAddIcon fontSize="small" />
-    },
-    {
-        name: 'Crear categorías',
-        icon: <CreateNewFolderIcon fontSize="small" />
-    },
-    {
-        name: 'Importar catálogo',
-        icon: <FileDownloadIcon fontSize="small" />
-    },
-    {
-        name: 'Reiniciar estado',
-        icon: <RestartAltIcon fontSize="small" />
-    }
-]
+const sections = adminPageSections
 
-const UserPage = ({ categories }) => {
+const AdminPage = ({ categories }) => {
     const router = useRouter()
     const { adminSlug } = router.query
 
@@ -69,7 +37,7 @@ const UserPage = ({ categories }) => {
     )
 }
 
-export default UserPage
+export default AdminPage
 
 export async function getStaticPaths() {
     const paths = sections.map(section => ({ params: { adminSlug: toPlainString(section.name) } }))

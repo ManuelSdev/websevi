@@ -7,6 +7,7 @@ import { baseApi } from './services/baseApi'
 import counterReducer from './counterSlice'
 import authReducer from './authSlice'
 import cartReducer from './cartSlice'
+import drawerSlice from './drawerSlice'
 
 
 
@@ -16,6 +17,7 @@ const makeStore = () =>
             auth: authReducer,
             cart: cartReducer,
             counter: counterReducer,
+            drawer: drawerSlice,
             [baseApi.reducerPath]: baseApi.reducer,
         },
         // Adding the api middleware enables caching, invalidation, polling,
