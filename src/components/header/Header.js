@@ -16,6 +16,7 @@ import CollapsedCategs from "./CollapsedCategs"
 import useBreakpoints from "../../hooks/useBreakpoints"
 import { useSelector } from "react-redux"
 import { getAuth } from "../../app/store/selectors"
+import BlackToolbar from "./BlackToolbar"
 
 
 const Header = ({ categories, mdUp }) => {
@@ -49,30 +50,7 @@ const Header = ({ categories, mdUp }) => {
             <AppBar position="sticky"
             // sx={{ minWidth: 400 }}
             >
-                <Toolbar
-                    sx={{
-                        bgcolor: 'corpBlack.main',
-                        flexDirection: 'row-reverse',
-                        height: "2em",
-                        color: "corpWhite.main",
-                        '@media (min-width: 600px)': {
-                            minHeight: "1em"
-                        }
-                    }}
-                >
-                    <Stack
-                        alignItems='center'
-                        direction='row'>
-                        <Typography
-                            mr={3}
-                            variant="subtitle1">Lunes a jueves 10-19h. Viernes 10-15h </Typography>
-                        <LocalPhoneIcon
-                        />
-                        <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
-                    </Stack>
-                    {isLogged && <SwitchMode />}
-                </Toolbar>
-
+                <BlackToolbar />
                 <WhiteToolBar handleChangeCollapsed={handleChangeCollapsed} categories={categories} />
                 {sm750Up &&
                     <Toolbar
