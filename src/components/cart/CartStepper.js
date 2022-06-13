@@ -12,8 +12,7 @@ import * as React from 'react';
 
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
-import { useAppContext } from "../context";
-import CartStep from "./CartStep";
+import DetailsStep from "./DetailsStep";
 import PaymentStep from "./PaymentStep";
 import ResumeStep from "./ResumeStep";
 import ShipmentStep from './ShipmentStep';
@@ -37,11 +36,11 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
     //const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
 
     const { isLogged, authId } = useSelector(getAuth)
-    console.log('auth', authId)
+    //  console.log('auth', authId)
 
     //const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery(authId)
 
-    console.log('user', user)
+    //  console.log('user', user)
 
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
@@ -142,7 +141,7 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
                 <Grid container spacing={2}>
                     <Grid container item xs={12} sm={12} md={8} lg={8} >
                         {activeStep === 0 ?
-                            <CartStep />
+                            <DetailsStep />
                             :
                             activeStep === 1 ?
                                 <Paper sx={{ flexGrow: 1, p: 2, pt: 1.5 }}>

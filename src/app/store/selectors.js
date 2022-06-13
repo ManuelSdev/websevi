@@ -16,7 +16,6 @@ export const getCartVolume = state => {
         //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/rest_parameters
         //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax
         const volume = sum(...volumeOfEachProduct)
-
         return volume
     } else { return 0 }
 }
@@ -29,8 +28,12 @@ export const getCartPrice = state => {
         //console.log('@@@@@@@@@', price)
         return price
     } else { return 0 }
-
-
 }
+
+export const getProductAmountInCart = product => state => {
+    const [{ amount }] = state.cart.cartProducts.filter(cartProduct => cartProduct._id === product._id)
+    return amount
+}
+
 
 export const getDrawer = state => state.drawer

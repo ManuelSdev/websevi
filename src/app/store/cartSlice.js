@@ -47,7 +47,7 @@ export const cartSlice = createSlice({
             //action.payLoad={product}
             const { _id: productId } = action.payload
             state.cartProducts = state.cartProducts.map(productInCart => {
-                if (productInCart._id === productId) {
+                if (productInCart.amount > 1 && productInCart._id === productId) {
                     productInCart.amount -= 1
                 }
                 return productInCart

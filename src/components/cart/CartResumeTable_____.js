@@ -35,7 +35,7 @@ const TextTableCell = ({ children, bold, colSpan }) => {
                 fontWeight: bold && 'bold',
                 '&.MuiTableCell-root':
                 {
-                    border: 0, padding: 0,
+                    paddingRight: 0, paddingTop: 0, paddingBottom: 0,
 
                 },
 
@@ -150,65 +150,59 @@ export default function CartResumeTable({ user, order }) {
                 :
                 <Table aria-label="collapsible table">
                     <TableHead>
-                        <TableRow sx={{ borderBottom: 0 }}>
-                            <TableCell colSpan={3}><Typography variant='h6' sx={{ fontWeight: 'bold', borderBottom: 0 }} >Artículos</Typography></TableCell>
+                        <TableRow>
+                            <TableCell colSpan={2}><Typography variant='h6' sx={{ fontWeight: 'bold' }} >Artículos</Typography></TableCell>
 
+                            <TableCell align="right">Precio</TableCell>
+                            <TableCell align="right">Cantidad</TableCell>
+                            <TableCell colSpan={2} align="left">Total</TableCell>
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {order.orderCart.map((product) => {
-                            return <TableRow
-                                className='row-principal'
-                                key={product.productId}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell colSpan={2} component="th" >
-                                    <Link href={`/product/${product.url}`}>
-                                        <Image
-                                            width='100%'
-                                            height='100%'
-                                            objectFit='contain'
-                                            src={product.productImage}
-                                            alt="Imagen de producto"
-                                        />
-                                    </Link>
-                                </TableCell >
-                                <TableCell colSpan={3}  >
-                                    <TableContainer>
-                                        <Table>
-                                            <TableBody sx={{
-                                                'td,th': { border: 0, padding: 0.5, },
-                                                'th': { fontWeight: 'bold' }
-                                            }}>
-                                                <TableRow >
-                                                    <TableCell
-                                                        scope="row"
-                                                        component="th"
-                                                        // sx={{ '&.MuiTableCell-root': { border: 0, padding: 0, } }}
-                                                        colSpan={4}
-                                                    >{product.productName}</TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                    <TableCell component="th" style={{ width: 60 }} >Unidades: </TableCell>
-                                                    <TableCell> {product.productAmount} </TableCell>
-                                                </TableRow>
-                                                <TableRow >
-                                                    <TableCell component="th" >Precio: </TableCell>
-                                                    <TableCell >
-                                                        {Math.round(product.productPrice * product.productAmount * 100) / 100} €
-                                                    </TableCell>
-                                                </TableRow>
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                </TableCell>
-                            </TableRow>
+                            return <>
+                                <TableRow
+                                    key={product.productId}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell rowSpan={3} colSpan={2} component="th" scope="row">
+                                        <Link href={`/product/${product.url}`}>
+                                            <Image
+                                                width='100%'
+                                                height='100%'
+                                                objectFit='contain'
+                                                src={product.productImage}
+                                                alt="Imagen de producto"
+                                            />
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell
+                                        //component="th"
+                                        sx={{ '&.MuiTableCell-root': { borderBottom: '0px solid red', paddingBottom: 0, } }}
+                                        colSpan={4}
+                                    >{product.productName}</TableCell>
+                                </TableRow>
+                                <TableRow
+                                    sx={{ 'td': { borderBottom: '0px solid red' } }}
+                                >
+                                    <TextTableCell bold={true}>Unidades: </TextTableCell>
+                                    <TextTableCell bold={false} colSpan={2}> {product.productAmount} </TextTableCell>
+
+                                </TableRow>
+                                <TableRow >
+                                    <TextTableCell bold={true}>Precio: </TextTableCell>
+                                    <TextTableCell colSpan={2}>
+                                        {Math.round(product.productPrice * product.productAmount * 100) / 100} €
+                                    </TextTableCell>
+
+                                </TableRow>
+                            </>
                         })
                         }
                     </TableBody>
                 </Table>}
-        </TableContainer >
+        </TableContainer>
 
     );
 }
