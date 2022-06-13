@@ -10,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getDrawer } from '../../app/store/selectors';
 import { userPageSections } from '../../items/profilePageSections';
 import { Link } from '@mui/material';
@@ -18,6 +18,7 @@ import { toPlainString } from '../../lib/utils/stringTools';
 
 export default function UserPageDrawer({ onClose }) {
 
+    const dispatch = useDispatch()
     const sections = userPageSections
 
     const { userDrawerIsOpen: isOpen } = useSelector(getDrawer)
@@ -29,20 +30,25 @@ export default function UserPageDrawer({ onClose }) {
                 {sections.map((section, index) => (
                     <ListItem
                         key={section.name}
-                        disablePadding>
+                        disablePadding
+                    >
+
                         <ListItemButton
+                            onClick={section.action ? () => dispatch(section.action) : undefined}
                             component={Link}
-                            href={`/user/${toPlainString(section.name)}`}
+                            href={section.action ? '/' : `/user/${toPlainString(section.name)}`}
                         >
                             <ListItemIcon>
                                 {section.icon}
                             </ListItemIcon>
                             <ListItemText primary={section.name} />
                         </ListItemButton>
+
+
                     </ListItem>
                 ))}
             </List>
-        </Box>
+        </Box >
     );
     return (
         <Drawer

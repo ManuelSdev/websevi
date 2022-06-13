@@ -12,8 +12,12 @@ import { resetCategories } from '../../lib/api/category';
 import { resetProducts } from '../../lib/api/product';
 import initialsCategories from '../../assets/initialsCategories';
 import initialsProducts from '../../assets/initialsProducts';
+import { useDispatch } from 'react-redux';
+
 
 const ProfileBar = ({ sections, profile }) => {
+
+    const dispatch = useDispatch()
 
     const restartCategs = async () => {
         await resetCategories(initialsCategories)
@@ -34,11 +38,16 @@ const ProfileBar = ({ sections, profile }) => {
                     </MenuItem>
                     :
                     <MenuItem key={section.name}
+                        onClick={section.action ? () => dispatch(section.action) : undefined}
+
                         component={Link}
                         href={profile === 'admin' ?
                             `/admin/${toPlainString(section.name)}`
                             :
-                            `/user/${toPlainString(section.name)}`
+                            section.action ?
+                                '/'
+                                :
+                                `/user/${toPlainString(section.name)}`
                         }
                     >
                         <ListItemIcon>

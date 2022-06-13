@@ -39,14 +39,14 @@ const HeaderButtonsPanel = () => {
                 sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}
             >
                 {sm750Up || <CompactSearchButton sm750Up={sm750Up} />}
-                {isLogged && <HeaderButtonBox href={'/'} onClick={logoutClicked} IconByProps={LogoutIcon} buttonText={'Salir'} />}
+                {isLogged && sm750Up && <HeaderButtonBox href={'/'} onClick={logoutClicked} IconByProps={LogoutIcon} buttonText={'Salir'} />}
                 {isLogged ?
                     isAdmin ?
                         <HeaderButtonBox href={'/admin/pedidos'} IconByProps={ManageAccountsOutlinedIcon} buttonText={'Panel de administrador'} />
                         :
                         <HeaderButtonBox onClick={handleDrawer} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
                     :
-                    <HeaderButtonBox href={'/auth'} IconByProps={LoginIcon} buttonText={'Iniciar sesión'} />
+                    <HeaderButtonBox href={'/auth'} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
                 }
                 {!isAdmin && <CartButton />}
             </Box>
