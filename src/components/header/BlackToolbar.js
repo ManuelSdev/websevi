@@ -1,29 +1,19 @@
-import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Box from '@mui/system/Box'
-import DropdownMenu from '../elements/DropdownMenu'
-
-
-import React, { useEffect, useState } from "react"
-import WhiteToolBar from './WhiteToolBar'
-
+import React from "react"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-
 import SwitchMode from "./SwitchMode"
-import CollapsedCategs from "./CollapsedCategs"
 import useBreakpoints from "../../hooks/useBreakpoints"
 import { useSelector } from "react-redux"
 import { getAuth } from "../../app/store/selectors"
-
 
 const BlackToolbar = () => {
 
     const { isLogged } = useSelector(getAuth)
     const { sm750Up } = useBreakpoints()
     return (
-
         sm750Up ?
             <Toolbar
                 sx={{
@@ -70,8 +60,6 @@ const BlackToolbar = () => {
                     alignItems='center'
                     direction='row'
                 >
-
-
                     <LocalPhoneIcon />
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>

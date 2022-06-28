@@ -46,11 +46,9 @@ const DetailsStep = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell colSpan={2} >Artículos</TableCell>
-
                             <TableCell align="right">Precio</TableCell>
                             <TableCell align="right">Cantidad</TableCell>
                             <TableCell colSpan={2} align="left">Total</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -123,12 +121,10 @@ const DetailsStep = () => {
                                         sx={{ '&.MuiTableCell-root': { borderBottom: '0px solid red', paddingBottom: 0 } }}
                                         colSpan={4}>
                                         {product.name}</TableCell>
-
                                 </TableRow>
                                 <TableRow>
                                     <TableCell align="right">
                                         <DirectProductAmountButton product={product} />
-
                                     </TableCell>
                                     <TableCell align="right">
                                         {Math.round(product.price * product.amount * 100) / 100} €
@@ -142,11 +138,6 @@ const DetailsStep = () => {
                                     </TableCell>
                                 </TableRow>
                             </>
-
-
-
-
-
                         })
                         }
                     </TableBody>

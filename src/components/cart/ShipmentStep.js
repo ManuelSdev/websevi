@@ -1,11 +1,9 @@
 import Box from "@mui/system/Box"
 import Typography from "@mui/material/Typography"
 import ProfileForm from "../elements/ProfileForm"
-//import { updateUser } from "../../lib/api/user"
 import Stack from "@mui/material/Stack"
 import CircularProgress from "@mui/material/CircularProgress"
 import { useUpdateUserDataMutation } from "../../app/store/services/userApi"
-//import { updateUser } from "../../lib/api/user"
 
 const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
 
@@ -21,7 +19,6 @@ const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
             console.log('ERROR updateUser EN ShipmentStep.JS', error)
         }
     }
-
 
     //Obtiene dirección principal del array de direcciones
     if (user?.hasProfile) {

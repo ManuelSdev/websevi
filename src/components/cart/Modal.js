@@ -8,7 +8,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Modal({ open, mainMessage, handleClose, full, children }) {
 
-
     return (
         <div>
             <Dialog

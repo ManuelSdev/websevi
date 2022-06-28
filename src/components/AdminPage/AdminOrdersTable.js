@@ -1,24 +1,14 @@
 
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
 import AdminOrderRows from './AdminOrderRows';
-import formatDate from '../../lib/utils/formatDate'
-
 
 
 export default function UserOrdersTable({ mainHeaders, orders, detailsHeaders }) {
@@ -28,13 +18,11 @@ export default function UserOrdersTable({ mainHeaders, orders, detailsHeaders })
                 <TableHead>
                     <TableRow>
                         <TableCell />
-
                         <TableCell >Fecha</TableCell>
                         <TableCell >ID de cliente</TableCell>
                         <TableCell >ID de pedido</TableCell>
                         <TableCell align="right">Productos</TableCell>
                         <TableCell align="right">Total</TableCell>
-
                     </TableRow>
                 </TableHead>
                 <TableBody>

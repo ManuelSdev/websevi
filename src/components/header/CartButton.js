@@ -106,7 +106,6 @@ const CartButton = () => {
                 mainMessage={"No tiene nigún artículo en el carrito"}
             />
         </>
-
     )
 }
 

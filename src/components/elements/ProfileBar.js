@@ -4,8 +4,6 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/router';
 import Link from './Link'
 import { toPlainString } from '../../lib/utils/stringTools';
 import { resetCategories } from '../../lib/api/category';
@@ -13,7 +11,6 @@ import { resetProducts } from '../../lib/api/product';
 import initialsCategories from '../../assets/initialsCategories';
 import initialsProducts from '../../assets/initialsProducts';
 import { useDispatch } from 'react-redux';
-
 
 const ProfileBar = ({ sections, profile }) => {
 

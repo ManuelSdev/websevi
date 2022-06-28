@@ -7,15 +7,10 @@ import FormControl from "@mui/material/FormControl"
 import Switch from "@mui/material/Switch"
 import FormGroup from "@mui/material/FormGroup"
 import FormControlLabel from "@mui/material/FormControlLabel"
-
-
-
 import Box from "@mui/system/Box";
 import useForm from "../../hooks/useForm";
 import React from "react";
-import SaveAndLoadButton from '../elements/SaveAndLoadButton'
 import { getCategories } from "../../lib/api/category";
-import { toPlainString } from "../../lib/utils/stringTools";
 import FormTemplate from "../elements/FormTemplate"
 import { Typography } from "@mui/material"
 
@@ -26,35 +21,29 @@ const NewCategsForm = ({ onSubmit, error }) => {
         category_1: '',
         category_2: '',
         fields: ''
-
-
     });
 
     const { category_1, category_2, category_1_isNew, fields } = formValue;
 
     const [categories, setCategories] = React.useState({
         categories_1: [],
-
     })
 
     const { categories_1 } = categories
 
     const [isNew, setIsNew] = React.useState(true);
 
-
     const isFirstRender = React.useRef(true)
 
     //Tras el primer render, setea las categorías de nivel 1
     React.useEffect(() => {
         //Uso de función cleanUP
-
         let mounted = true;
         mounted && setCategs({ level: 1 }, 'categories_1')
         return () => {
             mounted = false;
         };
     }, [])
-
 
     React.useEffect(() => {
         if (isFirstRender.current) {
@@ -71,8 +60,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
             mounted = false;
         };
     }, [isNew])
-
-
 
     /**
      * Recibe un objeto filter para filtrar categorías en bdd
@@ -93,7 +80,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
     const column1Elements = (
         <Box>
             <FormControl component='fieldset' variant="standard" margin='normal'>
-
                 <Typography variant='h6'>Añadir categoria de nivel 1</Typography>
                 <FormGroup>
                     <FormControlLabel
@@ -151,7 +137,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
                 <Typography variant='h6'>Añadir categoria de nivel 2</Typography>
                 <FormGroup>
                     <TextField
-
                         autoComplete='off'
                         fullWidth
                         size="small"
@@ -161,12 +146,8 @@ const NewCategsForm = ({ onSubmit, error }) => {
                         onChange={handleChange}
                         value={category_2}
                     />
-
                 </FormGroup>
             </FormControl>
-
-
-
         </Box>
     )
 
@@ -190,20 +171,16 @@ const NewCategsForm = ({ onSubmit, error }) => {
                         superior, se han creado dos campos: Marca y Color. El campo Marca ofrece dos opciones, marca1 y marca2.
                         El campo Color ofrece dos opciones, color1 y color2. Debe separar las opciones con '/' y el nombre  
                         del campo con ':' . Los distintos campos se separan con ',' "
-
                     />
-
                 </FormGroup>
             </FormControl>
         </Box>
 
     )
+
     const fullWidthElements = (
         <Box>
-
             <Button type="submit" >Crear Categoría</Button>
-
-
             {/**TODO: refina el tema de errores */}
             {error && <Box>{error}</Box>}
         </Box>
@@ -223,8 +200,6 @@ const NewCategsForm = ({ onSubmit, error }) => {
             column2Elements={column2Elements}
             fullWidthElements={fullWidthElements}
         />
-
-
     )
 }
 

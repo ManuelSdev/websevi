@@ -29,7 +29,6 @@ const SearchFiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valu
 
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange
 
-
     const marks = [
         {
             value: minPrice,

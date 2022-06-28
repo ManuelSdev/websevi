@@ -108,13 +108,11 @@ const CollapsedCategs = ({ isCollapsed, setCollapsed, categories, selectedCatego
                     <MenuList
                         sx={{
                             width: '100%', flexGrow: 1, bgcolor: 'white',
-                            //outline: '1px solid black',
-                            //border: '1px solid',
+
                             zIndex: 'fab',
                             height: '100%',
                             border: 1,
-                            // overflowX: 'hidden',
-                            // overflowY: 'auto',
+
                         }}
                     >
                         {selectedCategoryChilds.map(child =>

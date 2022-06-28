@@ -3,7 +3,8 @@ import Box from "@mui/system/Box"
 import GridCard from './GridCard'
 import React from "react";
 import Button from "@mui/material/Button";
-const ProductsGrid = ({ products, selectedPricesRange }) => {
+import { Typography } from "@mui/material";
+const ProductsGrid = ({ products, searchKeys, selectedPricesRange }) => {
 
     const [displayedProducts, setDisplayedProduct] = React.useState(0)
 
@@ -11,15 +12,15 @@ const ProductsGrid = ({ products, selectedPricesRange }) => {
         setDisplayedProduct(9)
     }, [products])
     const handleDisplayed = () => setDisplayedProduct(displayedProducts + 9)
-
+    console.log(searchKeys)
+    console.log(!!products)
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange ? selectedPricesRange : []
-
     /**
      * array.filter: usado para la paginación. Se mostrarán un número de productos igual displayedProducts
      * array.map: usado para el filtro de precio 
      */
     return (
-        <>
+        !!products.length ?
             <Box sx={{
                 mb: 3, flexGrow: 1,
             }}>
@@ -49,7 +50,26 @@ const ProductsGrid = ({ products, selectedPricesRange }) => {
                     </Box>
                 }
             </Box>
-        </>
+            :
+            searchKeys ?
+                <Typography variant="h5">
+                    No hay resultados para "{searchKeys}"
+                </Typography>
+                :
+                <Box>
+                    <Typography variant="h6">
+                        No hay productos en la categoría seleccionada. Las categorías funcionales en
+                        este prototipo son:
+                    </Typography>
+                    <Typography variant="h6">   - componentes/procesadores</Typography>
+                    <Typography variant="h6"> - componentes/placas base</Typography>
+                </Box>
+
+
+
+
+
+
     )
 }
 

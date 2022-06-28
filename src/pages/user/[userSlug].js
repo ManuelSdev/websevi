@@ -19,14 +19,15 @@ import { userPageSections } from "../../items/profilePageSections"
 const sections = userPageSections
 
 const UserPage = ({ categories }) => {
+    const { authId } = useSelector(getAuth)
+    const { data: user, isLoading, isFetching, isError, refetch } = useGetUserQuery(authId)
 
     const router = useRouter()
 
     const { userSlug } = router.query
 
-    const { authId } = useSelector(getAuth)
 
-    const { data: user, isLoading, isFetching, isError, refetch } = useGetUserQuery(authId)
+
 
     return (
         <Layout sx={{ zIndex: 'snackbar' }} categories={categories}>
@@ -47,7 +48,7 @@ const UserPage = ({ categories }) => {
                             <WishListSection user={user} />
                             :
                             userSlug === 'pedidos' ?
-                                <OrdersSection user={user} />
+                                <OrdersSection user={user} orders={true} />
                                 :
                                 <Working />
                 }

@@ -52,34 +52,26 @@ export default function CartOrderRows({ product }) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-
                                         <TableCell >Artículo</TableCell>
                                         <TableCell >Nombre</TableCell>
                                         <TableCell align="right">Precio</TableCell>
                                         <TableCell align="right">Cantidad</TableCell>
                                         <TableCell align="right">Total</TableCell>
-
                                     </TableRow>
                                 </TableHead>
-
                                 <TableBody>
                                     {cart.map((product) => {
                                         const [image] = product.images
-
                                         return <TableRow key={product._id}>
                                             <TableCell component="th" scope="row">
-
                                                 <Image
                                                     width='100%'
                                                     height='100%'
                                                     objectFit='contain'
-
                                                     //src={product.images}
                                                     src={product.productImage}
-
                                                     alt="Imagen de producto"
                                                 />
-
                                             </TableCell>
                                             <TableCell >{product.name}</TableCell>
                                             <TableCell align="right">{product.price} €</TableCell>
@@ -91,7 +83,6 @@ export default function CartOrderRows({ product }) {
                                     })
                                     }
                                 </TableBody>
-
                             </Table>
                         </Box>
                     </Collapse>

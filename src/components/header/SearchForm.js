@@ -9,7 +9,7 @@ import { IconButton, Stack } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import useBreakpoints from "../../hooks/useBreakpoints"
 
-const SearchForm = () => {
+const SearchForm = ({ handleClose }) => {
 
     const { sm750Up } = useBreakpoints()
 
@@ -21,6 +21,7 @@ const SearchForm = () => {
 
     const onSubmit = async () => {
         router.push(`/buscar/${searchKeys}`)
+        handleClose()
     }
 
     const resetSearchKeys = () => {
@@ -36,8 +37,7 @@ const SearchForm = () => {
             onSubmit={handleSubmit(onSubmit)}
             sx={{
                 flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
-                // bgcolor: 'corpWhite.main',
-                //mt: '-1em', pb: '0.3em'
+
             }}
         >
             <TextField

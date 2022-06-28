@@ -40,11 +40,9 @@ const CheckBoxGroup = ({ options, value, onChange, checkBoxGroupClassName, check
                                 />{" "}{option}
                             </label>
                     }
-
                 </div>
             )
             )}
-
         </div>
     )
 }

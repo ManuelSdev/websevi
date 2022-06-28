@@ -1,15 +1,15 @@
 
 import ProductsGrid from '../products/ProductsGrid'
-import useFavorites from '../../hooks/swrHooks/useFavorites';
 import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography"
 import CircularProgress from '@mui/material/CircularProgress';
+import { useGetUserFavsQuery } from '../../app/store/services/userApi';
 
 
 const WishListSection = ({ user }) => {
 
-    const { favorites, isLoadingFavs, isErrorFavs, mutateFavs } = useFavorites(user._id)
+    const { data: favorites, isFetching: isLoadingFavs, refetch: refetchUser } = useGetUserFavsQuery(user._id)
 
     return (
         <Box>
@@ -28,10 +28,7 @@ const WishListSection = ({ user }) => {
                     :
                     <Box>No se han añadido productos a la lista de deseos</Box>
             }
-
-
         </Box>
-
     )
 }
 

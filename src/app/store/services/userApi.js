@@ -7,16 +7,14 @@ const userApi = baseApi.injectEndpoints({
             query: (authId) => `/users/getUser/${authId}`,
             providesTags: ['User'],
         }),
+        getUserFavs: builder.query({
+            query: (userId) => `/users/getFavorites/${userId}`,
+            providesTags: ['Favs'],
+        }),
         updateUserData: builder.mutation({
             query: ({ userId, ...data }) => ({
                 url: `/users/updateUser/${userId}`,
                 method: "PATCH",
-                /*
-                headers: {
-                    //'Accept': 'application/json',
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                */
                 body: data
             }),
             invalidatesTags: ['User'],
@@ -25,17 +23,10 @@ const userApi = baseApi.injectEndpoints({
             query: ({ userId, productId }) => ({
                 url: `/users/updateFavorites/${userId}/${productId}`,
                 method: "PATCH",
-                /*
-                headers: {
-                    //'Accept': 'application/json',
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                */
-                //body: data
             }),
-            invalidatesTags: ['User'],
+            invalidatesTags: ['User', 'Favs'],
         }),
     }),
 })
 
-export const { useGetUserQuery, useUpdateUserDataMutation, useUpdateUserFavMutation } = userApi
+export const { useGetUserQuery, useGetUserFavsQuery, useUpdateUserDataMutation, useUpdateUserFavMutation } = userApi

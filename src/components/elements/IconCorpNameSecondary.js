@@ -9,7 +9,4 @@ const IconCorpName = (props) =>
         <SvgIcon component={CorpName} {...props} />
     </Link>
 
-
-
-
 export default IconCorpName

@@ -19,8 +19,6 @@ const WhiteToolBar = ({ handleChangeCollapsed, categories }) => {
 
     const handleDrawer = () => dispatch(toggleCategDrawer())
 
-
-
     return (
         <>
             <Toolbar
@@ -52,15 +50,12 @@ const WhiteToolBar = ({ handleChangeCollapsed, categories }) => {
                                     130
                         }}
                     />
-
                 </Box>
                 {sm750Up && <SearchForm />}
                 <HeaderButtonsPanel />
-
             </Toolbar >
             <NestedDrawer onClose={handleDrawer} categories={categories} />
         </>
-
     )
 }
 

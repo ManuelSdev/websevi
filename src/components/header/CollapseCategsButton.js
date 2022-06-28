@@ -62,7 +62,6 @@ const CollapseCategsButton = ({ onClick, IconComponent, text, value, className, 
                 }
             }}
         >
-
             <StyledButton
                 name={text}
                 value={value}
@@ -72,10 +71,8 @@ const CollapseCategsButton = ({ onClick, IconComponent, text, value, className, 
                 startIcon={<IconComponent sx={{ mr: -0.5, width: 30, height: 30 }} />}
             >
                 {text}
-
             </StyledButton>
         </Box >
-
     )
 }
 

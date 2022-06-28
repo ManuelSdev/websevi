@@ -1,16 +1,12 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 import MemoryIcon from '@mui/icons-material/Memory';
 import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined';
@@ -20,7 +16,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { useSelector } from 'react-redux';
 import { getDrawer } from '../../app/store/selectors';
-import { userPageSections } from '../../items/profilePageSections';
 import { toPlainString } from '../../lib/utils/stringTools';
 import { Link } from '@mui/material';
 
@@ -38,7 +33,6 @@ export default function NestedDrawer({ onClose, categories }) {
         onClose()
         setParentCategory('root')
     }
-    parentCategory && console.log(parentCategory)
     const list = () => (
         <Box role="presentation">
             <List>

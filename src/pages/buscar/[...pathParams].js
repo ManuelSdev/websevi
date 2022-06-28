@@ -7,10 +7,10 @@ import { useRouter } from "next/router"
 import React from 'react'
 
 
-const Buscar = ({ products, categories, filtersProps }) => {
+const Buscar = ({ products, searchKeys, categories, filtersProps }) => {
 
     const router = useRouter()
-
+    console.log('ppppppppppppppp')
     const { pricesRange } = filtersProps
 
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider(pricesRange)
@@ -24,7 +24,7 @@ const Buscar = ({ products, categories, filtersProps }) => {
 
     return (
         <Layout categories={categories}>
-            <ProductsSection products={products} filtersProps={filtersProps} {...props} />
+            <ProductsSection products={products} searchKeys={searchKeys} filtersProps={filtersProps} {...props} />
         </Layout>
     )
 }
@@ -92,6 +92,6 @@ export async function getServerSideProps(context) {
     }
 
     return {
-        props: { products, categories, filtersProps }, // will be passed to the page component as props
+        props: { products, categories, filtersProps, searchKeys }, // will be passed to the page component as props
     }
 }

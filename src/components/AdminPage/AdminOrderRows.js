@@ -17,7 +17,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Image from "next/image"
 import { Stack } from '@mui/material';
-import FullDate from '../../lib/utils/formatDate';
+import { formatDate } from '../../lib/utils/formatDate';
 
 
 export default function CollapsibleTableRow({ order, detailsHeaders }) {
@@ -37,7 +37,8 @@ export default function CollapsibleTableRow({ order, detailsHeaders }) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    <FullDate namedMonth={false}>{order.date}</FullDate>
+                    <p>{formatDate(order.date, false)}</p>
+
                 </TableCell>
                 <TableCell >{order.userId}</TableCell>
                 <TableCell >{order._id}</TableCell>

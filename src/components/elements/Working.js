@@ -20,7 +20,5 @@ export default function Working() {
             //style={{ width: "600px", height: "600px" }}
             ></lottie-player>
         </Box>
-
-
     );
 }

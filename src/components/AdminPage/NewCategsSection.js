@@ -18,16 +18,13 @@ const NewCategsSection = ({ props }) => {
         setUploaded(true)
     };
 
-
     return (
         loading ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
                 <CircularProgress color="primary" />
-
             </Stack>
             :
             uploaded ?
-
                 <ConfirmAndReturn
                     message={confirmation.message}
                     action={() => setUploaded(false)}
@@ -40,7 +37,6 @@ const NewCategsSection = ({ props }) => {
                     </Stack>
                     <NewCategsForm error={error?.data} onSubmit={handleSubmit}></NewCategsForm>
                 </Box>
-
     )
 }
 

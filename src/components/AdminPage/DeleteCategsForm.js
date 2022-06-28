@@ -13,8 +13,6 @@ const DeleteCategsForm = ({ onSubmit, error }) => {
         categorie_1: '',
         categorie_2: '',
         categorie_3: '',
-
-
     });
 
     const { categorie_1, categorie_2, categorie_3, categ_1_isNew, categ_2_isNew } = formValue;

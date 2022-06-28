@@ -32,19 +32,15 @@ const NewProductForm = ({ onSubmit, error }) => {
         image_1: null,
         image_2: null,
         image_3: null,
-
-
     });
     const { formValue: fields, handleChange: handleChangeFields, setFormValue: setFields } = useForm({
 
     });
 
-
     const [options, setOptions] = React.useState({
         categories_1: [],
         categories_2: [],
         dynamicFields: []
-
     })
 
     const { name, price, category_1, category_2, ean, description, specs } = product;
@@ -65,7 +61,6 @@ const NewProductForm = ({ onSubmit, error }) => {
         effect3: true,
         effect4: true,
     });
-
 
     //Tras el primer render, usa el método setCategs para obtener los nombres de las categorías
     //de nivel 1 y mostrarlas en el desplegable del formulario
@@ -116,7 +111,6 @@ const NewProductForm = ({ onSubmit, error }) => {
             allowUseEffects.current.effect2 = false;
             return;
         }
-
         if (!category_2) return
         //Uso de función cleanUP
         let mounted = true;
@@ -139,13 +133,10 @@ const NewProductForm = ({ onSubmit, error }) => {
                 dynamicFields: [...categoryFields]
             })
         }
-
         createFields({ path: toPlainString(category_2) })
         return () => {
             mounted = false;
         };
-
-
     }, [category_2]);
 
     /**
@@ -186,7 +177,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                 onChange={handleChangeProduct}
                 value={name}
             />
-
             <TextField
                 required
                 fullWidth
@@ -225,7 +215,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                 </Select>
             </FormControl>
 
-
             <FormControl size="small" fullWidth>
                 <InputLabel id="cat2-label">Categoría 2</InputLabel>
                 <Select
@@ -247,8 +236,6 @@ const NewProductForm = ({ onSubmit, error }) => {
 
     const column2Elements = (
         <Box>
-
-
             {dynamicFields?.length > 0 && dynamicFields.map(field => {
                 const key = Object.keys(field)
                 return (
@@ -269,7 +256,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                         </Select>
                     </FormControl>)
             })}
-
         </Box>
     )
 
@@ -286,7 +272,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                 value={description}
                 onChange={handleChangeProduct}
             />
-
             <TextField
                 required
                 fullWidth
@@ -310,13 +295,11 @@ const NewProductForm = ({ onSubmit, error }) => {
                     accept="image/*" id="contained-button-file"
                     // editableSrc={product?.images ?? null}
                     onChange={handleChangeProduct}
-
                 />
                 <InputFile
                     //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
                     //y que salga el aviso de mui
                     name="image_1"
-
                     accept="image/*" id="contained-button-file"
                     // editableSrc={product?.images ?? null}
                     onChange={handleChangeProduct}
@@ -325,8 +308,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                     //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
                     //y que salga el aviso de mui
                     name="image_2"
-
-
                     accept="image/*" id="contained-button-file"
                     // editableSrc={product?.images ?? null}
                     onChange={handleChangeProduct}
@@ -335,8 +316,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                     //TODO: Mete un componente Input mui o algo para que poder ponerle "required"
                     //y que salga el aviso de mui
                     name="image_3"
-
-
                     accept="image/*" id="contained-button-file"
                     // editableSrc={product?.images ?? null}
                     onChange={handleChangeProduct}
@@ -346,8 +325,6 @@ const NewProductForm = ({ onSubmit, error }) => {
                 //Si no se selecciona ninguna imagen(todas son null), el botón es disabled
                 disabled={images.images.every(value => value === null)}
             >Crear producto</Button>
-
-
             {/**TODO: refina el tema de errores */}
             {error && <Box>{error}</Box>}
         </Box>
@@ -355,7 +332,6 @@ const NewProductForm = ({ onSubmit, error }) => {
     error && console.log('HAY ERROR ', error)
     return (
         <FormTemplate
-
             onSubmit={handleSubmit(onSubmit)}
             sx={{
                 //backgroundColor: 'dimGray',
@@ -366,7 +342,6 @@ const NewProductForm = ({ onSubmit, error }) => {
             column2Elements={column2Elements}
             fullWidthElements={fullWidthElements}
         />
-
     )
 }
 

@@ -14,10 +14,7 @@ export default function ControlledAccordions() {
     };
 
     return (
-
-
         <div>
-
             <Accordion sx={{ bgcolor: 'corpGreen.main' }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon color={'corpWhite'} />}

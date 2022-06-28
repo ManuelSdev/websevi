@@ -21,8 +21,8 @@ export const fullDate = date => {
 
 }
 */
-export const formatDate = (rawDate, namedMonth) => {
-    const date = new Date(rawDate)
+const FullDate = ({ namedMonth, children }) => {
+    const date = new Date(children)
 
     const month = namedMonth ?
         months[date.getMonth()]
@@ -35,7 +35,9 @@ export const formatDate = (rawDate, namedMonth) => {
         `${day}-${month.substr(0, 3)}-${year}`
         :
         `${day.toString().padStart(2, "0")}/${month.padStart(2, "0")}/${year}`
-    return formatedDate
-
+    return (
+        <p>{formatedDate}</p>
+    )
 }
 
+export default FullDate

@@ -6,8 +6,6 @@ import InputFile from "./InputFile"
 import { Button } from "@mui/material"
 import SaveAndLoadButton from './SaveAndLoadButton'
 
-
-
 const UserDataForm = ({ user, onSubmit }) => {
 
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
@@ -20,9 +18,8 @@ const UserDataForm = ({ user, onSubmit }) => {
         region: '',
         country: '',
         moreInfo: '',
-
-
     });
+
     const { name, lastName, idCard, phone, company, address, postCode, city, region, country, moreInfo, defaultAddress } = formValue
 
     const column1Elements = (
@@ -81,9 +78,7 @@ const UserDataForm = ({ user, onSubmit }) => {
                 name='company'
                 onChange={handleChange}
                 value={company}
-
             />
-
         </Box>
     )
 
@@ -100,7 +95,6 @@ const UserDataForm = ({ user, onSubmit }) => {
                 value={address}
                 onChange={handleChange}
             />
-
             <TextField
                 size="small"
                 label="Información opcional"
@@ -154,9 +148,6 @@ const UserDataForm = ({ user, onSubmit }) => {
                 value={postCode}
                 onChange={handleChange}
             />
-
-
-
             <Button type="submit" >Guardar datos</Button>
             <SaveAndLoadButton></SaveAndLoadButton>
             {/**TODO: refina el tema de errores */}
@@ -175,10 +166,7 @@ const UserDataForm = ({ user, onSubmit }) => {
             column1Elements={column1Elements}
             column2Elements={column2Elements}
             fullWidthElements={fullWidthElements}
-
         />
-
-
     )
 }
 

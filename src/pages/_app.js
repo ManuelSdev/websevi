@@ -24,7 +24,6 @@ import { CacheProvider } from '@emotion/react';
 //import "swiper/css/bundle";
 
 import "../styles/globals.css"
-import { useGetUserQuery } from '../app/store/services/userApi';
 
 Session.addAxiosInterceptors(axios);
 

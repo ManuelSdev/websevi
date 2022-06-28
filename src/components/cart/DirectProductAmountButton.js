@@ -1,25 +1,15 @@
 
 
-
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import React from 'react';
-import Box from "@mui/system/Box";
-import Link from '../elements/Link'
-import { updateFavorites } from '../../lib/api/user';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, getProductAmountInCart } from '../../app/store/selectors';
-//import { cartAddProduct } from '../../app/store/cartSlice';
-import { useGetUserQuery, useUpdateUserFavMutation } from '../../app/store/services/userApi';
+import { getProductAmountInCart } from '../../app/store/selectors';
 import { cartProductDecrement, cartProductIncrement } from '../../app/store/cartSlice';
 
 const DirectProductAmountButton = ({ product }) => {
-
 
     const dispatch = useDispatch()
     const amount = useSelector(getProductAmountInCart(product))
@@ -34,7 +24,6 @@ const DirectProductAmountButton = ({ product }) => {
 
         >
             <IconButton
-
                 onClick={() => dispatch(cartProductDecrement(product))}
                 sx={{
                     bgcolor: 'corpGreen.main',
@@ -86,14 +75,3 @@ const DirectProductAmountButton = ({ product }) => {
 }
 
 export default DirectProductAmountButton
-
-/**
-    <Box
-                width={40}
-                sx={{
-                    border: '1px solid grey',
-                    borderRadius: 1,
-                    textAlign: 'center'
-                }}
-            >  {amount}</Box>
- */

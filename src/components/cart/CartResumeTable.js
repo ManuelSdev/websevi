@@ -36,18 +36,13 @@ const TextTableCell = ({ children, bold, colSpan }) => {
                 '&.MuiTableCell-root':
                 {
                     border: 0, padding: 0,
-
                 },
-
-
-
             }}
         >
             {children}
         </TableCell >
     )
 }
-
 
 export default function CartResumeTable({ user, order }) {
     const up750 = useMediaQuery('(min-width:750px)');
@@ -57,7 +52,6 @@ export default function CartResumeTable({ user, order }) {
     const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
 
     return (
-
         <TableContainer component={Paper}>
             <Typography p={2} variant='h5' sx={{ fontWeight: 'bold' }} >
                 Resumen
@@ -103,7 +97,6 @@ export default function CartResumeTable({ user, order }) {
                                 </Stack>
                             }
                         </TableCell>
-
                     </TableRow>
                 </TableBody>
             </Table>
@@ -112,7 +105,6 @@ export default function CartResumeTable({ user, order }) {
                     <TableHead>
                         <TableRow>
                             <TableCell colSpan={2}><Typography variant='h6' sx={{ fontWeight: 'bold' }} >Artículos</Typography></TableCell>
-
                             <TableCell align="right">Precio</TableCell>
                             <TableCell align="right">Cantidad</TableCell>
                             <TableCell colSpan={2} align="left">Total</TableCell>
@@ -152,8 +144,6 @@ export default function CartResumeTable({ user, order }) {
                     <TableHead>
                         <TableRow sx={{ borderBottom: 0 }}>
                             <TableCell colSpan={3}><Typography variant='h6' sx={{ fontWeight: 'bold', borderBottom: 0 }} >Artículos</Typography></TableCell>
-
-
                         </TableRow>
                     </TableHead>
                     <TableBody>

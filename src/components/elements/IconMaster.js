@@ -6,8 +6,4 @@ const IconMaster = (props) =>
 
     <SvgIcon component={Master} {...props} />
 
-
-
-
-
 export default IconMaster

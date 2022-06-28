@@ -10,24 +10,23 @@ import HeaderButtonBox from "./HeaderButtonBox"
 
 const CompactSearchButton = () => {
 
-    const [openn, setOpenn] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-    const handleClickOpenn = () => {
-        setOpenn(true);
-
-    };
-
-    const handleClosen = () => {
-        setOpenn(false);
+    const handleClickOpen = () => {
+        setOpen(true);
 
     };
 
+    const handleClose = () => {
+        setOpen(false);
+
+    };
     return (
         <>
-            <HeaderButtonBox onClick={handleClickOpenn} IconByProps={SearchIcon} />
+            <HeaderButtonBox onClick={handleClickOpen} IconByProps={SearchIcon} />
             <Dialog
-                open={openn}
-                onClose={handleClosen}
+                open={open}
+                onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
                 fullScreen
@@ -41,9 +40,9 @@ const CompactSearchButton = () => {
                 >
                     <ArrowBackOutlinedIcon
                         sx={{ mr: '1em' }}
-                        onClick={handleClosen}
+                        onClick={handleClose}
                     />
-                    <SearchForm />
+                    <SearchForm handleClose={handleClose} />
                 </Box>
             </Dialog>
         </>

@@ -1,24 +1,10 @@
-
-
-
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import SvgIcon from '@mui/material/SvgIcon';
 import React from 'react';
-import Box from "@mui/system/Box";
-import Link from '../elements/Link'
-import { updateFavorites } from '../../lib/api/user';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import TextField from '@mui/material/TextField';
+import SvgIcon from '@mui/material/SvgIcon';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import { useDispatch, useSelector } from 'react-redux';
-import { getAuth } from '../../app/store/selectors';
-import { cartAddProduct } from '../../app/store/cartSlice';
-import { useGetUserQuery, useUpdateUserFavMutation } from '../../app/store/services/userApi';
 
 const ProductAmountButton = ({ amountField, setAmountField }) => {
-    // const [amountField, setAmountField] = React.useState(1)
 
     const increaseAmount = () => setAmountField(amountField + 1)
 

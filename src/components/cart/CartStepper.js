@@ -19,28 +19,19 @@ import ShipmentStep from './ShipmentStep';
 
 import { useSelector } from "react-redux";
 import { getAuth } from "../../app/store/selectors";
-import { useGetUserQuery } from "../../app/store/services/userApi";
 
 const steps = [
     'Carrito',
     'Envío',
     'Pago',
     'Resumen'
-
 ];
 
 export default function CartStepper({ cartTotalPrice, order, setOrder, handleSubmit,
     user, isFetchingUser, refetchUser
 }) {
 
-    //const { user, isLoadingUser, isErrorUser, mutateUser } = useAppContext()
-
     const { isLogged, authId } = useSelector(getAuth)
-    //  console.log('auth', authId)
-
-    //const { user, isFetching: isLoadingUser, refetch: mutateUser } = useGetUserQuery(authId)
-
-    //  console.log('user', user)
 
     //GESTIÓN DEL STEPPER
     const waitingForChangeIsLogged = React.useRef(false);
@@ -48,7 +39,6 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
     const [activeStep, setActiveStep] = React.useState(0);
 
     const [completed, setCompleted] = React.useState({});
-    //console.log(mutateUser)
 
     const totalSteps = () => {
         return steps.length;
@@ -96,7 +86,6 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
         setActiveStep(0);
         setCompleted({});
     };
-
 
     /**
      * Si, en el paso 2 (activeStep=1) el usuario no está logado, se le redirige a la página de login
@@ -157,7 +146,6 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
                                         <PaymentStep order={order} setOrder={setOrder} />
                                     </Paper>
                                     :
-
                                     <ResumeStep
                                         order={order}
                                         user={user}
@@ -190,7 +178,6 @@ export default function CartStepper({ cartTotalPrice, order, setOrder, handleSub
                     onClick={handleBack}
                 >ATRÁS</Button>
             }
-
         </Container >
     );
 }

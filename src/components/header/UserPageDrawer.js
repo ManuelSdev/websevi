@@ -20,9 +20,7 @@ export default function UserPageDrawer({ onClose }) {
 
     const dispatch = useDispatch()
     const sections = userPageSections
-
     const { userDrawerIsOpen: isOpen } = useSelector(getDrawer)
-
 
     const list = () => (
         <Box role="presentation">
@@ -32,7 +30,6 @@ export default function UserPageDrawer({ onClose }) {
                         key={section.name}
                         disablePadding
                     >
-
                         <ListItemButton
                             onClick={section.action ? () => dispatch(section.action) : undefined}
                             component={Link}
@@ -43,13 +40,12 @@ export default function UserPageDrawer({ onClose }) {
                             </ListItemIcon>
                             <ListItemText primary={section.name} />
                         </ListItemButton>
-
-
                     </ListItem>
                 ))}
             </List>
         </Box >
     );
+
     return (
         <Drawer
             anchor={'right'}

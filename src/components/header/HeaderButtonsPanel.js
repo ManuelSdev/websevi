@@ -16,7 +16,6 @@ import HeaderButtonBox from "./HeaderButtonBox"
 import { toggleUserDrawer } from '../../app/store/drawerSlice';
 import UserPageDrawer from './UserPageDrawer';
 
-
 const HeaderButtonsPanel = () => {
 
     const { sm750Up } = useBreakpoints()
@@ -29,8 +28,6 @@ const HeaderButtonsPanel = () => {
     async function logoutClicked() {
         await ThirdPartyEmailPassword.signOut()
         dispatch(authLogout())
-
-        // ThirdPartyEmailPassword.redirectToAuth()
     }
     const handleDrawer = () => dispatch(toggleUserDrawer())
     return (
@@ -57,7 +54,3 @@ const HeaderButtonsPanel = () => {
 }
 
 export default HeaderButtonsPanel
-
-/**
-  <HeaderButtonBox href={'/user/mis-datos'} IconByProps={PermIdentityOutlinedIcon} buttonText={'Mi cuenta'} />
- */

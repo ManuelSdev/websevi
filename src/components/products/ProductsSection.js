@@ -4,7 +4,7 @@ import FiltersBar from "../filtersSideBar/FiltersBar"
 
 import SidebarLayout from "../layouts/SidebarLayout"
 
-const ProductsSection = ({ products, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
+const ProductsSection = ({ products, searchKeys, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
 
 
 
@@ -22,6 +22,7 @@ const ProductsSection = ({ products, filtersProps, selectedPricesRange, handlePr
             content={
                 <ProductsGrid
                     products={products}
+                    searchKeys={searchKeys}
                     selectedPricesRange={selectedPricesRange}
                 />
             }
