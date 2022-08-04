@@ -53,7 +53,7 @@ const ProductsGrid = ({ products, searchKeys, selectedPricesRange }) => {
             :
             searchKeys ?
                 <Typography variant="h5">
-                    No hay resultados para "{searchKeys}"
+                    No hay resultados para
                 </Typography>
                 :
                 <Box>
