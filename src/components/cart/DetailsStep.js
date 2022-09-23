@@ -46,9 +46,11 @@ const DetailsStep = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell colSpan={2} >Artículos</TableCell>
+
                             <TableCell align="right">Precio</TableCell>
                             <TableCell align="right">Cantidad</TableCell>
                             <TableCell colSpan={2} align="left">Total</TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -101,43 +103,49 @@ const DetailsStep = () => {
                     <TableBody>
                         {cartProducts.map((product) => {
                             const [image] = product.images
-                            return <>
-                                <TableRow
-                                    key={product._id}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell rowSpan={2} component="th" scope="row">
-                                        <Link href={`/product/${product.url}`}>
-                                            <Image
-                                                width='100%'
-                                                height='100%'
-                                                objectFit='contain'
-                                                src={image}
-                                                alt="Imagen de producto"
-                                            />
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell
-                                        sx={{ '&.MuiTableCell-root': { borderBottom: '0px solid red', paddingBottom: 0 } }}
-                                        colSpan={4}>
-                                        {product.name}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="right">
-                                        <DirectProductAmountButton product={product} />
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        {Math.round(product.price * product.amount * 100) / 100} €
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <IconButton
-                                            onClick={handleDelete(product)}
-                                            color="primary" aria-label="upload picture" component="span">
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </TableCell>
-                                </TableRow>
-                            </>
+                            return <TableRow
+                                key={product._id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell rowSpan={2} component="th" scope="row">
+                                    <Link href={`/product/${product.url}`}>
+                                        <Image
+                                            width='100%'
+                                            height='100%'
+                                            objectFit='contain'
+                                            src={image}
+                                            alt="Imagen de producto"
+                                        />
+                                    </Link>
+                                </TableCell>
+                                <TableCell
+                                    sx={{ '&.MuiTableCell-root': { borderBottom: '0px solid red', paddingBottom: 0 } }}
+                                    colSpan={4}>
+                                    {product.name}</TableCell>
+
+                            </TableRow>
+
+                        })
+                        }
+                        {cartProducts.map((product) => {
+                            const [image] = product.images
+                            return <TableRow key={product._id}>
+                                <TableCell align="right">
+                                    <DirectProductAmountButton product={product} />
+
+                                </TableCell>
+                                <TableCell align="right">
+                                    {Math.round(product.price * product.amount * 100) / 100} €
+                                </TableCell>
+                                <TableCell align="right">
+                                    <IconButton
+                                        onClick={handleDelete(product)}
+                                        color="primary" aria-label="upload picture" component="span">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+
                         })
                         }
                     </TableBody>
