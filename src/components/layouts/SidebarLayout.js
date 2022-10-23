@@ -10,7 +10,7 @@ const SidebarLayout = ({ content, sidebar, elevationPaper }) => {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('md'));
-    console.log(content.props)
+    //console.log(content.props)
     return (
         <Container sx={{ minHeight: 'calc(100vh - 488.02px)' }} >
             <Box sx={{ mt: 5, mb: 10, flexGrow: 1 }}>
@@ -30,10 +30,7 @@ const SidebarLayout = ({ content, sidebar, elevationPaper }) => {
                                 {content}
                             </Paper>
                         }
-
-
                     </Grid>
-
                 </Grid>
             </Box>
         </Container>

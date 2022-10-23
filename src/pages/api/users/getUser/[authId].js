@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const { authId } = req.query
     try {
         const result = await getUser({ authId })
-        console.log('RESULT api/user/getUser/[autId]', result)
+        // console.log('RESULT api/user/getUser/[autId]', result)
         res.status(201).json(result)
     } catch (err) {
         console.log("ERROR USER GET", err.message)

@@ -1,12 +1,9 @@
 
 import ProductsGrid from "./ProductsGrid"
 import FiltersBar from "../filtersSideBar/FiltersBar"
-
 import SidebarLayout from "../layouts/SidebarLayout"
 
 const ProductsSection = ({ products, searchKeys, filtersProps, selectedPricesRange, handlePrice, valuetext }) => {
-
-
 
     return (
 

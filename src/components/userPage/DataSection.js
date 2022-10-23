@@ -23,13 +23,15 @@ const DataSection = ({ user, isLoading, isFetching, isError, refetch }) => {
         }
     }
 
-    //console.log('user has profile', user)
-    if (user.hasProfile) {
-        const [mainAddress] = user.addresses
-        const { address, moreInfo, city, postCode, region, country } = mainAddress
-        const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
-    }
+    console.log('user has profile', user.addresses)
 
+    const getAddressLine = () => {
+        const [mainAddress] = user.addresses
+
+        const { address, moreInfo, city, postCode, region, country } = mainAddress
+        return `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
+    }
+    const addressLine = getAddressLine()
     return (isFetching ?
         <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
             <CircularProgress color="primary" />

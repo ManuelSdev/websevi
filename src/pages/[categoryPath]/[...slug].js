@@ -8,7 +8,7 @@ import React from 'react'
 
 
 const FilteredProductsPage = ({ products, categories, filtersProps }) => {
-
+    console.log('en ...slug')
     // const router = useRouter()
     //const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
@@ -110,7 +110,7 @@ export async function getServerSideProps(context) {
         }
     }
     const filtersProps = getFiltersProps()
-    console.log('****************', filtersProps)
+    //console.log('****************', filtersProps)
     return {
         props: { products, categories, filtersProps }, // will be passed to the page component as props
     }

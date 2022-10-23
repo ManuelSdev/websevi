@@ -12,8 +12,8 @@ const ProductsGrid = ({ products, searchKeys, selectedPricesRange }) => {
         setDisplayedProduct(9)
     }, [products])
     const handleDisplayed = () => setDisplayedProduct(displayedProducts + 9)
-    console.log(searchKeys)
-    console.log(!!products)
+    //console.log(searchKeys)
+    //console.log(!!products)
     const [minSelectedPrice, maxSelectedPrice] = selectedPricesRange ? selectedPricesRange : []
     /**
      * array.filter: usado para la paginación. Se mostrarán un número de productos igual displayedProducts

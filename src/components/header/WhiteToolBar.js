@@ -7,13 +7,13 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import HeaderButtonsPanel from './HeaderButtonsPanel'
 import useBreakpoints from "../../hooks/useBreakpoints"
 import HeaderButtonBox from "./HeaderButtonBox"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { toggleCategDrawer } from '../../app/store/drawerSlice';
 import NestedDrawer from "./NestedDrawer";
 
 const WhiteToolBar = ({ handleChangeCollapsed, categories }) => {
 
-    const { md950Up, sm750Up } = useBreakpoints()
+    const { md950Up, sm750Up, sm750Down } = useBreakpoints()
 
     const dispatch = useDispatch()
 
@@ -36,8 +36,7 @@ const WhiteToolBar = ({ handleChangeCollapsed, categories }) => {
                 <Box
                     sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}
                 >
-                    {sm750Up || <HeaderButtonBox onClick={handleDrawer} IconByProps={DensityMediumIcon} />}
-
+                    {sm750Down && <HeaderButtonBox className='HeaderButtonBox' onClick={handleDrawer} IconByProps={DensityMediumIcon} />}
                     <IconCorpName viewBox="0 0 381.17 68.88"
                         sx={{
                             fill: "blue", height: "50%",

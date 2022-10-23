@@ -10,7 +10,7 @@ import React from 'react'
 const Buscar = ({ products, searchKeys, categories, filtersProps }) => {
 
     const router = useRouter()
-    console.log('ppppppppppppppp')
+    //console.log('ppppppppppppppp')
     const { pricesRange } = filtersProps
 
     const { selectedPricesRange, handlePrice, valuetext, setSelectedPricesRange } = usePriceSlider(pricesRange)

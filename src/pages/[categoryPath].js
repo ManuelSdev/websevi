@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import ProductsSection from "../components/products/ProductsSection"
 import { getProducts } from "./api/products/getProducts"
 import { getCategories } from './api/categories/getCategories'
@@ -8,6 +7,7 @@ import usePriceSlider from '../hooks/usePriceSlider'
 import React from 'react'
 
 const CategoryPage = ({ products, categories, filtersProps }) => {
+    console.log('CATEGORYPATH.JS---')
     // const router = useRouter()
     //const { selectedPricesRange: currentSelectedPricesRange } = router.query
     const { pricesRange } = filtersProps
@@ -98,7 +98,7 @@ export async function getStaticProps(context) {
         }
     }
     const filtersProps = getFiltersProps()
-    console.log('****************', filtersProps)
+    //console.log('****************', filtersProps)
 
     return {
         props: { categories, products, filtersProps }, // will be passed to the page component as props

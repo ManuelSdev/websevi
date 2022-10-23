@@ -11,7 +11,7 @@ import useBreakpoints from "../../hooks/useBreakpoints"
 
 const SearchForm = ({ handleClose }) => {
 
-    const { sm750Up } = useBreakpoints()
+    const { sm750Up, sm750Down } = useBreakpoints()
 
     const { formValue, handleChange, handleSubmit, validate, setFormValue } = useForm({
         searchKeys: ''
@@ -53,10 +53,12 @@ const SearchForm = ({ handleClose }) => {
                 value={searchKeys}
                 onChange={handleChange}
                 size="small"
+                //TODO jodido 
                 InputProps={{
                     endAdornment:
                         <InputAdornment position="end">
-                            {sm750Up ||
+                            {/**TODO jodido solo el del sm750up */}
+                            {sm750Down &&
                                 <IconButton
                                     onClick={resetSearchKeys}
                                     sx={{ mr: '1em' }}

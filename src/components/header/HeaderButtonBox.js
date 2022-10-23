@@ -1,41 +1,12 @@
 
-import Badge from "@mui/material/Badge"
-
-import IconCorpName from "../elements/IconCorpName"
-import Toolbar from "@mui/material/Toolbar"
 import Button from "@mui/material/Button"
 import Box from '@mui/system/Box'
 import Link from '../elements/Link'
 import React from "react";
-import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
-
-import { useAppContext } from "../context";
-
 import { styled } from "@mui/system";
-import { sum } from "../../lib/utils/sum";
-
-
-import LogoutIcon from '@mui/icons-material/Logout';
-import LoginIcon from '@mui/icons-material/Login';
-import SearchIcon from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
 import { experimental_sx } from "@mui/material"
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
-import Modal from '../cart/Modal'
-
-import Searcher from './SearchForm'
-import { Dialog } from "@mui/material"
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import CompactSearchButton from './CompactSearchButton'
 import useBreakpoints from "../../hooks/useBreakpoints"
 
-import { authLogout } from "../../app/store/authSlice"
-
-import { useDispatch, useSelector } from "react-redux"
-import { getAuth, getCart, getCartVolume } from "../../app/store/selectors"
 
 
 const StyledButton = styled(Button)(
