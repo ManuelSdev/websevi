@@ -83,7 +83,7 @@ export default function NestedDrawer({ onClose, categories }) {
             {parentCategory !== 'root' && (
                 <Box>
                     <ListItem button onClick={handleParent('root')} >
-                        <ListItemText primary="Back to main menu" />
+                        <ListItemText primary="Volver" />
                         <ChevronLeftIcon />
                     </ListItem>
                     <Divider />

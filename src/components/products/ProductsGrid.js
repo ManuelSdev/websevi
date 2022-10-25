@@ -22,7 +22,7 @@ const ProductsGrid = ({ products, searchKeys, selectedPricesRange }) => {
     return (
         !!products.length ?
             <Box sx={{
-                mb: 3, flexGrow: 1,
+                mb: 3, mt: 4, flexGrow: 1,
             }}>
                 <Grid container spacing={2}>
                     {products && products
