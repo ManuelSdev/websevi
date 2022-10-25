@@ -21,7 +21,7 @@ const SearchForm = ({ handleClose }) => {
 
     const onSubmit = async () => {
         router.push(`/buscar/${searchKeys}`)
-        handleClose()
+        handleClose && handleClose()
     }
 
     const resetSearchKeys = () => {

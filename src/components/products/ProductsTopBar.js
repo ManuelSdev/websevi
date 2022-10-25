@@ -1,6 +1,6 @@
 
 
-import { Box, Button, Drawer, Paper, Stack, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Button, Drawer, Paper, Popover, Stack, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
@@ -19,7 +19,18 @@ const ProductsTopBar = ({ ...props }) => {
     const up850 = useMediaQuery(theme.breakpoints.up('850'));
     const toggleDrawer = () => setIsOpen(!isOpen)
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
         <Paper sx={{
@@ -54,7 +65,7 @@ const ProductsTopBar = ({ ...props }) => {
                 :
                 <>
                     <Button sx={{ m: 0 }} variant="outlined" startIcon={<SwapVertOutlinedIcon />}
-
+                        onClick={handleClick}
                     >
                         Ordenar
                     </Button>
@@ -69,8 +80,33 @@ const ProductsTopBar = ({ ...props }) => {
                 }
 
             </Box>
-            <Drawer
+            <Popover
+                sx={{
 
+                }}
+                PaperProps={{
+                    style: {
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        display: 'flex',
+                    }
+
+                }}
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+            >
+                {titles.map((title, index) => <Button key={index} variant="text"
+                    sx={{ m: 0 }}
+                >{title}</Button>)
+                }
+            </Popover>
+            <Drawer
                 anchor={'right'}
                 open={isOpen}
                 onClose={toggleDrawer}
@@ -80,6 +116,7 @@ const ProductsTopBar = ({ ...props }) => {
                     {...props}
                 />
             </Drawer>
+
         </Paper >
     )
 }
