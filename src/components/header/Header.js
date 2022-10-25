@@ -4,14 +4,10 @@ import Box from '@mui/system/Box'
 import DropdownMenu from '../elements/DropdownMenu'
 
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import WhiteToolBar from './WhiteToolBar'
 
-import Stack from "@mui/material/Stack"
-import Typography from "@mui/material/Typography"
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-import SwitchMode from "./SwitchMode"
 import CollapsedCategs from "./CollapsedCategs"
 import useBreakpoints from "../../hooks/useBreakpoints"
 import { useSelector } from "react-redux"

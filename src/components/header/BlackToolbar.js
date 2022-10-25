@@ -36,8 +36,7 @@ const BlackToolbar = () => {
                         Lunes a jueves 10-19h. Viernes 10-15h
                     </Typography>
 
-                    <LocalPhoneIcon
-                    />
+                    <LocalPhoneIcon width="1em" />
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>
                 {isLogged && sm750Up && <SwitchMode />}
@@ -60,7 +59,7 @@ const BlackToolbar = () => {
                     alignItems='center'
                     direction='row'
                 >
-                    <LocalPhoneIcon />
+                    <LocalPhoneIcon width="1em" />
                     <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                 </Stack>
                 <Box sx={{ flexGrow: 1 }}>

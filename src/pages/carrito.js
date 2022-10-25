@@ -126,7 +126,7 @@ const CartPage = () => {
                         <Typography
                             mr={3}
                             variant="subtitle1">Lunes a jueves 10-19h. Viernes 10-15h </Typography>
-                        <LocalPhoneIcon
+                        <LocalPhoneIcon width="1em"
                         />
                         <Typography ml={0.5} variant="subtitle1">635 415 573</Typography>
                     </Stack>
