@@ -99,12 +99,14 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
 
   }, [cartProducts])
 
-  if (pageProps.fromSupertokens === 'needs-refresh') {
-    return null
-  }
   useEffect(() => {
     document.documentElement.style.visibility = 'visible'
   }, [])
+
+  if (pageProps.fromSupertokens === 'needs-refresh') {
+    return null
+  }
+
   //const { data: user, isFetching: isFetchingUser } = console.log('---_app.js') || useGetUserQuery(authId)
 
   return (
