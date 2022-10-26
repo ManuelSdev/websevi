@@ -61,15 +61,20 @@ const SearchForm = ({ handleClose }) => {
                             {sm750Down &&
                                 <IconButton
                                     onClick={resetSearchKeys}
-                                    sx={{ mr: '1em' }}
+                                // sx={{ mr: '1em' }}
                                 >
                                     <HighlightOffIcon />
                                 </IconButton>
                             }
                             <IconButton type='submit'>
-                                <SearchIcon />
+                                <SearchIcon
+                                    sx={{ mr: 0 }}
+                                />
                             </IconButton>
                         </InputAdornment>,
+                    style: {
+                        paddingRight: 0
+                    }
                 }}
             />
         </Box>

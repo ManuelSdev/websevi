@@ -18,6 +18,7 @@ export default function UserPageDrawer({ onClose }) {
     const sections = userPageSections
     const { userDrawerIsOpen: isOpen } = useSelector(getDrawer)
     const handleDrawer = () => dispatch(toggleUserDrawer())
+
     const list = () => (
         <Box role="presentation">
             <List>
@@ -27,7 +28,15 @@ export default function UserPageDrawer({ onClose }) {
                         disablePadding
                     >
                         <ListItemButton
-                            onClick={section.action ? () => dispatch(section.action) : handleDrawer}
+                            onClick={
+                                section.action ?
+                                    () => {
+                                        dispatch(section.action)
+                                        handleDrawer()
+                                    }
+                                    :
+                                    handleDrawer
+                            }
                             component={Link}
                             href={section.action ? '/' : `/user/${toPlainString(section.name)}`}
                         >
