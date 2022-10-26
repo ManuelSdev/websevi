@@ -5,9 +5,11 @@ import usePriceSlider from "../../hooks/usePriceSlider"
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from "next/router"
 import React from 'react'
+import { toPlainString } from "../../lib/utils/stringTools"
 
 
 const FilteredProductsPage = ({ products, categories, filtersProps }) => {
+    console.log(toPlainString('Hola aa kk'))
     console.log('en ...slug')
     // const router = useRouter()
     //const { selectedPricesRange: currentSelectedPricesRange } = router.query
@@ -60,6 +62,7 @@ export async function getServerSideProps(context) {
         //Retorna un false o un objeto con la estructura de query para mongodb
         return keyValues.length === 0 ? false : { [key]: { $in: [...keyValues] } }
     })
+    //   const sortKey
     const slugFilters = slugFiltersDirty.filter(element => element)
     //Crea el objeto que pasamos como filtro en la consulta con el filtro de categoría
     const productsFilter = { category: categoryPath }

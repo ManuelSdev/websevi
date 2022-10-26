@@ -7,12 +7,14 @@ import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import useBreakpoints from "../../hooks/useBreakpoints"
 import FiltersBar from '../filtersSideBar/FiltersBar';
 import { useState } from 'react';
+import { toPlainString } from '../../lib/utils/stringTools';
+import { useRouter } from 'next/router';
 
 
-const titles = ['Relevancia', 'Precio más bajo', 'Precio más alto', 'Novedades']
+const sortKeys = ['Relevancia', 'Precio más bajo', 'Precio más alto', 'Novedades']
 
-const ProductsTopBar = ({ ...props }) => {
-
+const ProductsTopBar = ({ handleSort, ...props }) => {
+    const router = useRouter();
     const theme = useTheme();
     const { md950Up, sm750Down } = useBreakpoints()
     const [isOpen, setIsOpen] = useState(false)
@@ -29,6 +31,7 @@ const ProductsTopBar = ({ ...props }) => {
         setAnchorEl(null);
     };
 
+    //const sortKeyToPath=(key)=>
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -50,15 +53,19 @@ const ProductsTopBar = ({ ...props }) => {
             >{up850 ?
 
                 <>
-                    {titles.map((title, index) => <Button key={index} variant="outlined"
-                        sx={{ m: 0 }}
-                    >{title}</Button>)
+                    {sortKeys.map((sortKey, index) =>
+                        <Button key={index} variant="outlined"
+                            disabled={index === 0 || index === 3}
+                            onClick={handleSort(index)}
+                            // onClick={() => console.log(index)}
+                            sx={{ m: 0 }}
+                        >{sortKey}</Button>)
                     }
                     {!md950Up &&
                         <Button sx={{ m: 0 }} variant="outlined" startIcon={<FilterAltOutlinedIcon />}
                             onClick={toggleDrawer}
                         >
-                            Filtrars
+                            Filtrar
                         </Button>
                     }
                 </>
@@ -101,9 +108,9 @@ const ProductsTopBar = ({ ...props }) => {
                     horizontal: 'left',
                 }}
             >
-                {titles.map((title, index) => <Button key={index} variant="text"
+                {sortKeys.map((sortKey, index) => <Button key={index} variant="text"
                     sx={{ m: 0 }}
-                >{title}</Button>)
+                >{sortKey}</Button>)
                 }
             </Popover>
             <Drawer

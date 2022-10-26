@@ -51,7 +51,7 @@ const FiltersBar = ({ filtersProps, selectedPricesRange, handlePrice, valuetext,
     });
     const resetFilters = () => setFormValue({ checkedFilters: [] })
     const { checkedFilters } = formValue
-    console.log('`+++++++++++++++++', checkedFilters)
+    console.log('`+++++++++++++++++', searchKeys)
     /**Slider */
     const handleChange = ev => {
         const { name, checked, value: filterValue } = ev.target;
