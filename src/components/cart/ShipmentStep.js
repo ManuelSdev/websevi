@@ -21,12 +21,20 @@ const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
     }
 
     //Obtiene dirección principal del array de direcciones
+    /*
     if (user?.hasProfile) {
         const [mainAddress] = user.addresses
         const { address, moreInfo, city, postCode, region, country } = mainAddress
         const addressLine = `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
     }
+*/
+    const getAddressLine = () => {
+        const [mainAddress] = user.addresses
 
+        const { address, moreInfo, city, postCode, region, country } = mainAddress
+        return `${address}, ${moreInfo}, ${city}, ${postCode}, ${region}, ${country}`
+    }
+    const addressLine = getAddressLine()
     return (
         isFetchingUser ?
             <Stack sx={{ color: 'grey.500', justifyContent: 'center' }} spacing={2} direction="row">
