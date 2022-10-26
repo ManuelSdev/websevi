@@ -51,9 +51,7 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   const { cartProducts } = useSelector(getCart)
   //https://stackoverflow.com/questions/71400494/flash-of-unstyled-content-fouc-for-nextjs-using-mantine
   const dispatch = useDispatch()
-  useEffect(() => {
-    document.documentElement.style.visibility = 'visible'
-  }, [])
+
   //Supertokens logic
   useEffect(() => {
     async function doRefresh() {
@@ -104,7 +102,9 @@ function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   if (pageProps.fromSupertokens === 'needs-refresh') {
     return null
   }
-
+  useEffect(() => {
+    document.documentElement.style.visibility = 'visible'
+  }, [])
   //const { data: user, isFetching: isFetchingUser } = console.log('---_app.js') || useGetUserQuery(authId)
 
   return (
