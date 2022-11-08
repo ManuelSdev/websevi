@@ -6,14 +6,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useUpdateUserDataMutation } from "../../app/store/services/userApi";
 
 const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
-  console.log("#### shipmentstep user", user);
+  //console.log("#### shipmentstep user", user);
   const [updateUserData, result] = useUpdateUserDataMutation();
+
   //TODO:ERRORES EN PANTALLA
   const onSubmit = async (newUserValues) => {
+    console.log("updateUserData ---------------------", newUserValues);
+    console.log("user++++++++++++++++++", user._id);
     //const { done } = await updateUser(user._id, newUserValues)
     //  done && refetchUser()
     try {
-      await updateUserData({ id: user._id, ...newUserValues });
+      await updateUserData({ userId: user._id, ...newUserValues });
     } catch (error) {
       console.log("ERROR updateUser EN ShipmentStep.JS", error);
     }
