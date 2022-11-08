@@ -16,6 +16,7 @@ const ShipmentStep = ({ user, refetchUser, isFetchingUser, ...props }) => {
     //const { done } = await updateUser(user._id, newUserValues)
     //  done && refetchUser()
     try {
+      console.log("first");
       await updateUserData({ userId: user._id, ...newUserValues });
     } catch (error) {
       console.log("ERROR updateUser EN ShipmentStep.JS", error);
